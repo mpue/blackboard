@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>SMBT3904SIE</name>
+    <content>.MODEL SMBT3904SIE NPN(
+       AF= 1.00E00    BF= 3.00E02    BR= 1.19E01   CJC= 4.75E-12
+      CJE= 8.54E-12   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 5.58E-02   IKR= 1.00E00   IRB= 1.70E-03    IS= 5.42E-14
+      ISC= 1.08E-11   ISE= 1.20E-15   ITF= 2.86E-04    KF= 0.00E00
+      MJC= 4.02E-01   MJE= 3.68E-01   MJS= 3.30E-01    NC= 1.66E00
+       NE= 1.25E00    NF= 1.09E00    NR= 1.02E00   PTF= 0.00E00
+       RB= 1.51E02   RBM= 1.00E-02    RC= 1.63E00    RE= 1.29E-02
+       TF= 1.58E-10    TR= 0.00E00   VAF= 2.88E02   VAR= 4.18E01
+      VJC= 3.83E-01   VJE= 3.33E-01   VJS= 7.50E-01   VTF= 1.90E-01
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 4.69E00   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <width>64</width>
+    <height>48</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>TSOP1136</name>
+    <imageName>tsop1136.png</imageName>
+    <description>integrated infrared receiver</description>
+    <packageType>SIL</packageType>
+    <rotation>0</rotation>
+</part>

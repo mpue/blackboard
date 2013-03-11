@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BFN22SIE</name>
+    <content>.MODEL BFN22SIE NPN(
+       AF= 1.00E00    BF= 1.23E02    BR= 5.61E00   CJC= 5.49E-12
+      CJE= 4.19E-11   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 4.09E-02   IKR= 1.00E00   IRB= 2.42E-02    IS= 6.46E-16
+      ISC= 2.89E-14   ISE= 2.80E-17   ITF= 2.65E00    KF= 0.00E00
+      MJC= 5.21E-01   MJE= 3.90E-01   MJS= 3.30E-01    NC= 1.03E00
+       NE= 1.00E00    NF= 9.11E-01    NR= 1.86E00   PTF= 0.00E00
+       RB= 4.64E01   RBM= 2.17E01    RC= 4.08E-01    RE= 4.41E-01
+       TF= 1.13E-09    TR= 0.00E00   VAF= 4.15E02   VAR= 4.30E02
+      VJC= 3.00E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 8.76E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 6.01E02   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

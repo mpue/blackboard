@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>48</width>
+    <height>64</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>SP 6x6mm</name>
+    <imageName>sw_SP_6x6mm.png</imageName>
+    <description>Switch 6x6mm</description>
+    <packageType>SWITCH</packageType>
+    <rotation>0</rotation>
+    <designator>S</designator>
+
+    <connections>
+      <pin>
+        <num>A</num>
+        <x>8</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>B</num>
+        <x>40</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>A</num>
+        <x>8</x>
+        <y>56</y>
+      </pin>
+      <pin>
+        <num>B</num>
+        <x>40</x>
+        <y>56</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>8,8</sebulli-pin1>
+    <sebulli-pins>0,0/2,0/-2,3/2,0</sebulli-pins>
+    <sebulli-pinnames>A,B,A,B</sebulli-pinnames>
+</part>

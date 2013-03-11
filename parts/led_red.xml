@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <width>48</width>
+    <height>48</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>LED red</name>
+    <imageName>led_red.png</imageName>
+    <description>A red LED</description>
+    <packageType>DIL</packageType>
+    <rotation>0</rotation>
+</part>

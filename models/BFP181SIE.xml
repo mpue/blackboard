@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BFP181SIE</name>
+    <content>.MODEL BFP181SIE NPN(
+ BF = 100  BR = 1 NF = 1 NE = 4.95 NR = 1 NC = 2  VAF = 35
+ IS = 2.8E-016  ISE = 1.3E-014  ISC = 1E-017  IKR = 0.5
+ IKF = 0.018  RE = 1  RC = 4.5  RBM = 1.9 RB = 35.2  VAR = 360
+ IRB = 0.25  TR = 0  TF = 0  ITF = 0  XTF = 0  VTF = 1E030
+ FC = 0.5  VJE = 0.85  MJE = 0.33  CJE = 1E-012  XCJC = 0.3
+ CJC = 1E-013  VJC = 0.75  MJC = 0.33  XTB = 0  XTI = 3)
+</content>
+    <type>NPN</type>
+</model>

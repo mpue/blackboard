@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spiceSimulator>
+    <filename>NGSpice.xml</filename>
+    <name>NGSpice</name>
+    <path>.\spice\ngspice.exe</path>
+    <parameters>-i</parameters>
+    <defaultSimulator>true</defaultSimulator>
+    <type>EXTERNAL</type>
+</spiceSimulator>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>112</width>
+    <height>64</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>SW DIP 5</name>
+    <imageName>sw_DIP_5.png</imageName>
+    <description>Switch DIP 5</description>
+    <packageType>SWITCHDIP</packageType>
+    <rotation>0</rotation>
+    <designator>S</designator>
+
+    <connections>
+      <pin>
+        <num>1A</num>
+        <x>24</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>2A</num>
+        <x>40</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>3A</num>
+        <x>56</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>4A</num>
+        <x>72</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>5A</num>
+        <x>88</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>1B</num>
+        <x>24</x>
+        <y>56</y>
+      </pin>
+      <pin>
+        <num>2B</num>
+        <x>40</x>
+        <y>56</y>
+      </pin>
+      <pin>
+        <num>3B</num>
+        <x>56</x>
+        <y>56</y>
+      </pin>
+      <pin>
+        <num>4B</num>
+        <x>72</x>
+        <y>56</y>
+      </pin>
+      <pin>
+        <num>5B</num>
+        <x>88</x>
+        <y>56</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>24,8</sebulli-pin1>
+    <sebulli-pins>0,0/4*1,0/-4,3/4*1,0</sebulli-pins>
+    <sebulli-pinnames>1A,2A,3A,4A,5A,1B,2B,3B,4B,5B</sebulli-pinnames>
+</part>

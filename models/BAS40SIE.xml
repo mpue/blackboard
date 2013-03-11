@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BAS40SIE</name>
+    <content>.MODEL BAS40SIE   D(IS=8N RS=7.8 N=1.04 XTI=1.8 EG=.68 
+ CJO=3P M=.42 VJ=.4 FC=.5 BV=40 IBV=100n TT=25P)
+</content>
+    <type>DIODE</type>
+</model>

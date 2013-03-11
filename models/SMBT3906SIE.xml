@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>SMBT3906SIE</name>
+    <content>.MODEL SMBT3906SIE PNP(
+       AF= 1.00E00    BF= 2.52E02    BR= 5.00E01   CJC= 7.17E-12
+      CJE= 1.01E-11   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 2.93E-02   IKR= 1.00E00   IRB= 9.90E-03    IS= 3.18E-13
+      ISC= 1.29E-13   ISE= 1.20E-13   ITF= 3.22E-03    KF= 0.00E00
+      MJC= 4.05E-01   MJE= 3.91E-01   MJS= 3.30E-01    NC= 1.29E00
+       NE= 1.75E00    NF= 1.17E00    NR= 1.13E00   PTF= 0.00E00
+       RB= 4.06E01   RBM= 4.87E00    RC= 1.44E00    RE= 1.00E-02
+       TF= 1.35E-10    TR= 0.00E00   VAF= 3.49E01   VAR= 1.86E01
+      VJC= 3.00E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 9.99E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 2.73E00   XTI= 3.00E00)
+</content>
+    <type>PNP</type>
+</model>

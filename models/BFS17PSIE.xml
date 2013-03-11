@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BFS17PSIE</name>
+    <content>.MODEL BFS17PSIE NPN(
+       AF= 1.00E00    BF= 1.03E02    BR= 1.73E-01   CJC= 1.26E-12
+      CJE= 1.42E-12   CJS= 0.00E00    EG= 1.11E00    FC= 9.00E-01
+      IKF= 5.04E-02   IKR= 1.00E00   IRB= 1.00E01    IS= 1.72E-17
+      ISC= 1.00E-13   ISE= 1.44E-15   ITF= 5.09E-01    KF= 0.00E00
+      MJC= 2.00E-01   MJE= 2.00E-01   MJS= 3.30E-01    NC= 2.00E00
+       NE= 1.33E00    NF= 9.19E-01    NR= 1.00E00   PTF= 0.00E00
+       RB= 1.15E01   RBM= 8.04E00    RC= 2.60E00    RE= 2.91E-02
+       TF= 4.90E-11    TR= 0.00E00   VAF= 3.50E01   VAR= 1.00E01
+      VJC= 8.00E-01   VJE= 6.65E-01   VJS= 7.50E-01   VTF= 1.32E00
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 1.00E02   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

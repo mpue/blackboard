@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>SMBT2222ASIE</name>
+    <content>.MODEL SMBT2222ASIE NPN(
+       AF= 1.00E00    BF= 3.03E02    BR= 1.00E-02   CJC= 1.37E-11
+      CJE= 2.64E-11   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 2.11E-01   IKR= 1.00E00   IRB= 9.62E-03    IS= 1.75E-12
+      ISC= 9.42E-14   ISE= 5.92E-14   ITF= 5.09E-01    KF= 0.00E00
+      MJC= 4.89E-01   MJE= 4.09E-01   MJS= 3.30E-01    NC= 1.00E00
+       NE= 1.26E00    NF= 1.10E00    NR= 1.71E00   PTF= 0.00E00
+       RB= 8.63E01   RBM= 1.00E-02    RC= 1.07E00    RE= 1.00E-02
+       TF= 5.16E-10    TR= 0.00E00   VAF= 3.60E02   VAR= 1.64E01
+      VJC= 3.00E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 1.09E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 1.64E00   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

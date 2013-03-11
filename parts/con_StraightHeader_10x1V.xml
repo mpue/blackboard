@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>160</width>
+    <height>16</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Straight Header 10x1V</name>
+    <imageName>con_StraightHeader_10x1V.png</imageName>
+    <description>Straight Header 10x1 vertical</description>
+    <packageType>STRAIGHTHEADER</packageType>
+    <rotation>0</rotation>
+    <designator>J</designator>
+
+    <connections>
+      <pin>
+        <num>1</num>
+        <x>8</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>2</num>
+        <x>24</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>3</num>
+        <x>40</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>4</num>
+        <x>56</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>5</num>
+        <x>72</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>6</num>
+        <x>88</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>7</num>
+        <x>104</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>8</num>
+        <x>120</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>9</num>
+        <x>136</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>10</num>
+        <x>152</x>
+        <y>8</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>8,8</sebulli-pin1>
+    <sebulli-pins>0,0/9*1,0</sebulli-pins>
+</part>

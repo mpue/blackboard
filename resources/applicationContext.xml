@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>application.properties</value>
+		</property>
+	</bean>	
+
+	<bean id="resourceService" class="org.pmedv.core.services.ResourceServiceImpl"/>
+	
+    <bean id="splashScreen" class="org.pmedv.core.app.SplashScreen">
+        <property name="imageResourcePath"><value>${splash}</value></property>
+        <property name="showProgressLabel" value="true"/>
+    </bean> 
+ 	
+ 	
+	<bean id="logPane" class="org.pmedv.core.components.LogPane"/>	 	 
+	<bean id="contextApplicationContextProvider" class="org.pmedv.core.context.ApplicationContextProvider">
+		<constructor-arg><value>${app.name}</value></constructor-arg>
+	</bean>
+
+ 	<bean id="partFactory" class="org.pmedv.blackboard.tools.PartFactory" init-method="init" depends-on="contextApplicationContextProvider"/>
+	<bean id="applicationWindowAdvisor" class="org.pmedv.core.gui.ApplicationWindowAdvisorImpl"/>
+    <bean id="applicationWindowConfig" class="org.pmedv.core.provider.ApplicationWindowConfigurationProviderImpl"/>
+    <bean id="abstractApplicationWindow" class="org.pmedv.core.gui.ApplicationWindow" abstract="true"/>
+    <bean id="applicationWindow" class="org.pmedv.core.gui.ApplicationWindow" parent="abstractApplicationWindow"/>
+
+	<bean id="abstractPerspective" abstract="true" class="org.pmedv.core.perspectives.AbstractPerspective"/>
+	<bean id="boardDesignerPerspective" class="org.pmedv.blackboard.board.BoardDesignerPerspective" parent="abstractPerspective" depends-on="partFactory,modelProvider"/>
+	<bean id="perspectiveProvider" class="org.pmedv.core.provider.ApplicationPerspectiveProviderImpl"/>
+    <bean id="menuBarProvider" class="org.pmedv.core.provider.ApplicationMenuBarProviderImpl"/>	
+	<bean id="toolBarProvider" class="org.pmedv.blackboard.provider.BoardEditorToolbarProviderImpl"/>
+
+	<bean id="logView" class="net.infonode.docking.View">
+		<constructor-arg><value>LogView</value></constructor-arg>
+		<constructor-arg>
+			<null/>
+		</constructor-arg> 
+		<constructor-arg ref="logPane"/>
+	</bean>
+	 
+	<bean id="abstractController" class="org.pmedv.core.gui.controller.AbstractController" abstract="true"/>	
+	<bean id="authenticator" class="org.pmedv.core.authentication.DummyAuthenticatorImpl"/>	
+	<bean id="loginController" class="org.pmedv.core.gui.controller.ApplicationLoginController" parent="abstractController">
+	   <constructor-arg ref="authenticator"/>
+	</bean>
+	
+	<!-- Application wide commands -->
+	<import resource="commands.xml"/>
+	
+	<bean id="palette" class="org.pmedv.blackboard.components.Palette"/>	
+
+	<bean id="datasheetProvider" class="org.pmedv.blackboard.provider.DataSheetProvider"/>
+	<bean id="SheetBrowser" class="org.pmedv.blackboard.dialogs.DatasheetDialog" parent="abstractNiceDialog" depends-on="datasheetProvider"/>
+	<bean id="SimulatorManager" class="org.pmedv.blackboard.dialogs.SpiceSimulatorManageDialog" parent="abstractNiceDialog" depends-on="simulatorProvider"/>
+	
+	<bean id="abstractNiceDialog" class="org.pmedv.core.dialogs.AbstractNiceDialog" abstract="true"/>
+	 
+	<bean id="PartBrowser" class="org.pmedv.blackboard.dialogs.PartDialog" parent="abstractNiceDialog" depends-on="applicationWindow"/>
+	
+	<!--  
+	<bean id="partView" class="org.pmedv.blackboard.components.PartView"/>
+	 -->
+	 
+	<bean id="shapesPanel" class="org.pmedv.blackboard.panels.ShapePropertiesPanel"/>
+	<bean id="symbolListPanel" class="org.pmedv.blackboard.panels.SymbolListPanel"/>
+	<bean id="symbolProvider" class="org.pmedv.blackboard.provider.SymbolProvider"/>
+	<bean id="modelProvider" class="org.pmedv.blackboard.provider.ModelProvider" init-method="loadElements"/>
+	<bean id="simulatorProvider" class="org.pmedv.blackboard.provider.SimulatorProvider" init-method="loadElements"/>
+	<bean id="modelListPanel" class="org.pmedv.blackboard.panels.ModelListPanel"/>
+	
+			
+</beans>

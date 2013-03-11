@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <width>32</width>
+    <height>32</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Elko radial 6mm standing</name>
+    <imageName>elko_radial_6mm_s.png</imageName>
+    <description>An elektrolyte with 6mm diameter standing upright</description>
+    <packageType>radial single ended</packageType>
+    <rotation>0</rotation>
+</part>

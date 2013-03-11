@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <width>64</width>
+    <height>16</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Diode Vertical 7.5mm</name>
+    <imageName>diode_vertical_7.5mm.png</imageName>
+    <description>vertical mount diode</description>
+    <packageType>TH</packageType>
+    <rotation>0</rotation>
+</part>

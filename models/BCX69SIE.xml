@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BCX69SIE</name>
+    <content>.MODEL BCX69SIE PNP(
+       AF= 1.00E00    BF= 2.25E02    BR= 9.96E00   CJC= 1.94E-10
+      CJE= 3.28E-10   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 5.88E00   IKR= 1.00E00   IRB= 1.00E-06    IS= 7.82E-15
+      ISC= 1.00E-17   ISE= 3.05E-17   ITF= 4.21E01    KF= 0.00E00
+      MJC= 4.03E-01   MJE= 5.26E-01   MJS= 3.30E-01    NC= 2.00E00
+       NE= 1.00E00    NF= 8.54E-01    NR= 8.80E-01   PTF= 0.00E00
+       RB= 1.00E-02   RBM= 1.00E-02    RC= 2.17E-02    RE= 1.34E-01
+       TF= 1.39E-09    TR= 0.00E00   VAF= 1.00E02   VAR= 5.00E01
+      VJC= 3.00E-01   VJE= 5.03E-01   VJS= 7.50E-01   VTF= 9.99E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 4.93E02   XTI= 3.00E00)
+</content>
+    <type>PNP</type>
+</model>

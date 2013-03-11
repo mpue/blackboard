@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BAS21SIE</name>
+    <content>.MODEL BAS21SIE D(
+       AF= 1.00E00    BV= 2.50E02   CJO= 6.64E-13    EG= 1.11E00
+       FC= 5.00E-01   IBV= 1.00E-04    IS= 6.42E-09    KF= 0.00E00
+        M= 1.00E-01     N= 1.98E00    RS= 9.12E-01    TT= 7.21E-08
+       VJ= 2.00E00   XTI= 3.00E00)
+</content>
+    <type>DIODE</type>
+</model>

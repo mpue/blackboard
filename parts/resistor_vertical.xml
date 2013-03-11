@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <width>32</width>
+    <height>16</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Resistor Vertical</name>
+    <imageName>resistor_vertical.png</imageName>
+    <description>vertical mount resistor</description>
+    <packageType>TH</packageType>
+    <rotation>0</rotation>
+</part>

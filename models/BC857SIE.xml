@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BC857SIE</name>
+    <content>.MODEL BC857SIE PNP(
+       AF= 1.00E00    BF= 1.96E02    BR= 3.38E00   CJC= 9.80E-12
+      CJE= 1.56E-11   CJS= 0.00E00    EG= 1.11E00    FC= 8.28E-01
+      IKF= 8.35E-01   IKR= 1.60E-02   IRB= 1.31E-06    IS= 1.32E-14
+      ISC= 7.71E-14   ISE= 8.44E-13   ITF= 2.14E-01    KF= 0.00E00
+      MJC= 3.49E-01   MJE= 4.18E-01   MJS= 3.30E-01    NC= 1.19E00
+       NE= 1.83E00    NF= 1.00E00    NR= 1.00E00   PTF= 0.00E00
+       RB= 1.00E-02   RBM= 1.00E-02    RC= 1.52E00    RE= 3.00E-02
+       TF= 6.05E-10    TR= 0.00E00   VAF= 5.90E01   VAR= 1.74E01
+      VJC= 3.00E-01   VJE= 8.00E-01   VJS= 7.50E-01   VTF= 4.39E00
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 5.81E00   XTI= 3.00E00)
+</content>
+    <type>PNP</type>
+</model>

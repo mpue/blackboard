@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BCX42SIE</name>
+    <content>.MODEL BCX42SIE PNP(
+       AF= 1.00E00    BF= 1.52E02    BR= 1.16E-01   CJC= 3.90E-11
+      CJE= 5.74E-11   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 1.18E-01   IKR= 1.00E00   IRB= 8.03E-02    IS= 7.59E-14
+      ISC= 1.72E-12   ISE= 1.90E-14   ITF= 1.28E00    KF= 0.00E00
+      MJC= 4.85E-01   MJE= 4.41E-01   MJS= 3.30E-01    NC= 2.00E00
+       NE= 1.27E00    NF= 1.01E00    NR= 1.21E00   PTF= 0.00E00
+       RB= 2.42E00   RBM= 4.95E00    RC= 8.89E-01    RE= 1.00E-02
+       TF= 8.18E-10    TR= 0.00E00   VAF= 3.28E02   VAR= 2.61E01
+      VJC= 3.00E-01   VJE= 3.15E-01   VJS= 7.50E-01   VTF= 9.99E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 5.01E00   XTI= 3.00E00)
+</content>
+    <type>PNP</type>
+</model>

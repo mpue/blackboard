@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BA582SIE</name>
+    <content>.MODEL BA582SIE D (IS=185F RS=.15 N=1.305 BV=70 IBV=.1N
+ CJO=1.17P VJ=.12 M=.096 TT=125N)
+</content>
+    <type>DIODE</type>
+</model>

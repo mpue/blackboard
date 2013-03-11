@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BCX55SIE</name>
+    <content>.MODEL BCX55SIE NPN(
+       AF= 1.00E00    BF= 1.29E02    BR= 2.92E00   CJC= 4.85E-11
+      CJE= 1.17E-10   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 9.06E-01   IKR= 1.00E00   IRB= 2.38E-02    IS= 3.06E-15
+      ISC= 4.08E-14   ISE= 1.62E-16   ITF= 5.64E-01    KF= 0.00E00
+      MJC= 5.09E-01   MJE= 4.22E-01   MJS= 3.30E-01    NC= 1.00E00
+       NE= 1.00E00    NF= 8.55E-01    NR= 9.10E-01   PTF= 0.00E00
+       RB= 1.65E01   RBM= 1.73E-02    RC= 3.11E-01    RE= 1.26E-02
+       TF= 1.42E-09    TR= 0.00E00   VAF= 7.24E02   VAR= 5.46E01
+      VJC= 3.00E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 9.99E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 7.75E-01   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

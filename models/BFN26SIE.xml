@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BFN26SIE</name>
+    <content>.MODEL BFN26SIE NPN(
+       AF= 1.00E00    BF= 7.04E01    BR= 1.76E01   CJC= 1.56E-11
+      CJE= 1.31E-10   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 1.00E01   IKR= 1.00E00   IRB= 1.30E-03    IS= 1.59E-13
+      ISC= 9.06E-11   ISE= 3.62E-16   ITF= 1.33E00    KF= 0.00E00
+      MJC= 5.80E-01   MJE= 4.02E-01   MJS= 3.30E-01    NC= 1.47E00
+       NE= 1.21E00    NF= 1.03E00    NR= 1.11E00   PTF= 0.00E00
+       RB= 3.23E01   RBM= 7.75E-02    RC= 4.11E-01    RE= 4.19E-01
+       TF= 1.73E-09    TR= 0.00E00   VAF= 4.51E01   VAR= 9.11E01
+      VJC= 4.64E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 9.99E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 1.00E02   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

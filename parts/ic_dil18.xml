@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>64</width>
+    <height>144</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>IC DIL 18</name>
+    <imageName>ic_dil18.png</imageName>
+    <description>IC DIL</description>
+    <packageType>DIL 18</packageType>
+    <rotation>0</rotation>
+    <designator>U</designator>
+
+    <connections>
+      <pin>
+        <num>1</num>
+        <x>8</x>
+        <y>8</y>
+      </pin>
+      <pin>
+        <num>2</num>
+        <x>8</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>3</num>
+        <x>8</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>4</num>
+        <x>8</x>
+        <y>56</y>
+      </pin>
+      <pin>
+        <num>5</num>
+        <x>8</x>
+        <y>72</y>
+      </pin>
+      <pin>
+        <num>6</num>
+        <x>8</x>
+        <y>88</y>
+      </pin>
+      <pin>
+        <num>7</num>
+        <x>8</x>
+        <y>104</y>
+      </pin>
+      <pin>
+        <num>8</num>
+        <x>8</x>
+        <y>120</y>
+      </pin>
+      <pin>
+        <num>9</num>
+        <x>8</x>
+        <y>136</y>
+      </pin>
+      <pin>
+        <num>10</num>
+        <x>56</x>
+        <y>136</y>
+      </pin>
+      <pin>
+        <num>11</num>
+        <x>56</x>
+        <y>120</y>
+      </pin>
+      <pin>
+        <num>12</num>
+        <x>56</x>
+        <y>104</y>
+      </pin>
+      <pin>
+        <num>13</num>
+        <x>56</x>
+        <y>88</y>
+      </pin>
+      <pin>
+        <num>14</num>
+        <x>56</x>
+        <y>72</y>
+      </pin>
+      <pin>
+        <num>15</num>
+        <x>56</x>
+        <y>56</y>
+      </pin>
+      <pin>
+        <num>16</num>
+        <x>56</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>17</num>
+        <x>56</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>18</num>
+        <x>56</x>
+        <y>8</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>8,8</sebulli-pin1>
+    <sebulli-pins>0,0/8*0,1/3,0/8*0,-1</sebulli-pins>
+</part>

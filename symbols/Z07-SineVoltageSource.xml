@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<symbolBean>
+    <value></value>
+    <rotation>0</rotation>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <index>39</index>
+    <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+    </color>
+    <layer>0</layer>
+    <name>Sine Voltage Source</name>
+    <category>Sources</category>
+    <width>72</width>
+    <height>112</height>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>48</x>
+            <y>0</y>
+        </start>
+        <end>
+            <x>48</x>
+            <y>32</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>48</x>
+            <y>80</y>
+        </start>
+        <end>
+            <x>48</x>
+            <y>112</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <ellipses>
+        <xLoc>24</xLoc>
+        <yLoc>32</yLoc>
+        <index>33</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>48</width>
+        <height>48</height>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+        <style>OUTLINED</style>
+        <startAngle>0</startAngle>
+        <rotation>360</rotation>
+    </ellipses>
+    <textparts>
+        <xLoc>40</xLoc>
+        <yLoc>36</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>~</text>
+        <font>Arial</font>
+        <fontsize>32</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <textparts>
+        <xLoc>0</xLoc>
+        <yLoc>12</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>#NAME</text>
+        <font>Arial</font>
+        <fontsize>12</fontsize>
+        <type>NAME</type>
+    </textparts>
+    <textparts>
+        <xLoc>0</xLoc>
+        <yLoc>84</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>#VALUE</text>
+        <font>Arial</font>
+        <fontsize>12</fontsize>
+        <type>VALUE</type>
+    </textparts>
+    <mirrorVertical>false</mirrorVertical>
+    <mirrorHorizontal>false</mirrorHorizontal>
+    <macroMode>true</macroMode>
+    <connections>
+        <pin>
+            <x>48</x>
+            <y>0</y>
+            <num>1</num>
+            <name>1</name>
+            <orientation>BOTTOM_RIGHT</orientation>
+        </pin>
+        <pin>
+            <x>48</x>
+            <y>112</y>
+            <num>2</num>
+            <name>2</name>
+            <orientation>BOTTOM_LEFT</orientation>
+        </pin>
+    </connections>
+    <customModel>false</customModel>
+    <type>VOLTAGE_SOURCE</type>
+    <filename>SineVoltageSource.xml</filename>
+    <properties>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">frequencyUnit</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">HZ</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">acAmplitude</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0.0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">dcVoltage</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0.0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">shape</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">SIN</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">dcOffset</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0.0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">frequency</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0.0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">acPhase</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0.0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">mode</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">AC</value>
+        </entry>
+    </properties>
+</symbolBean>

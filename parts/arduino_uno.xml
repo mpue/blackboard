@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Matthias Pueski</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>486</width>
+    <height>336</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Arduino Uno</name>
+    <imageName>arduino_uno.png</imageName>
+    <description>Arduino Uno</description>
+    <packageType>ArduinoUno</packageType>
+    <rotation>0</rotation>
+    <designator>A</designator>
+</part>

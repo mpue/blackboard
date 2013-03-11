@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BF775ASIE</name>
+    <content>.MODEL BF775ASIE NPN(
+ BF = 312  BR = 1  NF = 0.97  NE = 2.6  NR = 1  NC = 2
+ IS = 2.2E-016  ISE = 2.1E-015  ISC = 1E-017  IKR = 0.5
+ XTI = 3  IKF = 0.02  RE = 0.9  RC = 3.2 RBM = 2.2
+ RB = 26  IRB = 0.25  TR = 0  TF = 0  ITF = 0
+ XTF = 0  VTF = 1E030  FC = 0.5  VJE = 0.85  MJE = 0.33
+ CJE = 2.5E-012  XCJC = 0.3  CJC = 1E-014  VJC = 0.75
+ MJC = 0.33  XTB = 0  VAF = 36  VAR = 60)
+</content>
+    <type>NPN</type>
+</model>

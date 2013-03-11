@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>32</width>
+    <height>32</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>TO92 3</name>
+    <imageName>t_TO92_3.png</imageName>
+    <description>TO92 housing</description>
+    <packageType>TO</packageType>
+    <rotation>0</rotation>
+    <designator>Q</designator>
+
+    <connections>
+      <pin>
+        <num>3</num>
+        <x>8</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>2</num>
+        <x>24</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>1</num>
+        <x>24</x>
+        <y>8</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>8,24</sebulli-pin1>
+    <sebulli-pins>0,0/1,0/0,-1</sebulli-pins>
+    <sebulli-pinnames>3,2,1</sebulli-pinnames>
+</part>

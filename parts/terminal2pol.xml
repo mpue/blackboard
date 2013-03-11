@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<part>
+    
+<width>64</width>
+    
+<height>48</height>
+    
+<xLoc>0</xLoc>
+    
+<yLoc>0</yLoc>
+    
+<name>Terminal 2Pol</name>
+    
+<imageName>terminal2pol.png</imageName>
+    
+<description>Terminal</description>
+    
+<packageType>f</packageType>
+    
+<rotation>0</rotation>
+
+</part>
+

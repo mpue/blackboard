@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BFP450SIE</name>
+    <content>.MODEL BFP450SIE NPN(
+  IS = 45.4E-18       RB = 4.22          CJC = 910E-15
+  BF = 117.3         IRB = 2.0E-3        VJC = 1.0
+  NF = 0.95          RBM = 4.78          MJC = 0.5
+ VAF = 31.7           RE = 0.55         XCJC = 0.2
+ IKF = 0.696          RC = 3.72           TR = 5.0E-9
+ ISE = 3.1E-12       CJE = 660E-15       CJS = 0
+  NE = 2.11          VJE = 1.0           VJS = 0.8
+  BR = 1.0           MJE = 0.5           MJS = 0.33
+  NR = 1.0            TF = 9.6E-12       XTB = 0
+ VAR = 1000          XTF = 10.4           EG = 1.16
+ IKR = 1000          VTF = 6.4           XTI = 3.0
+ ISC = 0             ITF = 85E-3          FC = 0.78
+  NC = 2.0           PTF = 0 )
+</content>
+    <type>NPN</type>
+</model>

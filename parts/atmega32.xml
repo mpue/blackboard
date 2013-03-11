@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <width>112</width>
+    <height>320</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>ATMega32</name>
+    <imageName>atmega32.png</imageName>
+    <description>Atmel ATMega32</description>
+    <packageType>DIL40</packageType>
+    <rotation>0</rotation>
+    <author>Matthias Pueski - http://www.pueski.de</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <designator>IC</designator>
+    <connections>
+      <pin>
+		<name>(XCK/T0) PB0</name>
+        <num>1</num>
+        <x>8</x>
+        <y>8</y>
+      </pin>
+      <pin>
+      	<name>(T1) PB1</name>
+        <num>2</num>
+        <x>8</x>
+        <y>24</y>
+      </pin>
+      <pin>
+      	<name>(INT2/AIN0) PB2</name>
+        <num>3</num>
+        <x>8</x>
+        <y>40</y>
+      </pin>
+      <pin>
+      	<name>(OC0/AIN1) PB3</name>
+        <num>4</num>
+        <x>8</x>
+        <y>56</y>
+      </pin>
+      <pin>
+      	<name>(SS) PB4</name>
+        <num>5</num>
+        <x>8</x>
+        <y>72</y>
+      </pin>
+      <pin>
+      	<name>(MOSI) PB5</name>
+        <num>6</num>
+        <x>8</x>
+        <y>88</y>
+      </pin>
+      <pin>
+      	<name>(MISO) PB6</name>
+        <num>7</num>
+        <x>8</x>
+        <y>104</y>
+      </pin>
+      <pin>
+      	<name>(SCK) PB7</name>
+        <num>8</num>
+        <x>8</x>
+        <y>120</y>
+      </pin>
+      <pin>
+      	<name>RESET</name>	
+        <num>9</num>
+        <x>8</x>
+        <y>136</y>
+      </pin>
+      <pin>
+      	<name>VCC</name>
+        <num>10</num>
+        <x>8</x>
+        <y>152</y>
+      </pin>
+      <pin>
+      	<name>GND</name>
+        <num>11</num>
+        <x>8</x>
+        <y>168</y>
+      </pin>
+      <pin>
+      	<name>XTAL2</name>
+        <num>12</num>
+        <x>8</x>
+        <y>184</y>
+      </pin>
+      <pin>
+		<name>XTAL1</name>      
+        <num>13</num>
+        <x>8</x>
+        <y>200</y>
+      </pin>
+      <pin>
+		<name>(RXD) PD0</name>      
+        <num>14</num>
+        <x>8</x>
+        <y>216</y>
+      </pin>
+      <pin>
+      	<name>(TXD) PD1</name>
+        <num>15</num>
+        <x>8</x>
+        <y>232</y>
+      </pin>
+      <pin>
+      	<name>(INT0) PD2</name>
+        <num>16</num>
+        <x>8</x>
+        <y>248</y>
+      </pin>
+      <pin>
+      	<name>(INT1) PD3</name>
+        <num>17</num>
+        <x>8</x>
+        <y>264</y>
+      </pin>
+      <pin>
+      	<name>(OC1B) PD4</name>
+        <num>18</num>
+        <x>8</x>
+        <y>280</y>
+      </pin>
+      <pin>
+      	<name>(OC1A) PD5</name>
+        <num>19</num>
+        <x>8</x>
+        <y>296</y>
+      </pin>
+      <pin>
+      	<name>(ICP1) PD6</name>
+        <num>20</num>
+        <x>8</x>
+        <y>312</y>
+      </pin>
+      <pin>
+      	<name>PD7 (OC2)</name>
+        <num>21</num>
+        <x>104</x>
+        <y>312</y>
+      </pin>
+      <pin>
+      	<name>PC0 (SCL)</name>
+        <num>22</num>
+        <x>104</x>
+        <y>296</y>
+      </pin>
+      <pin>
+		<name>PC1 (SDA)</name>
+        <num>23</num>
+        <x>104</x>
+        <y>280</y>
+      </pin>
+      <pin>
+		<name>PC2 (TCK)</name>
+        <num>24</num>
+        <x>104</x>
+        <y>264</y>
+      </pin>
+      <pin>
+		<name>PC3 (TMS)</name>
+        <num>25</num>
+        <x>104</x>
+        <y>248</y>
+      </pin>
+      <pin>
+		<name>PC4 (TDO)</name>
+        <num>26</num>
+        <x>104</x>
+        <y>232</y>
+      </pin>
+      <pin>
+		<name>PC5 (TDI)</name>
+        <num>27</num>
+        <x>104</x>
+        <y>216</y>
+      </pin>
+      <pin>
+      	<name>PC6 (TOSC1)</name>
+        <num>28</num>
+        <x>104</x>
+        <y>200</y>
+      </pin>
+      <pin>
+      	<name>PC7 (TOSC2)</name>
+        <num>29</num>
+        <x>104</x>
+        <y>184</y>
+      </pin>
+      <pin>
+      	<name>AVCC</name>
+        <num>30</num>
+        <x>104</x>
+        <y>168</y>
+      </pin>
+      <pin>
+		<name>GND</name>
+        <num>31</num>
+        <x>104</x>
+        <y>152</y>
+      </pin>
+      <pin>
+      	<name>AREF</name>
+        <num>32</num>
+        <x>104</x>
+        <y>136</y>
+      </pin>
+      <pin>
+		<name>PA7 (ADC7)</name>
+        <num>33</num>
+        <x>104</x>
+        <y>120</y>
+      </pin>
+      <pin>
+      	<name>PA6 (ADC6)</name>
+        <num>34</num>
+        <x>104</x>
+        <y>104</y>
+      </pin>
+      <pin>
+      	<name>PA5 (ADC5)</name>
+        <num>35</num>
+        <x>104</x>
+        <y>88</y>
+      </pin>
+      <pin>
+      	<name>PA4 (ADC4)</name>
+        <num>36</num>
+        <x>104</x>
+        <y>72</y>
+      </pin>
+      <pin>
+      	<name>PA3 (ADC3)</name>
+        <num>37</num>
+        <x>104</x>
+        <y>56</y>
+      </pin>
+      <pin>
+      	<name>PA2 (ADC2)</name>
+        <num>38</num>
+        <x>104</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <name>PA1 (ADC1)</name>
+        <num>39</num>
+        <x>104</x>
+        <y>24</y>
+      </pin>
+      <pin>
+      	<name>PA0 (ADC0)</name>
+        <num>40</num>
+        <x>104</x>
+        <y>8</y>
+      </pin>
+    </connections>
+</part>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BC848CSIE</name>
+    <content>.MODEL BC848CSIE NPN(
+       AF= 1.00E00    BF= 5.27E02    BR= 5.38E00   CJC= 5.26E-12
+      CJE= 1.25E-11   CJS= 0.00E00    EG= 1.11E00    FC= 8.75E-01
+      IKF= 2.04E-01   IKR= 1.00E00   IRB= 2.57E00    IS= 7.58E-15
+      ISC= 1.00E-13   ISE= 1.25E-15   ITF= 1.20E00    KF= 0.00E00
+      MJC= 3.38E-01   MJE= 3.31E-01   MJS= 3.30E-01    NC= 2.00E00
+       NE= 1.40E00    NF= 9.50E-01    NR= 1.01E00   PTF= 0.00E00
+       RB= 7.26E00   RBM= 1.00E01    RC= 1.66E00    RE= 9.80E-01
+       TF= 6.64E-10    TR= 0.00E00   VAF= 3.49E01   VAR= 2.18E01
+      VJC= 3.84E-01   VJE= 5.96E-01   VJS= 7.50E-01   VTF= 1.72E00
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 1.00E02   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: 1.6.0_33-b05 (Sun Microsystems Inc.)
+Built-By: P�ski
+Main-Class: org.pmedv.blackboard.app.BlackBoard
+Class-Path: lib/commons-beanutils-1.8.3.jar      lib/beansbinding-1.2.
+ 1.jar     lib/commons-collections-3.2.jar     lib/commons-io-1.3.1.ja
+ r     lib/commons-lang-2.3.jar     lib/commons-logging-1.1.jar     li
+ b/forms-1.2.1.jar     lib/log4j-1.2.14.jar     lib/looks-2.3.0.jar   
+   lib/autocomplete.jar     lib/jcommon.1.0.17.jar     lib/jfreechart-
+ 1.0.14.jar     lib/jcas.jar     lib/javolution-core-java-6.0.0-201209
+ 23.104917-4.jar     lib/rsyntaxtextarea.jar     lib/org.springframewo
+ rk.asm-3.0.5.RELEASE.jar     lib/org.springframework.beans-3.0.5.RELE
+ ASE.jar     lib/org.springframework.context-3.0.5.RELEASE.jar     lib
+ /org.springframework.context.support-3.0.5.RELEASE.jar     lib/org.sp
+ ringframework.core-3.0.5.RELEASE.jar     lib/org.springframework.expr
+ ession-3.0.5.RELEASE.jar     lib/swing-worker-1.2.jar     lib/jbusyco
+ mponent-1.1.jar     lib/jxlayer.jar     lib/swingx-1.6.1.jar     lib/
+ swingx-beaninfo-1.6.1.jar .
+

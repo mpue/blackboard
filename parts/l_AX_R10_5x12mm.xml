@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>80</width>
+    <height>48</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>L AX R10 5x12mm</name>
+    <imageName>l_AX_R10_5x12mm.png</imageName>
+    <description>Inductor axial, R10 5x12mm</description>
+    <packageType>INDUCTOR_AX</packageType>
+    <rotation>0</rotation>
+    <designator>L</designator>
+
+    <connections>
+      <pin>
+        <num>1</num>
+        <x>8</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>2</num>
+        <x>72</x>
+        <y>8</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>8,40</sebulli-pin1>
+    <sebulli-pins>0,0/4,-2</sebulli-pins>
+</part>

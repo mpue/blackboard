@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BFQ182SIE</name>
+    <content>.MODEL BFQ182SIE NPN(
+ BF = 70.22 BR = 1 NF = 0.9 NE = 1.775 NR = 1 NC = 2 VAF = 32.284
+ IS = 2E-016 ISE = 1.95E-015 ISC = 1E-017 IKR = 0.5 VAR = 3.22
+ IKF = 0.32 RE = 0.45 RC = 2.147 RBM = 0.9 RB = 9 IRB = 0.251
+ TR = 0 TF = 1.11E-11 ITF = 0.1 XTF = 19.761 VTF = 1.705
+ FC = 0.497 VJE = 1.02 MJE = 0.353 CJE = 8.66E-013 XCJC = 0.495
+ CJC = 1.2E-013 VJC = 0.629 MJC = 0.734 XTB = 0 XTI = 2)
+</content>
+    <type>NPN</type>
+</model>

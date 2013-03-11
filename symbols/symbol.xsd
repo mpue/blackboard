@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="symbolBean" type="Symbol"/>
+
+  <xs:complexType name="Symbol">
+    <xs:sequence>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="rotation" type="xs:int"/>
+      <xs:element name="xLoc" type="xs:int"/>
+      <xs:element name="yLoc" type="xs:int"/>
+      <xs:element name="index" type="xs:int"/>
+      <xs:element name="color" type="Color" minOccurs="0"/>
+      <xs:element name="layer" type="xs:int"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="category" type="xs:string" minOccurs="0"/>
+      <xs:element name="width" type="xs:int"/>
+      <xs:element name="height" type="xs:int"/>
+      <xs:element name="lines" type="lineBean" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ellipses" type="Ellipse" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boxes" type="Box" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="textparts" type="TextPart" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="mirrorVertical" type="xs:boolean"/>
+      <xs:element name="mirrorHorizontal" type="xs:boolean"/>
+      <xs:element name="macroMode" type="xs:boolean"/>
+      <xs:element name="connections" type="Connections" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Color">
+    <xs:sequence>
+      <xs:element name="red" type="xs:int"/>
+      <xs:element name="green" type="xs:int"/>
+      <xs:element name="blue" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="lineBean">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="xLoc" type="xs:int"/>
+      <xs:element name="yLoc" type="xs:int"/>
+      <xs:element name="index" type="xs:int"/>
+      <xs:element name="color" type="Color" minOccurs="0"/>
+      <xs:element name="layer" type="xs:int"/>
+      <xs:element name="start" type="pointBean" minOccurs="0"/>
+      <xs:element name="end" type="pointBean" minOccurs="0"/>
+      <xs:element name="startType" type="lineEdgeType" minOccurs="0"/>
+      <xs:element name="endType" type="lineEdgeType" minOccurs="0"/>
+      <xs:element name="thickness" type="xs:float"/>
+      <xs:element name="dashArray" type="xs:float" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="dashPhase" type="xs:float"/>
+      <xs:element name="endCap" type="xs:int"/>
+      <xs:element name="lineJoin" type="xs:int"/>
+      <xs:element name="miterLimit" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pointBean">
+    <xs:sequence>
+      <xs:element name="x" type="xs:int"/>
+      <xs:element name="y" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Ellipse">
+    <xs:sequence>
+      <xs:element name="xLoc" type="xs:int"/>
+      <xs:element name="yLoc" type="xs:int"/>
+      <xs:element name="index" type="xs:int"/>
+      <xs:element name="color" type="Color" minOccurs="0"/>
+      <xs:element name="layer" type="xs:int"/>
+      <xs:element name="width" type="xs:int"/>
+      <xs:element name="height" type="xs:int"/>
+      <xs:element name="thickness" type="xs:float"/>
+      <xs:element name="dashArray" type="xs:float" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="dashPhase" type="xs:float"/>
+      <xs:element name="endCap" type="xs:int"/>
+      <xs:element name="lineJoin" type="xs:int"/>
+      <xs:element name="miterLimit" type="xs:float"/>
+      <xs:element name="style" type="shapeStyle" minOccurs="0"/>
+      <xs:element name="startAngle" type="xs:int"/>
+      <xs:element name="rotation" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Box">
+    <xs:sequence>
+      <xs:element name="xLoc" type="xs:int"/>
+      <xs:element name="yLoc" type="xs:int"/>
+      <xs:element name="index" type="xs:int"/>
+      <xs:element name="color" type="Color" minOccurs="0"/>
+      <xs:element name="layer" type="xs:int"/>
+      <xs:element name="width" type="xs:int"/>
+      <xs:element name="height" type="xs:int"/>
+      <xs:element name="thickness" type="xs:float"/>
+      <xs:element name="dashArray" type="xs:float" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="dashPhase" type="xs:float"/>
+      <xs:element name="endCap" type="xs:int"/>
+      <xs:element name="lineJoin" type="xs:int"/>
+      <xs:element name="miterLimit" type="xs:float"/>
+      <xs:element name="style" type="shapeStyle" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TextPart">
+    <xs:sequence>
+      <xs:element name="xLoc" type="xs:int"/>
+      <xs:element name="yLoc" type="xs:int"/>
+      <xs:element name="index" type="xs:int"/>
+      <xs:element name="color" type="Color" minOccurs="0"/>
+      <xs:element name="layer" type="xs:int"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="width" type="xs:int"/>
+      <xs:element name="height" type="xs:int"/>
+      <xs:element name="rotation" type="xs:int"/>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="text" type="xs:string" minOccurs="0"/>
+      <xs:element name="font" type="xs:string" minOccurs="0"/>
+      <xs:element name="fontsize" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Connections">
+    <xs:sequence>
+      <xs:element name="pin" type="Pin" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Pin">
+    <xs:sequence>
+      <xs:element name="x" type="xs:int"/>
+      <xs:element name="y" type="xs:int"/>
+      <xs:element name="num" type="xs:int"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="lineEdgeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ROUND_DOT"/>
+      <xs:enumeration value="SIMPLE_ARROW"/>
+      <xs:enumeration value="STRAIGHT"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="shapeStyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OUTLINED"/>
+      <xs:enumeration value="FILLED"/>
+      <xs:enumeration value="OUTLINED_FILLED"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

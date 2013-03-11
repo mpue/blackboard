@@ -1,0 +1,318 @@
+<hr>
+<b>Version 0.01</b>
+<hr>
+<ul>
+	<li>First experimental version</li>
+</ul>
+
+<hr>
+<b>Version 0.1</b>
+<hr>
+<ul>
+	<li>First usable version</li>
+	<li>Undo/Redo system works now</li>
+</ul>
+
+<hr>
+<b>Version 0.11</b>
+<hr>
+<ul>
+	<li>Changed resource loading to ClassLoader.getSystemClassLoader()</li>
+</ul>
+<hr>
+<b>Version 0.12</b>
+<hr>
+<ul>
+	<li>Adding lines is now undoable</li>
+	<li>Changed raster size to be more precise</li>
+	<li>Rotating parts can now be done from the menu too.</li>
+	<li>Rotating parts is now undoable</li>
+	<li>Improved precision when drawing lines</li>
+</ul>
+<hr>
+<b>Version 0.13</b>
+<hr>
+<ul>
+	<li>Parts can no be switched to transparent</li>
+	<li>Added splash image to about dialog</li>	
+	<li>Board may now have two different types : STRIPES, HOLES</li>
+	<li>Board size and type can now be specified</li>
+	<li>New part type : "break" for stripe layouts</li>
+</ul>  
+<hr>
+<b>Version 0.14</b>
+<hr>
+<ul>
+	<li>Color for lines is now chooseable</li>
+	<li>Line color can now be changed</li>
+	<li>Missing xml extension for files is now automatically added</li>
+	<li>Missing parts are shown as quotation marks both in browser and on the board</li>
+	<li>Parts have now an author and a license</li>
+	<li>Parts can now be reordered from front to back and vice versa</li>
+	<li>Fixed wrong display of dirty flag when restoring open views</li>
+	<li>Selection borders and handles are now always drawn on top</li>
+	<li>Changed background of part preview to lightgray for better viewing</li>
+	<li>Raster is now adjustable</li>
+</ul>  
+<hr>
+<b>Version 0.15</b>
+<hr>
+<ul>
+	<li>Fixed missing z-index for parts when opening a board</li>
+	<li>Added new board type "blank"</li>
+	<li>Added new text part type</li>
+	<li>Changed order of some items</li>
+	<li>Toggle snap to grid is now reachable from all menus</li>
+	<li>Added separators to ApplicationMenubarProvider and ApplicationToolbarProvider</li>
+</ul>
+<hr>
+<b>Version 0.16</b>
+<hr>
+<ul>
+	<li>Text color is now changeable</li>
+	<li>Parts may now be moved by cursor keys</li>
+	<li>Added part preloading for part browser</li>
+	<li>Properties of all objects are now changeable</li>
+	<li>Added value display of parts</li>
+	<li>Added basic CSV partlist export</li>
+	<li>Commands are now enabled/disabled depending on the editor state</li>
+	<li>Tab windows are now minimizable/maximizable</li>
+</ul>
+<hr>
+<b>Version 0.17</b>
+<hr>
+<ul>
+	<li>Added designator function when adding parts</li>
+	<li>Fixed nasty bug when creating new boards while an untitled dirty editor is open</li>
+	<li>Fixed problem with opening boards which contain empty parts</li>
+	<li>Added basic preferences system</li>
+	<li>Visibility of part names can now be toggled.</li>
+	<li>Files are now stored in a packed way</li>  
+	<li>Added user definable board type</li>	
+</ul>
+<hr>
+<b>Version 0.18</b>
+<hr>
+<ul>
+	<li>Improved selection behaviour</li>
+	<li>Improved snap behaviour</li>
+	<li>Added user definable layers.</li>
+	<li>Board properties may now be changed at any time</li>
+	<li>Change all single key commands to ALT-modifier</li>
+	<li>Made editor zoomable</li>
+	<li>Made size for board switchable between pixels and mm</li>
+	<li>Added changeable line types and thickness</li>
+	<li>Opacity of layers is now adjustable</li>
+	<li>Fixed bug : strange snap behaviour, when moving different types of items.</li>
+	<li>Changed UI for layers view</li>
+	<li>Added datasheet browser</li> 
+	<li>Sorting preferences alphabetically</li>
+	<li>Fixed some minor copy and paste bugs</li>
+	<li>Added confirmation dialog if saving to an existing file</li>
+	<li>Board is now mirrorable</li>
+	<li>Added primitive drawing: box and ellipse</li>
+	<li>Drawings can now be converted to parts and be reused</li>	
+</ul>
+<hr>
+<b>Version 1.0</b>
+<hr>
+<ul>
+	<li>Extracted layer behaviour to command pattern</li>
+	<li>Extracted string resources to make them translatable</li>	
+	<li>Added german translation</li>
+	<li>Changed resistor appeareance</li>
+	<li>Fixed maximized window state problem under Windows Vista/7</li>
+	<li>Added new line styles</li>
+	<li>Replaced Ellipse with Arc and made angles configurable</li>
+	<li>Fixed build problem for Java 6</li>
+	<li>Added Pixel-O-Mat tool for primitive pixel drawings</li>
+	<li>Lines, Ellipses and Boxes may now be combined/uncombined as symbols</li>
+	<li>Shape properties like color, outline and line style may now be changed at any time</li>
+	<li>Fixed wrong calculation of bounding box, when text is being rotated</li>
+	<li>BlackBoard reminds now the folder last saved to and loaded from</li>
+	<li>Added backside solder pin render, when board is mirrored</li>
+	<li>Added symbol library with draggable symbols</li>
+	<li>Fixed bug : bad snap behaviour (fw)</li>
+	<li>Fixed bug : wrong behavior of Save As command when cancelled</li>
+	<li>AddTextCommand reminds now last selected font and takes care of the mouse position</li>
+	<li>Enabled default language</li>
+	<li>Changed several hotkeys due to menu translation mechanism</li>
+	<li>Made item, line and symbol movements undoable/redoable</li>	
+	<li>Each editor has now its own undo history</li>
+	<li>Added mouse coordinate display at the status bar</li> 
+	<li>Fixed bug : Impossible to move resistors from a recently opened board</li>
+	<li>Editor switches now automatically to select mode if items are inserted or copied</li>
+	<li>Symbols can now be automatically labelled when inserting, for that a symbol must contain textparts starting with #</li>
+	<li>Paste command is undoable</li> 
+	<li>Mouse wheel zooming can now be inverted</li>
+	<li>Parts are added now to the default parts layer if it still exists.</li>
+	<li>Editor mode defaults to select</li>
+	<li>Layers now have a color, the user can choose if the layers colors should be used for drawing on that layer or not.</li>
+	<li>Fixed bug : Wrong setting of designators when copying items.</li>
+	<li>Parts are now deletable from the part browser</li>
+	<li>Part XML is now editable from the part browser</li>
+	<li>Part name is now the name defined in the part XML instead of the XML filename itself</li>
+	<li>BlackBoard can now be opened with a filename as argument</li>
+	<li>Added connection checking</li>
+	<li>Resistors cannot be converted to symbols anymore</li>
+	<li>Shape style can now be changed for a group of selected shapes.</li>
+	<li>Fixed color picking bug in pixel editor</li>
+	<li>Board is now being printed with the right size and hopefully at the center of the page.</li>
+	<li>Opening boards is now done in background with a busy window being showing while loading</li> 
+	<li>Added realistic wire mode</li>
+	<li>Diodes are now addable via dialog with selectable types</li>
+	<li>Textparts are now painted antialiased</li>
+	<li>Added designer for front panel scales</li>	
+	<li>Resistors can now have tolerances and the according ring is rendered correctly</li>
+	<li>Fixed bug : Impossible do draw lines if a resistor was selected before</li>
+	<li>Recent files are now listed in reverse order</li>
+	<li>Fixed bug : Diodes are always facing the same direction.</li>
+	<li>Fixed bug : Lines use the color of the layer they are moved to if layer colors are enabled.</li>
+	<li>Removed MoveForwardCommand and MoveBackwardCommand since we have layers now</li>
+	<li>Added dialog for part creation</li>
+	<li>Added names for pins and according tooltip display</li>
+</ul>
+<hr>
+<b>Version 1.01</b>
+<hr>
+<ul>
+	<li>Added DuplicateLayer command</li>
+	<li>Added DuplicateItem command</li>
+	<li>Added simple command line interface</li>
+	<li>Added Arduino UNO board to parts library</li>
+	<li>Switchable Look and Feel<li>
+	<li>Grid switchable between dots and lines</li>
+</ul>	
+<hr>
+<b>Version 1.02</b>
+<hr>
+<ul>
+	<li>Added magnetic mode for symbols and lines</li>
+	<li>Fixed bug : Wrong orientation of text parts within symbols, when adding to the library.</li>
+	<li>Made Symbols editable, renameable and added according edit dialog</li>
+	<li>Added auto completion for symbol categories</li>
+	<li>Changed split panel for symbols and layers to JTabbed pane.</li>	
+	<li>Added open sample board menu to file menu</li>
+	<li>Added connections property to symbols</li>
+	<li>Added basic symbol editor and the ability to add pins/connections to a symbol</li> 
+	<li>Added pin orientation to pins for better display</li>
+	<li>Added SPICE Model import functionality</li>
+	<li>Fixed bug : Diode properties cannot be changed.</li>
+	<li>Added basic NGSpice integration</li>
+	<li>NGSpice integration : pulse and sine voltage sources, resistors, diodes, inductors, bjts</li>
+	<li>Added magnetic mode for parts</li>
+	<li>Fixed bug : Missing properties on copy/paste of symbol</li>
+	<li>Fixed bug : Wrong designator on copy/paste of symbol</li>
+	<li>Added automatic build number to ant build</li>
+	<li>Added missing libraries to build.xml</li>
+	<li>Added manager for (external) simulators</li>
+	<li>Circuit is now simulatable with all installed simulators</li>
+	<li>Added OpenImageCommand</li>
+</ul>	
+<b>Version 1.02.28</b>
+<hr>
+<ul>
+	<li>Fixed bug : not deleting whole temp dir anymore when exiting (whoops!)</li>
+	<li>Fixed bug : finally diodes are editable</li>
+</ul>
+<b>Version 1.02.30</b>
+<hr>
+<ul>
+	<li>Added undo support for lines moved by magnetic mode</li>
+</ul>
+<b>Version 1.02.32</b>
+<hr>
+<ul>
+	<li>Added very simple ratsnest functionality (to be continued)</li>
+	<li>The size of the endpoint of lines, depends now on line thickness</li>
+	<li>The board is now a real layer. Important : older boards need an additional layer named "Board", this has to be added manually!</li>
+	<li>Newly created boards get a new default layer named "Board"</li>
+	<li>Changed layers to be really transparent with alpha composite</li>	
+</ul>
+<b>Version 1.02.34</b>
+<hr>
+<ul>
+	<li>Ground symbols get no new name on paste</li>
+	<li>Fixed bug : Spice ground nodes get now the same net index</li>
+	<li>Workaround : Grid is now displayed only when board layer is available until there's a better way.</li>
+	<li>Spice integration now supporting subcircuits</li> 	
+</ul>
+<b>Version 1.02.37</b>
+<hr>
+<ul>
+	<li>Netlist is now saveable</li>
+	<li>Netindex of wire is now being displayed in a tooltip if connection check mode is selected</li>
+	<li>Added ModelAddCommand</li>
+	<li>Added ModelEditCommand</li>
+	<li>Added ModelDeleteCommand</li>
+	<li>Added spice model import</li>
+</ul>
+<b>Version 1.02.38</b>
+<hr>
+<ul>
+	<li>Refactoring of CommandAction</li>
+	<li>Removed unnecessary references to ResourceService</li>
+	<li>Added PNG file filter to custom board chooser</li> 
+	<li>ExportImageCommand remembers now last selected folder</li>
+</ul>
+<b>Version 1.02.41</b>
+<hr>
+<ul>
+	<li>Extended zoom to 800%</li>
+	<li>Fixed bug : Adding symbols to library was impossible</li>
+	<li>Fixed bug : Breaking symbols dragged from library caused an empty symbol on editor</li>	
+</ul>
+<b>Version 1.02.44</b>
+<hr>
+<ul>
+	<li>Fixed bug : Recently added Symbols could not be removed from the library</li>	
+</ul>
+<b>Version 1.02.46</b>
+<hr>
+<ul>
+	<li>Reorganized toolbar</li>
+	<li>Added ToggleCommands to toolbar and added optical feedback if button is toggled</li>
+	<li>Parts and symbols are now rotateable by 45 degrees</li>	
+</ul>
+<b>Version 1.02.48</b>
+<hr>
+<ul>
+	<li>Fixed bug : Type of diode is now changeable after it has been created</li>	
+</ul>
+<b>Version 1.02.49</b>
+<hr>
+<ul>
+	<li>Changed draw mode : clicking once starts drawing, clicking twice stops. Pressing ESC while drawing cancels drawing</li>	
+</ul>
+<b>Version 1.02.52</b>
+<hr>
+<ul>
+	<li>Made tooltips disableable</li>	
+</ul>
+<b>Version 1.03.1</b>
+<hr>
+<ul>
+	<li>Splitted icon and text resources</li>
+	<li>More i18n</li>
+	<li>Changed several actions to inherit AbstractEditorAction</li>
+</ul>
+<b>Version 1.03.2</b>
+<hr>
+<ul>
+	<li>all data is now stored and retrieved from users home directory. Users which use nigthly builds must copy the directories 
+	symbols, models, parts, datasheets and simulators to the folder USER_HOME/.BlackBoard </li>
+	<li>Added new board type &quot;schematics&quot;</li>
+	<li>Improved error handling on erroneous symbols</li>
+	<li>Added continuous drawing mode</li>
+	<li>Added automatic split for lines</li>
+	<li>Pin and midpoint drawing of symbols is now disableable</li>
+</ul>
+<b>Version 1.1</b>
+<hr>
+<ul>
+    <li>Fixed bug : Wrong location of symbol when copied and pasted.</li>
+    <li>Added : Consecutive selection of overlapping elements</li>    
+    <li>Added missing icons to layer panel</li>
+    <li>Changed selection behaviour of editor : Multiple items can sow be selected wit CTRL-Key</li>
+    <li>Fixed bug : Move of multiple items caused multiple undo edits</li>    
+</ul>

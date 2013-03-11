@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BAT64SIE</name>
+    <content>.MODEL BAT64SIE D(
+       AF= 1.00E00    BV= 3.00E01   CJO= 6.59E-12    EG= 1.11E00
+       FC= 5.00E-01   IBV= 1.00E-04    IS= 6.97E-09    KF= 0.00E00
+        M= 3.96E-01     N= 1.01E00    RS= 1.84E00    TT= 1.00E-10
+       VJ= 3.42E-01   XTI= 3.00E00)
+</content>
+    <type>DIODE</type>
+</model>

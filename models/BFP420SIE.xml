@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BFP420SIE</name>
+    <content>.MODEL BFP420SIE NPN(
+  IS = 17.7E-18       RB = 9.47          CJC = 380E-15
+  BF = 117           IRB = 0.5E-3        VJC = 1.0
+  NF = 0.98          RBM = 5.47          MJC = 0.5
+ VAF = 45             RE = 0.948        XCJC = 0.18
+ IKF = 0.15           RC = 4.4            TR = 5.0E-9
+ ISE = 4.5E-12       CJE = 130E-15       CJS = 0
+  NE = 2.31          VJE = 1.0           VJS = 0.8
+  BR = 1.0           MJE = 0.5           MJS = 0.33
+  NR = 1.0            TF = 9.6E-12       XTB = 0
+ VAR = 1000          XTF = 0.457          EG = 1.16
+ IKR = 1000          VTF = 0.413         XTI = 3.0
+ ISC = 0             ITF = 41E-3          FC = 0.78
+  NC = 2.0           PTF = 0 )
+</content>
+    <type>NPN</type>
+</model>

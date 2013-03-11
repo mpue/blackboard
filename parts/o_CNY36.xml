@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>96</width>
+    <height>64</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>CNY36</name>
+    <imageName>o_CNY36.png</imageName>
+    <description>CNY36 photo sensor</description>
+    <packageType>PHOTOSENSOR</packageType>
+    <rotation>0</rotation>
+    <designator>T</designator>
+
+    <connections>
+      <pin>
+        <num>+</num>
+        <x>24</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>E</num>
+        <x>24</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>D</num>
+        <x>72</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>+</num>
+        <x>72</x>
+        <y>40</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>24,24</sebulli-pin1>
+    <sebulli-pins>0,0/0,1/3,-1/0,1</sebulli-pins>
+    <sebulli-pinnames>+,E,D,+</sebulli-pinnames>
+</part>

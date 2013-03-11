@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BF799SIE</name>
+    <content>.MODEL BF799SIE NPN(
+       AF= 1.00E00    BF= 1.39E02    BR= 1.00E-02   CJC= 2.37E-12
+      CJE= 3.85E-12   CJS= 0.00E00    EG= 1.11E00    FC= 7.64E-01
+      IKF= 2.34E-01   IKR= 1.00E00   IRB= 2.25E-04    IS= 9.72E-16
+      ISC= 1.00E-13   ISE= 2.26E-13   ITF= 4.64E-01    KF= 0.00E00
+      MJC= 2.40E-01   MJE= 2.26E-01   MJS= 3.30E-01    NC= 2.00E00
+       NE= 1.75E00    NF= 9.94E-01    NR= 1.23E00   PTF= 0.00E00
+       RB= 1.00E-02   RBM= 1.00E-02    RC= 1.56E00    RE= 3.22E-02
+       TF= 1.37E-10    TR= 0.00E00   VAF= 6.40E01   VAR= 1.29E01
+      VJC= 3.00E-01   VJE= 4.75E-01   VJS= 7.50E-01   VTF= 3.43E-01
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 1.00E02   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

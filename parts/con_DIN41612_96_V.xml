@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>608</width>
+    <height>80</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>DIN41612 96 V</name>
+    <imageName>con_DIN41612_96_V.png</imageName>
+    <description>Connector DIN41612 3x32Pin vertical</description>
+    <packageType>CONNECTOR</packageType>
+    <rotation>0</rotation>
+    <designator>J</designator>
+</part>

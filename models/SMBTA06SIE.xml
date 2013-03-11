@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>SMBTA06SIE</name>
+    <content>.MODEL SMBTA06SIE NPN(
+       AF= 1.00E00    BF= 2.75E02    BR= 3.94E00   CJC= 3.01E-11
+      CJE= 7.59E-11   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 2.80E-01   IKR= 1.00E00   IRB= 1.10E-02    IS= 2.52E-14
+      ISC= 3.75E-13   ISE= 8.30E-16   ITF= 1.24E00    KF= 0.00E00
+      MJC= 5.01E-01   MJE= 3.95E-01   MJS= 3.30E-01    NC= 1.16E00
+       NE= 1.05E00    NF= 9.74E-01    NR= 1.02E00   PTF= 0.00E00
+       RB= 2.86E01   RBM= 1.00E-02    RC= 3.69E-01    RE= 1.00E-02
+       TF= 1.29E-09    TR= 0.00E00   VAF= 6.55E02   VAR= 6.79E01
+      VJC= 3.00E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 9.99E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 7.79E-01   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

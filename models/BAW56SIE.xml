@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BAW56SIE</name>
+    <content>.MODEL BAW56SIE D(
+       AF= 1.00E00    BV= 7.00E01   CJO= 1.76E-12    EG= 1.11E00
+       FC= 5.00E-01   IBV= 1.00E-04    IS= 4.90E-10    KF= 0.00E00
+        M= 2.66E-01     N= 1.64E00    RS= 1.32E00    TT= 8.66E-09
+       VJ= 6.26E-01   XTI= 3.00E00)
+</content>
+    <type>DIODE</type>
+</model>

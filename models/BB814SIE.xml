@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BB814SIE</name>
+    <content>.MODEL BB814SIE D(IS=7f N=1.012 RS=.18 XTI=3 EG=1.11 CJO=83.9p M=.775
+               VJ=1.6 FC=.5 BV=20 IBV=100n TT=137n)
+</content>
+    <type>DIODE</type>
+</model>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BCX70JSIE</name>
+    <content>.MODEL BCX70JSIE NPN(
+       AF= 1.00E00    BF= 3.20E02    BR= 1.47E01   CJC= 7.16E-12
+      CJE= 1.03E-11   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 1.79E-01   IKR= 1.00E00   IRB= 3.37E-03    IS= 3.71E-13
+      ISC= 1.71E-13   ISE= 2.77E-15   ITF= 2.26E00    KF= 0.00E00
+      MJC= 4.60E-01   MJE= 3.86E-01   MJS= 3.30E-01    NC= 1.21E00
+       NE= 1.37E00    NF= 1.14E00    NR= 1.21E00   PTF= 0.00E00
+       RB= 1.00E02   RBM= 1.00E01    RC= 1.75E00    RE= 1.00E-02
+       TF= 5.65E-10    TR= 0.00E00   VAF= 2.49E02   VAR= 3.31E01
+      VJC= 3.00E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 9.99E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 1.10E02   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

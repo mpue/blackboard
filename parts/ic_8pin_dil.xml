@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <width>64</width>
+    <height>64</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>IC generic 8 pin</name>
+    <imageName>ic_8pin_dil.png</imageName>
+    <description>Generic 8 pin IC with dil package</description>
+    <packageType>DIL</packageType>
+    <rotation>0</rotation>
+</part>

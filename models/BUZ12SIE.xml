@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BUZ12SIE</name>
+    <content>.SUBCKT BUZ12SIE 1 2 3
+LS 5 2 7N
+LD 86 3 5N
+RG 4 11 5.5M
+RS 5 76 24M
+D12 76 86 DREV
+.MODEL DREV D CJO=2N RS=20M TT=1.8N IS=300P BV=50
+M12 86 11 76 76 MBUZ
+.MODEL MBUZ NMOS VTO=3.516 KP=39.13
+M2 11 86 8 8 MSW
+.MODEL MSW NMOS VTO=0.001 KP=5
+M3 86 11 8 8 MSW
+COX 11 8 4N
+DGD 8 86 DCGD
+.MODEL DCGD D CJO=1.9N M=0.556 VJ=1.131
+CGS 76 11 1.77N
+LG 4 1 7N
+.ENDS</content>
+    <type>SUBCIRCUIT</type>
+</model>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BAS70SIE</name>
+    <content>.MODEL BAS70SIE   D(IS=3N N=1.06 RS=29 XTI=1.8 EG=.68 
+ CJO=1.55P M=.29 VJ=.36 FC=.5 BV=70 IBV=100n TT=25P)
+</content>
+    <type>DIODE</type>
+</model>

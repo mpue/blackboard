@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>48</width>
+    <height>48</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Dummy Logo 48x48px</name>
+    <imageName>x_Logo48.png</imageName>
+    <description>Dummy Logo. Place this on the Microchips or create your own.</description>
+    <packageType>LOGO</packageType>
+    <rotation>0</rotation>
+    <designator></designator>
+
+    <connections/>
+</part>

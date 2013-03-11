@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BB515SIE</name>
+    <content>.MODEL BB515SIE D (IS=2F RS=.05 N=1.045 BV=32 IBV=100N XTI=3 EG=1.11
+ CJO=25.5P VJ=2.5 M=1 TT=14.4N)
+</content>
+    <type>DIODE</type>
+</model>

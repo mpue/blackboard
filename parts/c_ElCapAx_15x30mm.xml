@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>224</width>
+    <height>112</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>ElCap Ax 15x30mm</name>
+    <imageName>c_ElCapAx_15x30mm.png</imageName>
+    <description>Electrolytic Capacitor 15 x 30mm</description>
+    <packageType>ELCAP</packageType>
+    <rotation>0</rotation>
+    <designator>C</designator>
+
+    <connections>
+      <pin>
+        <num>P</num>
+        <x>8</x>
+        <y>56</y>
+      </pin>
+      <pin>
+        <num>N</num>
+        <x>216</x>
+        <y>56</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>8,56</sebulli-pin1>
+    <sebulli-pins>0,0/13,0</sebulli-pins>
+    <sebulli-pinnames>P,N</sebulli-pinnames>
+</part>

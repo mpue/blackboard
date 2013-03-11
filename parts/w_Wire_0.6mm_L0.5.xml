@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>16</width>
+    <height>16</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Wire 0.6mm L0.5</name>
+    <imageName>w_Wire_0.6mm_L0.5.png</imageName>
+    <description>Wire to stretch axial components, left 50mil</description>
+    <packageType>WIRE</packageType>
+    <rotation>0</rotation>
+    <designator></designator>
+
+    <connections>
+      <pin>
+        <num>1</num>
+        <x>8</x>
+        <y>8</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>8,8</sebulli-pin1>
+    <sebulli-pins>0,0</sebulli-pins>
+</part>

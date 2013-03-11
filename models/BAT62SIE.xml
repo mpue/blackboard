@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BAT62SIE</name>
+    <content>.MODEL BAT62SIE   D(IS=120N RS=200 N=1.04 XTI=1.8 EG=.68
+ CJO=.35P M=.14 VJ=.4 FC=.5 BV=40 IBV=5U TT=25P)
+</content>
+    <type>DIODE</type>
+</model>

@@ -1,0 +1,15 @@
+body {
+	font-family: Tahoma, Arial, Verdana, Helvetica, sans-serif;
+	width: 100%;
+	margin: 10;
+	padding: 10; 
+	background-color: #ffffff;
+	font-size: 0.9em;
+	color: #000000;
+	text-align: justify;
+}
+
+.toc {
+	font-size: 1.2em;
+	font-weight: bold;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>144</width>
+    <height>224</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>6mmAxis mono 20mm</name>
+    <imageName>pot_6mmAxis_mono_20mm.png</imageName>
+    <description>Potentiometer with 6mm axis</description>
+    <packageType>POTENTIOMETER</packageType>
+    <rotation>0</rotation>
+    <designator>VR</designator>
+
+    <connections>
+      <pin>
+        <num>1</num>
+        <x>40</x>
+        <y>48</y>
+      </pin>
+      <pin>
+        <num>2</num>
+        <x>72</x>
+        <y>48</y>
+      </pin>
+      <pin>
+        <num>3</num>
+        <x>104</x>
+        <y>48</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>40,48</sebulli-pin1>
+    <sebulli-pins>0,0/2,0/2,0</sebulli-pins>
+</part>

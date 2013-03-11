@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BCX41SIE</name>
+    <content>.MODEL BCX41SIE NPN(
+       AF= 1.00E00    BF= 1.70E02    BR= 9.55E-02   CJC= 2.58E-11
+      CJE= 4.69E-11   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 2.13E-01   IKR= 1.00E00   IRB= 6.59E-02    IS= 1.69E-12
+      ISC= 9.92E-13   ISE= 3.23E-14   ITF= 6.20E00    KF= 0.00E00
+      MJC= 5.11E-01   MJE= 3.97E-01   MJS= 3.30E-01    NC= 2.00E00
+       NE= 1.28E00    NF= 1.20E00    NR= 1.41E00   PTF= 0.00E00
+       RB= 7.17E00   RBM= 1.00E01    RC= 5.54E-01    RE= 1.00E-02
+       TF= 1.50E-09    TR= 0.00E00   VAF= 7.00E02   VAR= 8.58E01
+      VJC= 3.00E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 1.00E06
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 1.00E02   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>

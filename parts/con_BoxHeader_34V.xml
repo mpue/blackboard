@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>336</width>
+    <height>64</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Box Header 34V</name>
+    <imageName>con_BoxHeader_34V.png</imageName>
+    <description>Box Header 34 pins vertical</description>
+    <packageType>BOXHEADER</packageType>
+    <rotation>0</rotation>
+    <designator>J</designator>
+
+    <connections>
+      <pin>
+        <num>1</num>
+        <x>40</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>2</num>
+        <x>56</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>3</num>
+        <x>72</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>4</num>
+        <x>88</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>5</num>
+        <x>104</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>6</num>
+        <x>120</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>7</num>
+        <x>136</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>8</num>
+        <x>152</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>9</num>
+        <x>168</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>10</num>
+        <x>184</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>11</num>
+        <x>200</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>12</num>
+        <x>216</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>13</num>
+        <x>232</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>14</num>
+        <x>248</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>15</num>
+        <x>264</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>16</num>
+        <x>280</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>17</num>
+        <x>296</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>18</num>
+        <x>40</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>19</num>
+        <x>56</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>20</num>
+        <x>72</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>21</num>
+        <x>88</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>22</num>
+        <x>104</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>23</num>
+        <x>120</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>24</num>
+        <x>136</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>25</num>
+        <x>152</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>26</num>
+        <x>168</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>27</num>
+        <x>184</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>28</num>
+        <x>200</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>29</num>
+        <x>216</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>30</num>
+        <x>232</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>31</num>
+        <x>248</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>32</num>
+        <x>264</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>33</num>
+        <x>280</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>34</num>
+        <x>296</x>
+        <y>24</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>40,24</sebulli-pin1>
+    <sebulli-pins>0,1/16*1,0/-16,-1/16*1,0</sebulli-pins>
+</part>

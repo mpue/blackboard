@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spiceSimulator>
+    <filename>internal.xml</filename>
+    <name>Internal</name>
+    <path>Internal</path>
+    <parameters></parameters>
+    <defaultSimulator>false</defaultSimulator>
+    <type>INTERNAL</type>
+</spiceSimulator>

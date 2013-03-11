@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>64</width>
+    <height>16</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>1N400x</name>
+    <imageName>d_DO41.png</imageName>
+    <description>1A Diode 1N400x</description>
+    <packageType>DO</packageType>
+    <rotation>0</rotation>
+</part>

@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<symbolBean>
+    <value></value>
+    <rotation>0</rotation>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <index>7</index>
+    <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+    </color>
+    <layer>0</layer>
+    <name>ua741</name>
+    <category>Active</category>
+    <width>129</width>
+    <height>160</height>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>0</x>
+            <y>64</y>
+        </start>
+        <end>
+            <x>32</x>
+            <y>64</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>44</x>
+            <y>60</y>
+        </start>
+        <end>
+            <x>52</x>
+            <y>60</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>0</x>
+            <y>96</y>
+        </start>
+        <end>
+            <x>32</x>
+            <y>96</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>60</x>
+            <y>40</y>
+        </start>
+        <end>
+            <x>60</x>
+            <y>56</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>60</x>
+            <y>56</y>
+        </start>
+        <end>
+            <x>72</x>
+            <y>48</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>72</x>
+            <y>48</y>
+        </start>
+        <end>
+            <x>60</x>
+            <y>40</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>48</x>
+            <y>96</y>
+        </start>
+        <end>
+            <x>48</x>
+            <y>104</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>44</x>
+            <y>100</y>
+        </start>
+        <end>
+            <x>52</x>
+            <y>100</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>96</x>
+            <y>80</y>
+        </start>
+        <end>
+            <x>128</x>
+            <y>80</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>64</x>
+            <y>0</y>
+        </start>
+        <end>
+            <x>64</x>
+            <y>32</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>64</x>
+            <y>128</y>
+        </start>
+        <end>
+            <x>64</x>
+            <y>160</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <boxes>
+        <xLoc>32</xLoc>
+        <yLoc>32</yLoc>
+        <index>1</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>64</width>
+        <height>96</height>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+        <style>OUTLINED</style>
+    </boxes>
+    <textparts>
+        <xLoc>80</xLoc>
+        <yLoc>52</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>&amp;infin;</text>
+        <font>Arial</font>
+        <fontsize>16</fontsize>
+    </textparts>
+    <textparts>
+        <xLoc>72</xLoc>
+        <yLoc>8</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>V+</text>
+        <font>Arial</font>
+        <fontsize>12</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <textparts>
+        <xLoc>72</xLoc>
+        <yLoc>136</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>V-</text>
+        <font>Arial</font>
+        <fontsize>12</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <textparts>
+        <xLoc>104</xLoc>
+        <yLoc>56</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>OUT</text>
+        <font>Arial</font>
+        <fontsize>12</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <mirrorVertical>false</mirrorVertical>
+    <mirrorHorizontal>false</mirrorHorizontal>
+    <macroMode>true</macroMode>
+    <connections>
+        <pin>
+            <x>0</x>
+            <y>96</y>
+            <num>1</num>
+            <name>1</name>
+            <orientation>BOTTOM_LEFT</orientation>
+        </pin>
+        <pin>
+            <x>0</x>
+            <y>64</y>
+            <num>2</num>
+            <name>2</name>
+            <orientation>TOP_LEFT</orientation>
+        </pin>
+        <pin>
+            <x>64</x>
+            <y>0</y>
+            <num>3</num>
+            <name>3</name>
+            <orientation>TOP_LEFT</orientation>
+        </pin>
+        <pin>
+            <x>64</x>
+            <y>160</y>
+            <num>4</num>
+            <name>4</name>
+            <orientation>BOTTOM_LEFT</orientation>
+        </pin>
+        <pin>
+            <x>128</x>
+            <y>80</y>
+            <num>5</num>
+            <name>5</name>
+            <orientation>TOP_RIGHT</orientation>
+        </pin>
+    </connections>
+    <customModel>true</customModel>
+    <model>
+        <filename>ua741.xml</filename>
+        <name>ua741</name>
+        <content>* UA741 OPERATIONAL AMPLIFIER &quot;MACROMODEL&quot; SUBCIRCUIT
+* CREATED USING PARTS RELEASE 4.01 ON 07/05/89 AT 09:09
+* (REV N/A)      SUPPLY VOLTAGE: +/-15V
+* CONNECTIONS:   NON-INVERTING INPUT
+*                | INVERTING INPUT
+*                | | POSITIVE POWER SUPPLY
+*                | | | NEGATIVE POWER SUPPLY
+*                | | | | OUTPUT
+*                | | | | |
+.SUBCKT UA741    1 2 3 4 5
+  C1   11 12 4.664E-12
+  C2    6  7 20.00E-12
+  DC    5 53 DX
+  DE   54  5 DX
+  DLP  90 91 DX
+  DLN  92 90 DX
+  DP    4  3 DX
+  EGND 99  0 POLY(2) (3,0) (4,0) 0 .5 .5
+  FB    7 99 POLY(5) VB VC VE VLP VLN 0 10.61E6 -10E6 10E6 10E6 -10E6
+  GA 6  0 11 12 137.7E-6
+  GCM 0  6 10 99 2.574E-9
+  IEE  10  4 DC 10.16E-6
+  HLIM 90  0 VLIM 1K
+  Q1   11  2 13 QX
+  Q2   12  1 14 QX
+  R2    6  9 100.0E3
+  RC1   3 11 7.957E3
+  RC2   3 12 7.957E3
+  RE1  13 10 2.740E3
+  RE2  14 10 2.740E3
+  REE  10 99 19.69E6
+  RO1   8  5 150
+  RO2   7 99 150
+  RP    3  4 18.11E3
+  VB    9  0 DC 0
+  VC 3 53 DC 2.600
+  VE   54  4 DC 2.600
+  VLIM  7  8 DC 0
+  VLP  91  0 DC 25
+  VLN   0 92 DC 25
+.MODEL DX D(IS=800.0E-18)
+.MODEL QX NPN(IS=800.0E-18 BF=62.50)
+.ENDS
+</content>
+        <type>SUBCIRCUIT</type>
+    </model>
+    <type>SUBCIRCUIT</type>
+    <filename>ua741.xml</filename>
+</symbolBean>

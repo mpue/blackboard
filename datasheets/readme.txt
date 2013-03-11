@@ -1,0 +1,1 @@
+This is just a dummy file, to convince eclipse that this folder should be committed too ;)

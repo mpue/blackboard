@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BFN23SIE</name>
+    <content>.MODEL BFN23SIE PNP(
+       AF= 1.00E00    BF= 1.40E02    BR= 1.00E-02   CJC= 1.65E-11
+      CJE= 4.20E-11   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 2.41E-02   IKR= 1.00E00   IRB= 1.10E-02    IS= 5.35E-16
+      ISC= 1.00E-13   ISE= 9.81E-17   ITF= 3.00E00    KF= 0.00E00
+      MJC= 7.00E-01   MJE= 4.13E-01   MJS= 3.30E-01    NC= 2.00E00
+       NE= 1.03E00    NF= 8.73E-01    NR= 9.84E-01   PTF= 0.00E00
+       RB= 1.99E01   RBM= 2.41E-02    RC= 2.22E00    RE= 1.85E-02
+       TF= 1.11E-09    TR= 0.00E00   VAF= 1.49E02   VAR= 9.18E01
+      VJC= 3.00E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 9.99E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 5.76E02   XTI= 3.00E00)
+</content>
+    <type>PNP</type>
+</model>

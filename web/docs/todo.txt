@@ -1,0 +1,13 @@
+TODO:
+-tutorials, tutorials, tutorials for everything!
+-Create editor for parts
+-translate to german
+-users want to upload their own parts to the community
+-need for boards with stripe layout
+-provide a few sample boards (e.g. ATMega ISP)
+-change export dialog to select file instead of folder
+-image size for export should be adjustable
+-create tons of parts!
+-make parts placeable on bottom layer (mirrored)
+
+

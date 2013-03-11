@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BAW78DSIE</name>
+    <content>.MODEL BAW78DSIE D(
+       AF= 1.00E00    BV= 4.00E02   CJO= 5.40E-12    EG= 1.11E00
+       FC= 5.00E-01   IBV= 1.00E-04    IS= 3.08E-11    KF= 0.00E00
+        M= 4.62E-01     N= 1.51E00    RS= 4.04E-01    TT= 1.44E-06
+       VJ= 8.00E-01   XTI= 3.00E00)
+</content>
+    <type>DIODE</type>
+</model>

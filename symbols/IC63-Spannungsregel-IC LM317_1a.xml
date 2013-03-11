@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<symbolBean>
+    <value>+LM317T  -LM337T 1,5Amp.  (+LM350  -LM333 3A)</value>
+    <rotation>0</rotation>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <index>1395</index>
+    <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+    </color>
+    <layer>2</layer>
+    <name>-Spannungsregel-IC</name>
+    <category>Semiconductors</category>
+    <width>160</width>
+    <height>176</height>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>120</x>
+            <y>40</y>
+        </start>
+        <end>
+            <x>136</x>
+            <y>24</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashPhase>0.0</dashPhase>
+        <endCap>0</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>1.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>40</x>
+            <y>40</y>
+        </start>
+        <end>
+            <x>24</x>
+            <y>24</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashPhase>0.0</dashPhase>
+        <endCap>0</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>1.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>40</x>
+            <y>120</y>
+        </start>
+        <end>
+            <x>24</x>
+            <y>136</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashPhase>0.0</dashPhase>
+        <endCap>0</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>1.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>120</x>
+            <y>120</y>
+        </start>
+        <end>
+            <x>136</x>
+            <y>136</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashPhase>0.0</dashPhase>
+        <endCap>0</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>1.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>40</x>
+            <y>120</y>
+        </start>
+        <end>
+            <x>40</x>
+            <y>120</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>42</x>
+            <y>122</y>
+        </start>
+        <end>
+            <x>121</x>
+            <y>122</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>122</x>
+            <y>42</y>
+        </start>
+        <end>
+            <x>122</x>
+            <y>121</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>40</x>
+            <y>88</y>
+        </start>
+        <end>
+            <x>0</x>
+            <y>88</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>120</x>
+            <y>88</y>
+        </start>
+        <end>
+            <x>160</x>
+            <y>88</y>
+        </end>
+        <startType>STRAIGHT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <lines>
+        <xLoc>0</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <start>
+            <x>80</x>
+            <y>120</y>
+        </start>
+        <end>
+            <x>80</x>
+            <y>176</y>
+        </end>
+        <startType>ROUND_DOT</startType>
+        <endType>STRAIGHT</endType>
+        <thickness>2.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+    </lines>
+    <boxes>
+        <xLoc>40</xLoc>
+        <yLoc>40</yLoc>
+        <index>1374</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>2</layer>
+        <width>80</width>
+        <height>80</height>
+        <thickness>3.0</thickness>
+        <dashPhase>0.0</dashPhase>
+        <endCap>2</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>10.0</miterLimit>
+        <style>OUTLINED</style>
+    </boxes>
+    <boxes>
+        <xLoc>24</xLoc>
+        <yLoc>24</yLoc>
+        <index>1375</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>2</layer>
+        <width>112</width>
+        <height>112</height>
+        <thickness>2.0</thickness>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashArray>8.0</dashArray>
+        <dashArray>4.0</dashArray>
+        <dashPhase>0.0</dashPhase>
+        <endCap>0</endCap>
+        <lineJoin>0</lineJoin>
+        <miterLimit>1.0</miterLimit>
+        <style>OUTLINED</style>
+    </boxes>
+    <textparts>
+        <xLoc>67</xLoc>
+        <yLoc>0</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>IC#</text>
+        <font>Arial</font>
+        <fontsize>16</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <textparts>
+        <xLoc>50</xLoc>
+        <yLoc>56</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>LM317T</text>
+        <font>Arial</font>
+        <fontsize>16</fontsize>
+        <type>VALUE</type>
+    </textparts>
+    <textparts>
+        <xLoc>28</xLoc>
+        <yLoc>72</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>3</text>
+        <font>Arial</font>
+        <fontsize>12</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <textparts>
+        <xLoc>125</xLoc>
+        <yLoc>71</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>2</text>
+        <font>Arial</font>
+        <fontsize>14</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <textparts>
+        <xLoc>84</xLoc>
+        <yLoc>121</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>1</text>
+        <font>Arial</font>
+        <fontsize>14</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <textparts>
+        <xLoc>71</xLoc>
+        <yLoc>99</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>adj.</text>
+        <font>Arial</font>
+        <fontsize>12</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <textparts>
+        <xLoc>46</xLoc>
+        <yLoc>79</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>In</text>
+        <font>Arial</font>
+        <fontsize>12</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <textparts>
+        <xLoc>96</xLoc>
+        <yLoc>79</yLoc>
+        <index>0</index>
+        <color>
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+        </color>
+        <layer>0</layer>
+        <width>0</width>
+        <height>0</height>
+        <rotation>0</rotation>
+        <text>Out</text>
+        <font>Arial</font>
+        <fontsize>12</fontsize>
+        <type>TEXT</type>
+    </textparts>
+    <mirrorVertical>false</mirrorVertical>
+    <mirrorHorizontal>false</mirrorHorizontal>
+    <macroMode>true</macroMode>
+    <connections>
+        <pin>
+            <x>0</x>
+            <y>88</y>
+            <num>3</num>
+            <name>In</name>
+            <orientation>TOP_LEFT</orientation>
+        </pin>
+        <pin>
+            <x>160</x>
+            <y>88</y>
+            <num>2</num>
+            <name>Out</name>
+            <orientation>BOTTOM_RIGHT</orientation>
+        </pin>
+        <pin>
+            <x>80</x>
+            <y>176</y>
+            <num>1</num>
+            <name>ADJ</name>
+            <orientation>BOTTOM_LEFT</orientation>
+        </pin>
+    </connections>
+    <customModel>true</customModel>
+    <model>
+        <filename>7812.xml</filename>
+        <name>LM7812</name>
+        <content>.SUBCKT LM7812  1    2    3
+QT6          23  10  2   Q_NPN 0.1
+QT7          5   4   10  Q_NPN 0.1
+QT5          7   6   5   Q_NPN 0.1
+QT1          1   9   8   Q_NPN 0.1
+QT3          11  8   7   Q_NPN 0.1
+QT2          11  13  12  Q_NPN 0.1
+QT17         1   15  14  Q_NPN 10
+C2           10  23      4P
+R16          12  5       500
+R12          16  2       12.1K
+QT18         17  23  16  Q_NPN 0.1
+D1           18  19  	 D_D 
+R11          20  21      850
+R5           22  3       100
+QT14         24  18  2   Q_NPN 0.1
+R21          6   2       2.67K
+R20          3   6       5.22K
+DZ2          25  26      D_5V1 
+R19          1   26      16K
+R18          14  3       250M
+R17          25  14      380
+R15          25  15      1.62K
+QT16         1   20  15  Q_NPN 1
+QT15         2   24  21  Q_PNP 0.1 
+*OFF
+R14          21  24      4K
+C1           27  24      20P
+R13          19  2       4K
+QT13         24  27  18  Q_NPN 0.1
+QT12         20  25  22  Q_NPN 1 
+*OFF
+QT11         20  28  2   Q_NPN 0.1
+*OFF
+QT10         20  11  1   Q_PNP 0.1
+R10          17  27      16.5K
+R9           5   4       1.9K
+R8           4   23      26
+R7           10  2       1.2K
+R6           29  2       1K
+QT9          11  11  1   Q_PNP 0.1
+QT8          27  16  29  Q_NPN 0.1
+QT4          15  6   17  Q_NPN 0.1
+DZ1          2   9       D_5V6
+R4           1   9       80K
+R3           28  2       830
+R2           13  28      4.97K
+R1           8   13      7K
+
+.MODEL D_5V1 D( IS=10F N=1.16 BV=5.1 IBV=0.5M CJ0 = 1P TT = 10p )
+.MODEL D_5V6 D( IS=10F N=1.16 BV=5.6 IBV=5U CJ0 = 1P TT = 10p )
+.MODEL Q_NPN NPN( IS=10F NF=1.16 NR=1.16 BF=80 CJC=1P CJE=2P  
++       TF=10P TR=1N )
+.MODEL Q_PNP PNP( IS=10F NF=1.16 NR=1.16 BF=80 CJC=1P CJE=2P  
++      TF=10P TR=1N )
+.MODEL D_D D( IS=1F N=1.16 CJ0 = 1P TT = 10p )
+
+.ENDS LM7812</content>
+        <type>SUBCIRCUIT</type>
+    </model>
+    <type>VOLTAGE_SOURCE</type>
+    <filename>-Spannungsregel-IC.xml</filename>
+    <properties>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">frequencyUnit</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">HZ</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">acAmplitude</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0.0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">dcVoltage</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0.0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">shape</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">PULSE</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">dcOffset</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0.0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">frequency</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">acPhase</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">0.0</value>
+        </entry>
+        <entry>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">mode</key>
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">AC</value>
+        </entry>
+    </properties>
+</symbolBean>

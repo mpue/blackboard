@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spiceSimulator>
+    <filename>LTSpice.xml</filename>
+    <name>LTSpice</name>
+    <path>C:\Program Files (x86)\LTC\LTspiceIV\scad3.exe</path>
+    <parameters></parameters>
+    <defaultSimulator>false</defaultSimulator>
+    <type>EXTERNAL</type>
+</spiceSimulator>

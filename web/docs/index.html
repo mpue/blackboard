@@ -1,0 +1,167 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta name="author" content="Matthias Pueski">
+	<meta name="publisher" content="Matthias Pueski">
+	<meta name="copyright" content="Matthias Pueski">
+	<meta name="description" content="BlackBoard breadboard designer">
+	<meta name="keywords" content="Breadboard, Soldering, Prototype, Wiring, Electronics">
+	<meta name="page-topic" content="Electronics">
+	<meta name="page-type" content="Private">
+	<meta name="audience" content="all">
+	<meta http-equiv="content-language" content="en">
+	<meta name="robots" content="index, follow">
+	<meta name="DC.Creator" content="Matthias Pueski">
+	<meta name="DC.Publisher" content="Matthias Pueski">
+	<meta name="DC.Rights" content="Matthias Pueski">
+	<meta name="DC.Description" content="BlackBoard breadboard designer">
+	<meta name="DC.Language" content="en">	
+	<title>Blackboard breadboard designer - documentation</title>
+	</head>
+	<body style="font-family: sans-serif">
+		<h1>BlackBoard Documentation</h1>
+		<p>
+			This document describes the use of the BlackBoard BreadBoard Editor. Blackboard is intended for the hobby enthusiast and should
+			help building prototypes on so called breadboards easily.
+		</p>
+		<h2>
+			Creating a board
+		</h2>
+		<p>
+			In order to create an empty board simply go to "File->Create new board". A new editor
+			with an empty board will be opened. The application should now look as shown in the figure below:
+		</p>
+		<p>
+			<img alt="An empty board" src="./images/blackboard_new.png"> 
+		</p>
+		<p>
+			Currently BlackBoard knows of three different types of elements, these are:
+			<ul>
+				<li>Parts</li>
+				<li>Wires</li>
+				<li>Resistors</li>
+			</ul>
+			We simply start with a few different parts and connect them with some wires:
+		</p>
+		<p>
+			To place a part (parts are actually all other than resistors and wires, e.g. ICs and IC sockets.) hit the "Browse parts" button
+			on the toolbar (the little IC package) and the part browser will show up as shown in the figure below.
+		</p>
+		<p>
+			<img src="./images/browse_parts.png" alt="Browse parts"/>
+		</p>
+		<p>
+			As your part library will grow in the future, you may enter some part of the name, the description or the package type in the filter box
+			on the left side of the dialog. This will help you find the desired part quickly. If you've found the desired part, select it with the mouse
+			and hit the "OK" button, the part will be placed on the board.
+			The following image shows the board editor with an ATMega32 and some LEDs placed.</p>
+		</p>
+		<p>
+			<img src="./images/board_with_parts.png" alt="Board with parts"/>
+		</p>
+		<h2>Modes of operation</h2>
+		<p>
+			Blackboard provides two essential modes, selecting parts and lines and drawing lines. In order to switch between them
+			you may use the two hotkeys "S" for select mode and "D" for drawing. Alternatively you may select the desired mode from the select
+			menu. If you are going to draw a wire, as we do in the next step you have to choose the draw mode (D).
+		</p>	
+		<p>
+			To draw a wire simply click where you want the line to start and drag it to the desired endpoint. Du to a little snapping bug 
+			the line might not start as expected, but don't mind, I'll show you how to correct that later. After dragging a few wires and adding some
+			parts your board should now look like this:
+		</p>
+		<p>
+			<img src="./images/some_parts_and_wires.png" alt="Parts and wires"/>
+		</p>	
+		<p>As mentioned above, you may change the start and endpoints of a wire at any time. In order to do that, select the wire by clicking it. The wire shows
+		now two green handles, which allow you to change them. To change one of the two points of a line, simply click it and drag it to the desired location. See figure below:
+		</p>  
+		<p>
+			<img src="./images/selected_line.png" alt="Selected line"/>
+		</p>	
+		<h2>Using layers</h2>
+		<p>Working with layers is very simple. Blackboard provides three layers:</p>
+		<ul>
+			<li>The top layer</li>
+			<li>The bottom layer</li>
+			<li>The part layer</li>			
+		</ul>
+		<p>
+			Parts are automatically added to the part layer. Lines are drawn on the top or bottom layer, depending on the
+			selected layer. Lines on the top layer have a red color, bottom lines (wires) have a black color.
+			The layers can be toggled visible with the according checkboxes on the toolbar. 
+			The current layer can be selected with the layer drop down box on the toolbar  or with the three keyboard
+			shortcuts T,B and P. When exporting the board as an image, only the visible layers are exported.
+		</p>
+		
+		<h2>Adding resistors</h2>
+		<p>
+			As resistors are parts with a special behaviour (their size differs), they need to be added with an extra comand. To add a resistor choose "Board->Add resistor" from
+			the menu or use the little resistor symbol from the toolbar. A dialog will appear and let you define the resistor to be added. See figure below.
+		</p>
+		<p>
+			<img src="./images/add_resistor.png" alt="Add resistor"/>
+		</p>	
+		<p>
+			The same behaviour as for lines applies for resistors. Since these are parts which may differ in their size, you can change the 
+			start and endpoints of a resistor at any time. After adding some resistors, your board may look like shown in the image below.		
+		</p> 
+		<p>
+			<img src="./images/resistors_added.png" alt="Added a resistor"/>
+		</p>	
+		<p><b>Hint:</b> If you would like to change the size of a whole bunch of resistors, simly switch to select mode, drag a selection 
+		and the click onto a single end of a resistor and drag it. This way you can resize a group of resistors easily.
+		</p>	
+		<h3>Exporting an image</h3>
+		<p>After finishing your layout you may want to create an image from the board in order to print it or to edit it with
+		the graphics tool of your choice. BlackBoard provides a few tools to make that task easy. Lets say you've created a board like
+		shown in the image below:
+		</p>
+		<p>
+			<img src="./images/sample_board.png" alt="Sample board"/>
+		</p>	
+		<p>
+			To export your board as an image, choose "Board->Export image" or just hit the little image button on the toolbar. 
+			The following dialog will show up:
+		</p>
+		<p>
+			<img src="./images/export_image.png" alt="Export image"/>
+		</p>				
+		<p>If you are going to solder your board, you will do it most of the time from the copper side. BlackBoard simplifies this
+		and lets you export the image as grayscale, inverted or mirrored horizontally. Like this you can create your layout from each side
+		of the board. Alternatively you may export the image with only the layers enabled you need, for soldering the wires for example.
+		</p>
+		<h2>Creating custom parts</h2>
+		<p>BlackBoard comes with a hand full of parts, but you may add parts at any time by yourself. The parts are located in the 
+		parts directory below the BlackBoard folder. The according images are located inside the pars/images folder.</p>
+		<p>To create a part you need thus an XML file describing the part and an according image. A typical part definition could look
+		like this:</p>
+		<p>
+			&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;<br>
+			&lt;part&gt;<br>
+			&nbsp;&nbsp;&lt;width&gt;112&lt;/width&gt;<br>
+			&nbsp;&nbsp;&lt;height&gt;320&lt;/height&gt;<br>
+			&nbsp;&nbsp;&lt;xLoc&gt;0&lt;/xLoc&gt;<br>
+			&nbsp;&nbsp;&lt;yLoc&gt;0&lt;/yLoc&gt;<br>
+			&nbsp;&nbsp;&lt;name&gt;ATMega32&lt;/name&gt;<br>
+			&nbsp;&nbsp;&lt;imageName&gt;atmega32.png&lt;/imageName&gt;<br>
+			&nbsp;&nbsp;&lt;description&gt;ATmel ATMega32&lt;/description&gt;<br>
+			&nbsp;&nbsp;&lt;packageType&gt;DIL&lt;/packageType&gt;<br>
+			&nbsp;&nbsp;&lt;rotation&gt;0&lt;/rotation&gt;<br>
+			&lt;/part&gt;<br>		
+		</p>		
+		<p>
+			The image for the part has only few constraints: It should fit into the 16 pixel raster of the editor and
+			thus should have dimensions with a multiple of 16. Furthermore you should have the real size in mind while 
+			creating an image. A typical breadboard has a raster of 1/10 inch (2.54mm).		
+		</p>
+		<p>The fields xLoc, yLoc and as well the rotation can be always 0, this ist just the initial position of the part.
+		All other fields are text fields which simplify finding a part inside the parts browser. Once you've 
+		created the XML file and the image and have placed it inside the parts directory, the parts browser should find
+		the new part after next program startup.</p> 
+	</body>
+</html>

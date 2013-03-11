@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<part>
+    <width>16</width>
+    <height>128</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>socket 8x1</name>
+    <imageName>socket_8.png</imageName>
+    <description>socket strip 8 pins</description>
+    <packageType>DIL</packageType>
+    <rotation>0</rotation>
+</part>
+
+

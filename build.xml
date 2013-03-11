@@ -1,0 +1,154 @@
+<project name="BlackBoard" default="dist" basedir=".">
+
+	<property file="build.properties" />
+
+	<description>
+       	BlackBoard build file
+    </description>
+
+	<!-- set global properties for this build -->
+
+	<property name="src" location="src" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="resources" location="resources" />
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${build}/jar" />
+	</target>
+
+	<target name="compile" depends="init" description="compile the source">
+		<!-- Compile the java code from ${src} into ${build} -->
+
+		<javac srcdir="${src}" destdir="${build}/jar" debug="true">
+
+			<classpath>
+				<pathelement path="${classpath}" />
+				<fileset dir="./lib">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile" description="generate the distribution">
+		<delete file="${dist}/lib/BlackBoard.jar" />
+		<delete file="MANIFEST.MF" />
+		<manifest file="MANIFEST.MF">
+			<attribute name="Built-By" value="${user.name}" />
+			<attribute name="Main-Class" value="${mainclass}" />
+			<attribute name="Class-Path" value="lib/commons-beanutils-1.8.3.jar	
+				lib/beansbinding-1.2.1.jar
+				lib/commons-collections-3.2.jar
+				lib/commons-io-1.3.1.jar
+				lib/commons-lang-2.3.jar
+				lib/commons-logging-1.1.jar
+				lib/forms-1.2.1.jar
+				lib/log4j-1.2.14.jar
+				lib/looks-2.3.0.jar
+				lib/autocomplete.jar
+				lib/jcommon.1.0.17.jar
+				lib/jfreechart-1.0.14.jar
+				lib/jcas.jar
+				lib/javolution-core-java-6.0.0-20120923.104917-4.jar
+				lib/rsyntaxtextarea.jar
+				lib/org.springframework.asm-3.0.5.RELEASE.jar
+				lib/org.springframework.beans-3.0.5.RELEASE.jar
+				lib/org.springframework.context-3.0.5.RELEASE.jar
+				lib/org.springframework.context.support-3.0.5.RELEASE.jar
+				lib/org.springframework.core-3.0.5.RELEASE.jar
+				lib/org.springframework.expression-3.0.5.RELEASE.jar
+				lib/swing-worker-1.2.jar
+				lib/jbusycomponent-1.1.jar
+				lib/jxlayer.jar
+				lib/swingx-1.6.1.jar
+				lib/swingx-beaninfo-1.6.1.jar ." />
+		</manifest>
+
+		<delete dir="${dist}/lib">
+		</delete>
+		<delete dir="${dist}">
+		</delete>
+
+		<copy todir="${build}/jar">
+			<fileset dir="${src}">
+				<include name="**/*.properties" />
+			</fileset>
+			<fileset dir="resources">
+				<include name="**/*.properties" />
+				<include name="**/*.html" />
+				<include name="**/*.xml" />
+			</fileset>			
+		</copy>
+
+		<copy todir="${build}">
+			<fileset dir="resources">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.properties" />
+				<exclude name="**/*.html" />
+				<exclude name="**/*.xml" />
+			</fileset>
+			<fileset dir=".">
+			    <include name="**/*.number" />
+			</fileset>
+		</copy>
+
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/lib" />
+
+
+		<!-- Put everything in ${build} into the jar file -->
+
+		<jar jarfile="${dist}/lib/BlackBoard.jar" manifest="MANIFEST.MF" basedir="${build}/jar" />
+
+		<copy todir="./dist/lib">
+			<fileset dir=".">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+
+		<delete dir="${build}/jar">
+		</delete>
+		<delete dir="${build}/org">
+		</delete>
+		<delete dir="${build}/net">
+		</delete>
+		<delete dir="${dist}/lib/dist">
+		</delete>
+
+		<copy todir="${dist}/lib">
+			<fileset dir="${build}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+
+		<copydir src="./parts" dest="${dist}/lib/parts"/>
+		<copydir src="./symbols" dest="${dist}/lib/symbols"/>
+		<copydir src="./spice" dest="${dist}/lib/spice"/>
+		<copydir src="./models" dest="${dist}/lib/models"/>
+		<copydir src="./samples" dest="${dist}/lib/samples"/>
+		<copydir src="./simulators" dest="${dist}/lib/simulators"/>
+		<copydir src="./regression" dest="${dist}/lib/regression"/>
+		<copydir src="./start" dest="${dist}/lib/"/>
+		
+		<buildnumber file="build.number"/>
+		<property file="build.number"/>
+		
+		<zip destfile="${dist}/blackboard-bin-${version}.${build.number}.zip">
+			<zipfileset dir="${dist}/lib/" prefix="blackboard-bin-${version}.${build.number}" />
+		</zip>
+
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+
+</project>

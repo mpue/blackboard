@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>32</width>
+    <height>48</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Tantalum R2.5 3.7mm</name>
+    <imageName>c_Tantal_RM2.5_3.7mm.png</imageName>
+    <description>Tantalum Capacitor, R2.5mm, diameter: 3.7mm</description>
+    <packageType>CTANTAL</packageType>
+    <rotation>0</rotation>
+    <designator>C</designator>
+
+    <connections>
+      <pin>
+        <num>P</num>
+        <x>8</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>N</num>
+        <x>24</x>
+        <y>24</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>8,24</sebulli-pin1>
+    <sebulli-pins>0,0/1,0</sebulli-pins>
+    <sebulli-pinnames>P,N</sebulli-pinnames>
+</part>

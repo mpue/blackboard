@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>144</width>
+    <height>144</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>Single 0.35VA 22x23mm</name>
+    <imageName>tr_Single_0.35VA_22x23mm.png</imageName>
+    <description>Transformer, 0.35VA 22x23mm</description>
+    <packageType>TRANSFORMER</packageType>
+    <rotation>0</rotation>
+    <designator>T</designator>
+
+    <connections>
+      <pin>
+        <num>P</num>
+        <x>24</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>P</num>
+        <x>120</x>
+        <y>24</y>
+      </pin>
+      <pin>
+        <num>S</num>
+        <x>56</x>
+        <y>120</y>
+      </pin>
+      <pin>
+        <num>S</num>
+        <x>88</x>
+        <y>120</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>24,24</sebulli-pin1>
+    <sebulli-pins>0,0/6,0/-4,6/2,0</sebulli-pins>
+    <sebulli-pinnames>P,P,S,S</sebulli-pinnames>
+</part>

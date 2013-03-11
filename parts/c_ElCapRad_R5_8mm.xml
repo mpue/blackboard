@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+
+  This file describes an electronic component for the
+  open source project BlackBoard breadboard designer.
+  Visit http://blackboard.serverpool.org/ for more
+  information and additional components.
+
+-->
+
+<part>
+    <author>Gerd Bartelt - www.sebulli.com</author>
+    <license>Creative Commons Attribution 3.0 Unported License(CC BY 3.0)</license>
+    <width>80</width>
+    <height>80</height>
+    <xLoc>0</xLoc>
+    <yLoc>0</yLoc>
+    <name>ElCap Rad R5 8mm</name>
+    <imageName>c_ElCapRad_R5_8mm.png</imageName>
+    <description>Electrolytic Capacitor radial, R5mm, Diameter 8mm</description>
+    <packageType>ELCAPRAD</packageType>
+    <rotation>0</rotation>
+    <designator>C</designator>
+
+    <connections>
+      <pin>
+        <num>N</num>
+        <x>24</x>
+        <y>40</y>
+      </pin>
+      <pin>
+        <num>P</num>
+        <x>56</x>
+        <y>40</y>
+      </pin>
+    </connections>
+
+    <sebulli-pin1>24,40</sebulli-pin1>
+    <sebulli-pins>0,0/2,0</sebulli-pins>
+    <sebulli-pinnames>N,P</sebulli-pinnames>
+</part>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>BCX68SIE</name>
+    <content>.MODEL BCX68SIE NPN(
+       AF= 1.00E00    BF= 1.61E02    BR= 3.66E00   CJC= 1.37E-10
+      CJE= 2.52E-10   CJS= 0.00E00    EG= 1.11E00    FC= 5.00E-01
+      IKF= 7.74E00   IKR= 1.00E00   IRB= 6.95E-02    IS= 9.77E-14
+      ISC= 4.11E-14   ISE= 1.49E-16   ITF= 1.00E01    KF= 0.00E00
+      MJC= 4.87E-01   MJE= 4.11E-01   MJS= 3.30E-01    NC= 1.02E00
+       NE= 1.01E00    NF= 9.64E-01    NR= 1.23E00   PTF= 0.00E00
+       RB= 1.91E01   RBM= 3.03E00    RC= 2.06E-01    RE= 1.01E-02
+       TF= 1.38E-09    TR= 0.00E00   VAF= 5.63E02   VAR= 3.49E01
+      VJC= 3.00E-01   VJE= 3.00E-01   VJS= 7.50E-01   VTF= 9.99E05
+     XCJC= 1.00E00   XTB= 0.00E00   XTF= 3.26E01   XTI= 3.00E00)
+</content>
+    <type>NPN</type>
+</model>
