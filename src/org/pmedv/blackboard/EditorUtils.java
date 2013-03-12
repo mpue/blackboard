@@ -28,10 +28,13 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+
+import ktb.math.Pi;
 
 import net.infonode.docking.DockingWindow;
 import net.infonode.docking.RootWindow;
@@ -42,10 +45,49 @@ import org.apache.commons.logging.LogFactory;
 import org.pmedv.blackboard.app.EditorMode;
 import org.pmedv.blackboard.app.FileState;
 import org.pmedv.blackboard.beans.SymbolBean;
-import org.pmedv.blackboard.commands.*;
+import org.pmedv.blackboard.commands.AddDiodeCommand;
+import org.pmedv.blackboard.commands.AddItemEdit;
+import org.pmedv.blackboard.commands.AddResistorCommand;
+import org.pmedv.blackboard.commands.AddTextCommand;
+import org.pmedv.blackboard.commands.BreakSymbolCommand;
+import org.pmedv.blackboard.commands.BrowsePartsCommand;
+import org.pmedv.blackboard.commands.ConvertToPartCommand;
+import org.pmedv.blackboard.commands.ConvertToSymbolCommand;
+import org.pmedv.blackboard.commands.CreatePartListCommand;
+import org.pmedv.blackboard.commands.CreateRatsnestCommand;
+import org.pmedv.blackboard.commands.CreateScaleCommand;
+import org.pmedv.blackboard.commands.EditPropertiesCommand;
+import org.pmedv.blackboard.commands.ExportImageCommand;
+import org.pmedv.blackboard.commands.MoveToLayerCommand;
+import org.pmedv.blackboard.commands.PrintBoardCommand;
+import org.pmedv.blackboard.commands.RedoCommand;
+import org.pmedv.blackboard.commands.RotateCCWCommand;
+import org.pmedv.blackboard.commands.RotateCWCommand;
+import org.pmedv.blackboard.commands.SaveAsCommand;
+import org.pmedv.blackboard.commands.SaveBoardCommand;
+import org.pmedv.blackboard.commands.SelectAllCommand;
+import org.pmedv.blackboard.commands.SelectAllLinesCommand;
+import org.pmedv.blackboard.commands.SetColorCommand;
+import org.pmedv.blackboard.commands.SetConnectionCheckModeCommand;
+import org.pmedv.blackboard.commands.SetDrawEllipseModeCommand;
+import org.pmedv.blackboard.commands.SetDrawMeasureModeCommand;
+import org.pmedv.blackboard.commands.SetDrawModeCommand;
+import org.pmedv.blackboard.commands.SetDrawRectangleModeCommand;
+import org.pmedv.blackboard.commands.SetMoveModeCommand;
+import org.pmedv.blackboard.commands.SetSelectModeCommand;
+import org.pmedv.blackboard.commands.ShowLayersCommand;
+import org.pmedv.blackboard.commands.SimulateCircuitCommand;
+import org.pmedv.blackboard.commands.ToggleGridCommand;
+import org.pmedv.blackboard.commands.ToggleMagneticCommand;
+import org.pmedv.blackboard.commands.ToggleMirrorCommand;
+import org.pmedv.blackboard.commands.ToggleSnapToGridCommand;
+import org.pmedv.blackboard.commands.UndoCommand;
 import org.pmedv.blackboard.components.BoardEditor;
 import org.pmedv.blackboard.components.Item;
+import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.components.Line;
+import org.pmedv.blackboard.components.Part;
+import org.pmedv.blackboard.components.Pin;
 import org.pmedv.blackboard.components.Symbol;
 import org.pmedv.blackboard.panels.CenterPanel;
 import org.pmedv.core.components.CmdJButton;
@@ -370,4 +412,78 @@ public class EditorUtils {
 		return dt;
 
 	}
+	
+	/**
+	 * Finds the mouse hovered {@link Pin} for the current {@link BoardEditor}
+	 * 
+	 * @param e The mouse event to find the pin for
+	 * @param editor the current {@link BoardEditor}
+	 * @return the pin, or null if no {@link Pin} is being hovered
+	 * 
+	 */
+	public static Pin findMouseOverPin(MouseEvent e, BoardEditor editor) {
+		
+		Point point = new Point(e.getX(), e.getY());
+		
+		for (Layer layer : editor.getModel().getLayers()) {
+			
+			for (Item item : layer.getItems()) {
+					
+				if (item instanceof Part) {
+					
+					Part p = (Part)item;
+					
+					if (p.getRotation() != 0) {
+						point = BoardUtil.rotatePoint((int)point.getX(), (int)point.getY(), p.getXLoc(), p.getYLoc(), p.getRotation());
+					}
+					
+					for (Pin pin : p.getConnections().getPin()) {
+						
+						if (point.getX() >= (item.getXLoc() + pin.getX() - 3) && 
+							point.getX() <= (item.getXLoc() + pin.getX() + 3) && 
+							point.getY() >= (item.getYLoc() + pin.getY() - 3) && 
+							point.getY() <= (item.getYLoc() + pin.getY()) + 3) {
+							return pin;
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Finds the mouse hovered {@link Line} for the current {@link BoardEditor}
+	 * 
+	 * @param e The mouse event to find the line for
+	 * @param editor the current {@link BoardEditor}
+	 * @return the line, or null if no {@link Line} is being hovered
+	 * 
+	 */
+	public static Line findMouseOverLine(MouseEvent e, BoardEditor editor) {
+
+		Point point = new Point(e.getX(), e.getY());
+
+		for (Layer layer : editor.getModel().getLayers()) {
+
+			for (Item item : layer.getItems()) {
+
+				Line line = (Line) item;
+
+				if (line.containsPoint(point)) {
+					return line;
+				}
+
+			}
+
+		}
+
+		return null;
+	}
+	
 }

@@ -76,6 +76,8 @@ import org.pmedv.core.preferences.Preferences;
 import org.pmedv.core.services.ResourceService;
 import org.springframework.context.ApplicationContext;
 
+import com.sun.org.apache.xpath.internal.FoundIndex;
+
 /**
  * <p>
  * This is the main editor component of blackboard. 
@@ -300,52 +302,12 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			}
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				
-				Point point = new Point(e.getX(), e.getY());
-				
-				for (Layer layer : model.getLayers()) {
-					
-					for (Item item : layer.getItems()) {
 							
-						if (item instanceof Part && !editorMode.equals(EditorMode.CHECK_CONNECTIONS)) {
-							
-							Part p = (Part)item;
-							
-							if (p.getRotation() != 0) {
-								point = BoardUtil.rotatePoint((int)point.getX(), (int)point.getY(), p.getXLoc(), p.getYLoc(), p.getRotation());
-							}
-							
-							for (Pin pin : p.getConnections().getPin()) {
-								
-								if (point.getX() >= (item.getXLoc() + pin.getX() - 3) && 
-									point.getX() <= (item.getXLoc() + pin.getX() + 3) && 
-									point.getY() >= (item.getYLoc() + pin.getY() - 3) && 
-									point.getY() <= (item.getYLoc() + pin.getY()) + 3) {
-									mouseOverPin = pin;
-									break;
-								}
-								else {
-									mouseOverPin = null;
-								}
-								
-							}
-							
-						}
-						else if (item instanceof Line && editorMode.equals(EditorMode.CHECK_CONNECTIONS)) {
-							
-							Line line = (Line)item;
-							
-							if (line.containsPoint(point)) {
-								mouseOverLine = line;
-								break;
-							}
-							else {
-								mouseOverLine = null;
-							}
-							
-							
-						}
-					}
+				if (editorMode.equals(EditorMode.CHECK_CONNECTIONS)) {
+					mouseOverLine = EditorUtils.findMouseOverLine(e, BoardEditor.this);
+				}
+				else {
+					mouseOverPin = EditorUtils.findMouseOverPin(e, BoardEditor.this);					
 				}
 				
 				win.getCustomLabel().setText("x : "+e.getX()+" y : "+e.getY());
