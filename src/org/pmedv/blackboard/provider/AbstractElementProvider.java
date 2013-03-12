@@ -112,7 +112,10 @@ public class AbstractElementProvider<T extends BaseElement> {
 					e.printStackTrace();
 					continue;
 				}
-				elements.add(t);
+				if (!elements.contains(t)) {
+					elements.add(t);					
+				}
+				
 			}
 			
 		}

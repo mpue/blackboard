@@ -42,6 +42,13 @@ public abstract class BaseElement {
 		this.filename = filename;
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof BaseElement) {
+			BaseElement el = (BaseElement)obj;
+			return el.getName().equals(name);
+		}
+		return false;
+	}
 	
 }
