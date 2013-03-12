@@ -26,7 +26,6 @@ import java.io.File;
 
 import org.pmedv.blackboard.components.Item;
 import org.pmedv.core.components.ClipBoard;
-import org.pmedv.core.services.ResourceService;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 

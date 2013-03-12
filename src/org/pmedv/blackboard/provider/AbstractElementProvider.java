@@ -60,7 +60,7 @@ public class AbstractElementProvider<T extends BaseElement> {
 	private final Unmarshaller unmarshaller;
 	private final Marshaller marshaller;
 	
-	public AbstractElementProvider(Class clazz, String elementsBaseDir) {
+	public AbstractElementProvider(Class<?> clazz, String elementsBaseDir) {
 
 		elements = new ArrayList<T>();
 		
