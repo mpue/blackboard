@@ -488,6 +488,12 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 				if (editorMode.equals(EditorMode.SELECT)) {
 					handleClickSelectionEvent(e);
 				}
+				else if (editorMode.equals(EditorMode.MOVE)) {
+					dragStartX = e.getX();
+					dragStartY = e.getY();
+					dragStopX  = e.getX();
+					dragStopY = e.getY();
+				}
 				else if (editorMode.equals(EditorMode.DRAW_LINE) || 
 						 editorMode.equals(EditorMode.DRAW_MEASURE) ||
 						 editorMode.equals(EditorMode.DRAW_RECTANGLE) || 
@@ -701,7 +707,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			deltaY = BoardUtil.snap(deltaY, raster);
 		}
 		if (currentMovingItem != null) {
-			// if (editorMode.equals(EditorMode.MOVE)) {
+			if (editorMode.equals(EditorMode.MOVE)) {
 				setFileState(FileState.DIRTY);
 				if (currentMovingItem instanceof Line && currentMovingItem == selectedItem) {
 					Line l = (Line) currentMovingItem;
@@ -715,7 +721,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 					moveOrResizeItem(deltaX, deltaY, currentMovingItem);
 					setFileState(FileState.DIRTY);
 				}				
-			// }
+			}
 		}
 		else {
 			if (e.getX() <= model.getWidth())
@@ -747,7 +753,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			// one or many items selected, move them
 			else {
 				if (selectedItems.size() > 1) {
-					// if (editorMode.equals(EditorMode.MOVE)) {
+					if (editorMode.equals(EditorMode.MOVE)) {
 						for (Item item : selectedItems) {
 							if (item instanceof Line) {
 								Line l = (Line) item;
@@ -759,7 +765,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 							setFileState(FileState.DIRTY);
 							
 						}						
-					// }					
+					}					
 				}
 				else {
 					getCurrentMovingItem(e);
@@ -1523,15 +1529,6 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			drawLayer(model.getLayers().get(i), g2);
 		}
 		
-		g2.setColor(Color.LIGHT_GRAY);
-		g2.setStroke(BoardUtil.stroke_1_0f);
-				
-		Boolean dotGrid = (Boolean)Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.dotGrid");
-		// draw grid
-		if (gridVisible) {
-			BoardUtil.drawGrid(g, raster, model.getWidth(), model.getHeight(),dotGrid.booleanValue());
-		}
-		
 		// draw selection border
 		if (state.equals(SelectionState.DRAGGING_NEW_SELECTION) && button1Pressed) {
 			g2.setColor(Color.GREEN);
@@ -1714,6 +1711,16 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 				g2d.setColor(Color.WHITE);
 				g2d.fillRect(0, 0, getWidth(), getHeight());
 			}
+			
+			g2d.setColor(Color.LIGHT_GRAY);
+			g2d.setStroke(BoardUtil.stroke_1_0f);
+					
+			Boolean dotGrid = (Boolean)Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.dotGrid");
+			// draw grid
+			if (gridVisible) {
+				BoardUtil.drawGrid(g2d, raster, model.getWidth(), model.getHeight(),dotGrid.booleanValue());
+			}
+			
 			return;
 		}
 
@@ -1764,7 +1771,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		popupMenu.add(ctx.getBean(SetSelectModeCommand.class));
 		popupMenu.add(ctx.getBean(SetDrawModeCommand.class));
-		// popupMenu.add(ctx.getBean(SetMoveModeCommand.class));
+		popupMenu.add(ctx.getBean(SetMoveModeCommand.class));
 		popupMenu.add(ctx.getBean(SetColorCommand.class));
 		popupMenu.addSeparator();
 		popupMenu.add(ctx.getBean(ToggleSnapToGridCommand.class));

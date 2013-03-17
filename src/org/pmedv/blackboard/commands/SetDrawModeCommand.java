@@ -25,6 +25,9 @@ package org.pmedv.blackboard.commands;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.Action;
 import javax.swing.JToolBar;
@@ -76,7 +79,7 @@ public class SetDrawModeCommand extends AbstractEditorCommand {
 		
 		editor.updateStatusBar();
 		editor.refresh();
-
+		
 	}
 
 	/**

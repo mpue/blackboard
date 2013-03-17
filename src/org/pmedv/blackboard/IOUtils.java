@@ -489,9 +489,9 @@ public class IOUtils {
 				else if (item instanceof Part && !(item instanceof TextPart) && !(item instanceof Box)
 						&& !(item instanceof Ellipse) && !(item instanceof Symbol)) {
 					Part part = (Part) item;
-					FileUtils.copyFile(new File(AppContext.getWorkingDir() + "/parts/" + part.getFilename()), new File(
+					FileUtils.copyFile(new File(System.getProperty("user.home") + "/." + AppContext.getName() + "/parts/" + part.getFilename()), new File(
 							tempPartDir, part.getFilename()), true);
-					FileUtils.copyFile(new File(AppContext.getWorkingDir() + "/parts/images/" + part.getImageName()), new File(
+					FileUtils.copyFile(new File(System.getProperty("user.home") + "/." + AppContext.getName() + "/parts/images/" + part.getImageName()), new File(
 							tempImagesDir, part.getImageName()), true);
 					PartBean pb = new PartBean(part);
 					board.getParts().add(pb);

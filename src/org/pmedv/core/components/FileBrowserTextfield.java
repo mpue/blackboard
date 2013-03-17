@@ -25,7 +25,7 @@ import com.jgoodies.forms.layout.FormLayout;
  */
 public class FileBrowserTextfield extends JPanel {
 	
-	private static final ResourceService resources = AppContext.getContext().getBean(ResourceService.class);
+	private final ResourceService resources;
 
 	private static final long serialVersionUID = -9209620854884015479L;
 
@@ -38,7 +38,8 @@ public class FileBrowserTextfield extends JPanel {
 	}
 
 	public FileBrowserTextfield() {
-		initComponents();
+		resources = AppContext.getContext().getBean(ResourceService.class);
+		initComponents();		
 		fileChooser = new JFileChooser(System.getProperty("user.home"));
 		browseButton.addActionListener(new ActionListener() {
 			

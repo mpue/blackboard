@@ -43,12 +43,10 @@
 			<actionClass>org.pmedv.blackboard.commands.SetDrawModeCommand</actionClass>
 			<bean>true</bean>
 		</toolbarContributions>
-		<!-- 
         <toolbarContributions>
             <actionClass>org.pmedv.blackboard.commands.SetMoveModeCommand</actionClass>
             <bean>true</bean>
         </toolbarContributions>
-         -->		
 		<toolbarContributions>
 			<actionClass>org.pmedv.blackboard.commands.SetDrawRectangleModeCommand</actionClass>
 			<bean>true</bean>

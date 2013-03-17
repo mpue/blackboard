@@ -153,7 +153,7 @@ public final class PartFactory {
 		if (name == null)
 			return null;
 
-		File workDir = new File(".");
+		File workDir = new File(System.getProperty("user.home") + "/." + AppContext.getName());
 
 		FileInputStream fis = new FileInputStream(System.getProperty("user.home") + "/." + AppContext.getName()
 				+ "/parts/" + name);

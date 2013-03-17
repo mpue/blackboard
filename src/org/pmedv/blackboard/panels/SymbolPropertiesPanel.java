@@ -24,7 +24,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 public class SymbolPropertiesPanel extends JPanel {
 	
-	private static final ResourceService resources = AppContext.getContext().getBean(ResourceService.class);
+	private final ResourceService resources;
 	
 	private JTextField nameTextfield;
 	private RSyntaxTextArea categoryArea;
@@ -41,6 +41,9 @@ public class SymbolPropertiesPanel extends JPanel {
 	 */
 	@SuppressWarnings("unchecked")
 	public SymbolPropertiesPanel() {
+		
+		resources = AppContext.getContext().getBean(ResourceService.class);
+		
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
@@ -136,7 +139,7 @@ public class SymbolPropertiesPanel extends JPanel {
 		return customModelCheckBox;
 	}
 	
-	private static class TypeComboBoxRenderer extends DefaultListCellRenderer {
+	private class TypeComboBoxRenderer extends DefaultListCellRenderer {
 		
 		@Override
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,

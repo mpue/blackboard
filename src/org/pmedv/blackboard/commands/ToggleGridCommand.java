@@ -59,6 +59,9 @@ public class ToggleGridCommand extends AbstractCommand implements EditorChangedL
 	@Override
 	public void execute(ActionEvent e) {
 		BoardEditor editor = EditorUtils.getCurrentActiveEditor();
+		if (editor == null) {
+			return;
+		}
 		editor.setGridVisible(!editor.isGridVisible());
 		editor.refresh();
 		setButtonSelected(editor);

@@ -56,7 +56,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBluer;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 
 
 public class ApplicationWindowAdvisorImpl implements ApplicationWindowAdvisor {
