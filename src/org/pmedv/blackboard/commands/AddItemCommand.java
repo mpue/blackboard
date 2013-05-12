@@ -185,6 +185,7 @@ public class AddItemCommand extends AbstractCommand {
 	/**
 	 * Creates a split of an existing line, means that the old line is splitted 
 	 * into two new lines at the point where the new line hits an exising one
+	 * 
 	 * @param model The model to perform the split on
 	 * @param line The new {@link Line}
 	 * @param l the {@link Line} to be hit

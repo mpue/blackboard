@@ -127,26 +127,28 @@ public class IOUtils {
 							FileUtils.copyFile(new File(tempImagesDir, p.getImageName()), new File(imageDir, p.getImageName()));
 							AppContext.getContext().getBean(PartFactory.class).addPart(outputPart.getName());
 						}
-						else {
-							// houston we got a problem, there's already a file with the same name, it might be the same
-							// part or not. No matter what, we cannot be sure and we need to give the file a new name						
-							// to be absolutely sure, we need a unique name, we just add the time add the beginning of the filename							
-							String timestamp = String.valueOf(System.currentTimeMillis());													
-							// copy the file with a new name
-							String partName = timestamp + tempPartDir.listFiles()[i].getName();
-							File newOutput = new File(partDir,partName);
-							FileUtils.copyFile(tempPartDir.listFiles()[i], newOutput);
-							// get the part
-							Part p = (Part) partUnmarshaller.unmarshal(new FileInputStream(newOutput));
-							// if a part with a new name exists the image probably is also the same, wo we need a new name for it too
-							String newImageName = timestamp + p.getImageName();
-							FileUtils.copyFile(new File(tempImagesDir, p.getImageName()), new File(imageDir, newImageName));
-							p.setImageName(newImageName);
-							// persist the changes 
-							partMarshaller.marshal(p, newOutput);
-							// and finally add the part to the PartFactory
-							AppContext.getContext().getBean(PartFactory.class).addPart(partName);
-						}
+// TODO : This is a real big mess here, if we do it like that, each time a board is opened, the parts which are contained in 
+// 		  the file will be created and we get lots of duplicates. Notice to myself : Do not program while sitting in a train!
+//						else {
+//							// houston we got a problem, there's already a file with the same name, it might be the same
+//							// part or not. No matter what, we cannot be sure and we need to give the file a new name						
+//							// to be absolutely sure, we need a unique name, we just add the time add the beginning of the filename							
+//							String timestamp = String.valueOf(System.currentTimeMillis());													
+//							// copy the file with a new name
+//							String partName = timestamp + tempPartDir.listFiles()[i].getName();
+//							File newOutput = new File(partDir,partName);
+//							FileUtils.copyFile(tempPartDir.listFiles()[i], newOutput);
+//							// get the part
+//							Part p = (Part) partUnmarshaller.unmarshal(new FileInputStream(newOutput));
+//							// if a part with a new name exists the image probably is also the same, wo we need a new name for it too
+//							String newImageName = timestamp + p.getImageName();
+//							FileUtils.copyFile(new File(tempImagesDir, p.getImageName()), new File(imageDir, newImageName));
+//							p.setImageName(newImageName);
+//							// persist the changes 
+//							partMarshaller.marshal(p, newOutput);
+//							// and finally add the part to the PartFactory
+//							AppContext.getContext().getBean(PartFactory.class).addPart(partName);
+//						}
 						
 					}
 					catch (Exception e) {

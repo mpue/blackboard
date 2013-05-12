@@ -60,7 +60,6 @@ public class BrowsePartsCommand extends AbstractEditorCommand {
 		putValue(Action.SMALL_ICON,resources.getIcon("icon.browseparts"));
 		putValue(Action.SHORT_DESCRIPTION, resources.getResourceByKey("BrowsePartsCommand.description"));	
 		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_DOWN_MASK));
-		setEnabled(false);
 	}
 	
 // 	TODO : Display part view instead of dialog
@@ -167,7 +166,5 @@ public class BrowsePartsCommand extends AbstractEditorCommand {
 
 	@Override
 	public void editorChanged(EditorChangedEvent event) {
-		super.editorChanged(event);
-		setEnabled(event.getEditor() != null && !event.getEditor().getModel().getType().equals(BoardType.SCHEMATICS));
 	}
 }

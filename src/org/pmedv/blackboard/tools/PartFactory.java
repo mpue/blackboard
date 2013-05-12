@@ -158,7 +158,14 @@ public final class PartFactory {
 		FileInputStream fis = new FileInputStream(System.getProperty("user.home") + "/." + AppContext.getName()
 				+ "/parts/" + name);
 
-		Part p = (Part) partUnmarshaller.unmarshal(fis);
+		Part p = null;
+		
+		try {
+			p = (Part) partUnmarshaller.unmarshal(fis);
+		}
+		catch (Exception e1) {
+			throw new IllegalArgumentException("Unable to create part from file "+name);
+		}
 
 		String xmlContent = FileUtils.readFile(new File(System.getProperty("user.home"), "." + AppContext.getName()
 				+ "/parts/" + name));

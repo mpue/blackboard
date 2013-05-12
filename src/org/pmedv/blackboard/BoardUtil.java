@@ -28,10 +28,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
+
+import org.jdesktop.jxlayer.JXLayer;
+import org.pbjar.jxlayer.plaf.ext.TransformUI;
+import org.pbjar.jxlayer.plaf.ext.transform.DefaultTransformModel;
 import org.pmedv.blackboard.app.FileState;
 import org.pmedv.blackboard.commands.AddItemCommand;
 import org.pmedv.blackboard.commands.SetSelectModeCommand;
@@ -688,5 +696,14 @@ public class BoardUtil {
 		}
 		
 	}	
+	
+	public static Point mirrorTransform(Point point, JXLayer<?> zoomLayer,MouseEvent event) {
+		point = SwingUtilities.convertPoint(event.getComponent(), point, zoomLayer);
+		TransformUI ui = (TransformUI)(Object) zoomLayer.getUI();
+		DefaultTransformModel model = (DefaultTransformModel) ui.getModel();
+		AffineTransform at = model.getTransform((JXLayer<? extends JComponent>) zoomLayer);
+		at.transform(point, point);
+		return point;
+	}
 	
 }

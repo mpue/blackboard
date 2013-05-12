@@ -302,6 +302,9 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			}
 			@Override
 			public void mouseMoved(MouseEvent e) {
+				
+				Point p = e.getPoint();					
+				p = BoardUtil.mirrorTransform(p, zoomLayer, e);
 							
 				if (editorMode.equals(EditorMode.CHECK_CONNECTIONS)) {
 					mouseOverLine = EditorUtils.findMouseOverLine(e, BoardEditor.this);
@@ -321,16 +324,17 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 					BoardEditor.this.setToolTipText(tooltipBuffer.toString());
 					ToolTipManager.sharedInstance().mouseMoved(
 					        new MouseEvent(BoardEditor.this, 0, 0, 0,
-					                e.getX(), e.getY(), // X-Y of the mouse for the tool tip
+					                (int)p.getX(), (int)p.getY(), // X-Y of the mouse for the tool tip
 					                0, false));					
 				}
 				else if (mouseOverLine != null) {
 					tooltipBuffer.delete(0, tooltipBuffer.length());
 					tooltipBuffer.append("net : "+mouseOverLine.getNetIndex());
 					BoardEditor.this.setToolTipText(tooltipBuffer.toString());
+									
 					ToolTipManager.sharedInstance().mouseMoved(
 					        new MouseEvent(BoardEditor.this, 0, 0, 0,
-					                e.getX(), e.getY(), // X-Y of the mouse for the tool tip
+					                (int)p.getX(), (int)p.getY(), // X-Y of the mouse for the tool tip
 					                0, false));					
 					
 				}
@@ -707,7 +711,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			deltaY = BoardUtil.snap(deltaY, raster);
 		}
 		if (currentMovingItem != null) {
-			if (editorMode.equals(EditorMode.MOVE)) {
+			// if (editorMode.equals(EditorMode.MOVE)) {
 				setFileState(FileState.DIRTY);
 				if (currentMovingItem instanceof Line && currentMovingItem == selectedItem) {
 					Line l = (Line) currentMovingItem;
@@ -721,7 +725,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 					moveOrResizeItem(deltaX, deltaY, currentMovingItem);
 					setFileState(FileState.DIRTY);
 				}				
-			}
+			//}
 		}
 		else {
 			if (e.getX() <= model.getWidth())
@@ -753,7 +757,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			// one or many items selected, move them
 			else {
 				if (selectedItems.size() > 1) {
-					if (editorMode.equals(EditorMode.MOVE)) {
+					// if (editorMode.equals(EditorMode.MOVE)) {
 						for (Item item : selectedItems) {
 							if (item instanceof Line) {
 								Line l = (Line) item;
@@ -765,7 +769,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 							setFileState(FileState.DIRTY);
 							
 						}						
-					}					
+					// }					
 				}
 				else {
 					getCurrentMovingItem(e);
@@ -1771,7 +1775,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		popupMenu.add(ctx.getBean(SetSelectModeCommand.class));
 		popupMenu.add(ctx.getBean(SetDrawModeCommand.class));
-		popupMenu.add(ctx.getBean(SetMoveModeCommand.class));
+//		popupMenu.add(ctx.getBean(SetMoveModeCommand.class));
 		popupMenu.add(ctx.getBean(SetColorCommand.class));
 		popupMenu.addSeparator();
 		popupMenu.add(ctx.getBean(ToggleSnapToGridCommand.class));
@@ -1839,11 +1843,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 	 */
 	private void handleContextClick(MouseEvent event) {
 		Point point = event.getPoint();
-		point = SwingUtilities.convertPoint(event.getComponent(), point, zoomLayer);
-		TransformUI ui = (TransformUI)(Object) zoomLayer.getUI();
-		DefaultTransformModel model = (DefaultTransformModel) ui.getModel();
-		AffineTransform at = model.getTransform((JXLayer<? extends JComponent>) zoomLayer);
-		at.transform(point, point);
+		point = BoardUtil.mirrorTransform(point, zoomLayer, event);
 		contextClickX = (int) point.x;
 		contextClickY = (int) point.y;
 		deleteCommand.setEnabled(selectedItem != null || selectedItems.size() > 0);
