@@ -79,7 +79,7 @@ public class DeleteCommand extends AbstractCommand {
 		
 		try {
 
-			if (editor.getSelectedItems().size() > 1) {						
+			if (editor.getSelectedItems().size() >= 1) {						
 				editor.clearSelectionBorder();
 				for (Item item : editor.getSelectedItems()) {
 					deletedItems.add(item);

@@ -22,7 +22,17 @@
  */
 package org.pmedv.blackboard.components;
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -32,7 +42,6 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -40,7 +49,16 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.ToolTipManager;
 import javax.swing.undo.UndoManager;
 import javax.swing.undo.UndoableEdit;
 
@@ -58,7 +76,39 @@ import org.pmedv.blackboard.ShapeUtil;
 import org.pmedv.blackboard.app.EditorMode;
 import org.pmedv.blackboard.app.FileState;
 import org.pmedv.blackboard.app.SelectionState;
-import org.pmedv.blackboard.commands.*;
+import org.pmedv.blackboard.commands.AddItemCommand;
+import org.pmedv.blackboard.commands.AddResistorCommand;
+import org.pmedv.blackboard.commands.AddSymbolToLibraryCommand;
+import org.pmedv.blackboard.commands.AddTextCommand;
+import org.pmedv.blackboard.commands.BreakSymbolCommand;
+import org.pmedv.blackboard.commands.BrowsePartsCommand;
+import org.pmedv.blackboard.commands.ConvertToPartCommand;
+import org.pmedv.blackboard.commands.ConvertToSymbolCommand;
+import org.pmedv.blackboard.commands.CopyCommand;
+import org.pmedv.blackboard.commands.DeleteCommand;
+import org.pmedv.blackboard.commands.DuplicateCommand;
+import org.pmedv.blackboard.commands.EditPartCommand;
+import org.pmedv.blackboard.commands.EditPropertiesCommand;
+import org.pmedv.blackboard.commands.ExportImageCommand;
+import org.pmedv.blackboard.commands.FlipHorizontalCommand;
+import org.pmedv.blackboard.commands.FlipVerticalCommand;
+import org.pmedv.blackboard.commands.MoveItemEdit;
+import org.pmedv.blackboard.commands.MoveLineEdit;
+import org.pmedv.blackboard.commands.MoveMultipleItemsEdit;
+import org.pmedv.blackboard.commands.MoveToLayerCommand;
+import org.pmedv.blackboard.commands.PasteCommand;
+import org.pmedv.blackboard.commands.RedoCommand;
+import org.pmedv.blackboard.commands.RotateCCWCommand;
+import org.pmedv.blackboard.commands.RotateCWCommand;
+import org.pmedv.blackboard.commands.SaveBoardCommand;
+import org.pmedv.blackboard.commands.SetColorCommand;
+import org.pmedv.blackboard.commands.SetDrawModeCommand;
+import org.pmedv.blackboard.commands.SetSelectModeCommand;
+import org.pmedv.blackboard.commands.SimulateCircuitCommand;
+import org.pmedv.blackboard.commands.ToggleGridCommand;
+import org.pmedv.blackboard.commands.ToggleMirrorCommand;
+import org.pmedv.blackboard.commands.ToggleSnapToGridCommand;
+import org.pmedv.blackboard.commands.UndoCommand;
 import org.pmedv.blackboard.components.WireConnection.WireConnectionType;
 import org.pmedv.blackboard.events.EditorChangedEvent;
 import org.pmedv.blackboard.events.EditorChangedEvent.EventType;
@@ -75,8 +125,6 @@ import org.pmedv.core.gui.ApplicationWindow;
 import org.pmedv.core.preferences.Preferences;
 import org.pmedv.core.services.ResourceService;
 import org.springframework.context.ApplicationContext;
-
-import com.sun.org.apache.xpath.internal.FoundIndex;
 
 /**
  * <p>
