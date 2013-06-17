@@ -70,7 +70,6 @@ public class UndoCommand extends AbstractCommand implements EditorChangedListene
 			
 			try {
 				undoManager.undo();	
-				undoManager.end();
 			}
 			catch (CannotUndoException c) {
 				JOptionPane.showMessageDialog(win, resources.getResourceByKey("msg.cantundo"), 

@@ -69,6 +69,8 @@ public class AddItemCommand extends AbstractCommand {
 	private static final List<Item> removals = new LinkedList<Item>();
 	private static final List<Item> addables = new LinkedList<Item>();
 	
+	private boolean split = false;
+	
 	@Override
 	public void execute(ActionEvent e) {
 		
@@ -81,6 +83,7 @@ public class AddItemCommand extends AbstractCommand {
 		ApplicationContext ctx = AppContext.getContext();
 		BoardEditor editor = EditorUtils.getCurrentActiveEditor();
 		BoardEditorModel model = editor.getModel();
+		UndoManager undoManager = editor.getUndoManager();				
 		
 		final ShapePropertiesPanel shapesPanel = ctx.getBean(ShapePropertiesPanel.class);
 		item.setLayer(model.getCurrentLayer().getIndex());	
@@ -126,14 +129,17 @@ public class AddItemCommand extends AbstractCommand {
 							// place no junction if start or end points of line meet
 							if (!l.getStart().equals(line.getStart()) && !l.getEnd().equals(line.getStart())) {
 								line.setStartType(LineEdgeType.ROUND_DOT);									
-								createSplit(model, line, l, true);							
+								createSplit(editor,model, line, l, true);
+								split = true;
+								
 							}															
 						}
 						if (l.containsPoint(line.getEnd(),1)) {
 							// place no junction if start or end points of line meet
 							if (!l.getStart().equals(line.getEnd()) && !l.getEnd().equals(line.getEnd())) {
 								line.setEndType(LineEdgeType.ROUND_DOT);
-								createSplit(model, line, l, false);
+								createSplit(editor,model, line, l, false);
+								split = true;
 							}
 						}
 						
@@ -168,13 +174,24 @@ public class AddItemCommand extends AbstractCommand {
 		}
 		
 		for (Item item : addables) {
-			model.getCurrentLayer().getItems().add(item);
+			if (item instanceof Line) {
+				Line l = (Line)item;
+				// keep layer of splitted lines
+				model.getLayer(l.getLayer()).getItems().add(l);
+			}
+			else {
+				model.getCurrentLayer().getItems().add(item);	
+			}
+			
+		}
+
+
+		if (!split) {
+			if (!undoManager.addEdit(new AddItemEdit(item))) {
+				log.info("Could not add edit "+this.getClass());
+			}						
 		}
 		
-		UndoManager undoManager = editor.getUndoManager();				
-		if (!undoManager.addEdit(new AddItemEdit(item))) {
-			log.info("Could not add edit "+this.getClass());
-		}
 		editor.setFileState(FileState.DIRTY);
 
 		ctx.getBean(RedoCommand.class).setEnabled(undoManager.canRedo());
@@ -185,12 +202,14 @@ public class AddItemCommand extends AbstractCommand {
 	/**
 	 * Creates a split of an existing line, means that the old line is splitted 
 	 * into two new lines at the point where the new line hits an exising one
+	 * @param editor 
 	 * 
 	 * @param model The model to perform the split on
 	 * @param line The new {@link Line}
 	 * @param l the {@link Line} to be hit
 	 */
-	private void createSplit(BoardEditorModel model, Line line, Line l, boolean atStart) {
+	private void createSplit(BoardEditor editor, BoardEditorModel model, Line line, Line l, boolean atStart) {
+		
 		Point start = new Point(l.getStart());
 		Point end   = new Point(l.getEnd());
 		
@@ -205,17 +224,29 @@ public class AddItemCommand extends AbstractCommand {
 		
 		Line l1 = new Line(start, middle, getFreeIndex(model));
 		l1.setStroke(l.getStroke());
-		l1.setColor(line.getColor());
-
+		l1.setColor(l.getColor());
+		l1.setLayer(l.getLayer());
+		l1.setStartType(l.getStartType());
+		l1.setEndType(l.getEndType());
+		
 		Line l2 = new Line(new Point(middle), end, getFreeIndex(model));
 		l2.setStroke(l.getStroke());
-		l2.setColor(line.getColor());
+		l2.setColor(l.getColor());
+		l2.setLayer(l.getLayer());
+		l2.setStartType(l.getStartType());
+		l2.setEndType(l.getEndType());
 
-		// model.getCurrentLayer().getItems().add(l1);
-		// model.getCurrentLayer().getItems().add(l2);
 		addables.add(l1);
 		addables.add(l2);
 		removals.add(l);
+		
+		if (!editor.getUndoManager().addEdit(new CreateSplitEdit(line, l, l1, l2))) {
+			log.info("Could not add edit "+this.getClass());
+		}
+		
+		AppContext.getBean(RedoCommand.class).setEnabled(editor.getUndoManager().canRedo());
+		AppContext.getBean(UndoCommand.class).setEnabled(editor.getUndoManager().canUndo());
+
 	}
 
 

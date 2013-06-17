@@ -326,9 +326,11 @@ public class PartDialog extends AbstractNiceDialog {
 				int index = table.convertRowIndexToModel(rows[0]); 				
 				Part selectedPart = model.getParts().get(index);				
 				String content = textArea.getText();
-				String name = selectedPart.getFilename();				
-				String partFileLocation = AppContext.getWorkingDir() + "/parts/" + name;				
-				FileUtils.writeFile(new File(partFileLocation),content);
+				String name = selectedPart.getFilename();
+				File workDir = new File(System.getProperty("user.home"), "." + AppContext.getName());
+				File partDir = new File(workDir + "/parts/");
+				File partFile = new File(partDir,name);
+				FileUtils.writeFile(partFile,content);
 				try {
 					model.getParts().set(index, AppContext.getContext().getBean(PartFactory.class).createPart(name));
 				} 

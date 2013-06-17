@@ -97,16 +97,13 @@ public class PasteCommand extends AbstractCommand {
 				i.setIndex(maxIndex);	
 				
 				editor.getSelectedItems().add(i);
+				
 				if (i instanceof Line) {
-
 					Line line = (Line) i;
-
 					line.setStart(new Point((int) line.getStart().getX() + 32, (int) line.getStart().getY() + 32));
 					line.setEnd(new Point((int) line.getEnd().getX() + 32, (int) line.getEnd().getY() + 32));
 					line.setOldstart(new Point(line.getStart()));
-					line.setOldEnd(new Point(line.getEnd()));
-
-					editor.getModel().getLayer(i.getLayer()).getItems().add(line);
+					line.setOldEnd(new Point(line.getEnd()));					
 				}
 				else {
 					i.setXLoc(i.getXLoc() + 32);
@@ -115,8 +112,9 @@ public class PasteCommand extends AbstractCommand {
 					i.setOldYLoc(i.getYLoc());
 					i.setOldWidth(i.getWidth());
 					i.setOldHeight(i.getHeight());
-					editor.getModel().getLayer(i.getLayer()).getItems().add(i);
 				}
+
+				editor.getModel().getLayer(i.getLayer()).getItems().add(i);
 				
 				
 				if (i instanceof Resistor) {					

@@ -41,7 +41,7 @@ public class CreatePartCommand extends AbstractCommand {
 		
 		// setup directories
 		
-		File workDir = new File(".");
+		File workDir = new File(System.getProperty("user.home"), "." + AppContext.getName());
 		File partDir = new File(workDir + "/parts/");
 		File imageDir = new File(workDir + "/parts/images/");
 		File outputPart = new File(partDir+"/"+part.getName()+".xml");
