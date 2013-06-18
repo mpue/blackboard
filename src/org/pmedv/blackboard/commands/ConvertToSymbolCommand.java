@@ -28,17 +28,23 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.swing.Action;
 import javax.swing.KeyStroke;
+import javax.swing.undo.UndoManager;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.pmedv.blackboard.EditorUtils;
+import org.pmedv.blackboard.app.FileState;
 import org.pmedv.blackboard.components.BoardEditor;
 import org.pmedv.blackboard.components.Item;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.components.Line;
 import org.pmedv.blackboard.components.Symbol;
 import org.pmedv.core.commands.AbstractEditorCommand;
+import org.pmedv.core.context.AppContext;
 
 /**
  * The <code>ConvertToSymbolCommand</code> converts one or more selected {@link Item} objects
@@ -50,6 +56,8 @@ import org.pmedv.core.commands.AbstractEditorCommand;
 public class ConvertToSymbolCommand extends AbstractEditorCommand {
 
 	private static final long serialVersionUID = -1410589465955713058L;
+	
+	private static final Log log = LogFactory.getLog(ConvertToSymbolCommand.class);
 	
 	public ConvertToSymbolCommand() {
 		putValue(Action.NAME, resources.getResourceByKey("ConvertToSymbolCommand.name"));
@@ -73,9 +81,10 @@ public class ConvertToSymbolCommand extends AbstractEditorCommand {
 		int max_x = Integer.MIN_VALUE;
 		int max_y = Integer.MIN_VALUE;
 
-		final ArrayList<Item> items = editor.getSelectedItems();
+		final List<Item> items = editor.getSelectedItems();
+		final List<Item> preserveItems = new ArrayList<Item>();
 		
-		for (Item item :items) {
+		for (Item item : items) {
 			
 			if (item instanceof Line) {
 				
@@ -184,6 +193,8 @@ public class ConvertToSymbolCommand extends AbstractEditorCommand {
 		if (editor.getSelectedItems().size() > 1) {						
 			editor.clearSelectionBorder();
 
+			preserveItems.addAll(editor.getSelectedItems());
+			
 			for (Item item : editor.getSelectedItems()) {
 				for (Layer layer : editor.getModel().getLayers())
 					layer.getItems().remove(item);					
@@ -196,6 +207,16 @@ public class ConvertToSymbolCommand extends AbstractEditorCommand {
 			
 			editor.getModel().getCurrentLayer().getItems().add(symbol);
 			editor.setSelectedItem(symbol);
+			
+			UndoManager undoManager = editor.getUndoManager();				
+			if (!undoManager.addEdit(new ConvertToSymbolEdit(preserveItems, symbol))) {
+				log.info("Could not add edit "+this.getClass());
+			}
+			editor.setFileState(FileState.DIRTY);
+
+			AppContext.getContext().getBean(RedoCommand.class).setEnabled(undoManager.canRedo());
+			AppContext.getContext().getBean(UndoCommand.class).setEnabled(undoManager.canUndo());
+			
 			editor.refresh();
 		}
 
