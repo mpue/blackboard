@@ -34,8 +34,6 @@ import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
-import ktb.math.Pi;
-
 import net.infonode.docking.DockingWindow;
 import net.infonode.docking.RootWindow;
 import net.infonode.docking.View;
@@ -89,6 +87,7 @@ import org.pmedv.blackboard.components.Line;
 import org.pmedv.blackboard.components.Part;
 import org.pmedv.blackboard.components.Pin;
 import org.pmedv.blackboard.components.Symbol;
+import org.pmedv.blackboard.models.BoardEditorModel;
 import org.pmedv.blackboard.panels.CenterPanel;
 import org.pmedv.core.components.CmdJButton;
 import org.pmedv.core.context.AppContext;
@@ -107,8 +106,7 @@ import org.springframework.context.ApplicationContext;
  * </p>
  * <p>
  * <b>TODO : Read this!</b> Notice to myself : We should make this much more
- * generic, such that any type of an abstract editor kind can be queried. Get
- * it?
+ * generic, such that any type of an abstract editor kind can be queried.
  * </p>
  * 
  * @author Matthias Pueski (29.05.2011)
@@ -485,5 +483,29 @@ public class EditorUtils {
 
 		return null;
 	}
+	
+	/**
+	 * Determiens the next free item index for a given {@link BoardEditorModel}
+	 * 
+	 * @param model the model to check for the index
+	 * 
+	 * @return the next free index.
+	 */
+	public static int getFreeIndex(BoardEditorModel model) {
+		/**
+		 * Determine next free index
+		 */
+		int maxIndex = 0;
+		for (Layer layer : model.getLayers()) {
+			for (Item item : layer.getItems()) {
+				if (item.getIndex() > maxIndex) {
+					maxIndex = item.getIndex();
+				}
+			}
+		}
+		maxIndex++;
+		return maxIndex;
+	}
+
 	
 }

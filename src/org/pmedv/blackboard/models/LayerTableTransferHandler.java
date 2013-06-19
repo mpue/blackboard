@@ -15,6 +15,7 @@ import javax.swing.TransferHandler;
  * Handles drag & drop row reordering
  */
 public class LayerTableTransferHandler extends TransferHandler {
+
 	private final DataFlavor localObjectFlavor = new ActivationDataFlavor(Integer.class, DataFlavor.javaJVMLocalObjectMimeType, "Integer Row Index");
 	private JTable table = null;
 

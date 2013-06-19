@@ -236,7 +236,7 @@ public class LayerTableModel extends AbstractBaseTableModel implements Reorderab
 	@Override
 	public void reorder(int fromIndex, int toIndex) {		
 		// if the row is dragged from top, the element on top will 
-		// be missing sfter remove, thus we need to decrease the 
+		// be missing after remove, thus we need to decrease the 
 		// index by 1 
 		if (fromIndex <= toIndex) {
 			toIndex--;
@@ -250,6 +250,10 @@ public class LayerTableModel extends AbstractBaseTableModel implements Reorderab
 		}		
 		// update table
 		fireTableDataChanged();
+		if (EditorUtils.getCurrentActiveEditor() != null) {
+			EditorUtils.getCurrentActiveEditor().setFileState(FileState.DIRTY);
+			EditorUtils.getCurrentActiveEditor().refresh();
+		}
 	}
 
 }
