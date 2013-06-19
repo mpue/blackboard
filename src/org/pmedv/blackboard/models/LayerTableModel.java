@@ -244,9 +244,9 @@ public class LayerTableModel extends AbstractBaseTableModel implements Reorderab
 		// change order
 		Layer l = layers.remove(fromIndex);		
 		layers.add(toIndex, l);
-		// and finally reassing indices
+		// and finally reassingn indices
 		for (int i = 0; i < layers.size();i++) {
-			layers.get(i).setIndex(i++);
+			layers.get(i).setIndex(i);
 		}		
 		// update table
 		fireTableDataChanged();
