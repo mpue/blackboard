@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -51,6 +52,7 @@ import org.pmedv.blackboard.commands.MoveLayerUpCommand;
 import org.pmedv.blackboard.commands.SetLayerColorCommand;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.models.LayerTableModel;
+import org.pmedv.blackboard.models.LayerTableTransferHandler;
 import org.pmedv.blackboard.tools.ColorIconFactory;
 import org.pmedv.core.components.AlternatingLineTable;
 import org.pmedv.core.context.AppContext;
@@ -82,6 +84,9 @@ public class LayersPanel extends JPanel {
 		layerTable.setColumnSelectionAllowed(false);
 		layerTable.setRowSelectionAllowed(true);
 		layerTable.getTableHeader().setReorderingAllowed(false);
+		layerTable.setDragEnabled(true);
+		layerTable.setDropMode(DropMode.INSERT_ROWS);
+		layerTable.setTransferHandler(new LayerTableTransferHandler(layerTable)); 
 		
 		currentLayerCombo.setModel(layerComboModel);
 		addLayerButton.setIcon(resources.getIcon("icon.addlayer"));

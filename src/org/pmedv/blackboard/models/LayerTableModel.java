@@ -19,7 +19,7 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-*/
+ */
 package org.pmedv.blackboard.models;
 
 import java.awt.Color;
@@ -35,21 +35,21 @@ import org.pmedv.core.context.AppContext;
 import org.pmedv.core.model.AbstractBaseTableModel;
 import org.pmedv.core.services.ResourceService;
 
-public class LayerTableModel extends AbstractBaseTableModel {
+public class LayerTableModel extends AbstractBaseTableModel implements Reorderable {
 
 	private static final ResourceService resources = AppContext.getContext().getBean(ResourceService.class);
-	private static final long	serialVersionUID	= 1545402161525947344L;
-	private static final Log	log			= LogFactory.getLog(LayerTableModel.class);
+	private static final long serialVersionUID = 1545402161525947344L;
+	private static final Log log = LogFactory.getLog(LayerTableModel.class);
 
-	private ArrayList<Layer>		layers;
-	
-	private final String[]		columnNames	= { 
+	private ArrayList<Layer> layers;
+
+	private final String[] columnNames = { 
 			resources.getResourceByKey("LayerTableModel.layer"), 
 			resources.getResourceByKey("LayerTableModel.visible"),
-			resources.getResourceByKey("LayerTableModel.locked"),
-			resources.getResourceByKey("LayerTableModel.color")
+			resources.getResourceByKey("LayerTableModel.locked"), 
+			resources.getResourceByKey("LayerTableModel.color") 
 	};
-	
+
 	public LayerTableModel() {
 
 		layers = new ArrayList<Layer>();
@@ -65,9 +65,9 @@ public class LayerTableModel extends AbstractBaseTableModel {
 	public void setLayers(ArrayList<Layer> layers) {
 
 		this.layers = layers;
-		
+
 		if (layers != null) {
-			log.info("layers : "+layers.size());
+			log.info("layers : " + layers.size());
 
 			columns = 4;
 			data = new Object[layers.size()][columns];
@@ -86,7 +86,7 @@ public class LayerTableModel extends AbstractBaseTableModel {
 				index++;
 
 			}
-			
+
 		}
 
 		fireTableDataChanged();
@@ -121,7 +121,7 @@ public class LayerTableModel extends AbstractBaseTableModel {
 		fireTableCellUpdated(row, 1);
 		fireTableCellUpdated(row, 2);
 		fireTableCellUpdated(row, 3);
-		
+
 		fireTableDataChanged();
 
 	}
@@ -153,10 +153,13 @@ public class LayerTableModel extends AbstractBaseTableModel {
 	public Class<?> getColumnClass(int columnIndex) {
 
 		switch (columnIndex) {
-			case 0: return String.class;
-			case 1: 
-			case 2: return Boolean.class;
-			case 3: return Color.class;
+			case 0:
+				return String.class;
+			case 1:
+			case 2:
+				return Boolean.class;
+			case 3:
+				return Color.class;
 		}
 
 		return super.getColumnClass(columnIndex);
@@ -172,57 +175,81 @@ public class LayerTableModel extends AbstractBaseTableModel {
 	 * @return the layers
 	 */
 	public ArrayList<Layer> getLayer() {
-	
+
 		return layers;
 	}
-	
+
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return true;
 	}
-	
+
 	@Override
 	public synchronized Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
-			case 0 : return layers.get(rowIndex).getName();
-			case 1 : return layers.get(rowIndex).isVisible();
-			case 2 : return layers.get(rowIndex).isLocked();
-			case 3 : return layers.get(rowIndex).getColor();
+			case 0:
+				return layers.get(rowIndex).getName();
+			case 1:
+				return layers.get(rowIndex).isVisible();
+			case 2:
+				return layers.get(rowIndex).isLocked();
+			case 3:
+				return layers.get(rowIndex).getColor();
 		}
 		return null;
 	}
-	
+
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		switch (columnIndex) {
-			case 0 : 
-				String name = (String)aValue;
+			case 0:
+				String name = (String) aValue;
 				if (EditorUtils.getCurrentActiveEditor() != null)
 					EditorUtils.getCurrentActiveEditor().setFileState(FileState.DIRTY);
 				layers.get(rowIndex).setName(name);
 				break;
-			case 1 :
-				Boolean visible = (Boolean)aValue;
+			case 1:
+				Boolean visible = (Boolean) aValue;
 				layers.get(rowIndex).setVisible(visible);
 				if (EditorUtils.getCurrentActiveEditor() != null)
-					EditorUtils.getCurrentActiveEditor().setFileState(FileState.DIRTY);				
+					EditorUtils.getCurrentActiveEditor().setFileState(FileState.DIRTY);
 				break;
-			case 2 :
-				Boolean locked = (Boolean)aValue;
+			case 2:
+				Boolean locked = (Boolean) aValue;
 				layers.get(rowIndex).setLocked(locked);
 				if (EditorUtils.getCurrentActiveEditor() != null)
-					EditorUtils.getCurrentActiveEditor().setFileState(FileState.DIRTY);				
+					EditorUtils.getCurrentActiveEditor().setFileState(FileState.DIRTY);
 				break;
-				
-			default : break;
+
+			default:
+				break;
 		}
 		if (EditorUtils.getCurrentActiveEditor() != null)
 			EditorUtils.getCurrentActiveEditor().updateStatusBar();
-		
+
 	}
 
 	public void sortLayers() {
 		Collections.sort(layers);
 	}
-	
+
+	@Override
+	public void reorder(int fromIndex, int toIndex) {		
+		// if the row is dragged from top, the element on top will 
+		// be missing sfter remove, thus we need to decrease the 
+		// index by 1 
+		if (fromIndex <= toIndex) {
+			toIndex--;
+		}	
+		// change order
+		Layer l = layers.remove(fromIndex);		
+		layers.add(toIndex, l);
+		// and finally reassing indices
+		for (int i = 0; i < layers.size();i++) {
+			layers.get(i).setIndex(i++);
+		}		
+		// update table
+		fireTableDataChanged();
+	}
+
 }
