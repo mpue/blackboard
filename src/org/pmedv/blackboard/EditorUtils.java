@@ -470,11 +470,13 @@ public class EditorUtils {
 		for (Layer layer : editor.getModel().getLayers()) {
 
 			for (Item item : layer.getItems()) {
-
-				Line line = (Line) item;
-
-				if (line.containsPoint(point)) {
-					return line;
+				
+				if (item instanceof Line) {
+					Line line = (Line) item;
+					
+					if (line.containsPoint(point)) {
+						return line;
+					}					
 				}
 
 			}
@@ -485,7 +487,7 @@ public class EditorUtils {
 	}
 	
 	/**
-	 * Determiens the next free item index for a given {@link BoardEditorModel}
+	 * Determines the next free item index for a given {@link BoardEditorModel}
 	 * 
 	 * @param model the model to check for the index
 	 * 

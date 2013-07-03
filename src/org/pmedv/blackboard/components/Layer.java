@@ -194,7 +194,7 @@ public class Layer implements Comparable<Layer> {
 
 	@Override
 	public String toString() {
-		return name.toString() + " : "+index;
+		return name.toString();
 	}
 	
 	@Override

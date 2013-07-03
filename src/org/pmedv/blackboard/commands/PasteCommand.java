@@ -82,19 +82,8 @@ public class PasteCommand extends AbstractCommand {
 			try {
 				Item i = (Item) item.clone();
 				
-				/**
-				 * Determine next free index
-				 */
-				int maxIndex = 0;
-				for (Layer layer : editor.getModel().getLayers()) {
-					for (Item _item : layer.getItems()) {
-						if (_item.getIndex() > maxIndex) {
-							maxIndex = _item.getIndex();
-						}
-					}
-				}
-				maxIndex++;
-				i.setIndex(maxIndex);	
+				int freeIndex = EditorUtils.getFreeIndex(editor.getModel());
+				i.setIndex(freeIndex);	
 				
 				editor.getSelectedItems().add(i);
 				

@@ -117,6 +117,7 @@ public final class PartFactory {
 		availableParts.add(p);
 		partNames.add(p.getName());
 		parts.put(p.getName(), p);
+		parts.put(p.getFilename(), p);
 		return p;
 	}
 
@@ -149,7 +150,7 @@ public final class PartFactory {
 	 * @return the ready to use {@link Part} object.
 	 */
 	public Part createPart(String name) throws Exception {
-
+		
 		if (name == null)
 			return null;
 

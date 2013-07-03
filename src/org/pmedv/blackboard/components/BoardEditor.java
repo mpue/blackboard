@@ -325,6 +325,8 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			public void actionPerformed(ActionEvent actionEvent) {
 				skip = true;				
 				handleReleaseDrawEvent(null);
+				lineStopX = 0;
+				lineStopY = 0;
 				refresh();
 			}
 		};
@@ -569,7 +571,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		else if (e.getButton() == 3) {
 			button3Pressed = true;
 		}
-//		if (e.getClickCount() == 2) {
+//		if (e.getClickCount() == 2 && e.isControlDown()) {
 //			if (selectedItem != null || getSelectedItems().size() > 0) {
 //				AppContext.getContext().getBean(EditPropertiesCommand.class).execute(null);
 //			}
@@ -729,6 +731,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		if (e.getButton() == 1) {
 			button1Pressed = false;
 			if (editorMode.equals(EditorMode.SELECT)) {
+				// handleClickSelectionEvent(e);
 				handleReleaseSelectionEvent(e,edits);
 			}
 		}
@@ -1466,12 +1469,29 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 	}
 
 	private void handleClickDrawEvent(MouseEvent e) {
-		if (e == null)
+		
+		if (e == null)		
 			return;
+		
 		drawing = true;
-		lineStartX = e.getX();
-		lineStartY = e.getY();
-		if (snapToGrid) {
+
+		// if we are drawing a continous line, make sure the 
+		// next line segment starts at the previous segments end
+
+		Boolean drawContinuous = (Boolean)Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.dawContinuousLines");
+		
+		if (drawContinuous && lineStopX > 0 && lineStopY > 0) {
+			lineStartX = lineStopX;
+			lineStartY = lineStopY;
+			return;
+		}
+		 // start of a new line, mouse coordinates are starting point
+		else {
+			lineStartX = e.getX();
+			lineStartY = e.getY();			
+		}
+		// snap the point to the grid
+		if (snapToGrid) { 
 			if (lineStartX % raster > 0) {
 				int diff = lineStartX % raster;
 				if (diff < raster / 2) {
@@ -1542,14 +1562,19 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			}
 		}
 		skip = false;
+		
 		lineStartX = 0;
 		lineStartY = 0;
-		lineStopX = 0;
-		lineStopY = 0;
+		
+		Boolean drawContinuous = (Boolean)Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.dawContinuousLines");		
+
+		if (!drawContinuous) {
+			lineStopX = 0;
+			lineStopY = 0;			
+		}
 		
 		// draw continuously if desired
-		Boolean drawContinuous = (Boolean)Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.dawContinuousLines");		
-		if (drawContinuous && selectedPin == null) {
+		if (drawContinuous && selectedPin == null && editorMode.equals(EditorMode.DRAW_LINE)) {
 			handleClickDrawEvent(e);			
 		}
 	}

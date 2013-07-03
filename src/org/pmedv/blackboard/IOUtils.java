@@ -248,7 +248,7 @@ public class IOUtils {
 				model.getLayer(p.getLayer()).getItems().add(p);
 			}
 			for (PartBean partBean : board.getParts()) {
-				Part part = AppContext.getContext().getBean(PartFactory.class).createPart(partBean.getFilename());
+				Part part = (Part) AppContext.getContext().getBean(PartFactory.class).getPart(partBean.getFilename()).clone();
 				// part does not exist -> proceed
 				if (part == null)
 					continue;
