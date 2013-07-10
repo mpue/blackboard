@@ -101,6 +101,7 @@ import org.pmedv.core.perspectives.AbstractPerspective;
 import org.pmedv.core.preferences.Preferences;
 import org.pmedv.core.provider.ApplicationWindowConfigurationProvider;
 import org.pmedv.core.services.ResourceService;
+import org.pmedv.core.util.ErrorUtils;
 import org.springframework.context.ApplicationContext;
 
 public class BoardDesignerPerspective extends AbstractPerspective implements IMemento {
@@ -115,9 +116,6 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 	private ApplicationWindowConfigurationProvider configProvider;
 
 	private JSplitPane horizontalSplitPane;
-	// private JSplitPane verticalSplitPane;
-	
-	
 	private JTabbedPane toolTabPane;
 
 	private boolean providerInit = false;
@@ -185,14 +183,11 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 					horizontalSplitPane.setLeftComponent(rootWindow);
 				}
 
-				// rootWindow.setBackground(Color.WHITE);
 				advisor.setCurrentEditorArea(editorArea);
 
 			}
 
 		});
-
-		// setBackground(Color.WHITE);
 
 		JXTaskPaneContainer taskpanecontainer = new JXTaskPaneContainer();
 		taskpanecontainer.setBackground(new Color(182, 191, 205));
@@ -212,7 +207,6 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		taskpanecontainer.add(layerPane);
 
 		JScrollPane scrollPane = new JScrollPane(taskpanecontainer);
-		// scrollPane.setBackground(Color.WHITE);
 
 		if (position.equalsIgnoreCase("left")) {
 			horizontalSplitPane.setLeftComponent(toolTabPane);
@@ -222,7 +216,6 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 
 		horizontalSplitPane.setOneTouchExpandable(true);
 		horizontalSplitPane.setDividerSize(10);
-		// horizontalSplitPane.setBackground(Color.WHITE);
 
 		toolTabPane.addTab(resources.getResourceByKey("tooltab.forms"),resources.getIcon("icon.paint"), scrollPane);
 		
@@ -309,6 +302,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 					}
 
 				}
+				
 			}
 
 		});
@@ -649,8 +643,5 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 	public boolean isProviderInit() {
 		return providerInit;
 	}
-	
-
-	
 	
 }

@@ -13,6 +13,9 @@ import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.pmedv.blackboard.dialogs.DatasheetDialog;
+import org.pmedv.blackboard.dialogs.PartDialog;
+import org.pmedv.blackboard.dialogs.SpiceSimulatorManageDialog;
 import org.pmedv.core.commands.AbstractCommand;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.gui.ApplicationWindow;
@@ -68,6 +71,9 @@ public class EditPreferencesCommand extends AbstractCommand {
 				
 				ApplicationWindow win = AppContext.getBean(ApplicationWindow.class);			
 				SwingUtilities.updateComponentTreeUI(win);
+				SwingUtilities.updateComponentTreeUI(AppContext.getBean(PartDialog.class));
+				SwingUtilities.updateComponentTreeUI(AppContext.getBean(SpiceSimulatorManageDialog.class));
+				SwingUtilities.updateComponentTreeUI(AppContext.getBean(DatasheetDialog.class));
 			
 			}
 			catch (Exception e2) {

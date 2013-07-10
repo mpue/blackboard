@@ -147,13 +147,13 @@ public class ShapePropertiesPanel extends JPanel {
 		startLineCombo.addItem(LineEdgeType.STRAIGHT);
 		startLineCombo.addItem(LineEdgeType.SIMPLE_ARROW);
 		
-		for (Float f = 1.0f;f <= 10.0f;f+=1.0f) {
+		for (Float f = 1.0f;f <= 10.0f;f+=0.5f) {
 			thicknessCombo.addItem(StrokeFactory.createStroke(f, StrokeType.BASIC));
 		}
-		for (Float f = 1.0f;f <= 10.0f;f+=1.0f) {
+		for (Float f = 1.0f;f <= 10.0f;f+=0.5f) {
 			thicknessCombo.addItem(StrokeFactory.createStroke(f, StrokeType.HALF_DASHED));
 		}
-		for (Float f = 1.0f;f <= 10.0f;f+=1.0f) {
+		for (Float f = 1.0f;f <= 10.0f;f+=0.5f) {
 			thicknessCombo.addItem(StrokeFactory.createStroke(f, StrokeType.DASH_DOT));
 		}		
 		

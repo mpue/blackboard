@@ -45,6 +45,7 @@ import org.pmedv.blackboard.components.Line;
 import org.pmedv.blackboard.components.Symbol;
 import org.pmedv.core.commands.AbstractEditorCommand;
 import org.pmedv.core.context.AppContext;
+import org.pmedv.core.util.ErrorUtils;
 
 /**
  * The <code>ConvertToSymbolCommand</code> converts one or more selected {@link Item} objects
@@ -69,10 +70,21 @@ public class ConvertToSymbolCommand extends AbstractEditorCommand {
 	
 	@Override
 	public void execute(ActionEvent e) {
-		
-		// which editor do we have?
 
+		// which editor do we have?
+		
 		final BoardEditor editor = EditorUtils.getCurrentActiveEditor();
+
+		final List<Item> items = editor.getSelectedItems();
+		final List<Item> preserveItems = new ArrayList<Item>();
+		
+		for (Item item : items) {
+			if (item instanceof Symbol) {
+				ErrorUtils.showErrorDialog(new IllegalStateException(resources.getResourceByKey("error.onlyshapes")));
+				return;
+			}
+		}
+		
 		
 		// first we need to check all items and determine min_x, min_y, max_x, max_y as well as height and width
 		
@@ -81,8 +93,6 @@ public class ConvertToSymbolCommand extends AbstractEditorCommand {
 		int max_x = Integer.MIN_VALUE;
 		int max_y = Integer.MIN_VALUE;
 
-		final List<Item> items = editor.getSelectedItems();
-		final List<Item> preserveItems = new ArrayList<Item>();
 		
 		for (Item item : items) {
 			

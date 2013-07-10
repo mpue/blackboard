@@ -571,11 +571,11 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		else if (e.getButton() == 3) {
 			button3Pressed = true;
 		}
-//		if (e.getClickCount() == 2 && e.isControlDown()) {
-//			if (selectedItem != null || getSelectedItems().size() > 0) {
-//				AppContext.getContext().getBean(EditPropertiesCommand.class).execute(null);
-//			}
-//		}
+		if (e.getClickCount() == 2 && e.isShiftDown()) {
+			if (selectedItem != null || getSelectedItems().size() > 0) {
+				AppContext.getContext().getBean(EditPropertiesCommand.class).execute(null);
+			}
+		}
 		refresh();
 	}
 
@@ -1491,25 +1491,9 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			lineStartY = e.getY();			
 		}
 		// snap the point to the grid
-		if (snapToGrid) { 
-			if (lineStartX % raster > 0) {
-				int diff = lineStartX % raster;
-				if (diff < raster / 2) {
-					lineStartX -= diff;
-				}
-				else {
-					lineStartX += raster - diff;
-				}
-			}
-			if (lineStartY % raster > 0) {
-				int diff = lineStartY % raster;
-				if (diff < raster / 2) {
-					lineStartY -= diff;
-				}
-				else {
-					lineStartY += raster - diff;
-				}
-			}
+		if (snapToGrid) {
+			lineStartX = BoardUtil.snap(lineStartX, raster);
+			lineStartY = BoardUtil.snap(lineStartY, raster);			
 		}
 	}
 
@@ -1574,8 +1558,14 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		}
 		
 		// draw continuously if desired
-		if (drawContinuous && selectedPin == null && editorMode.equals(EditorMode.DRAW_LINE)) {
+		if (drawContinuous && selectedPin == null && editorMode.equals(EditorMode.DRAW_LINE) ) {
 			handleClickDrawEvent(e);			
+		}
+		else {
+			lineStopX = 0;
+			lineStopY = 0;			
+			lineStartX = 0;
+			lineStartY = 0;			
 		}
 	}
 

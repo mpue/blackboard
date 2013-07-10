@@ -32,18 +32,18 @@ public class LineStrokeRenderer extends DefaultListCellRenderer {
 	
 	public LineStrokeRenderer() {
 		
-		for (Float f = 1.0f;f <= 10.0f;f+=1.0f) {
+		for (Float f = 1.0f;f <= 10.0f;f+=0.5f) {
 			Stroke s = StrokeFactory.createStroke(f, StrokeType.BASIC);			
 			icons.put(s,createIcon(f, StrokeType.BASIC));
 			values.put(s, f);
 			
 		}
-		for (Float f = 1.0f;f <= 10.0f;f+=1.0f) {
+		for (Float f = 1.0f;f <= 10.0f;f+=0.5f) {
 			Stroke s = StrokeFactory.createStroke(f, StrokeType.HALF_DASHED);
 			icons.put(s,createIcon(f, StrokeType.HALF_DASHED));
 			values.put(s, f);
 		}
-		for (Float f = 1.0f;f <= 10.0f;f+=1.0f) {
+		for (Float f = 1.0f;f <= 10.0f;f+=0.5f) {
 			Stroke s = StrokeFactory.createStroke(f, StrokeType.DASH_DOT);
 			icons.put(s,createIcon(f, StrokeType.DASH_DOT));
 			values.put(s, f);
