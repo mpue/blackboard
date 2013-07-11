@@ -11,5 +11,6 @@ public class VoltageSourceProperties  {
 	public static final String FREQUENCY_UNIT = "frequencyUnit";
 	public static final String DC_OFFSET = "dcOffset";
 	public static final String SHAPE = "shape";
+	public static final String DUTY_CYCLE = "duty";
 	
 }

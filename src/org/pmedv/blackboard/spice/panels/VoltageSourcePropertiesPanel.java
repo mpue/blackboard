@@ -35,6 +35,7 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 	private JRadioButton pulseShapeRadioButton;
 	private final ButtonGroup voltageTypeGroup = new ButtonGroup();
 	private final ButtonGroup shapeGroup = new ButtonGroup();
+	private JSpinner dutyCycleSpinner;
 
 	/**
 	 * Create the panel.
@@ -56,6 +57,8 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 				ColumnSpec.decode("3dlu:grow"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,},
 			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -140,16 +143,25 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 		JLabel lblVolt_2 = new JLabel("Volt");
 		add(lblVolt_2, "10, 16");
 		
+		JLabel lblDutyCycle = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.duty"));
+		add(lblDutyCycle, "4, 18");
+		
+		dutyCycleSpinner = new JSpinner();
+		add(dutyCycleSpinner, "6, 18, 3, 1");
+		
+		JLabel label = new JLabel("%");
+		add(label, "10, 18");
+		
 		JLabel lblShape = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.shape"));
-		add(lblShape, "4, 18");
+		add(lblShape, "4, 20");
 		
 		sineShapeRadioButton = new JRadioButton(resources.getResourceByKey("VoltageSourcePropertiesPanel.sine"));
 		shapeGroup.add(sineShapeRadioButton);
-		add(sineShapeRadioButton, "6, 18");
+		add(sineShapeRadioButton, "6, 20");
 		
 		pulseShapeRadioButton = new JRadioButton(resources.getResourceByKey("VoltageSourcePropertiesPanel.pulse"));
 		shapeGroup.add(pulseShapeRadioButton);
-		add(pulseShapeRadioButton, "8, 18");
+		add(pulseShapeRadioButton, "8, 20");
 
 	}
 
@@ -182,5 +194,8 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 	}
 	public JRadioButton getPulseShapeRadioButton() {
 		return pulseShapeRadioButton;
+	}	
+	public JSpinner getDutyCycleSpinner() {
+		return dutyCycleSpinner;
 	}
 }

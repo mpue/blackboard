@@ -697,6 +697,7 @@ public class SpiceUtil {
 		Double dcOffset  = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.DC_OFFSET));
 		Double amplitude = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.AC_AMPLITUDE)); 
 		Double frequency = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.FREQUENCY));
+		Integer dutyCycle = Integer.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.DUTY_CYCLE));
 		
 		data.append(shape);
 		data.append("(");
@@ -733,11 +734,9 @@ public class SpiceUtil {
 			data.append(" ");
 			
 			double period = 1d / frequency; // f = 1/t => t = 1/f
-			// currently we support only symmetric pulses
-			// TODO : provide an advanced mode 
-			double pulsewidth = period / 2;
+			double pulsewidth = (period / 100.0d) * Double.valueOf(dutyCycle).doubleValue();
 			DecimalFormat df = new DecimalFormat("#.############");
-			DecimalFormatSymbols custom=new DecimalFormatSymbols();
+			DecimalFormatSymbols custom = new DecimalFormatSymbols();
 			custom.setDecimalSeparator('.');
 			df.setDecimalFormatSymbols(custom);
 			data.append(df.format(pulsewidth));

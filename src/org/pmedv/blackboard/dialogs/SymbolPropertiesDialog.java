@@ -253,6 +253,7 @@ public class SymbolPropertiesDialog extends AbstractNiceDialog {
 		symbol.getProperties().put(VoltageSourceProperties.FREQUENCY, propertiesPanel.getFrequencySpinner().getValue().toString());
 		symbol.getProperties().put(VoltageSourceProperties.FREQUENCY_UNIT, propertiesPanel.getFrequencyUnitComboBox().getSelectedItem().toString());
 		symbol.getProperties().put(VoltageSourceProperties.DC_OFFSET, propertiesPanel.getDcOffsetSpinner().getValue().toString());
+		symbol.getProperties().put(VoltageSourceProperties.DUTY_CYCLE, propertiesPanel.getDutyCycleSpinner().getValue().toString());
 		
 		if (propertiesPanel.getSineShapeRadioButton().isSelected()) {
 			symbol.getProperties().put(VoltageSourceProperties.SHAPE,"SIN");						
@@ -322,6 +323,14 @@ public class SymbolPropertiesDialog extends AbstractNiceDialog {
 		}
 		catch (Exception e) {
 			propertiesPanel.getDcOffsetSpinner().setValue(0);
+		}
+		
+		try {
+			Integer dutyCycle = Integer.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.DUTY_CYCLE));
+			propertiesPanel.getDutyCycleSpinner().setValue(dutyCycle);
+		}
+		catch (Exception e) {
+			propertiesPanel.getDutyCycleSpinner().setValue(50);
 		}
 		
 		try {
