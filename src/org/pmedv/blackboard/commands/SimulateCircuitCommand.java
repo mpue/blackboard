@@ -78,32 +78,30 @@ public class SimulateCircuitCommand extends AbstractEditorCommand {
 		simulator = null;
 	}
 
-	private void doSimulation(BoardEditor editor, final SpiceSimulator simulator) throws Exception {
+	private void doSimulation(final BoardEditor editor, final SpiceSimulator simulator) throws Exception {
 		
 		final StringBuffer data = SpiceUtil.createSpiceNetList(editor);
-		
-		if (simulator.getType().equals(SimulatorType.INTERNAL)) {
-			doInternalSim(data);
-		}
-		
-		else {
 
-			SpiceUtil.addSpiceDefaultControl(data, BoardUtil.getTextParts(editor.getModel()));
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
 
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
+				if (simulator.getType().equals(SimulatorType.INTERNAL)) {
+					doInternalSim(data);
+				}
+				else {
+					SpiceUtil.addSpiceDefaultControl(data, BoardUtil.getTextParts(editor.getModel()));
 					try {
 						doSpiceSim(data,simulator);
 					}
 					catch (Exception e) {
 						ErrorUtils.showErrorDialog(e);
 					}					
+					
 				}
-			}).start();
-			
-		}
+			}
+		}).start();
 		
 	}
 

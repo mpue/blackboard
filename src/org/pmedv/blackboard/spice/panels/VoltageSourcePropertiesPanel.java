@@ -46,15 +46,19 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("max(50dlu;min)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(50dlu;min)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.MIN_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("max(50dlu;min)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("max(50dlu;min)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("3dlu:grow"),
+				ColumnSpec.decode("min:grow"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -77,91 +81,90 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.LINE_GAP_ROWSPEC,}));
 		
 		JLabel lblVoltageSourceProperties = new JLabel(resources.getResourceByKey("SymbolPropertiesDialog.VoltageSourceProperties"));
 		lblVoltageSourceProperties.setFont(new Font("Tahoma", Font.BOLD, 11));
-		add(lblVoltageSourceProperties, "4, 2, 9, 1");
+		add(lblVoltageSourceProperties, "4, 2, 13, 1, fill, default");
 		
 		JSeparator separator = new JSeparator();
-		add(separator, "2, 4, 11, 1");
+		add(separator, "2, 4, 15, 1");
 		
 		JLabel lblType = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.mode"));
-		add(lblType, "4, 6");
+		add(lblType, "4, 6, 3, 1");
+		
+		JLabel lblShape = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.shape"));
+		add(lblShape, "12, 6, 3, 1");
 		
 		dcRadioButton = new JRadioButton("DC");
 		voltageTypeGroup.add(dcRadioButton);
-		add(dcRadioButton, "6, 6");
+		add(dcRadioButton, "4, 8");
 		
 		acRadioButton = new JRadioButton("AC");
 		voltageTypeGroup.add(acRadioButton);
-		add(acRadioButton, "8, 6");
-		
-		JLabel lblNewLabel = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.dcVoltage"));
-		add(lblNewLabel, "4, 8");
-		
-		dcVoltageSpinner = new JSpinner();
-		add(dcVoltageSpinner, "6, 8, 3, 1");
-		
-		JLabel lblVolt = new JLabel("Volt");
-		add(lblVolt, "10, 8");
-		
-		JLabel lblPhase = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.acPhase"));
-		add(lblPhase, "4, 10");
-		
-		acPhaseSpinner = new JSpinner();
-		add(acPhaseSpinner, "6, 10, 3, 1");
-		
-		JLabel lblDegrees = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.degrees"));
-		add(lblDegrees, "10, 10");
-		
-		JLabel lblAcAmplitude = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.acAmplitude"));
-		add(lblAcAmplitude, "4, 12");
-		
-		acAmplitudeSpinner = new JSpinner();
-		add(acAmplitudeSpinner, "6, 12, 3, 1");
-		
-		JLabel lblVolt_1 = new JLabel("Volt");
-		add(lblVolt_1, "10, 12");
-		
-		JLabel lblFrequency = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.frequency"));
-		add(lblFrequency, "4, 14");
-		
-		frequencySpinner = new JSpinner();
-		add(frequencySpinner, "6, 14, 3, 1");
-		
-		frequencyUnitComboBox = new JComboBox(FrequencyUnit.values());
-		add(frequencyUnitComboBox, "10, 14, fill, default");
-		
-		JLabel lblDcOffset = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.dcOffset"));
-		add(lblDcOffset, "4, 16");
-		
-		dcOffsetSpinner = new JSpinner();
-		add(dcOffsetSpinner, "6, 16, 3, 1");
-		
-		JLabel lblVolt_2 = new JLabel("Volt");
-		add(lblVolt_2, "10, 16");
-		
-		JLabel lblDutyCycle = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.duty"));
-		add(lblDutyCycle, "4, 18");
-		
-		dutyCycleSpinner = new JSpinner();
-		add(dutyCycleSpinner, "6, 18, 3, 1");
-		
-		JLabel label = new JLabel("%");
-		add(label, "10, 18");
-		
-		JLabel lblShape = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.shape"));
-		add(lblShape, "4, 20");
+		add(acRadioButton, "6, 8");
 		
 		sineShapeRadioButton = new JRadioButton(resources.getResourceByKey("VoltageSourcePropertiesPanel.sine"));
 		shapeGroup.add(sineShapeRadioButton);
-		add(sineShapeRadioButton, "6, 20");
+		add(sineShapeRadioButton, "12, 8");
 		
 		pulseShapeRadioButton = new JRadioButton(resources.getResourceByKey("VoltageSourcePropertiesPanel.pulse"));
 		shapeGroup.add(pulseShapeRadioButton);
-		add(pulseShapeRadioButton, "8, 20");
+		add(pulseShapeRadioButton, "14, 8");
+		
+		JLabel lblNewLabel = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.dcVoltage"));
+		add(lblNewLabel, "4, 10, 3, 1");
+		
+		JLabel lblDcOffset = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.dcOffset"));
+		add(lblDcOffset, "12, 10, 3, 1");
+		
+		dcVoltageSpinner = new JSpinner();
+		add(dcVoltageSpinner, "4, 12, 3, 1");
+		
+		JLabel lblVolt = new JLabel("Volt");
+		add(lblVolt, "8, 12");
+		
+		dcOffsetSpinner = new JSpinner();
+		add(dcOffsetSpinner, "12, 12, 3, 1");
+		
+		JLabel lblVolt_2 = new JLabel("Volt");
+		add(lblVolt_2, "16, 12");
+		
+		JLabel lblPhase = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.acPhase"));
+		add(lblPhase, "4, 14, 3, 1");
+		
+		JLabel lblAcAmplitude = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.acAmplitude"));
+		add(lblAcAmplitude, "12, 14, 3, 1");
+		
+		acPhaseSpinner = new JSpinner();
+		add(acPhaseSpinner, "4, 16, 3, 1");
+		
+		JLabel lblDegrees = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.degrees"));
+		add(lblDegrees, "8, 16");
+		
+		acAmplitudeSpinner = new JSpinner();
+		add(acAmplitudeSpinner, "12, 16, 3, 1");
+		
+		JLabel lblVolt_1 = new JLabel("Volt");
+		add(lblVolt_1, "16, 16");
+		
+		JLabel lblFrequency = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.frequency"));
+		add(lblFrequency, "4, 18, 3, 1");
+		
+		JLabel lblDutyCycle = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.duty"));
+		add(lblDutyCycle, "12, 18, 3, 1");
+		
+		frequencySpinner = new JSpinner();
+		add(frequencySpinner, "4, 20, 3, 1");
+		
+		frequencyUnitComboBox = new JComboBox(FrequencyUnit.values());
+		add(frequencyUnitComboBox, "8, 20, fill, default");
+		
+		dutyCycleSpinner = new JSpinner();
+		add(dutyCycleSpinner, "12, 20, 3, 1");
+		
+		JLabel label = new JLabel("%");
+		add(label, "16, 20");
 
 	}
 

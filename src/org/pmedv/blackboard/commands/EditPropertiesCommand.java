@@ -70,6 +70,8 @@ public class EditPropertiesCommand extends AbstractEditorCommand {
 		
 		ApplicationWindow win = AppContext.getContext().getBean(ApplicationWindow.class);
 		
+		AbstractNiceDialog dlg = null;
+		
 		if (editor.getSelectedItems().size() > 1) {
 			return;
 		}
@@ -98,15 +100,15 @@ public class EditPropertiesCommand extends AbstractEditorCommand {
 				String title = resources.getResourceByKey("EditPropertiesCommand.text.title");
 				String subTitle = resources.getResourceByKey("EditPropertiesCommand.text.subtitle");
 				ImageIcon icon = resources.getIcon("icon.dialog.text");
-				TextPropertiesDialog dlg = new TextPropertiesDialog(title, subTitle, icon, text);
-				dlg.setVisible(true);
+				dlg = new TextPropertiesDialog(title, subTitle, icon, text);
+				dlg.setVisible(true);				
 			}
 			else if (editor.getSelectedItem() instanceof Resistor) {
 				Resistor resistor = (Resistor)editor.getSelectedItem();
 				String title = resources.getResourceByKey("EditPropertiesCommand.resistor.title");
 				String subTitle = resources.getResourceByKey("EditPropertiesCommand.resistor.subtitle");
 				ImageIcon icon = resources.getIcon("icon.dialog.resistor");				
-				ResistorDialog dlg = new ResistorDialog(title, subTitle, icon, resistor);
+				dlg = new ResistorDialog(title, subTitle, icon, resistor);
 				dlg.setVisible(true);				
 			}
 			else if (editor.getSelectedItem() instanceof Diode) {
@@ -114,7 +116,7 @@ public class EditPropertiesCommand extends AbstractEditorCommand {
 				String title = resources.getResourceByKey("EditPropertiesCommand.diode.title");
 				String subTitle = resources.getResourceByKey("EditPropertiesCommand.diode.subtitle");
 				ImageIcon icon = resources.getIcon("icon.dialog.resistor");				
-				DiodeDialog dlg = new DiodeDialog(title, subTitle, icon, diode);
+				dlg = new DiodeDialog(title, subTitle, icon, diode);
 				dlg.setVisible(true);				
 			}
 			else if(editor.getSelectedItem() instanceof Symbol) {
@@ -129,12 +131,18 @@ public class EditPropertiesCommand extends AbstractEditorCommand {
 				String title = resources.getResourceByKey("EditPropertiesCommand.part.title");
 				String subTitle = resources.getResourceByKey("EditPropertiesCommand.part.subtitle");
 				ImageIcon icon = resources.getIcon("icon.dialog.part");				
-				PartPropertiesDialog dlg = new PartPropertiesDialog(title, subTitle, icon, part, win);
+				dlg = new PartPropertiesDialog(title, subTitle, icon, part, win);
 				dlg.setVisible(true);				
 			}
-
+			
 			editor.refresh();
+			
 		}
-		editor.setFileState(FileState.DIRTY);
+		
+		if (dlg != null && dlg.getResult() == AbstractNiceDialog.OPTION_OK) {
+			editor.setFileState(FileState.DIRTY);			
+		}
+		
 	}
+	
 }
