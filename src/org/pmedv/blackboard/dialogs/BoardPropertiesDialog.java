@@ -87,6 +87,10 @@ public class BoardPropertiesDialog extends AbstractNiceDialog {
 			propertiesPanel.getBoardWidthSpinner().setValue(model.getWidth());
 			propertiesPanel.getBoardHeightSpinner().setValue(model.getHeight());
 			propertiesPanel.getTypeCombo().setSelectedItem(model.getType());
+			if (model.getType().equals(BoardType.CUSTOM)) {
+				propertiesPanel.getFileField().setEnabled(true);
+				propertiesPanel.getFileField().getPathField().setText(model.getBackgroundImageLocation());
+			}
 		}
 		
 		initListeners();

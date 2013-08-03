@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <name>AD1580</name>
+    <name>AD1580</name>
+    <content>.SUBCKT AD1580   1 8  
+
+r1 1 2 13.0k
+r2 2 3 21k
+r3 2 4 105k 
+r4 3 5 2.73k
+c1 4 6 10e-12
+q1 7 3 8 qn1 
+q2 4 5 8 qn2
+q3 8 6 1 qp1
+vic 5 7 0
+f1 1 8 vic 0.8
+g1 6 8 4 3 2e-4
+
+.model qn1 npn(bf=100 vaf=100)
+.model qn2 npn(bf=100 vaf=100)
+.model qp1 pnp(bf=50k vaf=100)
+
+.ends ad1580</content>
+    <type>SUBCIRCUIT</type>
+</model>

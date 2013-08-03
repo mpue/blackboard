@@ -67,7 +67,7 @@ public class SpiceUtil {
 	
 	public static void importModels(ArrayList<Model> models) throws JAXBException, PropertyException, FileNotFoundException {
 		for (Model model : models) {			
-			marshaller.marshal(model, new FileOutputStream(new File("models", model.getName() + ".xml")));			
+			marshaller.marshal(model, new FileOutputStream(new File(System.getProperty("user.home")+"/."+AppContext.getName()+"/models/", model.getName() + ".xml")));			
 		}
 	}
 
@@ -117,14 +117,21 @@ public class SpiceUtil {
 
 			String line = (String) o;
 
-			if (line.startsWith(".SUBCKT")) {
+			if (line.startsWith(".SUBCKT") || line.startsWith(".subckt")) {
 				subCircuit = new StringBuffer();
 				subCircuit.append(line);
 				subCircuit.append("\n");
 				inSubCircuit = true;
 				continue;
 			}
-			else if (line.startsWith(".ENDS")) {
+			else if (line.startsWith(".ENDS") || line.startsWith(".ends")) {
+				
+				if (subCircuit == null) {
+					// seems the file is fucked up somehow, simply skip and continue
+					inSubCircuit = false;
+					continue;					
+				}
+				
 				inSubCircuit = false;
 				subCircuit.append(line);
 				subcircuits.add(subCircuit.toString());
@@ -152,11 +159,11 @@ public class SpiceUtil {
 			
 			String line = (String) o;
 
-			if (line.startsWith(".SUBCKT")) {
+			if (line.startsWith(".SUBCKT") || line.startsWith(".subckt")) {
 				inSubCircuit = true;
 				continue;
 			}
-			else if (line.startsWith(".ENDS")) {
+			else if (line.startsWith(".ENDS") || line.startsWith(".ends")) {
 				inSubCircuit = false;
 				continue;
 			}			
@@ -697,7 +704,13 @@ public class SpiceUtil {
 		Double dcOffset  = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.DC_OFFSET));
 		Double amplitude = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.AC_AMPLITUDE)); 
 		Double frequency = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.FREQUENCY));
-		Integer dutyCycle = Integer.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.DUTY_CYCLE));
+		Integer dutyCycle;
+		try {
+			dutyCycle = Integer.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.DUTY_CYCLE));
+		}
+		catch (NumberFormatException e) {
+			dutyCycle = 50;
+		}
 		
 		data.append(shape);
 		data.append("(");

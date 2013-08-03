@@ -2,6 +2,7 @@ package org.pmedv.blackboard.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ModelImportDialog extends AbstractNiceDialog {
 	private ArrayList<Model> models;
 	
 	private JButton selectAllButton;
+	private JButton selectNoneButton;
 	
 	public ModelImportDialog(ArrayList<Model> models) {
 		super(title,subTitle,icon,true,false,true,true,win,models);		
@@ -64,8 +66,27 @@ public class ModelImportDialog extends AbstractNiceDialog {
 			}
 		});
 		
+		selectNoneButton = new JButton("Select none");
+		selectNoneButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (Model m : model.getModels()) {
+					m.setShouldImport(false);
+					model.fireTableDataChanged();
+				}				
+			}
+		});
+
+
 		panel.add(scrollPane, BorderLayout.CENTER);
-		panel.add(selectAllButton, BorderLayout.SOUTH);
+		
+		JPanel buttonPanel = new JPanel(new FlowLayout());
+		
+		buttonPanel.add(selectAllButton);
+		buttonPanel.add(selectNoneButton);
+		
+		panel.add(buttonPanel, BorderLayout.SOUTH);
 		
 		getContentPanel().add(panel);
 		

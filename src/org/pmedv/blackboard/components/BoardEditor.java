@@ -360,7 +360,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 					mouseOverLine = EditorUtils.findMouseOverLine(e, BoardEditor.this);
 				}
 				else {
-					mouseOverPin = EditorUtils.findMouseOverPin(e, BoardEditor.this);					
+					mouseOverPin = EditorUtils.findPin(e.getX(),e.getY(), BoardEditor.this);					
 				}
 				
 				win.getCustomLabel().setText("x : "+e.getX()+" y : "+e.getY());
@@ -496,22 +496,22 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		}
 	}
 	
-	private void getSelectedPin() {
-		for (Layer layer : model.getLayers()) {
-			for (Item item : layer.getItems()) {					
-				if(item instanceof Part) {
-					Part part = (Part)item;
-					for (Pin pin : part.getConnections().getPin()) {							
-						if (pin.getX() + part.getXLoc() == lineStopX && pin.getY() + part.getYLoc() == lineStopY) {
-							selectedPin = pin;
-							return;
-						}
-					}
-				}					
-			}
-		}						
-		selectedPin = null;
-	}
+//	private void getSelectedPin() {
+//		for (Layer layer : model.getLayers()) {
+//			for (Item item : layer.getItems()) {					
+//				if(item instanceof Part) {
+//					Part part = (Part)item;
+//					for (Pin pin : part.getConnections().getPin()) {							
+//						if (pin.getX() + part.getXLoc() == lineStopX && pin.getY() + part.getYLoc() == lineStopY) {
+//							selectedPin = pin;
+//							return;
+//						}
+//					}
+//				}					
+//			}
+//		}						
+//		selectedPin = null;
+//	}
 
 	private void handleMouseDragged(MouseEvent e) {
 		if (editorMode.equals(EditorMode.SELECT) || 
@@ -751,7 +751,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			lineStopX = BoardUtil.snap(lineStopX, raster);
 			lineStopY = BoardUtil.snap(lineStopY, raster);
 		}		
-		getSelectedPin();
+		selectedPin = EditorUtils.findPin(lineStopX, lineStopY, this);
 	}
 
 	private void handleDragEvent(MouseEvent e) {

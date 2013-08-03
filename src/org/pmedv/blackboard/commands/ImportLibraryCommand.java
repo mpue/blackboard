@@ -39,9 +39,9 @@ public class ImportLibraryCommand extends AbstractCommand {
 		}
 
 		final JFileChooser fc = new JFileChooser(path);
-
+		
 		fc.setDialogTitle(resources.getResourceByKey("ImportLibraryCommand.dialog.subtitle"));
-
+		fc.setMultiSelectionEnabled(true);
 
 		int result = fc.showOpenDialog(win);
 
@@ -49,19 +49,29 @@ public class ImportLibraryCommand extends AbstractCommand {
 			return;
 		}
 
-		if (fc.getSelectedFile() == null)
+		if (fc.getSelectedFiles() == null || fc.getSelectedFiles().length == 0)
 			return;
 
-		File selectedFile = fc.getSelectedFile();
+		File[] selectedFiles = fc.getSelectedFiles();
 
-		AppContext.setLastSelectedFolder(selectedFile.getParentFile().getAbsolutePath());
+		AppContext.setLastSelectedFolder(selectedFiles[0].getParentFile().getAbsolutePath());
 		
 		ArrayList<String> raw;
 		try {
-			raw = SpiceUtil.readRawModelsFromLib(selectedFile);
-			ArrayList<Model> models = SpiceUtil.convertRawModels(raw);
-			ArrayList<String> subcircuits = SpiceUtil.readRawSubcircuitsFromLib(selectedFile);
-			models.addAll(SpiceUtil.convertRawSubcircuits(subcircuits));
+			ArrayList<Model> models = new ArrayList<Model>();
+			
+			for (File f : selectedFiles) {
+				
+				raw = SpiceUtil.readRawModelsFromLib(f);
+				
+				if (raw.size() > 0) {
+					models.addAll(SpiceUtil.convertRawModels(raw));
+				}
+				
+				ArrayList<String> subcircuits = SpiceUtil.readRawSubcircuitsFromLib(f);
+				models.addAll(SpiceUtil.convertRawSubcircuits(subcircuits));
+				
+			}
 
 			ModelImportDialog dlg = new ModelImportDialog(models);
 			dlg.setVisible(true);

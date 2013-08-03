@@ -419,9 +419,9 @@ public class EditorUtils {
 	 * @return the pin, or null if no {@link Pin} is being hovered
 	 * 
 	 */
-	public static Pin findMouseOverPin(MouseEvent e, BoardEditor editor) {
+	public static Pin findPin(int x, int y, BoardEditor editor) {
 		
-		Point point = new Point(e.getX(), e.getY());
+		
 		
 		for (Layer layer : editor.getModel().getLayers()) {
 			
@@ -431,16 +431,26 @@ public class EditorUtils {
 					
 					Part p = (Part)item;
 					
-					if (p.getRotation() != 0) {
-						point = BoardUtil.rotatePoint((int)point.getX(), (int)point.getY(), p.getXLoc(), p.getYLoc(), p.getRotation());
-					}
 					
 					for (Pin pin : p.getConnections().getPin()) {
+
+						Point point = new Point(pin.getX(), pin.getY());
 						
-						if (point.getX() >= (item.getXLoc() + pin.getX() - 3) && 
-							point.getX() <= (item.getXLoc() + pin.getX() + 3) && 
-							point.getY() >= (item.getYLoc() + pin.getY() - 3) && 
-							point.getY() <= (item.getYLoc() + pin.getY()) + 3) {
+						int rot	= p.getRotation();
+						
+						if (rot != 0) {
+							
+							if (rot == 90 || rot == 270) {
+								rot -= 180;
+							}
+							
+							point = BoardUtil.rotatePoint((int)point.getX(), (int)point.getY(), 0, 0, rot);
+						}
+						
+						if (x >= (item.getXLoc() + point.getX() - 3) && 
+							x <= (item.getXLoc() + point.getX() + 3) && 
+							y >= (item.getYLoc() + point.getY() - 3) && 
+							y <= (item.getYLoc() + point.getY()) + 3) {
 							return pin;
 						}
 						

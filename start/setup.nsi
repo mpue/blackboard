@@ -5,7 +5,7 @@ Name "BlackBoard"
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 1.03.2
+!define VERSION 1.1.0
 !define COMPANY "Matthias Pueski"
 !define URL http://blackboard.serverpool.org
 
@@ -39,7 +39,7 @@ Var StartMenuGroup
 !insertmacro MUI_UNPAGE_INSTFILES
 
 # Installer languages
-!insertmacro MUI_LANGUAGE German
+!insertmacro MUI_LANGUAGE English
 
 # Installer attributes
 OutFile BlackBoardSetup_${VERSION}.exe
@@ -47,7 +47,7 @@ InstallDir "$PROGRAMFILES\BlackBoard"
 CRCCheck on
 XPStyle on
 ShowInstDetails show
-VIProductVersion 1.03.2.0
+VIProductVersion 1.1.0.0
 VIAddVersionKey ProductName "BlackBoard"
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"

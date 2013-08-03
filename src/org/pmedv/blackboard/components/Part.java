@@ -419,8 +419,11 @@ public class Part extends Item implements Cloneable, Rotateable, Comparable<Item
 		part.setLayer(getLayer());
 		part.setDesignator(getDesignator());
 		
-		for (Pin pin : connections.getPin()) {
-			part.getConnections().getPin().add(new Pin(pin.getX(),pin.getY()));
+		for (Pin pin : connections.getPin()) {			
+			Pin newPin = new Pin(pin.getX(),pin.getY());
+			newPin.setName(pin.getName());
+			newPin.setNum(pin.getNum());			
+			part.getConnections().getPin().add(newPin);
 		}
 		
 		return part;
