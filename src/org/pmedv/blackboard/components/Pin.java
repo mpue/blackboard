@@ -14,7 +14,7 @@ public class Pin implements Comparable<Pin> {
 	private int x;
 	private int y;
 	
-	private Integer num;
+	private Integer num = 0;
 	private String name;
 	private PinCaptionOrientation orientation;
 	@XmlTransient
