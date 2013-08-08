@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -441,6 +442,8 @@ public class SpiceUtil {
 
 		data.append(symbol.getName());
 		data.append(" ");
+		
+		Collections.sort(symbol.getConnections().getPin());
 		
 		for (Pin pin : symbol.getConnections().getPin()) {
 			data.append(pin.getNetIndex());

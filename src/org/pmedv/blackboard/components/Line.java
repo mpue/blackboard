@@ -632,6 +632,10 @@ public class Line extends Item implements Shape {
 		return wireConnections;
 	}
 	
+	@Override
+	public String toString() {
+		return "[("+start.x+","+start.x+") | ("+end.x+","+end.y+")]";
+	}
 	
 	
 }

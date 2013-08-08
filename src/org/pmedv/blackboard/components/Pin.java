@@ -9,12 +9,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Pin", propOrder = { "x", "y","num","name","orientation" })
 
-public class Pin {
+public class Pin implements Comparable<Pin> {
 
 	private int x;
 	private int y;
 	
-	private int num;
+	private Integer num;
 	private String name;
 	private PinCaptionOrientation orientation;
 	@XmlTransient
@@ -109,8 +109,14 @@ public class Pin {
 
 	@Override
 	public String toString() {		
-		return "pin ("+x+","+y+")";
+		return name+" "+num+" ("+x+","+y+")";
 	}
+
+	@Override
+	public int compareTo(Pin o) {
+		return num.compareTo(o.getNum());
+	}
+	
 	
 	
 }

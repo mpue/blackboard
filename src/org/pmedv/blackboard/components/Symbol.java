@@ -406,5 +406,9 @@ public class Symbol extends Part {
 		this.properties = properties;
 	}
 
+	@Override
+	public String toString() {
+		return name;	
+	}
 	
 }

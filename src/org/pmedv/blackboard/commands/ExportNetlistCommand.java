@@ -49,8 +49,11 @@ public class ExportNetlistCommand extends AbstractOpenEditorCommand {
 			RSyntaxTextArea textArea = new RSyntaxTextArea();
 			textArea.getPopupMenu().addSeparator();
 			
-			SaveNetlistCommand cmd = AppContext.getContext().getBean(SaveNetlistCommand.class);			
+			SaveNetlistCommand cmd = AppContext.getBean(SaveNetlistCommand.class);			
 			textArea.getPopupMenu().add(cmd);
+			SimulateCircuitCommand sim = AppContext.getBean(SimulateCircuitCommand.class);
+			sim.setData(data.toString());
+			textArea.getPopupMenu().add(sim);
 			textArea.setText(data.toString());			
 			cmd.setNetlist(data.toString());
 	        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);

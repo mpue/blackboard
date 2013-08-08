@@ -28,6 +28,7 @@ import org.pmedv.core.util.ErrorUtils;
 public class SimulateCircuitCommand extends AbstractEditorCommand {
 
 	private SpiceSimulator simulator;
+	private String data;
 	
 	private final SimulatorProvider provider = AppContext.getContext().getBean(SimulatorProvider.class);
 	
@@ -44,28 +45,27 @@ public class SimulateCircuitCommand extends AbstractEditorCommand {
 
  		BoardEditor editor = EditorUtils.getCurrentActiveEditor();
 
-		if (editor != null) {
+ 		if (simulator == null) {
+ 			// simulator has not been selected by context menu or is null by any other cause
+ 			// now try to find the default simulator.
+ 			for (SpiceSimulator sim : provider.getElements()) {
+ 				if (sim.isDefaultSimulator()) {
+ 					simulator = sim;
+ 					break;
+ 				}
+ 			}
+ 			
+ 		}
+ 		// somehow the simulator ist still null
+ 		// use the default internal simulator
+ 		if (simulator == null) {
+ 			simulator = new SpiceSimulator("Internal","internal","Internal");
+ 			simulator.setType(SimulatorType.INTERNAL);
+ 		}
+
+ 		if (editor != null) {
 			
 			try {				
-				
-				if (simulator == null) {
-					// simulator has not been selected by context menu or is null by any other cause
-					// now try to find the default simulator.
-					for (SpiceSimulator sim : provider.getElements()) {
-						if (sim.isDefaultSimulator()) {
-							simulator = sim;
-							break;
-						}
-					}
-					
-				}
-				// somehow the simulator ist still null
-				// use the default internal simulator
-				if (simulator == null) {
-					simulator = new SpiceSimulator("Internal","internal","Internal");
-					simulator.setType(SimulatorType.INTERNAL);
-				}
-				
 				doSimulation(editor, simulator);				
 			}
 			catch (Exception e1) {
@@ -73,6 +73,18 @@ public class SimulateCircuitCommand extends AbstractEditorCommand {
 				return;
 			}
 			
+		}
+		else {
+			// command has been called from netlist editor 
+			if (data != null) {				
+				try {				
+					doSimulation(simulator);				
+				}
+				catch (Exception e1) {
+					ErrorUtils.showErrorDialog(e1);
+					return;
+				}
+			}
 		}
 
 		simulator = null;
@@ -104,6 +116,31 @@ public class SimulateCircuitCommand extends AbstractEditorCommand {
 		}).start();
 		
 	}
+	
+	private void doSimulation(final SpiceSimulator simulator) throws Exception {
+		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+
+				if (simulator.getType().equals(SimulatorType.INTERNAL)) {
+					doInternalSim(new StringBuffer(data));
+				}
+				else {
+					try {
+						doSpiceSim(new StringBuffer(data),simulator);
+					}
+					catch (Exception e) {
+						ErrorUtils.showErrorDialog(e);
+					}					
+					
+				}
+			}
+		}).start();
+		
+	}
+	
 
 	private void doInternalSim(StringBuffer data) {
 		Simulator sim = new Simulator();
@@ -162,6 +199,20 @@ public class SimulateCircuitCommand extends AbstractEditorCommand {
 	 */
 	public void setSimulator(SpiceSimulator simulator) {
 		this.simulator = simulator;
+	}
+
+	/**
+	 * @return the data
+	 */
+	public String getData() {
+		return data;
+	}
+
+	/**
+	 * @param data the data to set
+	 */
+	public void setData(String data) {
+		this.data = data;
 	}
 
 	
