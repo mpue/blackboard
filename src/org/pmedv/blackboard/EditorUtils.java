@@ -421,8 +421,6 @@ public class EditorUtils {
 	 */
 	public static Pin findPin(int x, int y, BoardEditor editor) {
 		
-		
-		
 		for (Layer layer : editor.getModel().getLayers()) {
 			
 			for (Item item : layer.getItems()) {
@@ -440,7 +438,7 @@ public class EditorUtils {
 						
 						if (rot != 0) {
 							
-							if (rot == 90 || rot == 270) {
+							if (Math.abs(rot) == 90 || Math.abs(rot) == 270) {
 								rot -= 180;
 							}
 							

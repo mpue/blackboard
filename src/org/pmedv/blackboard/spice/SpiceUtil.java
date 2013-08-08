@@ -38,11 +38,9 @@ public class SpiceUtil {
 	private static final Pattern splitModelsPattern = Pattern.compile("\\.MODEL .*?(.*).*?(.*)");
 	private static final Pattern identifyModelPattern = Pattern.compile("\\.MODEL.*?(.*).*?(.*).*\\(",Pattern.MULTILINE);
 	private static final Pattern identifySubCircuitPattern = Pattern.compile("\\.SUBCKT.*?(.*)");
-	private static final ResourceService resources = AppContext.getBean(ResourceService.class);
-	
-	private static final HashMap<String, SpiceType> typeMap = new HashMap<String, SpiceType>();
-	
-	private static Marshaller marshaller;
+	private static final ResourceService resources = AppContext.getBean(ResourceService.class);	
+	private static final HashMap<String, SpiceType> typeMap = new HashMap<String, SpiceType>();	
+	private static final Marshaller marshaller;
 	
 	static  {
 		try {
@@ -472,7 +470,6 @@ public class SpiceUtil {
 		
 		data.append(symbol.getName());
 		data.append(" ");
-		
 		
 		int pinC = 0;
 		int pinB = 0;
