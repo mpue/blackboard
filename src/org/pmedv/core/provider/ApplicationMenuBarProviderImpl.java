@@ -252,19 +252,7 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 					menu.addSeparator();
 					menu.add(openRecentMenu);
 					
-					JMenu openSamplesMenu = new JMenu(resources.getResourceByKey("menu.samples"));
-					
-					File samplesDir = new File(AppContext.getWorkingDir(),"samples");
-					
-					File[] sampleFiles = samplesDir.listFiles();
-					
-					for (int i = 0; i < sampleFiles.length;i++) {
-						if (sampleFiles[i].getName().endsWith(".bb")) {
-							AbstractCommand openBoardAction = new OpenBoardCommand(sampleFiles[i].getName(), sampleFiles[i]);							
-							JMenuItem item = new JMenuItem(openBoardAction);
-							openSamplesMenu.add(item);													
-						}
-					}
+					JMenu openSamplesMenu = createSamplesMenu();
 					
 					menu.add(openSamplesMenu);
 					
@@ -461,40 +449,15 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 
 				}
 				
-				
 			}
 			
-			if (perspectiveProvider.getPerspectives().size() > 1)			
+			if (perspectiveProvider.getPerspectives().size() > 1) {			
 				menubar.add(perspectivesMenu);
+			}
 			
-			// TODO : Nice to have, but do we need that really? Maybe a feature for Version 1.0 ...
-			
-//			JMenuWithId languagesMenu = new JMenuWithId("Languages");
-//			
-//			Locale[] availableLocales = Locale.getAvailableLocales();
-//			
-//			ArrayList<String> languages = new ArrayList<String>();
-//			
-//			for (Locale locale : availableLocales) {
-//				
-//				InputStream is = BlackBoard.class.getClassLoader().getResourceAsStream("MessageResources_"+locale.getLanguage().toLowerCase()+".properties");
-//				if (is != null && !languages.contains(locale.getDisplayLanguage())) {
-//					languages.add(locale.getDisplayLanguage());
-//				}
-//			}
-//			
-//			for (String language : languages) {
-//				languagesMenu.add(new JMenuItem(language));				
-//			}
-//			
-//			languagesMenu.setId("languages");
-//			
-//			menubar.add(languagesMenu);
-//			
 			for (JMenuWithId helpmenu : helpMenus) {
 				menubar.add(helpmenu);
 			}
-			
 			
 			menubar.setFont(new Font("SansSerif", Font.PLAIN, 12));
 			
@@ -509,6 +472,40 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 		}
 		
 	}
+
+	private JMenu createSamplesMenu() {
+		JMenu openSamplesMenu = new JMenu(resources.getResourceByKey("menu.samples"));
+		
+		File samplesDir = new File(AppContext.getWorkingDir(),"samples");
+		
+		File[] sampleFiles = samplesDir.listFiles();
+		
+		populateSamplesMenu(openSamplesMenu, sampleFiles);
+	
+		return openSamplesMenu;
+	}
+
+	private void populateSamplesMenu(JMenu menu, File[] sampleFiles) {
+		for (int i = 0; i < sampleFiles.length;i++) {
+			if (sampleFiles[i].getName().endsWith(".bb")) {
+				AbstractCommand openBoardAction = new OpenBoardCommand(sampleFiles[i].getName(), sampleFiles[i]);							
+				JMenuItem item = new JMenuItem(openBoardAction);
+				menu.add(item);													
+			}
+			
+			if (sampleFiles[i].isDirectory()) {				
+				JMenu subMenu = new JMenu(sampleFiles[i].getName());
+				menu.add(subMenu);
+				File[] children = sampleFiles[i].listFiles();
+				populateSamplesMenu(subMenu, children);				
+			}
+			
+		}
+	}
+	
+	
+	
+	
 
 	/**
 	 * Populates the keyMap <code>HashMap</code> with key value pairs
