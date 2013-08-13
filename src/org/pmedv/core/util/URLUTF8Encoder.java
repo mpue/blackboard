@@ -34,7 +34,7 @@ package org.pmedv.core.util;
  *
  * URLUTF8Encoder: http://www.w3.org/International/URLUTF8Encoder.java
  *
- * Copyright © 1997 World Wide Web Consortium, (Massachusetts
+ * Copyright 1997 World Wide Web Consortium, (Massachusetts
  * Institute of Technology, European Research Consortium for
  * Informatics and Mathematics, Keio University). All Rights Reserved. 
  * This work is distributed under the W3C® Software License [1] in the
