@@ -162,7 +162,7 @@ public class SimulateCircuitCommand extends AbstractEditorCommand {
 		FileUtils.writeStringToFile(f, data.toString());
 
 		String[] command = { simulator.getPath(), simulator.getParameters(), f.getAbsolutePath()};
-		Process proc = Runtime.getRuntime().exec(command);
+		Process proc = Runtime.getRuntime().exec(command,null,new File(simulator.getPath()).getParentFile());
 		
 		StringBuffer outputReport = new StringBuffer();
 		StringBuffer errorBuffer  = new StringBuffer();

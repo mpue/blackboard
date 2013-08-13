@@ -473,18 +473,26 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 		
 	}
 
+	/**
+	 * Creates the samples menu for the BlackBoard sample files
+	 * 
+	 * @return the populated menu
+	 */
 	private JMenu createSamplesMenu() {
-		JMenu openSamplesMenu = new JMenu(resources.getResourceByKey("menu.samples"));
-		
-		File samplesDir = new File(AppContext.getWorkingDir(),"samples");
-		
-		File[] sampleFiles = samplesDir.listFiles();
-		
+		JMenu openSamplesMenu = new JMenu(resources.getResourceByKey("menu.samples"));		
+		File samplesDir = new File(AppContext.getWorkingDir(),"samples");		
+		File[] sampleFiles = samplesDir.listFiles();		
 		populateSamplesMenu(openSamplesMenu, sampleFiles);
 	
 		return openSamplesMenu;
 	}
 
+	/**
+	 * Recursively populates the samples menu
+	 * 
+	 * @param menu the menu tp populate
+	 * @param sampleFiles the list of files to populate with
+	 */
 	private void populateSamplesMenu(JMenu menu, File[] sampleFiles) {
 		for (int i = 0; i < sampleFiles.length;i++) {
 			if (sampleFiles[i].getName().endsWith(".bb")) {
@@ -498,14 +506,9 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 				menu.add(subMenu);
 				File[] children = sampleFiles[i].listFiles();
 				populateSamplesMenu(subMenu, children);				
-			}
-			
+			}			
 		}
 	}
-	
-	
-	
-	
 
 	/**
 	 * Populates the keyMap <code>HashMap</code> with key value pairs
