@@ -224,19 +224,4 @@ public class StringUtil {
 	    
 	}
 	
-	public static String convertUmlaut(String text) {
-		
-		text = text.replaceAll("ä", "ae");
-		text = text.replaceAll("ö", "oe");
-		text = text.replaceAll("ü", "ue");
-		text = text.replaceAll("Ä", "Ae");
-		text = text.replaceAll("Ö", "Oe");
-		text = text.replaceAll("Ü", "Ue");
-		
-		return text;
-		
-	}
-	
-	
-	
 }
