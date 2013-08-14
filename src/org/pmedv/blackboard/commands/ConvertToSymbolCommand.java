@@ -39,9 +39,11 @@ import org.apache.commons.logging.LogFactory;
 import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.app.FileState;
 import org.pmedv.blackboard.components.BoardEditor;
+import org.pmedv.blackboard.components.Diode;
 import org.pmedv.blackboard.components.Item;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.components.Line;
+import org.pmedv.blackboard.components.Resistor;
 import org.pmedv.blackboard.components.Symbol;
 import org.pmedv.core.commands.AbstractEditorCommand;
 import org.pmedv.core.context.AppContext;
@@ -79,7 +81,7 @@ public class ConvertToSymbolCommand extends AbstractEditorCommand {
 		final List<Item> preserveItems = new ArrayList<Item>();
 		
 		for (Item item : items) {
-			if (item instanceof Symbol) {
+			if (item instanceof Symbol || item instanceof Resistor || item instanceof Diode) {
 				ErrorUtils.showErrorDialog(new IllegalStateException(resources.getResourceByKey("error.onlyshapes")));
 				return;
 			}
