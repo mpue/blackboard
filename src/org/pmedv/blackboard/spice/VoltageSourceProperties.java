@@ -14,5 +14,7 @@ public class VoltageSourceProperties  {
 	public static final String DUTY_CYCLE = "duty";
 	public static final String RISE_TIME = "riseTime";
 	public static final String FALL_TIME = "fallTime";
+	public static final String RISE_TIME_UNIT = "riseTimeUnit";
+	public static final String FALL_TIME_UNIT = "fallTimeUnit";
 	
 }

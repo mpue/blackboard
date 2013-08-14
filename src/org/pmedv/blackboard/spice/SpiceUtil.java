@@ -703,13 +703,39 @@ public class SpiceUtil {
 		String shape = symbol.getProperties().getProperty(VoltageSourceProperties.SHAPE);
 		Double dcOffset  = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.DC_OFFSET));
 		Double amplitude = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.AC_AMPLITUDE)); 
+		
 		Double frequency = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.FREQUENCY));
+		FrequencyUnit u = FrequencyUnit.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.FREQUENCY_UNIT));
+		frequency = frequency * u.getValue();
+		
 		Integer dutyCycle;
+		
+		Double riseTime;
+		Double fallTime;
+		
 		try {
 			dutyCycle = Integer.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.DUTY_CYCLE));
 		}
-		catch (NumberFormatException e) {
+		catch (Exception e) {
 			dutyCycle = 50;
+		}
+
+		try {
+			riseTime = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.RISE_TIME));
+			TimeUnit t = TimeUnit.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.RISE_TIME_UNIT));
+			riseTime = riseTime * t.getValue();
+		}
+		catch (Exception e) {
+			riseTime = 0d;
+		}
+
+		try {
+			fallTime = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.FALL_TIME));
+			TimeUnit t = TimeUnit.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.FALL_TIME_UNIT));
+			fallTime = fallTime * t.getValue();
+		}
+		catch (Exception e) {
+			fallTime = 0d;
 		}
 		
 		data.append(shape);
@@ -741,9 +767,9 @@ public class SpiceUtil {
 			data.append(" ");
 			data.append("0");						// delay time
 			data.append(" ");
-			data.append("0");						// rise time
+			data.append(riseTime);						// rise time
 			data.append(" ");
-			data.append("0");						// fall time
+			data.append(fallTime);						// fall time
 			data.append(" ");
 			
 			double period = 1d / frequency; // f = 1/t => t = 1/f

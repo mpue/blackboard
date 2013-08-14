@@ -11,6 +11,7 @@ import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 
 import org.pmedv.blackboard.spice.FrequencyUnit;
+import org.pmedv.blackboard.spice.TimeUnit;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.services.ResourceService;
 
@@ -36,6 +37,10 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 	private final ButtonGroup voltageTypeGroup = new ButtonGroup();
 	private final ButtonGroup shapeGroup = new ButtonGroup();
 	private JSpinner dutyCycleSpinner;
+	private JSpinner riseTimeSpinner;
+	private JSpinner fallTimeSpinner;
+	private JComboBox riseTimeUnitCombo;
+	private JComboBox fallTimeUnitCombo;
 
 	/**
 	 * Create the panel.
@@ -57,6 +62,8 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 				ColumnSpec.decode("max(50dlu;min)"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(50dlu;min)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(34dlu;min)"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("min:grow"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,},
@@ -81,14 +88,22 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.LINE_GAP_ROWSPEC,}));
 		
 		JLabel lblVoltageSourceProperties = new JLabel(resources.getResourceByKey("SymbolPropertiesDialog.VoltageSourceProperties"));
 		lblVoltageSourceProperties.setFont(new Font("Tahoma", Font.BOLD, 11));
-		add(lblVoltageSourceProperties, "4, 2, 13, 1, fill, default");
+		add(lblVoltageSourceProperties, "4, 2, 15, 1, fill, default");
 		
 		JSeparator separator = new JSeparator();
-		add(separator, "2, 4, 15, 1");
+		add(separator, "2, 4, 17, 1");
 		
 		JLabel lblType = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.mode"));
 		add(lblType, "4, 6, 3, 1");
@@ -128,7 +143,7 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 		add(dcOffsetSpinner, "12, 12, 3, 1");
 		
 		JLabel lblVolt_2 = new JLabel("Volt");
-		add(lblVolt_2, "16, 12");
+		add(lblVolt_2, "16, 12, 3, 1");
 		
 		JLabel lblPhase = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.acPhase"));
 		add(lblPhase, "4, 14, 3, 1");
@@ -146,7 +161,7 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 		add(acAmplitudeSpinner, "12, 16, 3, 1");
 		
 		JLabel lblVolt_1 = new JLabel("Volt");
-		add(lblVolt_1, "16, 16");
+		add(lblVolt_1, "16, 16, 3, 1");
 		
 		JLabel lblFrequency = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.frequency"));
 		add(lblFrequency, "4, 18, 3, 1");
@@ -164,7 +179,25 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 		add(dutyCycleSpinner, "12, 20, 3, 1");
 		
 		JLabel label = new JLabel("%");
-		add(label, "16, 20");
+		add(label, "16, 20, 3, 1");
+		
+		JLabel lblRiseTime = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.riseTime"));
+		add(lblRiseTime, "12, 22");
+		
+		riseTimeSpinner = new JSpinner();
+		add(riseTimeSpinner, "12, 24, 3, 1");
+		
+		riseTimeUnitCombo = new JComboBox(TimeUnit.values());
+		add(riseTimeUnitCombo, "16, 24, fill, default");
+		
+		JLabel lblFallTime = new JLabel(resources.getResourceByKey("VoltageSourcePropertiesPanel.fallTime"));
+		add(lblFallTime, "12, 26");
+		
+		fallTimeSpinner = new JSpinner();
+		add(fallTimeSpinner, "12, 28, 3, 1");
+		
+		fallTimeUnitCombo = new JComboBox(TimeUnit.values());
+		add(fallTimeUnitCombo, "16, 28, fill, default");
 
 	}
 
@@ -200,5 +233,17 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 	}	
 	public JSpinner getDutyCycleSpinner() {
 		return dutyCycleSpinner;
+	}
+	public JSpinner getRiseTimeSpinner() {
+		return riseTimeSpinner;
+	}
+	public JSpinner getFallTimeSpinner() {
+		return fallTimeSpinner;
+	}
+	public JComboBox getRiseTimeUnitCombo() {
+		return riseTimeUnitCombo;
+	}
+	public JComboBox getFallTimeUnitCombo() {
+		return fallTimeUnitCombo;
 	}
 }

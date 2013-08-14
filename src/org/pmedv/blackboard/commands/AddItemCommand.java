@@ -36,11 +36,13 @@ import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.ShapeStyle;
 import org.pmedv.blackboard.app.FileState;
 import org.pmedv.blackboard.components.BoardEditor;
+import org.pmedv.blackboard.components.Diode;
 import org.pmedv.blackboard.components.Item;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.components.Line;
 import org.pmedv.blackboard.components.LineEdgeType;
 import org.pmedv.blackboard.components.Palette;
+import org.pmedv.blackboard.components.Resistor;
 import org.pmedv.blackboard.components.Shape;
 import org.pmedv.blackboard.models.BoardEditorModel;
 import org.pmedv.blackboard.panels.ShapePropertiesPanel;
@@ -181,7 +183,7 @@ public class AddItemCommand extends AbstractCommand {
 		for (Layer layer : editor.getModel().getLayers()) {
 			
 			for (Item item : layer.getItems()) {
-				if (item instanceof Line) {
+				if (item instanceof Line && !(item instanceof Resistor) && !(item instanceof Diode)) {
 					
 					Line l = (Line)item;
 					

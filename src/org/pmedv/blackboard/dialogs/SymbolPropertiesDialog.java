@@ -56,6 +56,7 @@ import org.pmedv.blackboard.provider.SymbolProvider;
 import org.pmedv.blackboard.spice.FrequencyUnit;
 import org.pmedv.blackboard.spice.Model;
 import org.pmedv.blackboard.spice.SpiceType;
+import org.pmedv.blackboard.spice.TimeUnit;
 import org.pmedv.blackboard.spice.VoltageSourceProperties;
 import org.pmedv.blackboard.spice.panels.VoltageSourcePropertiesPanel;
 import org.pmedv.core.context.AppContext;
@@ -95,6 +96,8 @@ public class SymbolPropertiesDialog extends AbstractNiceDialog {
 		propertiesPanel.getAcPhaseSpinner().setModel(new SpinnerNumberModel(0, 0, 1000, 0.1));
 		propertiesPanel.getDcVoltageSpinner().setModel(new SpinnerNumberModel(0, 0, 1000, 0.1));
 		propertiesPanel.getDcOffsetSpinner().setModel(new SpinnerNumberModel(0, 0, 1000, 0.1));
+		propertiesPanel.getRiseTimeSpinner().setModel(new SpinnerNumberModel(0, 0, 1000, 0.1));
+		propertiesPanel.getFallTimeSpinner().setModel(new SpinnerNumberModel(0, 0, 1000, 0.1));
 		
 		symbolPropertiesPanel = new SymbolPropertiesPanel();
 		setSize(new Dimension(640, 640));
@@ -254,6 +257,10 @@ public class SymbolPropertiesDialog extends AbstractNiceDialog {
 		symbol.getProperties().put(VoltageSourceProperties.FREQUENCY_UNIT, propertiesPanel.getFrequencyUnitComboBox().getSelectedItem().toString());
 		symbol.getProperties().put(VoltageSourceProperties.DC_OFFSET, propertiesPanel.getDcOffsetSpinner().getValue().toString());
 		symbol.getProperties().put(VoltageSourceProperties.DUTY_CYCLE, propertiesPanel.getDutyCycleSpinner().getValue().toString());
+		symbol.getProperties().put(VoltageSourceProperties.RISE_TIME,propertiesPanel.getRiseTimeSpinner().getValue().toString());
+		symbol.getProperties().put(VoltageSourceProperties.RISE_TIME_UNIT,propertiesPanel.getRiseTimeUnitCombo().getSelectedItem().toString());
+		symbol.getProperties().put(VoltageSourceProperties.FALL_TIME,propertiesPanel.getFallTimeSpinner().getValue().toString());
+		symbol.getProperties().put(VoltageSourceProperties.FALL_TIME_UNIT,propertiesPanel.getFallTimeUnitCombo().getSelectedItem().toString());
 		
 		if (propertiesPanel.getSineShapeRadioButton().isSelected()) {
 			symbol.getProperties().put(VoltageSourceProperties.SHAPE,"SIN");						
@@ -344,6 +351,39 @@ public class SymbolPropertiesDialog extends AbstractNiceDialog {
 		catch (Exception e) {
 			propertiesPanel.getSineShapeRadioButton().setSelected(true);
 		}
+		
+		try {
+			TimeUnit t = TimeUnit.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.RISE_TIME_UNIT));
+			propertiesPanel.getRiseTimeUnitCombo().setSelectedItem(t);
+		}
+		catch (Exception e) {
+			propertiesPanel.getRiseTimeUnitCombo().setSelectedIndex(0);
+		}
+		
+		try {
+			Double riseTime = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.RISE_TIME));
+			propertiesPanel.getRiseTimeSpinner().setValue(riseTime);
+		}
+		catch (Exception e) {
+			propertiesPanel.getRiseTimeSpinner().setValue(0);
+		}
+		
+		try {
+			TimeUnit t = TimeUnit.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.FALL_TIME_UNIT));
+			propertiesPanel.getFallTimeUnitCombo().setSelectedItem(t);
+		}
+		catch (Exception e) {
+			propertiesPanel.getFallTimeUnitCombo().setSelectedIndex(0);
+		}
+		
+		try {
+			Double fallTime = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.FALL_TIME));
+			propertiesPanel.getFallTimeSpinner().setValue(fallTime);
+		}
+		catch (Exception e) {
+			propertiesPanel.getFallTimeSpinner().setValue(0);
+		}
+
 	}
 	
 	private void setupAutoComplete() {
