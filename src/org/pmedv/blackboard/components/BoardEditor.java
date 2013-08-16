@@ -323,11 +323,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		addMouseMotionListener(this);
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				skip = true;				
-				handleReleaseDrawEvent(null);
-				lineStopX = 0;
-				lineStopY = 0;
-				refresh();
+				cancelDrawing();
 			}
 		};
 		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
@@ -341,6 +337,14 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		return undoManager;
 	}
 
+	public void cancelDrawing() {
+		skip = true;				
+		handleReleaseDrawEvent(null);
+		lineStopX = 0;
+		lineStopY = 0;
+		refresh();		
+	}
+	
 	/**
 	 * Setup the listeners
 	 */

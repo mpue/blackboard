@@ -58,6 +58,7 @@ public class SetSelectModeCommand extends AbstractEditorCommand {
 
 		BoardEditor editor = EditorUtils.getCurrentActiveEditor();
 
+		editor.cancelDrawing();
 		editor.setEditorMode(EditorMode.SELECT);
 		editor.setCursor(Cursor.getDefaultCursor());
 
