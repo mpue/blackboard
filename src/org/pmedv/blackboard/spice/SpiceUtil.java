@@ -782,14 +782,7 @@ public class SpiceUtil {
 			data.append(riseTime);						// rise time
 			data.append(" ");
 			data.append(fallTime);						// fall time
-			data.append(" ");
-			data.append(" ");
-			data.append("0");
-			data.append(" ");
-			data.append("0");
-			data.append(" ");
-			data.append(degrees);
-			
+			data.append(" ");		
 			DecimalFormat df = new DecimalFormat("#.############");
 			DecimalFormatSymbols custom = new DecimalFormatSymbols();
 			custom.setDecimalSeparator('.');
@@ -797,6 +790,8 @@ public class SpiceUtil {
 			data.append(df.format(pulsewidth));
 			data.append(" ");
 			data.append(df.format(period));
+			data.append(" ");
+			data.append(degrees);
 		}
 		
 		data.append(")");
