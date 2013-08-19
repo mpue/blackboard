@@ -741,12 +741,20 @@ public class SpiceUtil {
 		data.append(shape);
 		data.append("(");
 		
+		double degrees = Double.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.AC_PHASE));
+		
 		if (shape.equalsIgnoreCase("sin")) {		
 			data.append(dcOffset);
 			data.append(" ");
 			data.append(amplitude);
 			data.append(" ");
 			data.append(frequency);
+			data.append(" ");
+			data.append("0");
+			data.append(" ");
+			data.append("0");
+			data.append(" ");
+			data.append(degrees);
 		}
 		/**
 		 * For the moment, we keep the pulse voltage source as simple as possible. For now
@@ -761,6 +769,10 @@ public class SpiceUtil {
 		 * 
 		 */
 		else if (shape.equalsIgnoreCase("pulse")) {
+			
+			double period = 1d / frequency; // f = 1/t => t = 1/f
+			double pulsewidth = (period / 100.0d) * Double.valueOf(dutyCycle).doubleValue();
+
 			data.append(-amplitude+dcOffset);		// initial value	
 			data.append(" ");
 			data.append( amplitude+dcOffset);		// pulsed value
@@ -771,9 +783,13 @@ public class SpiceUtil {
 			data.append(" ");
 			data.append(fallTime);						// fall time
 			data.append(" ");
+			data.append(" ");
+			data.append("0");
+			data.append(" ");
+			data.append("0");
+			data.append(" ");
+			data.append(degrees);
 			
-			double period = 1d / frequency; // f = 1/t => t = 1/f
-			double pulsewidth = (period / 100.0d) * Double.valueOf(dutyCycle).doubleValue();
 			DecimalFormat df = new DecimalFormat("#.############");
 			DecimalFormatSymbols custom = new DecimalFormatSymbols();
 			custom.setDecimalSeparator('.');
