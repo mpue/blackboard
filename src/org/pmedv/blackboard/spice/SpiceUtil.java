@@ -278,7 +278,7 @@ public class SpiceUtil {
 		// collect the models distributed over the schematic
 		for (Symbol symbol : symbols) {
 			if (symbol.isCustomModel() && symbol.getModel() != null) {
-				// we need onl one definition per model
+				// we need only one definition per model
 				if (!models.contains(symbol.getModel())) {
 					models.add(symbol.getModel());
 				}				
@@ -765,7 +765,6 @@ public class SpiceUtil {
 		 * So we let the user only change the same parameters like for a sinus voltage source.
 		 * 
 		 * TODO : Provide an advanced mode for SPICE experts
-		 * TODO : What about the phase of a pulse voltage source
 		 * 
 		 */
 		else if (shape.equalsIgnoreCase("pulse")) {

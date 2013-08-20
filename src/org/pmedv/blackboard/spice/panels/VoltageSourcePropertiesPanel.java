@@ -1,6 +1,8 @@
 package org.pmedv.blackboard.spice.panels;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -199,6 +201,49 @@ public class VoltageSourcePropertiesPanel extends JPanel {
 		fallTimeUnitCombo = new JComboBox(TimeUnit.values());
 		add(fallTimeUnitCombo, "16, 28, fill, default");
 
+		initListeners();
+		
+	}
+
+	public void setState(boolean dc) {
+		dcVoltageSpinner.setEnabled(dc);
+		acPhaseSpinner.setEnabled(!dc);
+		acAmplitudeSpinner.setEnabled(!dc);
+		frequencySpinner.setEnabled(!dc);
+		frequencyUnitComboBox.setEnabled(!dc);
+		dcOffsetSpinner.setEnabled(!dc);
+		sineShapeRadioButton.setEnabled(!dc);
+		pulseShapeRadioButton.setEnabled(!dc);					
+		dutyCycleSpinner.setEnabled(!dc);
+		riseTimeSpinner.setEnabled(!dc);
+		fallTimeSpinner.setEnabled(!dc);
+		riseTimeUnitCombo.setEnabled(!dc);
+		fallTimeUnitCombo.setEnabled(!dc);		
+	}
+	
+	private void initListeners() {
+
+		dcRadioButton.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {			
+				JRadioButton button = (JRadioButton)e.getSource();
+				if (button.isSelected()) {
+					setState(true);
+				}
+			}
+		});
+
+		acRadioButton.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {			
+				JRadioButton button = (JRadioButton)e.getSource();
+				if (button.isSelected()) {
+					setState(false);
+				}
+			}
+		});
+
+		
 	}
 
 	public JRadioButton getDcRadioButton() {

@@ -236,6 +236,8 @@ public class SymbolPropertiesDialog extends AbstractNiceDialog {
 		});
 		
 		setupAutoComplete();
+		
+	
 	}
 
 	private void setVoltageProperties() {
@@ -272,17 +274,22 @@ public class SymbolPropertiesDialog extends AbstractNiceDialog {
 	
 	private void getVoltageProperties() {
 		
+		boolean dc = true;
+		
 		try {
 			if (symbol.getProperties().getProperty(VoltageSourceProperties.MODE).equalsIgnoreCase("DC")) {
 				propertiesPanel.getDcRadioButton().setSelected(true);
 			}
 			else if (symbol.getProperties().getProperty(VoltageSourceProperties.MODE).equalsIgnoreCase("AC")) {
 				propertiesPanel.getAcRadioButton().setSelected(true);
+				dc = false;
 			}
 		}
 		catch (NullPointerException n) {
 			propertiesPanel.getDcRadioButton().setSelected(true);
 		} 	
+
+		propertiesPanel.setState(dc);
 		
 		try {
 			Float dcVoltage = Float.valueOf(symbol.getProperties().getProperty(VoltageSourceProperties.DC_VOLTAGE));

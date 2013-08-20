@@ -35,6 +35,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -124,6 +125,7 @@ import org.pmedv.core.context.AppContext;
 import org.pmedv.core.gui.ApplicationWindow;
 import org.pmedv.core.preferences.Preferences;
 import org.pmedv.core.services.ResourceService;
+import org.pmedv.core.util.ErrorUtils;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -441,81 +443,75 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 	 */
 	@SuppressWarnings("serial")
 	private void initActions() {
+		
 		// keyboard associations
-		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "upAction");
-		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "downAction");
-		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "leftAction");
-		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "rightAction");
-		getActionMap().put("upAction", new AbstractAction() {
+		
+		ApplicationWindow window = AppContext.getBean(ApplicationWindow.class);
+//		
+//		window.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "upAction");
+//		window.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "downAction");
+//		window.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "leftAction");
+//		window.getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "rightAction");
+//
+//		window.getRootPane().getActionMap().put("upAction", new AbstractAction() {
+//			public void actionPerformed(ActionEvent event) {
+//				moveItemByKey("up");
+//			}
+//		});
+//		window.getRootPane().getActionMap().put("downAction", new AbstractAction() {
+//			public void actionPerformed(ActionEvent event) {
+//				moveItemByKey("down");
+//			}
+//		});
+//		window.getRootPane().getActionMap().put("leftAction", new AbstractAction() {
+//			public void actionPerformed(ActionEvent event) {
+//				moveItemByKey("left");
+//			}
+//		});
+//		window.getRootPane().getActionMap().put("rightAction", new AbstractAction() {
+//			public void actionPerformed(ActionEvent event) {
+//				moveItemByKey("right");
+//			}
+//		});
+		
+		registerKeyboardAction(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				moveItemByKey("up");
 			}
-		});
-		getActionMap().put("downAction", new AbstractAction() {
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+		
+		registerKeyboardAction(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				moveItemByKey("down");
 			}
-		});
-		getActionMap().put("leftAction", new AbstractAction() {
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+		registerKeyboardAction(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				moveItemByKey("left");
 			}
-		});
-		getActionMap().put("rightAction", new AbstractAction() {
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, InputEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+		registerKeyboardAction(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				moveItemByKey("right");
 			}
-		});
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, InputEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+
 	}
 
 	private void moveItemByKey(String direction) {
 		if (selectedItem != null) {
-			moveItem(selectedItem, direction);
+		    
 			updateStatusBar();
 		}
 		if (selectedItems.size() > 0) {
 			for (Item i : selectedItems) {
-				moveItem(i, direction);
+
 			}
 			updateStatusBar();
 		}
 	}
-
-	private void moveItem(Item item, String direction) {
-		if (direction.equalsIgnoreCase("up")) {
-			item.setYLoc(item.getYLoc() - raster);
-			item.setOldYLoc(item.getYLoc());
-		}
-		if (direction.equalsIgnoreCase("down")) {
-			item.setYLoc(item.getYLoc() + raster);
-			item.setOldYLoc(item.getYLoc());
-		}
-		if (direction.equalsIgnoreCase("left")) {
-			item.setXLoc(item.getXLoc() - raster);
-			item.setOldXLoc(item.getXLoc());
-		}
-		if (direction.equalsIgnoreCase("right")) {
-			item.setXLoc(item.getXLoc() + raster);
-			item.setOldXLoc(item.getXLoc());
-		}
-	}
-	
-//	private void getSelectedPin() {
-//		for (Layer layer : model.getLayers()) {
-//			for (Item item : layer.getItems()) {					
-//				if(item instanceof Part) {
-//					Part part = (Part)item;
-//					for (Pin pin : part.getConnections().getPin()) {							
-//						if (pin.getX() + part.getXLoc() == lineStopX && pin.getY() + part.getYLoc() == lineStopY) {
-//							selectedPin = pin;
-//							return;
-//						}
-//					}
-//				}					
-//			}
-//		}						
-//		selectedPin = null;
-//	}
 
 	private void handleMouseDragged(MouseEvent e) {
 		if (editorMode.equals(EditorMode.SELECT) || 
@@ -981,8 +977,6 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 	 * @param item the item to be moved or resized
 	 */
 	private void moveOrResizeItem(int deltaX, int deltaY, Item item) {
-		if (editPart)
-			return;		
 		int xLoc = item.getOldXLoc() + deltaX;
 		int yLoc = item.getOldYLoc() + deltaY;
 		int width = item.getOldWidth() + deltaX;
