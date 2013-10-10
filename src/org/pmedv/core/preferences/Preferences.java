@@ -67,10 +67,8 @@ public class Preferences {
 	 * Set a preference value to the given default if the preference key does
 	 * not exist.
 	 * 
-	 * @param key
-	 *            Key of the preference
-	 * @param defaultValue
-	 *            value to put if the key does not exist.
+	 * @param key Key of the preference
+	 * @param defaultValue value to put if the key does not exist.
 	 */
 	private static void setDefaultPreference(String key, Object defaultValue) {
 		if (!values.containsKey(key))

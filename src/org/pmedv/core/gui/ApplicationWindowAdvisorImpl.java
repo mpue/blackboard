@@ -43,6 +43,7 @@ import net.infonode.docking.TabWindow;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdesktop.swingx.painter.MattePainter;
 import org.pmedv.core.beans.ApplicationPerspective;
 import org.pmedv.core.beans.ApplicationWindowConfiguration;
 import org.pmedv.core.components.IMemento;
@@ -158,17 +159,17 @@ public class ApplicationWindowAdvisorImpl implements ApplicationWindowAdvisor {
 		}
 		
 		final Color blackboardLightBlue = new Color(225,234,242);
-		final Color blackBoardDarkBlue = new Color(127,127,200);
+		final Color blackBoardDarkBlue = new Color(182, 191, 205);
+		final Color blackboardLightGrey = new Color(220,220,222);
 		
-        UIManager.put("TaskPane.titleBackgroundGradientStart", blackboardLightBlue);        
+        UIManager.put("TaskPane.titleBackgroundGradientStart", Color.WHITE);        
         UIManager.put("TaskPane.titleBackgroundGradientEnd",blackboardLightBlue); 
         UIManager.put("TaksPane.specialTitleBackground",blackboardLightBlue); 
         UIManager.put("TaskPane.titleBackground",blackboardLightBlue); 
-        UIManager.put("TaskPane.borderColor",blackboardLightBlue);
-
-        // UIManager.put("Table.selectionBackground",Color.BLUE);
-        // UIManager.put("Table.selectionForeground",Color.WHITE);
-        
+        UIManager.put("TaskPane.borderColor",blackboardLightBlue);        
+        UIManager.put("TaskPane.background",blackboardLightGrey);
+        UIManager.put("TaskPaneContainer.backgroundPainter", new MattePainter(blackBoardDarkBlue));
+                
 		log.info("setting look and feel to: "+UIManager.getLookAndFeel());
 
 		// construct app icon
