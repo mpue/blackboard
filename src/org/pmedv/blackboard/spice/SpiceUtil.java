@@ -231,7 +231,7 @@ public class SpiceUtil {
 		data.append(System.getProperty("line.separator"));
 		
 		for (TextPart t : textparts)  {
-			if (t.getType().equals(TextPart.TextType.CONTROL)) {
+			if (t.getType() != null && t.getType().equals(TextPart.TextType.CONTROL)) {
 				data.append(t.getText());
 				data.append(System.getProperty("line.separator"));				
 			}
@@ -334,7 +334,7 @@ public class SpiceUtil {
 		List<TextPart> textParts = BoardUtil.getTextParts(model);
 		
 		for (TextPart part : textParts) {			
-			if (part.getType().equals(TextType.SPICE_DIRECTIVE)) {
+			if (part.getType() != null && part.getType().equals(TextType.SPICE_DIRECTIVE)) {
 				data.append(part.getText());
 				data.append(System.getProperty("line.separator"));
 			}			

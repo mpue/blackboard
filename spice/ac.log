@@ -1,0 +1,3 @@
+Circuit: simple_rc2.bb
+
+Fatal Error: .option syntax error, unrecognized option: "noacct"

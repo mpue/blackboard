@@ -10,7 +10,6 @@
 	<bean id="convertToSymbolCommand" class="org.pmedv.blackboard.commands.ConvertToSymbolCommand"/>
 	<bean id="addSymbolToLibraryCommand" class="org.pmedv.blackboard.commands.AddSymbolToLibraryCommand"/>	
 	<bean id="breakSymbolCommand" class="org.pmedv.blackboard.commands.BreakSymbolCommand"/>
-	<bean id="editPartCommand" class="org.pmedv.blackboard.commands.EditPartCommand"/>
 	<bean id="openBoardCommand" class="org.pmedv.blackboard.commands.OpenBoardCommand"/>
 	<bean id="browsePartsCommand" class="org.pmedv.blackboard.commands.BrowsePartsCommand"/>
 	<bean id="addResistorCommand" class="org.pmedv.blackboard.commands.AddResistorCommand"/>

@@ -85,16 +85,7 @@ public abstract class AbstractApplication {
 	private SplashScreen splashScreen;
 
 	public AbstractApplication(final String fileLocation) {
-		
-		/**
-		 * Currently only unix and windows platforma are supported
-		 */
-		
-		if (CheckEnv.getPlatform().equals("unsupported")) {
-			System.err.println("Plattform is not supported");
-			System.exit(-1);
-		}
-		
+				
 		/**
 		 * Set the default UncaughtExceptionHandler which calls an error dialog
 		 * with the full stacktrace inside.

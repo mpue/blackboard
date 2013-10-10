@@ -76,8 +76,6 @@ public class CheckEnv {
 		
 		else return "mac";
 		
-		
-		
 	}
 	
 }

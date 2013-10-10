@@ -31,7 +31,6 @@ import javax.swing.event.ChangeListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.pmedv.blackboard.app.FileState;
 import org.pmedv.blackboard.components.BoardEditor;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.events.EditorChangedEvent;
@@ -83,7 +82,8 @@ public class ShowLayersCommand extends AbstractOpenEditorCommand implements Edit
 				float opacity = (float) slider.getValue() / 100.0f;
 				editor.getModel().getCurrentLayer().setOpacity(opacity);
 				editor.repaint();
-				editor.setFileState(FileState.DIRTY);
+				// TODO : Happens also if an editor changes, what should we do? 
+				// editor.setFileState(FileState.DIRTY);
 			}
 
 		});

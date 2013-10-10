@@ -50,7 +50,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -88,7 +87,6 @@ import org.pmedv.blackboard.commands.ConvertToSymbolCommand;
 import org.pmedv.blackboard.commands.CopyCommand;
 import org.pmedv.blackboard.commands.DeleteCommand;
 import org.pmedv.blackboard.commands.DuplicateCommand;
-import org.pmedv.blackboard.commands.EditPartCommand;
 import org.pmedv.blackboard.commands.EditPropertiesCommand;
 import org.pmedv.blackboard.commands.ExportImageCommand;
 import org.pmedv.blackboard.commands.FlipHorizontalCommand;
@@ -125,7 +123,6 @@ import org.pmedv.core.context.AppContext;
 import org.pmedv.core.gui.ApplicationWindow;
 import org.pmedv.core.preferences.Preferences;
 import org.pmedv.core.services.ResourceService;
-import org.pmedv.core.util.ErrorUtils;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -1675,10 +1672,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		// draw selection handles
 		if (selectedItem != null) {
 			g2.setStroke(BoardUtil.stroke_1_0f);
-			if (isEditPart())
-				g2.setColor(Color.RED);
-			else
-				g2.setColor(Color.GREEN);			
+			g2.setColor(Color.GREEN);			
 			selectedItem.drawHandles(g2,8);
 		}
 
@@ -2146,25 +2140,10 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		this.zoomLayer = zoomLayer;		
 	}
 
-	/**
-	 * @return the editPart
-	 */
-	public boolean isEditPart() {
-		return editPart;
-	}
-
-	/**
-	 * @param editPart the editPart to set
-	 */
-	public void setEditPart(boolean editPart) {
-		this.editPart = editPart;
-	}
-
 	public void updateEditCommands() {
 		boolean isSingleItemSelected = selectedItem != null && !editPart;
 		ctx.getBean(RotateCWCommand.class).setEnabled(isSingleItemSelected && !(selectedItem instanceof Line));
 		ctx.getBean(RotateCCWCommand.class).setEnabled(isSingleItemSelected && !(selectedItem instanceof Line));
-		ctx.getBean(EditPartCommand.class).setEnabled(selectedItem != null);
 		ctx.getBean(DeleteCommand.class).setEnabled(isSingleItemSelected || selectedItems.size() > 0);
 		ctx.getBean(CopyCommand.class).setEnabled(isSingleItemSelected || selectedItems.size() > 0);
 		ctx.getBean(DuplicateCommand.class).setEnabled(isSingleItemSelected || selectedItems.size() > 0);

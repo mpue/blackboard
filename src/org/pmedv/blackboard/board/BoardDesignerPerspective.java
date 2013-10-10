@@ -101,7 +101,6 @@ import org.pmedv.core.perspectives.AbstractPerspective;
 import org.pmedv.core.preferences.Preferences;
 import org.pmedv.core.provider.ApplicationWindowConfigurationProvider;
 import org.pmedv.core.services.ResourceService;
-import org.pmedv.core.util.ErrorUtils;
 import org.springframework.context.ApplicationContext;
 
 public class BoardDesignerPerspective extends AbstractPerspective implements IMemento {

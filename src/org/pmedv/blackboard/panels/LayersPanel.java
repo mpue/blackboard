@@ -45,11 +45,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.commands.DeleteLayerCommand;
 import org.pmedv.blackboard.commands.DuplicateLayerCommand;
 import org.pmedv.blackboard.commands.MoveLayerDownCommand;
 import org.pmedv.blackboard.commands.MoveLayerUpCommand;
 import org.pmedv.blackboard.commands.SetLayerColorCommand;
+import org.pmedv.blackboard.components.BoardEditor;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.models.LayerTableModel;
 import org.pmedv.blackboard.models.LayerTableTransferHandler;
@@ -107,12 +109,12 @@ public class LayersPanel extends JPanel {
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				handlePopupTrigger(e);
+				handleMouse(e);
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				handlePopupTrigger(e);
+				handleMouse(e);
 			}
 		});
 		
@@ -143,19 +145,21 @@ public class LayersPanel extends JPanel {
 		*/
 	}
 
-	private void handlePopupTrigger(MouseEvent e) {
-		if (e.isPopupTrigger() && model.getLayer().size() >= 1) {
-			
-			Point p = e.getPoint();			 
-			// get the row index that contains that coordinate
-			int rowNumber = layerTable.rowAtPoint( p ); 
-			// Get the ListSelectionModel of the JTable
-			ListSelectionModel model = layerTable.getSelectionModel();
-			// set the selected interval of rows. Using the "rowNumber"
-			// variable for the beginning and end selects only that one row.
-			model.setSelectionInterval( rowNumber, rowNumber );			
-			popupMenu.show(e.getComponent(), e.getX(), e.getY());
-			
+	private void handleMouse(MouseEvent e) {
+		
+		Point p = e.getPoint();			 
+		// get the row index that contains that coordinate
+		int rowNumber = layerTable.rowAtPoint( p ); 
+		// Get the ListSelectionModel of the JTable
+		ListSelectionModel lsm = layerTable.getSelectionModel();
+		// set the selected interval of rows. Using the "rowNumber"
+		// variable for the beginning and end selects only that one row.
+		lsm.setSelectionInterval( rowNumber, rowNumber );		
+		
+		selectLayer(rowNumber);
+		
+		if (e.isPopupTrigger() && model.getLayer().size() >= 1) {			
+			popupMenu.show(e.getComponent(), e.getX(), e.getY());			
 		}
 	}
 	
@@ -266,6 +270,37 @@ public class LayersPanel extends JPanel {
 		}
 		
 		model.setLayers(layers);		
+	}
+	
+	private void selectLayer(int row) {
+
+		/**
+		 * Remove all listeners (in fact one) in order to prevent 
+		 * multiple comboBoxChanged events 
+		 */
+		
+		ActionListener[] listeners = currentLayerCombo.getListeners(ActionListener.class);		
+		for (int i = 0; i < listeners.length; i++) {
+			currentLayerCombo.removeActionListener(listeners[i]);
+		}
+
+		/**
+		 * Select the according layer
+		 */
+		
+		Layer layer = model.getLayer().get(row);		
+		currentLayerCombo.setSelectedItem(layer);
+		
+		/**
+		 * And finally add the listeners back to the box
+		 */
+		
+		for (int i = 0; i < listeners.length; i++) {
+			currentLayerCombo.addActionListener(listeners[i]);
+		}
+		
+		BoardEditor editor = EditorUtils.getCurrentActiveEditor();
+		editor.getModel().setCurrentLayer(layer);
 	}
 	
 	public AlternatingLineTable getLayerTable() {
