@@ -81,12 +81,6 @@ public class TextPart extends Part {
 	public void setText(String text) {
 		this.text = text;
 		this.image = TextUtil.createImageFromFont(text, font, color);
-
-		int ninetyDegreeSteps = getRotation() / 90;
-		
-		for (int i = 0; i < ninetyDegreeSteps;i++)
-			rotateCW();
-		
 		this.width = image.getWidth();
 		this.height = image.getHeight();			
 	}
