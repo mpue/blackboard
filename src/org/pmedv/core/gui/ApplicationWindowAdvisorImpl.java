@@ -158,6 +158,7 @@ public class ApplicationWindowAdvisorImpl implements ApplicationWindowAdvisor {
 		}
 		
 		final Color blackboardLightBlue = new Color(225,234,242);
+		final Color blackBoardDarkBlue = new Color(127,127,200);
 		
         UIManager.put("TaskPane.titleBackgroundGradientStart", blackboardLightBlue);        
         UIManager.put("TaskPane.titleBackgroundGradientEnd",blackboardLightBlue); 
@@ -165,6 +166,9 @@ public class ApplicationWindowAdvisorImpl implements ApplicationWindowAdvisor {
         UIManager.put("TaskPane.titleBackground",blackboardLightBlue); 
         UIManager.put("TaskPane.borderColor",blackboardLightBlue);
 
+        // UIManager.put("Table.selectionBackground",Color.BLUE);
+        // UIManager.put("Table.selectionForeground",Color.WHITE);
+        
 		log.info("setting look and feel to: "+UIManager.getLookAndFeel());
 
 		// construct app icon

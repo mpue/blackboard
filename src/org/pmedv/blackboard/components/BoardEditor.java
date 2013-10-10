@@ -549,11 +549,13 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 						 editorMode.equals(EditorMode.DRAW_MEASURE) ||
 						 editorMode.equals(EditorMode.DRAW_RECTANGLE) || 
 						 editorMode.equals(EditorMode.DRAW_ELLIPSE)) {
-					if (!drawing) {
-						handleClickDrawEvent(e);						
-					}
-					else {
-						handleReleaseDrawEvent(e);
+					if (!model.getCurrentLayer().getName().equalsIgnoreCase("Board")) {
+						if (!drawing) {
+							handleClickDrawEvent(e);						
+						}
+						else {
+							handleReleaseDrawEvent(e);
+						}						
 					}
 				}
 				else if (editorMode.equals(EditorMode.CHECK_CONNECTIONS)) {

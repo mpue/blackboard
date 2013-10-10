@@ -11,6 +11,10 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.TransferHandler;
 
+import org.pmedv.blackboard.BoardUtil;
+import org.pmedv.blackboard.EditorUtils;
+import org.pmedv.blackboard.events.EditorChangedEvent.EventType;
+
 /**
  * Handles drag & drop row reordering
  */
@@ -70,6 +74,7 @@ public class LayerTableTransferHandler extends TransferHandler {
 	protected void exportDone(JComponent c, Transferable t, int act) {
 		if (act == TransferHandler.MOVE) {
 			table.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			EditorUtils.getCurrentActiveEditor().notifyListeners(EventType.EDITOR_CHANGED);
 		}
 	}
 

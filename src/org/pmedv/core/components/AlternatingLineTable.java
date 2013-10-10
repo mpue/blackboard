@@ -15,7 +15,7 @@ public class AlternatingLineTable extends JXTable {
 	private static final Color lightGray   = new Color(230, 230, 230);
 	private static final Color lightOrange = new Color(243, 152, 100);
 	private static final Color lightBlue   = new Color(139, 171, 225);
-	private static final Color blackboardBlue = new Color(182,191,205);
+	private static final Color blackboardBlue = new Color(84, 113, 167);
 	
 	public AlternatingLineTable() {
 		super();
@@ -36,9 +36,11 @@ public class AlternatingLineTable extends JXTable {
 		else {
 			if (isCellSelected(row, column)) {
 				c.setBackground(blackboardBlue);
+				c.setForeground(Color.WHITE);
 			}
 			else {
 				c.setBackground(getBackground());
+				c.setForeground(getForeground());
 			}
 		}
 		
