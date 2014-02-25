@@ -83,7 +83,12 @@ public class AbstractElementProvider<T extends BaseElement> {
 		this.elementsDirName = elementsBaseDir;
 		final File workDir = new File(".");
 		log.info("Working directory " + workDir.getAbsolutePath());
+		
 		elementsXmlDir = new File(System.getProperty("user.home"), "."+AppContext.getName()+"/"+ elementsDirName+"/");
+		
+		if (!elementsXmlDir.exists()) {
+			throw new RuntimeException(elementsXmlDir.getAbsolutePath()+" does not exist.");
+		}
 	}
 
 	@SuppressWarnings("unchecked")
