@@ -24,3 +24,18 @@ or the sources must copy the directories symbols, models, parts, datasheets and 
 to the folder USER_HOME/.BlackBoard 
  
 For further information visit the [homepage] (http://blackboard.serverpool.org) or the [forum](http://blackboard.serverpool.org/forum).
+
+## Installing
+
+    $ git clone git@github.com:mpue/blackboard.git
+    $ cd blackboard
+    $ ant 
+    $ cp -R models/ ~/.BlackBoard
+    $ cp -R symbols/ ~/.BlackBoard
+    $ cp -R parts/ ~/.BlackBoard
+    $ cp -R datasheets/ ~/.BlackBoard
+    $ cp -R simulators/ ~/.BlackBoard
+
+## Running
+
+    $ java -Dsun.java2d.opengl=true -jar dist/lib/BlackBoard.jar
