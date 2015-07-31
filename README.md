@@ -23,7 +23,7 @@ All data is now stored and retrieved from users home directory. Users which use 
 or the sources must copy the directories symbols, models, parts, datasheets and simulators 
 to the folder USER_HOME/.BlackBoard 
  
-For further information visit the [homepage] (http://blackboard.serverpool.org) or the [forum](http://blackboard.serverpool.org/forum).
+For further information visit the [homepage] (http://pueski.de)
 
 ## Installing
 
