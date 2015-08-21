@@ -53,7 +53,6 @@ public class ResistorDialog extends AbstractNiceDialog {
 		super(title, subTitle, icon, true, false, true, true, AppContext.getContext().getBean(ApplicationWindow.class), resistor);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void initializeComponents() {
 	
@@ -72,6 +71,7 @@ public class ResistorDialog extends AbstractNiceDialog {
 			this.resistor = (Resistor)getUserObject();	
 			resistorPanel.getNameField().setText(resistor.getName());
 			resistorPanel.getValueSpinner().setValue(resistor.getValue());
+			resistorPanel.getToleranceCombo().setSelectedItem(Float.valueOf(resistor.getTolerance()));
 		}
 		
 		if (getUserObject() == null) {

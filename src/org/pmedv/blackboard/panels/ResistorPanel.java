@@ -47,7 +47,6 @@ public class ResistorPanel extends JPanel {
 	
 	private static final ResourceService resources = AppContext.getContext().getBean(ResourceService.class);
 	
-	@SuppressWarnings("unchecked")
 	public ResistorPanel() {
 		initComponents();
 		toleranceCombo.addItem(new Float(1));
