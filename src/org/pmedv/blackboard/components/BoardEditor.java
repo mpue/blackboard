@@ -215,6 +215,9 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 	private boolean button1Pressed = false;
 	private boolean button2Pressed = false;
 	private boolean button3Pressed = false;
+	// current mouse coordinates
+	private int mouseX;
+	private int mouseY;	
 	// where did the drag of the mouse happen?
 	private int dragStartX;
 	private int dragStartY;
@@ -1729,18 +1732,22 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			}			
 		}
 		
-		if (drawing) {
+		if (editorMode.equals(EditorMode.DRAW_LINE)) {
 
 			g2.setColor(Color.BLUE);
 			g2.setStroke(DEFAULT_STROKE);
 			
 			if (selectedPin != null) {
-				g2.drawRect(lineStopX - 8,lineStopY - 8, 16, 16);
+				
+				if (drawing) {
+					g2.drawRect(lineStopX - 8,lineStopY - 8, 16, 16);					
+				}
+				else {
+					g2.drawRect(mouseX - 8,mouseY - 8, 16, 16);
+				}
 			}
 			
 		}
-		
-		
 		
 		super.paintComponents(g2);
 	}
@@ -2200,6 +2207,27 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 			handleDrawEvent(e);
 			refresh();
 		}		
+		else {
+			handleMouseMoveEvent(e);
+			refresh();
+		}
+	}
+
+	private void handleMouseMoveEvent(MouseEvent e) {			
+		
+		int x = e.getX();
+		int y = e.getY();
+		
+		if (snapToGrid) {
+			x = BoardUtil.snap(x, raster);
+			y = BoardUtil.snap(y, raster);
+		}
+		
+		mouseX = x;
+		mouseY = y;
+		
+		selectedPin = EditorUtils.findPin(x, y, this);
+		
 	}
 	
 }
