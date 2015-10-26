@@ -22,8 +22,6 @@ and type "ant".
 All data is now stored and retrieved from users home directory. Users which use nigthly builds 
 or the sources must copy the directories symbols, models, parts, datasheets and simulators 
 to the folder USER_HOME/.BlackBoard 
- 
-For further information visit the [homepage] (http://pueski.de)
 
 ## Installing
 
