@@ -28,11 +28,11 @@ to the folder USER_HOME/.BlackBoard
     $ git clone git@github.com:mpue/blackboard.git
     $ cd blackboard
     $ ant 
-    $ cp -R models/ ~/.BlackBoard
-    $ cp -R symbols/ ~/.BlackBoard
-    $ cp -R parts/ ~/.BlackBoard
-    $ cp -R datasheets/ ~/.BlackBoard
-    $ cp -R simulators/ ~/.BlackBoard
+    $ cp -R models ~/.BlackBoard
+    $ cp -R symbols ~/.BlackBoard
+    $ cp -R parts ~/.BlackBoard
+    $ cp -R datasheets ~/.BlackBoard
+    $ cp -R simulators ~/.BlackBoard
 
 ## Running
 
