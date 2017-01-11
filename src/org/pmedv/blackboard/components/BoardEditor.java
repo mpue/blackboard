@@ -1705,7 +1705,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		g2.draw(border);
 		
 		if (model.getType().equals(BoardType.STRIPES) || 
-			model.getType().equals(BoardType.HOLES)) { 
+			model.getType().equals(BoardType.HOLES) || model.getType().equals(BoardType.HOLESSTRIPS)) { 
 			
 			g2.setColor(Color.BLACK);
 			g2.setFont(miniFont);
