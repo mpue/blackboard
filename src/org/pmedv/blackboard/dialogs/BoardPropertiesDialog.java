@@ -200,6 +200,9 @@ public class BoardPropertiesDialog extends AbstractNiceDialog {
 					case STRIPES:
 						renderer.setText(resources.getResourceByKey("BoardType.stripes"));
 						break;
+					case HOLESSTRIPS:
+						renderer.setText(resources.getResourceByKey("BoardType.holesAndStrip"));
+						break;	
 					default:
 						break;
 				}

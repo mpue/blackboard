@@ -60,7 +60,8 @@ public class BoardEditorModel {
 		STRIPES,
 		BLANK,
 		SCHEMATICS,
-		CUSTOM
+		CUSTOM,
+		HOLESSTRIPS
 	}
 	
 	private Layer currentLayer;
