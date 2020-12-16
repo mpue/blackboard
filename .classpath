@@ -14,7 +14,11 @@
 	<classpathentry kind="lib" path="lib/swingx-beaninfo-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/autocomplete.jar"/>
 	<classpathentry kind="lib" path="lib/bsh-2.0b4.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-15">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/org.springframework.asm-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.beans-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.context-3.0.5.RELEASE.jar"/>
@@ -29,5 +33,12 @@
 	<classpathentry kind="lib" path="lib/jcommon-1.0.17.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.14.jar"/>
 	<classpathentry kind="lib" path="lib/jcas.jar" sourcepath="C:/devel/indigo_workspace/jcas"/>
+	<classpathentry kind="lib" path="lib/RXTXcomm.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="BlackBoard/lib/native"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jaxb-api-2.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/javax.activation-1.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -57,7 +57,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JViewport;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.undo.UndoManager;
 import javax.swing.undo.UndoableEdit;
@@ -400,6 +402,55 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 				
 			}
 		});
+		
+		
+		MouseAdapter ma = new MouseAdapter() {
+
+            private Point origin;
+            
+            private Rectangle oldView = null;
+            private int lastZoomIndex = Integer.MAX_VALUE;
+            
+            @Override
+            public void mousePressed(MouseEvent e) {
+                origin = new Point(e.getPoint());               
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (origin != null && SwingUtilities.isMiddleMouseButton(e) ) {
+                    JViewport viewPort = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, BoardEditor.this);
+                    if (viewPort != null) {
+                        int deltaX = origin.x - e.getX();
+                        int deltaY = origin.y - e.getY();
+
+                        Rectangle view = viewPort.getViewRect();
+                        
+                        if (oldView == null || lastZoomIndex != currentZoomIndex) {
+                        	oldView = new Rectangle(view);                      
+                        	lastZoomIndex = currentZoomIndex;
+                        }
+                        
+                        view.x = (int) (oldView.x + (deltaX * zoomLevels[currentZoomIndex]));
+                        view.y = (int) (oldView.y + (deltaY * zoomLevels[currentZoomIndex]));
+
+                        scrollRectToVisible(view);
+                        
+                        oldView = view;
+                         
+                    }
+                }
+            }
+
+        };
+        
+        addMouseListener(ma);
+        addMouseMotionListener(ma);
+        
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

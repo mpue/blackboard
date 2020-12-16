@@ -39,7 +39,12 @@
 			<items>
 				<actionClass>org.pmedv.blackboard.commands.ExportNetlistCommand</actionClass>
 				<bean>true</bean>
+			</items>
+			<items>
+				<actionClass>org.pmedv.blackboard.commands.ExportGCodeCommand</actionClass>
+				<bean>true</bean>
 			</items>			
+						
 			<items>
 				<actionClass>org.pmedv.blackboard.commands.BBExitCommand</actionClass>
 				<bean>true</bean>

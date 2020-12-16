@@ -65,8 +65,4 @@ public class ExportNetlistCommand extends AbstractOpenEditorCommand {
 
 	}
 
-
-
-
-
 }

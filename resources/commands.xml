@@ -77,5 +77,6 @@
 	<bean id="importLibraryCommand" class="org.pmedv.blackboard.commands.ImportLibraryCommand"/>
 	<bean id="setDrawMeasureModeCommand" class="org.pmedv.blackboard.commands.SetDrawMeasureModeCommand"/>
 	<bean id="setMoveModeCommand" class="org.pmedv.blackboard.commands.SetMoveModeCommand"/>
-	
+	<bean id="exportGCodeCommand" class="org.pmedv.blackboard.commands.ExportGCodeCommand"/>
+
 </beans>

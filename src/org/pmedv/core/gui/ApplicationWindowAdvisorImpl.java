@@ -57,7 +57,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBluer;
-import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
+//import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 
 
 public class ApplicationWindowAdvisorImpl implements ApplicationWindowAdvisor {
@@ -142,10 +142,10 @@ public class ApplicationWindowAdvisorImpl implements ApplicationWindowAdvisor {
 		String laf = (String) Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.lookAndFeel");
 
 		try {
-			if (laf.equals("Nimbus")) {
-				UIManager.setLookAndFeel(new NimbusLookAndFeel());				
-			}
-			else if (laf.equals("SkyBlue")) {
+//			if (laf.equals("Nimbus")) {
+//				UIManager.setLookAndFeel(new NimbusLookAndFeel());				
+//			}
+			if (laf.equals("SkyBlue")) {
 				Plastic3DLookAndFeel.setPlasticTheme(new SkyBluer());
 				UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
 				com.jgoodies.looks.Options.setPopupDropShadowEnabled(true);				
