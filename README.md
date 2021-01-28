@@ -1,4 +1,4 @@
-#BlackBoard Circuit Designer
+# BlackBoard Circuit Designer
 
 Blackboard is intended for the hobby enthusiast and should help building prototypes on so called breadboards easily.
 
@@ -37,3 +37,9 @@ to the folder USER_HOME/.BlackBoard
 ## Running
 
     $ java -Dsun.java2d.opengl=true -jar dist/lib/BlackBoard.jar
+    
+## Documentation 
+
+Find the german manual here:
+
+https://www.pueski.de/bb/doc/
