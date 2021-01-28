@@ -11,6 +11,21 @@ Currently BlackBoard provides the following features:
 * integrated part and symbol editor
 * layer based editing
 
+## Screenshots
+
+![Perfboard Editing](web/images/bb_boards.jpg)
+
+![Schematics Editing](web/images/bb_schematics.jpg)
+
+![NGSpice simulation](web/images/bb_sim.jpg)
+
+![Scale Editing](web/images/bb_scale.jpg)
+
+![Symbol Editing](web/images/bb_symbols.jpg)
+
+![Part Library](web/images/bb_parts.jpg)
+
+
 This is an eclipse project, simply import it into the workspace.
 
 In order to build blackboard, you'll need ANT to be installed. Alternatively
