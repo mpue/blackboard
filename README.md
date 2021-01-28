@@ -1,5 +1,7 @@
 # BlackBoard Circuit Designer
 
+![Logo](web/images/splash_1.1_final.png)
+
 Blackboard is intended for the hobby enthusiast and should help building prototypes on so called breadboards easily.
 
 Currently BlackBoard provides the following features:
@@ -40,7 +42,7 @@ to the folder USER_HOME/.BlackBoard
 
 ## Installing
 
-    $ git clone git@github.com:mpue/blackboard.git
+    $ git clone git@github.com:mpue/blackboard.git 
     $ cd blackboard
     $ ant 
     $ cp -R models ~/.BlackBoard
