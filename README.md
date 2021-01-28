@@ -40,6 +40,10 @@ All data is now stored and retrieved from users home directory. Users which use 
 or the sources must copy the directories symbols, models, parts, datasheets and simulators 
 to the folder USER_HOME/.BlackBoard 
 
+## Prerequisites
+
+To get Blackboard running an installed Java Runtime 8 is mandatory. This will change in the near future.
+
 ## Installing
 
     $ git clone git@github.com:mpue/blackboard.git 
@@ -55,8 +59,11 @@ to the folder USER_HOME/.BlackBoard
 
     $ java -Dsun.java2d.opengl=true -jar dist/lib/BlackBoard.jar
     
+## Important Notes
+
+In order to run the simulation, you must run blackboard as Administrator.
+    
 ## Documentation 
 
 Find the german manual here:
-
 https://www.pueski.de/bb/doc/
