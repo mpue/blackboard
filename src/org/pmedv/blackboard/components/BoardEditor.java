@@ -1827,7 +1827,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 			}
 			else {
-				g2d.setColor(Color.WHITE);
+				g2d.setColor(Color.LIGHT_GRAY);
 				g2d.fillRect(0, 0, getWidth(), getHeight());
 			}
 			

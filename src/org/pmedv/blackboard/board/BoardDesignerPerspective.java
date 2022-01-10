@@ -43,6 +43,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.bind.JAXBContext;
@@ -55,6 +56,8 @@ import net.infonode.docking.OperationAbortedException;
 import net.infonode.docking.TabWindow;
 import net.infonode.docking.View;
 import net.infonode.docking.theme.DockingWindowsTheme;
+import net.infonode.docking.theme.LookAndFeelDockingTheme;
+import net.infonode.docking.theme.SlimFlatDockingTheme;
 import net.infonode.docking.theme.SoftBlueIceDockingTheme;
 import net.infonode.docking.util.DockingUtil;
 import net.infonode.docking.util.ViewMap;
@@ -69,6 +72,7 @@ import org.fife.ui.autocomplete.DefaultCompletionProvider;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTaskPaneContainer;
+import org.jdesktop.swingx.painter.MattePainter;
 import org.pmedv.blackboard.BoardUtil;
 import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.ShapeStyle;
@@ -126,6 +130,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		setName("boardDesignerPerspective");
 		log.info("Initializing " + getName());
 		configProvider = AppContext.getContext().getBean(ApplicationWindowConfigurationProvider.class);
+	
 	}
 
 	@Override
@@ -137,6 +142,8 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		ctx = AppContext.getContext();
 		resources = ctx.getBean(ResourceService.class);
 		advisor = ctx.getBean(ApplicationWindowAdvisor.class);
+		
+	
 
 		final String position = (String) Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.layerPanelPlacement");
 
@@ -151,7 +158,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 				rootWindow.getWindowBar(Direction.DOWN).setEnabled(true);
 				rootWindow.getWindowProperties().setMinimizeEnabled(true);
 
-				DockingWindowsTheme theme = new SoftBlueIceDockingTheme();
+				DockingWindowsTheme theme = new LookAndFeelDockingTheme();
 
 				rootWindow.getRootWindowProperties().addSuperObject(theme.getRootWindowProperties());
 				rootWindow.getWindowProperties().getTabProperties().getHighlightedButtonProperties().getCloseButtonProperties().setVisible(false);
@@ -188,8 +195,10 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 
 		});
 
+		UIManager.put("TaskPaneContainer.backgroundPainter", new MattePainter(Color.DARK_GRAY));		
+		
 		JXTaskPaneContainer taskpanecontainer = new JXTaskPaneContainer();
-		taskpanecontainer.setBackground(new Color(182, 191, 205));
+		taskpanecontainer.setBackground(Color.darkGray);
 
 		JXTaskPane shapePane = new JXTaskPane();
 		shapePane.setTitle(resources.getResourceByKey("BoardDesignerPerspective.shapes.title"));

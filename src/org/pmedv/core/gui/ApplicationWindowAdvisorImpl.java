@@ -36,14 +36,19 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import net.infonode.docking.TabWindow;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdesktop.swingx.painter.MattePainter;
+import org.pmedv.blackboard.dialogs.DatasheetDialog;
+import org.pmedv.blackboard.dialogs.PartDialog;
+import org.pmedv.blackboard.dialogs.SpiceSimulatorManageDialog;
 import org.pmedv.core.beans.ApplicationPerspective;
 import org.pmedv.core.beans.ApplicationWindowConfiguration;
 import org.pmedv.core.components.IMemento;
@@ -55,6 +60,10 @@ import org.pmedv.core.provider.ApplicationWindowConfigurationProvider;
 import org.pmedv.core.services.ResourceService;
 import org.springframework.context.ApplicationContext;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBluer;
 //import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
@@ -141,27 +150,36 @@ public class ApplicationWindowAdvisorImpl implements ApplicationWindowAdvisor {
 		
 		String laf = (String) Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.lookAndFeel");
 
+
+		
 		try {
+			UIManager.setLookAndFeel( new FlatDarculaLaf());				
 //			if (laf.equals("Nimbus")) {
 //				UIManager.setLookAndFeel(new NimbusLookAndFeel());				
 //			}
-			if (laf.equals("SkyBlue")) {
-				Plastic3DLookAndFeel.setPlasticTheme(new SkyBluer());
-				UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
-				com.jgoodies.looks.Options.setPopupDropShadowEnabled(true);				
-			}
-			else {
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			}
+//			if (laf.equals("FlatDarcula")) {
+//				UIManager.setLookAndFeel( new FlatDarculaLaf());				
+//			}
+//			if (laf.equals("SkyBlue")) {
+//				Plastic3DLookAndFeel.setPlasticTheme(new SkyBluer());
+//				UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
+//				com.jgoodies.looks.Options.setPopupDropShadowEnabled(true);				
+//			}
+//			else {
+//				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//			}
 		}
 		catch (Exception e2) {
 			log.info("failed to set look and feel.");
 		}
 		
+		SwingUtilities.updateComponentTreeUI(win);
+
 		final Color blackboardLightBlue = new Color(225,234,242);
 		final Color blackBoardDarkBlue = new Color(182, 191, 205);
 		final Color blackboardLightGrey = new Color(220,220,222);
 		
+		/*
         UIManager.put("TaskPane.titleBackgroundGradientStart", Color.WHITE);        
         UIManager.put("TaskPane.titleBackgroundGradientEnd",blackboardLightBlue); 
         UIManager.put("TaksPane.specialTitleBackground",blackboardLightBlue); 
@@ -169,7 +187,7 @@ public class ApplicationWindowAdvisorImpl implements ApplicationWindowAdvisor {
         UIManager.put("TaskPane.borderColor",blackboardLightBlue);        
         UIManager.put("TaskPane.background",blackboardLightGrey);
         UIManager.put("TaskPaneContainer.backgroundPainter", new MattePainter(blackBoardDarkBlue));
-                
+        */        
 		log.info("setting look and feel to: "+UIManager.getLookAndFeel());
 
 		// construct app icon
@@ -237,7 +255,7 @@ public class ApplicationWindowAdvisorImpl implements ApplicationWindowAdvisor {
 //		if (!config.isStatusbarVisible())
 //			win.getStatusBar().setVisible(false);
 	
-		
+				
 		
 	}
 

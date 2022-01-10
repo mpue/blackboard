@@ -49,7 +49,7 @@ public class Preferences {
 		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.layerPanelPlacement", new String("left"));
 		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.layerPanelPlacement.optionValues", new String("left,right"));
 		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.lookAndFeel", new String("SkyBlue"));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.lookAndFeel.optionValues", new String("Nimbus,SkyBlue,System"));
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.lookAndFeel.optionValues", new String("Nimbus,SkyBlue,System,FlatDarcula"));
 		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.useLayerColor", new Boolean(true));
 		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.realisticWires", new Boolean(false));
 		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.autoHideLayers", new Boolean(false));
