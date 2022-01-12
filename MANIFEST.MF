@@ -1,21 +1,26 @@
 Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.9.14
-Created-By: 1.8.0_212-20190603180034.buildslave.jdk8u-src-tar--b03 (Or
- acle Corporation)
-Built-By: mpue
+Ant-Version: Apache Ant 1.10.5
+Created-By: 17.0.1+12-39 (Oracle Corporation)
+Built-By: schminkel
 Main-Class: org.pmedv.blackboard.app.BlackBoard
-Class-Path: lib/commons-beanutils-1.8.3.jar      lib/beansbinding-1.2.
- 1.jar     lib/commons-collections-3.2.jar     lib/commons-io-1.3.1.ja
- r     lib/commons-lang-2.3.jar     lib/commons-logging-1.1.jar     li
- b/forms-1.2.1.jar     lib/log4j-1.2.14.jar     lib/looks-2.3.0.jar   
-   lib/autocomplete.jar     lib/jcommon.1.0.17.jar     lib/jfreechart-
- 1.0.14.jar     lib/jcas.jar     lib/javolution-core-java-6.0.0-201209
- 23.104917-4.jar     lib/rsyntaxtextarea.jar     lib/org.springframewo
- rk.asm-3.0.5.RELEASE.jar     lib/org.springframework.beans-3.0.5.RELE
- ASE.jar     lib/org.springframework.context-3.0.5.RELEASE.jar     lib
- /org.springframework.context.support-3.0.5.RELEASE.jar     lib/org.sp
- ringframework.core-3.0.5.RELEASE.jar     lib/org.springframework.expr
- ession-3.0.5.RELEASE.jar     lib/swing-worker-1.2.jar     lib/jbusyco
- mponent-1.1.jar     lib/jxlayer.jar     lib/swingx-1.6.1.jar     lib/
- swingx-beaninfo-1.6.1.jar .
+Class-Path: lib/commons-beanutils-1.8.3.jar     lib/FastInfoset.jar   
+   lib/codemodel.jar     lib/dtd-parser.jar     lib/flatlaf-extras-2.0
+ -SNAPSHOT.jar     lib/istack-commons-runtime.jar     lib/istack-commo
+ ns-tools.jar     lib/javax.activation-api.jar     lib/jaxb-api.jar   
+   lib/jaxb-jxc.jar     lib/jaxb-runtime.jar     lib/jaxb-xjc.jar     
+ lib/relaxng-datatype.jar     lib/rngom.jar     lib/spring-aop-5.0.5.R
+ ELEASE.jar     lib/spring-aspects-5.0.5.RELEASE.jar     lib/spring-be
+ ans-5.0.5.RELEASE.jar     lib/spring-context-5.0.5.RELEASE.jar     li
+ b/spring-context-indexer-5.0.5.RELEASE.jar     lib/spring-context-sup
+ port-5.0.5.RELEASE.jar     lib/spring-core-5.0.5.RELEASE.jar     lib/
+ spring-expression-5.0.5.RELEASE.jar     lib/spring-instrument-5.0.5.R
+ ELEASE.jar     lib/spring-jcl-5.0.5.RELEASE.jar     lib/spring-messag
+ ing-5.0.5.RELEASE.jar     lib/stax-ex.jar     lib/svgSalamander-1.1.3
+ .jar     lib/txw2.jar     lib/xsom.jar     lib/flatlaf-2.1-20220110.1
+ 20500-1.jar     lib/jaxb-api-2.3.0.jar     lib/org.springframework.as
+ m-3.0.5.RELEASE.jar     lib/org.springframework.beans-3.0.5.RELEASE.j
+ ar     lib/org.springframework.context-3.0.5.RELEASE.jar     lib/org.
+ springframework.context.support-3.0.5.RELEASE.jar     lib/org.springf
+ ramework.core-3.0.5.RELEASE.jar     lib/org.springframework.expressio
+ n-3.0.5.RELEASE.jar .
 
