@@ -35,7 +35,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/jaxb-api-2.3.0.jar"/>
 	<classpathentry kind="lib" path="lib/javax.activation-1.2.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_291"/>
-	<classpathentry kind="lib" path="lib/flatlaf-2.0-rc1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/jdk1.8.0_291"/>
+	<classpathentry kind="lib" path="/Users/schminkel/eclipse-workspace/blackboard/lib/flatlaf-2.1-20220110.120500-1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
