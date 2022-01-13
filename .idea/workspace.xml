@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0970e474-68de-4364-959c-4fcab6a55e6f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.number" beforeDir="false" afterPath="$PROJECT_DIR$/build.number" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/pmedv/blackboard/app/BlackBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/pmedv/blackboard/app/BlackBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/pmedv/blackboard/board/BoardDesignerPerspective.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/pmedv/blackboard/board/BoardDesignerPerspective.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/pmedv/core/gui/ApplicationWindowAdvisorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/pmedv/core/gui/ApplicationWindowAdvisorImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +25,15 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/lib/spring-beans-5.0.5.RELEASE.jar!/org/springframework/beans/factory/support/AbstractBeanFactory.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/../../../../../Java/JavaVirtualMachines/openjdk-17.0.1/Contents/Home/lib/src.zip!/java.desktop/javax/swing/UIManager.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$PROJECT_DIR$/../../../../../Java/JavaVirtualMachines/openjdk-17.0.1/Contents/Home/lib/src.zip!/java.desktop/javax/swing/SwingUtilities.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$PROJECT_DIR$/lib/swingx-1.6.1.jar!/org/jdesktop/swingx/JXTaskPane.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/lib/spring-beans-5.0.5.RELEASE.jar!/org/springframework/beans/factory/support/DefaultSingletonBeanRegistry.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/lib/spring-beans-5.0.5.RELEASE.jar!/org/springframework/beans/BeanUtils.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/lib/spring-beans-5.0.5.RELEASE.jar!/org/springframework/beans/factory/support/SimpleInstantiationStrategy.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/lib/spring-beans-5.0.5.RELEASE.jar!/org/springframework/beans/factory/support/AbstractAutowireCapableBeanFactory.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/lib/spring-beans-5.0.5.RELEASE.jar!/org/springframework/beans/factory/support/DefaultListableBeanFactory.class" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -114,18 +125,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/pmedv/core/gui/ApplicationWindowAdvisorImpl.java</url>
-          <line>201</line>
+          <line>222</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/org/pmedv/blackboard/board/BoardDesignerPerspective.java</url>
-          <line>247</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/pmedv/blackboard/commands/CreateBoardCommand.java</url>
           <line>97</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/lib/spring-beans-5.0.5.RELEASE.jar!/org/springframework/beans/factory/support/DefaultListableBeanFactory.class</url>
+          <line>527</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
