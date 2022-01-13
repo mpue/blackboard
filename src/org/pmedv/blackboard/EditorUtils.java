@@ -331,7 +331,7 @@ public class EditorUtils {
 						|| button.getAction() instanceof SetDrawMeasureModeCommand || button.getAction() instanceof ToggleMagneticCommand || button.getAction() instanceof ToggleGridCommand
 						|| button.getAction() instanceof ToggleMirrorCommand || button.getAction() instanceof ToggleSnapToGridCommand
 						|| button.getAction() instanceof SetMoveModeCommand)
-					button.setShowFeedback(true);
+					button.setShowFeedback(false);
 				if (button.getAction() instanceof SetDrawModeCommand)
 					button.setBorderPainted(true);
 			}
