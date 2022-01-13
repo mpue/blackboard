@@ -155,11 +155,9 @@ public class ApplicationWindow extends AbstractApplicationWindow implements Edit
 		// customLabel.setVisible(false);
 		// progressBar.setVisible(false);
 		this.add(statusBar, java.awt.BorderLayout.SOUTH);
-		layoutPane.setBackground(Color.DARK_GRAY);
 		
 		Boolean showTooltips = (Boolean)Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.showTooltips");
 		ToolTipManager.sharedInstance().setEnabled(showTooltips.booleanValue());
-
 	}
 
 	/**
