@@ -55,7 +55,7 @@ public class CmdJButton extends JButton implements MouseListener {
 		this.setSize(16, 16);
 		this.setAction(action);
 		this.addMouseListener(this);
-		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5),BorderFactory.createLineBorder(Color.white)));
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.white),BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 	}
 
 	public void mouseClicked(MouseEvent e) {
