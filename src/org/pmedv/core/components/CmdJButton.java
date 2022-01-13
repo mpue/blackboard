@@ -22,6 +22,7 @@
 */
 package org.pmedv.core.components;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -30,8 +31,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.border.Border;
-
-
 
 /**
  * This class represents a basic JButton with an associated command
@@ -43,24 +42,24 @@ import javax.swing.border.Border;
 public class CmdJButton extends JButton implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	protected JFrame frame;
 	protected String id;
 	protected boolean showFeedback = true;
-	
-	Border rb = BorderFactory.createRaisedBevelBorder(),
-    	   lb = BorderFactory.createLoweredBevelBorder();
-	
+
+	Border rb = BorderFactory.createRaisedBevelBorder(), lb = BorderFactory.createLoweredBevelBorder();
+
 	public CmdJButton(Action action) {
 		this.setContentAreaFilled(false);
 		this.setBorderPainted(false);
 		this.setSize(16, 16);
 		this.setAction(action);
-		this.addMouseListener(this);		
+		this.addMouseListener(this);
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5),BorderFactory.createLineBorder(Color.white)));
 	}
-	
+
 	public void mouseClicked(MouseEvent e) {
-		
+
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -73,7 +72,7 @@ public class CmdJButton extends JButton implements MouseListener {
 			setBorderPainted(false);
 	}
 
-	public void mousePressed(MouseEvent e) {		
+	public void mousePressed(MouseEvent e) {
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -93,24 +92,20 @@ public class CmdJButton extends JButton implements MouseListener {
 		this.id = id;
 	}
 
-	
 	/**
 	 * @return the showFeedback
 	 */
 	public boolean isShowFeedback() {
-	
+
 		return showFeedback;
 	}
 
-	
 	/**
 	 * @param showFeedback the showFeedback to set
 	 */
 	public void setShowFeedback(boolean showFeedback) {
-	
+
 		this.showFeedback = showFeedback;
 	}
 
-	
-	
 }
