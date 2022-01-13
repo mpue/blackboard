@@ -20,7 +20,8 @@ import net.infonode.docking.View;
 public class ExportGCodeCommand extends AbstractOpenEditorCommand{
 
 	public ExportGCodeCommand() {
-		putValue(Action.NAME, resources.getResourceByKey("ExportGCodeCommand.name"));		
+		putValue(Action.NAME, resources.getResourceByKey("ExportGCodeCommand.name"));
+		putValue(Action.SMALL_ICON, resources.getIcon("icon.gcode"));
 		putValue(Action.SHORT_DESCRIPTION, resources.getResourceByKey("ExportGCodeCommand.description"));
 	}
 	

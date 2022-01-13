@@ -55,7 +55,7 @@ public class ExportImageCommand extends AbstractEditorCommand {
 	
 	public ExportImageCommand() {
 		putValue(Action.NAME, resources.getResourceByKey("ExportImageCommand.name"));
-		putValue(Action.SMALL_ICON,resources.getIcon("icon.export"));
+		putValue(Action.SMALL_ICON,resources.getIcon("icon.exportimage"));
 		putValue(Action.SHORT_DESCRIPTION, resources.getResourceByKey("ExportImageCommand.description"));
 		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_DOWN_MASK));
 		setEnabled(false);

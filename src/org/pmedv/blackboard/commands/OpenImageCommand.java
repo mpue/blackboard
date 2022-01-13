@@ -26,7 +26,7 @@ public class OpenImageCommand extends AbstractOpenEditorCommand {
 	
 	public OpenImageCommand() {
 		putValue(Action.NAME, resources.getResourceByKey("OpenImageCommand.name"));
-		putValue(Action.SMALL_ICON, resources.getIcon("icon.export"));
+		putValue(Action.SMALL_ICON, resources.getIcon("icon.openimage"));
 		putValue(Action.SHORT_DESCRIPTION, resources.getResourceByKey("OpenImageCommand.description"));
 	}
 

@@ -1,0 +1,14 @@
+<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+    <title>symbol delete</title>
+    <g class="nc-icon-wrapper">
+        <g id="symbol-delete" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="shape-adjust" transform="translate(57)" fill="#B4B4B4" fill-rule="nonzero">
+                <path d="M225 75h-33C181.5 31.5 142.5 0 97.5 0 43.5 0 0 43.5 0 97.5c0 46.5 31.5 84 75 94.5v33c0 9 6 15 15 15h135c9 0 15-6 15-15V90c0-9-6-15-15-15zM30 97.5C30 60 60 30 97.5 30c30 0 54 19.5 63 45H90c-9 0-15 6-15 15v70.5c-25.5-9-45-33-45-63zm133.5 7.5c-3 31.5-28.5 55.5-58.5 58.5V105h58.5zM210 210H105v-15c48-3 85.5-42 90-90h15v105z"
+                      id="Shape"></path>
+            </g>
+            <g id="plus" transform="translate(0 180)" fill="#4C87C8">
+                <path id="Rectangle" d="M0 46.612h120v27.769H0z"></path>
+            </g>
+        </g>
+    </g>
+</svg>
