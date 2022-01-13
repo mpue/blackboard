@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.*;
+import javax.swing.text.AttributeSet.ColorAttribute;
 
 import org.jdesktop.jxlayer.JXLayer;
 import org.jdesktop.swingx.JXStatusBar;
@@ -86,6 +87,7 @@ public class ApplicationWindow extends AbstractApplicationWindow implements Edit
 		JPanel toolbarPanel = new JPanel(new BorderLayout());
 		this.add(toolBar, java.awt.BorderLayout.NORTH);
 		statusBar = new JXStatusBar();
+		statusBar.setBackground(Color.LIGHT_GRAY);
 		ImageIcon offlineIcon = resources.getIcon("icon.status.offline");
 		statusLabel = new JLabel();
 		statusBar.add(statusLabel);
