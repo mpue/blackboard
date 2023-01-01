@@ -26,9 +26,17 @@ import java.io.InputStream;
 import java.util.Locale;
 import java.util.Properties;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
+import com.jgoodies.looks.plastic.theme.SkyBluer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pmedv.core.app.AbstractApplication;
+import com.formdev.flatlaf.util.SystemInfo;
+import org.pmedv.core.preferences.Preferences;
+
+import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 
 /**
@@ -47,7 +55,25 @@ public class BlackBoard extends AbstractApplication {
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
-		
+
+		// macOS
+		if( SystemInfo.isMacOS ) {
+			// enable screen menu bar
+			// (moves menu bar from JFrame window to top of screen)
+			System.setProperty( "apple.laf.useScreenMenuBar", "true" );
+
+			// application name used in screen menu bar
+			// (in first menu after the "apple" menu)
+			System.setProperty( "apple.awt.application.name", "BlackBoard" );
+
+			// appearance of window title bars
+			// possible values:
+			//   - "system": use current macOS appearance (light or dark)
+			//   - "NSAppearanceNameAqua": use light appearance
+			//   - "NSAppearanceNameDarkAqua": use dark appearance
+			System.setProperty( "apple.awt.application.appearance", "system" );
+		}
+
 		String fileName = null;
 		
 		if (args.length == 1 && args[0] != null) {

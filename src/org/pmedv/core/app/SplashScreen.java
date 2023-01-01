@@ -134,7 +134,7 @@ public class SplashScreen implements ApplicationContextAware, BeanPostProcessor,
         Graphics2D g2d = (Graphics2D)bimg.createGraphics();
         
         g2d.drawImage(image, 0, 0, null);        
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.WHITE);
         g2d.setFont(new Font("Arial", Font.BOLD, 10));
 		InputStream is = getClass().getClassLoader().getResourceAsStream("application.properties");
 		Properties properties = new Properties();

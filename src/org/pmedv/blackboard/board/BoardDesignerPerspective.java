@@ -1,30 +1,28 @@
 /**
 
-	BlackBoard breadboard designer
-	Written and maintained by Matthias Pueski 
-	
-	Copyright (c) 2010-2011 Matthias Pueski
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ BlackBoard breadboard designer
+ Written and maintained by Matthias Pueski
+
+ Copyright (c) 2010-2011 Matthias Pueski
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
  */
 package org.pmedv.blackboard.board;
 
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -43,6 +41,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.bind.JAXBContext;
@@ -55,6 +54,8 @@ import net.infonode.docking.OperationAbortedException;
 import net.infonode.docking.TabWindow;
 import net.infonode.docking.View;
 import net.infonode.docking.theme.DockingWindowsTheme;
+import net.infonode.docking.theme.LookAndFeelDockingTheme;
+import net.infonode.docking.theme.SlimFlatDockingTheme;
 import net.infonode.docking.theme.SoftBlueIceDockingTheme;
 import net.infonode.docking.util.DockingUtil;
 import net.infonode.docking.util.ViewMap;
@@ -69,6 +70,7 @@ import org.fife.ui.autocomplete.DefaultCompletionProvider;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTaskPaneContainer;
+import org.jdesktop.swingx.painter.MattePainter;
 import org.pmedv.blackboard.BoardUtil;
 import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.ShapeStyle;
@@ -118,14 +120,15 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 	private JTabbedPane toolTabPane;
 
 	private boolean providerInit = false;
-	
+
 	private RSyntaxTextArea commandArea;
-	
+
 	public BoardDesignerPerspective() {
 		ID = "boardDesignerPerspective";
 		setName("boardDesignerPerspective");
 		log.info("Initializing " + getName());
 		configProvider = AppContext.getContext().getBean(ApplicationWindowConfigurationProvider.class);
+
 	}
 
 	@Override
@@ -151,7 +154,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 				rootWindow.getWindowBar(Direction.DOWN).setEnabled(true);
 				rootWindow.getWindowProperties().setMinimizeEnabled(true);
 
-				DockingWindowsTheme theme = new SoftBlueIceDockingTheme();
+				DockingWindowsTheme theme = new LookAndFeelDockingTheme();
 
 				rootWindow.getRootWindowProperties().addSuperObject(theme.getRootWindowProperties());
 				rootWindow.getWindowProperties().getTabProperties().getHighlightedButtonProperties().getCloseButtonProperties().setVisible(false);
@@ -175,7 +178,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 
 				rootWindow.setWindow(editorArea);
 
-				
+
 				if (position.equalsIgnoreCase("left")) {
 					horizontalSplitPane.setRightComponent(rootWindow);
 				} else {
@@ -188,24 +191,42 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 
 		});
 
-		JXTaskPaneContainer taskpanecontainer = new JXTaskPaneContainer();
-		taskpanecontainer.setBackground(new Color(182, 191, 205));
+		UIManager.put("TaskPaneContainer.backgroundPainter", new MattePainter(Color.DARK_GRAY));
 
-		JXTaskPane shapePane = new JXTaskPane();
-		shapePane.setTitle(resources.getResourceByKey("BoardDesignerPerspective.shapes.title"));
-		shapePane.add(ctx.getBean(ShapePropertiesPanel.class));
-		taskpanecontainer.add(shapePane);
+		/**
+		 JXTaskPaneContainer taskpanecontainer = new JXTaskPaneContainer();
+		 taskpanecontainer.setBackground(Color.darkGray);
+
+		 JXTaskPane shapePane = new JXTaskPane();
+		 shapePane.setTitle(resources.getResourceByKey("BoardDesignerPerspective.shapes.title"));
+		 shapePane.add(ctx.getBean(ShapePropertiesPanel.class));
+		 taskpanecontainer.add(shapePane);
+		 **/
 
 		ctx.getBean(ShapePropertiesPanel.class).getStartLineCombo().setSelectedItem(LineEdgeType.STRAIGHT);
 		ctx.getBean(ShapePropertiesPanel.class).getEndLineCombo().setSelectedItem(LineEdgeType.STRAIGHT);
 		ctx.getBean(ShapePropertiesPanel.class).getThicknessCombo().setSelectedItem(new BasicStroke(2.0f));
-		
-		JXTaskPane layerPane = new JXTaskPane();
-		layerPane.setTitle(resources.getResourceByKey("BoardDesignerPerspective.layers"));
-		layerPane.add(ctx.getBean(ShowLayersCommand.class).getLayerPanel());
-		taskpanecontainer.add(layerPane);
 
-		JScrollPane scrollPane = new JScrollPane(taskpanecontainer);
+		/**
+		 JXTaskPane layerPane = new JXTaskPane();
+		 layerPane.setTitle(resources.getResourceByKey("BoardDesignerPerspective.layers"));
+		 layerPane.add(ctx.getBean(ShowLayersCommand.class).getLayerPanel());
+		 taskpanecontainer.add(layerPane);
+		 **/
+
+		JPanel taskPaneContainer = new JPanel(new BorderLayout());
+		JPanel topShapePanel = ctx.getBean(ShapePropertiesPanel.class);
+		JPanel bottomLayersPanel = ctx.getBean(ShowLayersCommand.class).getLayerPanel();
+
+		topShapePanel.setBorder(BorderFactory.createTitledBorder(
+				resources.getResourceByKey("BoardDesignerPerspective.shapes.title")));
+		bottomLayersPanel.setBorder(BorderFactory.createTitledBorder(
+				resources.getResourceByKey("BoardDesignerPerspective.layers")));
+
+		taskPaneContainer.add(topShapePanel,BorderLayout.CENTER);
+		taskPaneContainer.add(bottomLayersPanel,BorderLayout.SOUTH);
+
+		JScrollPane scrollPane = new JScrollPane(taskPaneContainer);
 
 		if (position.equalsIgnoreCase("left")) {
 			horizontalSplitPane.setLeftComponent(toolTabPane);
@@ -217,96 +238,97 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		horizontalSplitPane.setDividerSize(10);
 
 		toolTabPane.addTab(resources.getResourceByKey("tooltab.forms"),resources.getIcon("icon.paint"), scrollPane);
-		
+
 		final SymbolListPanel symbolListPanel = ctx.getBean(SymbolListPanel.class);
 		toolTabPane.addTab(resources.getResourceByKey("tooltab.symbols"),resources.getIcon("icon.symbols"), symbolListPanel);
 
 		final ModelListPanel modelListPanel = ctx.getBean(ModelListPanel.class);
 		toolTabPane.addTab(resources.getResourceByKey("tooltab.models"),resources.getIcon("icon.model"), modelListPanel);
-		
+
 		add(horizontalSplitPane, BorderLayout.CENTER);
 
-		commandArea = new RSyntaxTextArea();
-		commandArea.setRows(1);		
-		commandArea.setColumns(100);
-		
-		JPanel commandPanel = new JPanel(new BorderLayout());
-		commandPanel.add(new JLabel("Command :"), BorderLayout.WEST);
-		commandPanel.add(commandArea, BorderLayout.CENTER);
-		commandArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(2,2,2,2),BorderFactory.createLineBorder(Color.BLACK)));
-		add(commandPanel, BorderLayout.NORTH);
-		setupAutoComplete();
-		
-		commandArea.addKeyListener(new KeyAdapter() {
+		/**
+		 commandArea = new RSyntaxTextArea();
+		 commandArea.setRows(1);
+		 commandArea.setColumns(100);
 
-			@Override
-			public void keyPressed(KeyEvent e) {
+		 JPanel commandPanel = new JPanel(new BorderLayout());
+		 commandPanel.add(new JLabel("Command :"), BorderLayout.WEST);
+		 commandPanel.add(commandArea, BorderLayout.CENTER);
+		 commandArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(2,2,2,2),BorderFactory.createLineBorder(Color.BLACK)));
+		 add(commandPanel, BorderLayout.NORTH);
+		 setupAutoComplete();
 
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		 commandArea.addKeyListener(new KeyAdapter() {
 
-					if (commandArea.getText().startsWith("add ") && commandArea.getText().length() > 4 && commandArea.hasFocus()) {
+		@Override
+		public void keyPressed(KeyEvent e) {
 
-						PartFactory pf = AppContext.getContext().getBean(PartFactory.class);
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-						String tokens[] = commandArea.getText().split(" ");
-						StringBuffer partName = new StringBuffer();
+		if (commandArea.getText().startsWith("add ") && commandArea.getText().length() > 4 && commandArea.hasFocus()) {
 
-						for (int i = 1; i < tokens.length; i++) {
-							partName.append(tokens[i] + " ");
-						}
+		PartFactory pf = AppContext.getContext().getBean(PartFactory.class);
 
-						String name = partName.toString().trim();
+		String tokens[] = commandArea.getText().split(" ");
+		StringBuffer partName = new StringBuffer();
 
-						if (pf.getPartnames().contains(name)) {
-							e.consume();
-							commandArea.setText("");
-							BoardUtil.addPart(name, EditorUtils.getCurrentActiveEditor());
-						}
+		for (int i = 1; i < tokens.length; i++) {
+		partName.append(tokens[i] + " ");
+		}
 
-					}
-					else if(commandArea.getText().equals("new")) {
-						e.consume();
-						commandArea.setText("");
-						AppContext.getContext().getBean(CreateBoardCommand.class).execute(null);
-					}
-					else if(commandArea.getText().equals("resistor")) {
-						e.consume();
-						commandArea.setText("");
-						AppContext.getContext().getBean(AddResistorCommand.class).execute(null);
-					}
-					else if(commandArea.getText().equals("diode")) {
-						e.consume();
-						commandArea.setText("");
-						AppContext.getContext().getBean(AddDiodeCommand.class).execute(null);
-					}
-					else if(commandArea.getText().equals("text")) {
-						e.consume();
-						commandArea.setText("");
-						AppContext.getContext().getBean(AddTextCommand.class).execute(null);
-					}
-					else if(commandArea.getText().equals("open")) {
-						e.consume();
-						commandArea.setText("");
-						new OpenBoardCommand().execute(null);
-					}
-					else if(commandArea.getText().equals("save")) {
-						e.consume();
-						commandArea.setText("");
-						AppContext.getContext().getBean(SaveBoardCommand.class).execute(null);
-					}
-					else if(commandArea.getText().equals("color")) {
-						e.consume();
-						commandArea.setText("");
-						AppContext.getContext().getBean(ChooseColorCommand.class).execute(null);
-					}
+		String name = partName.toString().trim();
 
-				}
-				
-			}
+		if (pf.getPartnames().contains(name)) {
+		e.consume();
+		commandArea.setText("");
+		BoardUtil.addPart(name, EditorUtils.getCurrentActiveEditor());
+		}
+
+		}
+		else if(commandArea.getText().equals("new")) {
+		e.consume();
+		commandArea.setText("");
+		AppContext.getContext().getBean(CreateBoardCommand.class).execute(null);
+		}
+		else if(commandArea.getText().equals("resistor")) {
+		e.consume();
+		commandArea.setText("");
+		AppContext.getContext().getBean(AddResistorCommand.class).execute(null);
+		}
+		else if(commandArea.getText().equals("diode")) {
+		e.consume();
+		commandArea.setText("");
+		AppContext.getContext().getBean(AddDiodeCommand.class).execute(null);
+		}
+		else if(commandArea.getText().equals("text")) {
+		e.consume();
+		commandArea.setText("");
+		AppContext.getContext().getBean(AddTextCommand.class).execute(null);
+		}
+		else if(commandArea.getText().equals("open")) {
+		e.consume();
+		commandArea.setText("");
+		new OpenBoardCommand().execute(null);
+		}
+		else if(commandArea.getText().equals("save")) {
+		e.consume();
+		commandArea.setText("");
+		AppContext.getContext().getBean(SaveBoardCommand.class).execute(null);
+		}
+		else if(commandArea.getText().equals("color")) {
+		e.consume();
+		commandArea.setText("");
+		AppContext.getContext().getBean(ChooseColorCommand.class).execute(null);
+		}
+
+		}
+
+		}
 
 		});
-		
-		
+		 **/
+
 		horizontalSplitPane.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -315,7 +337,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 				}
 			}
 		});
-		
+
 
 
 		ctx.getBean(ShapePropertiesPanel.class).getObjectField().setText(resources.getResourceByKey("ShapePropertiesPanel.items.none"));
@@ -379,7 +401,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 						for (Item item : editor.getSelectedItems()) {
 							if (item instanceof Shape) {
 								Shape shape = (Shape)item;
-								shape.setStyle((ShapeStyle) ctx.getBean(ShapePropertiesPanel.class).getStyleCombo().getSelectedItem());								
+								shape.setStyle((ShapeStyle) ctx.getBean(ShapePropertiesPanel.class).getStyleCombo().getSelectedItem());
 							}
 						}
 						editor.setFileState(FileState.DIRTY);
@@ -392,9 +414,9 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		ctx.getBean(ShapePropertiesPanel.class).getThicknessCombo().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ShapePropertiesPanel panel = ctx.getBean(ShapePropertiesPanel.class);
-				
+
 				if (EditorUtils.getCurrentActiveEditor() != null) {
 					BoardEditor editor = EditorUtils.getCurrentActiveEditor();
 					if (editor.getSelectedItem() != null) {
@@ -408,17 +430,17 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 						for (Item item : editor.getSelectedItems()) {
 							if (item instanceof Shape) {
 								Shape shape = (Shape)item;
-								shape.setStroke((BasicStroke) panel.getThicknessCombo().getSelectedItem());								
-							}							
+								shape.setStroke((BasicStroke) panel.getThicknessCombo().getSelectedItem());
+							}
 						}
 						editor.setFileState(FileState.DIRTY);
 						editor.refresh();
 					}
 
 				}
-				// Preserve settings				
+				// Preserve settings
 				if (panel.getThicknessCombo().getSelectedItem() != null) {
-					panel.setLastSelectedStroke((BasicStroke)panel.getThicknessCombo().getSelectedItem());					
+					panel.setLastSelectedStroke((BasicStroke)panel.getThicknessCombo().getSelectedItem());
 				}
 			}
 		});
@@ -426,9 +448,9 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		ctx.getBean(ShapePropertiesPanel.class).getStartLineCombo().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ShapePropertiesPanel panel = ctx.getBean(ShapePropertiesPanel.class);
-				
+
 				if (EditorUtils.getCurrentActiveEditor() != null) {
 					BoardEditor editor = EditorUtils.getCurrentActiveEditor();
 					if (editor.getSelectedItem() != null) {
@@ -450,19 +472,19 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 					}
 
 				}
-				// Preserve settings				
+				// Preserve settings
 				if (panel.getStartLineCombo().getSelectedItem() != null) {
-					panel.setLastSelectedLineStartStyle((LineEdgeType)panel.getStartLineCombo().getSelectedItem());	
-				}				
+					panel.setLastSelectedLineStartStyle((LineEdgeType)panel.getStartLineCombo().getSelectedItem());
+				}
 			}
 		});
 
 		ctx.getBean(ShapePropertiesPanel.class).getEndLineCombo().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ShapePropertiesPanel panel = ctx.getBean(ShapePropertiesPanel.class);
-				
+
 				if (EditorUtils.getCurrentActiveEditor() != null) {
 					BoardEditor editor = EditorUtils.getCurrentActiveEditor();
 					if (editor.getSelectedItem() != null) {
@@ -485,9 +507,9 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 				}
 				// Preserve settings
 				if (panel.getEndLineCombo().getSelectedItem() != null) {
-					panel.setLastSelectedLineEndStyle((LineEdgeType)panel.getEndLineCombo().getSelectedItem());	
+					panel.setLastSelectedLineEndStyle((LineEdgeType)panel.getEndLineCombo().getSelectedItem());
 				}
-				
+
 			}
 		});
 	}
@@ -500,26 +522,26 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		try {
 			final Unmarshaller u = (Unmarshaller) JAXBContext.newInstance(FileList.class).createUnmarshaller();
 			final FileList files = (FileList) u.unmarshal(new FileInputStream(new File(dir + ID + ".xml")));
-			
+
 			int count = 0;
-			
+
 			for (final String path : files.getFiles()) {
-				log.info("Opening editor for :" + path);						
+				log.info("Opening editor for :" + path);
 				OpenBoardCommand cmd = new OpenBoardCommand(path, new File(path));
-				
+
 				// the last command needs a trigger for perspective restore
 				if (count == files.getFiles().size() - 1) {
 					cmd.addPostConfigurator(new LoadViewStateEvent());
 					cmd.addPostConfigurator(new ViewStateDoneEvent());
 				}
-				
+
 				cmd.execute(null);
 				count++;
 			}
-			
+
 			horizontalSplitPane.setDividerLocation(configProvider.getConfig().getDividerLocation());
 
-		} 
+		}
 		catch (Exception e) {
 			log.info("Could not restore perspective state :" + e.getMessage());
 		}
@@ -557,14 +579,14 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		}
 
 	}
-	
+
 	private class LoadViewStateEvent implements Runnable {
 		@Override
 		public void run() {
 			loadViewState();
-		}		
+		}
 	}
-	
+
 	private class ViewStateDoneEvent implements Runnable {
 		@Override
 		public void run() {
@@ -580,7 +602,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 			 * the current editor area, request the focus for the current
 			 * editor and notify all pending listeners that the current
 			 * editor has changed.
-			 * 
+			 *
 			 */
 			if (openEditors.size() >= 1) {
 				BoardEditor editor = openEditors.get(0);
@@ -600,15 +622,15 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 
 		}
 	}
-	
+
 	private void setupAutoComplete() {
-        CompletionProvider provider = createCompletionProvider();
-        AutoCompletion ac = new AutoCompletion(provider);
-        ac.install(commandArea);		
+		CompletionProvider provider = createCompletionProvider();
+		AutoCompletion ac = new AutoCompletion(provider);
+		ac.install(commandArea);
 	}
 
 	private CompletionProvider createCompletionProvider() {
-		
+
 		DefaultCompletionProvider provider = new DefaultCompletionProvider();
 
 		provider.addCompletion(new BasicCompletion(provider, "add"));
@@ -621,7 +643,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		provider.addCompletion(new BasicCompletion(provider, "color"));
 
 		try {
-			ArrayList<Part> parts = AppContext.getContext().getBean(PartFactory.class).getAvailableParts();			
+			ArrayList<Part> parts = AppContext.getContext().getBean(PartFactory.class).getAvailableParts();
 			for (Part part : parts) {
 				provider.addCompletion(new BasicCompletion(provider, part.getName()));
 			}
@@ -629,9 +651,9 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		providerInit = true;
-		
+
 		return provider;
 
 	}
@@ -642,5 +664,5 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 	public boolean isProviderInit() {
 		return providerInit;
 	}
-	
+
 }
