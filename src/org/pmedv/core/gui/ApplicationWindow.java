@@ -68,7 +68,7 @@ public class ApplicationWindow extends AbstractApplicationWindow implements Edit
 	private JProgressBar progressBar;
 	private JMenuBar menuBar;
 	private JToolBar toolBar;
-	private JXStatusBar statusBar;
+	private JPanel statusBar;
 	private JLabel viewLabel;
 	
 	private JComboBox zoomCombo;
@@ -86,8 +86,8 @@ public class ApplicationWindow extends AbstractApplicationWindow implements Edit
 		toolBar = createToolBar();
 		JPanel toolbarPanel = new JPanel(new BorderLayout());
 		this.add(toolBar, java.awt.BorderLayout.NORTH);
-		statusBar = new JXStatusBar();
-		statusBar.setBackground(Color.LIGHT_GRAY);
+		statusBar = new JPanel();
+		statusBar.setBackground(Color.DARK_GRAY);
 		ImageIcon offlineIcon = resources.getIcon("icon.status.offline");
 		statusLabel = new JLabel();
 		statusBar.add(statusLabel);
@@ -235,7 +235,7 @@ public class ApplicationWindow extends AbstractApplicationWindow implements Edit
 		return viewLabel;
 	}
 	
-	public JXStatusBar getStatusBar() {
+	public JPanel getStatusBar() {
 		return statusBar;
 	}
 
