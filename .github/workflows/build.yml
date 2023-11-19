@@ -47,6 +47,6 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: blackboard-generic
-        path: install/*
+        name: blackboard-bin
+        path: dist/blackboard-bin-*.zip
 
