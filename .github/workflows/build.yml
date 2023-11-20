@@ -18,6 +18,7 @@ jobs:
       DEBIAN_PKGVERSION: "${{steps.gitversion.outputs.Major}}.${{steps.gitversion.outputs.Minor}}-${{steps.gitversion.outputs.Patch}}"
       MACOS_MAJORMINORPATCH: "1.${{steps.gitversion.outputs.Minor}}.${{steps.gitversion.outputs.Patch}}"
       GITVERSION_ASSEMBLYSEMVER: "${{ steps.gitversion.outputs.AssemblySemVer }}"
+      GITVERSION_SEMVER: "${{ steps.gitversion.outputs.SemVer }}"
 
     steps:
     - name: Checkout project
@@ -320,6 +321,8 @@ jobs:
     - name: Check status 4
       run: |
         set
+        echo "needs.build.outputs.GITVERSION_SEMVER=${{ needs.build.outputs.GITVERSION_SEMVER }}"
+        echo "needs.build.outputs.BB_VERSION=${{ needs.build.outputs.BB_VERSION }}"
         echo -n "Current directory: "
         pwd
         find . | sort
@@ -331,7 +334,7 @@ jobs:
           target/BlackBoard-*
 
   release:
-    needs: [package-linux,package-windows,package-macos]
+    needs: [build,package-linux,package-windows,package-macos]
     runs-on: ubuntu-latest
 
     steps:
@@ -348,17 +351,16 @@ jobs:
         find . | sort
 
     - name: Create Prerelease
-      if: github.ref != 'refs/heads/master'
       id: create_prerelease
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "v${{ needs.build.outputs.GITVERSION_SEMVER }}"
         prerelease: true
-        title: "BlackBoard v${{ needs.semver.outputs.BB_VERSION }}"
+        title: "BlackBoard v${{ needs.build.outputs.BB_VERSION }}"
         files: |
           artifacts/BlackBoard-MacOS/BlackBoard-*-MacOS.pkg
           artifacts/BlackBoard-Windows/BlackBoard-*-Windows.exe
-          artifacts/blackboard-bin/blackboard-bin-*-linux.1.95.zip
+          artifacts/blackboard-bin/blackboard-bin-*.zip
           artifacts/blackboard-linux/blackboard_*.deb
 
