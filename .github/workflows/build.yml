@@ -13,6 +13,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    outputs:
+      BB_VERSION: "${{ steps.gitversion.outputs.SemVer }}.${{ steps.gitversion.outputs.CommitsSinceVersionSource }}"
+      DEBIAN_PKGVERSION: "${{steps.gitversion.outputs.Major}}.${{steps.gitversion.outputs.Minor}}-${{steps.gitversion.outputs.Patch}}"
+      MACOS_MAJORMINORPATCH: "1.${{steps.gitversion.outputs.Minor}}.${{steps.gitversion.outputs.Patch}}"
+      GITVERSION_ASSEMBLYSEMVER: "${{ steps.gitversion.outputs.AssemblySemVer }}"
+      GITVERSION_SEMVER: "${{ steps.gitversion.outputs.SemVer }}"
+
     steps:
     - name: Checkout project
       uses: actions/checkout@v3
@@ -36,6 +43,8 @@ jobs:
       
     - name: Build with Ant
       run: |
+        sed -i "s/^version=.*/version=${{ steps.gitversion.outputs.SemVer }}/g" build.properties
+        sed -i "s/^build.number=.*/build.number=${{ steps.gitversion.outputs.CommitsSinceVersionSource }}/g" build.number
         ant
         
     - name: Check status
@@ -49,4 +58,310 @@ jobs:
       with:
         name: blackboard-bin
         path: dist/blackboard-bin-*.zip
+
+  package-linux:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+
+    - name: Checkout project
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        path: blackboard
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: blackboard-bin
+        path: artifacts
+
+    - name: Extract project
+      run: |
+        cd artifacts
+        unzip *.zip
+
+    - name: Check status 0
+      run: |
+        echo "BB_VERSION=${{ needs.build.outputs.BB_VERSION }}"
+        set | sort
+        echo -n "Current directory: "
+        pwd
+        find . | sort
+
+    - name: Prepare AppImage for Ubuntu
+      run: |
+        jpackage \
+          --type app-image \
+          --app-version "${{ needs.build.outputs.DEBIAN_PKGVERSION }}" \
+          --copyright Copyright \
+          --description "BlackBoard Circuit Designer ${{ needs.build.outputs.BB_VERSION }}" \
+          --name "BlackBoard" \
+          --dest target/appimage \
+          --temp target/blackboard-tmp \
+          --vendor "mpue" \
+          --verbose \
+          --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/icons/bb_dark.png \
+          --input ./artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }} \
+          --main-jar BlackBoard.jar \
+          --main-class org.pmedv.blackboard.app.BlackBoard \
+          --java-options sun.java2d.d3d=false
+          # --resource-dir bbbb
+
+    - name: Check status 1
+      run: |
+        echo "BB_VERSION=${{ needs.build.outputs.BB_VERSION }}"
+        set | sort
+        echo -n "Current directory: "
+        pwd
+        find . | sort
+
+    - name: Finish AppImage for Ubuntu
+      run: |
+        jpackage \
+          --verbose \
+          --app-image target/appimage/BlackBoard \
+          --name "BlackBoard" \
+          --app-version "${{ needs.build.outputs.DEBIAN_PKGVERSION }}" \
+          --dest target \
+          --license-file blackboard/gpl-2.0.txt \
+          --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/icons/bb_dark.png
+          # --resource-dir bbbb
+          #--linux-shortcut \
+          #--linux-menu-group Game \
+          #--linux-app-category misc \
+
+    - name: Check status 2
+      run: |
+        echo "BB_VERSION=${{ needs.build.outputs.BB_VERSION }}"
+        set | sort
+        echo -n "Current directory: "
+        pwd
+        find . | sort
+
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: blackboard-linux
+        path: target/blackboard_0.1-0-1_amd64.deb
+
+  package-windows:
+    needs: [build]
+    runs-on: windows-latest
+    steps:
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+
+    - name: Checkout project
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        path: blackboard
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: blackboard-bin
+        path: artifacts
+
+    - name: Extract project
+      run: |
+        cd artifacts
+        unzip *.zip
+
+    - name: Check status 0
+      run: |
+        get-childitem . -Recurse | where {!$_.PSIsContainer} | select-object FullName
+
+    - name: Prepare AppImage for Windows
+      run: |
+        jpackage --type app-image --app-version "${{ needs.build.outputs.GITVERSION_ASSEMBLYSEMVER }}" --copyright Copyright --description "BlackBoard Circuit Designer ${{ needs.build.outputs.BB_VERSION }}" --name "BlackBoard" --dest target/appimage --temp target/blackbird-tmp --vendor "mpue" --verbose --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/bb.ico --input artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }} --main-jar BlackBoard.jar --main-class org.pmedv.blackboard.app.BlackBoard --java-options sun.java2d.d3d=false
+        # --resource-dir src/jpackage/resources
+
+    - name: Check status 1
+      run: |
+        get-childitem . -Recurse | where {!$_.PSIsContainer} | select-object FullName
+
+    # for upgrades, it seems we need a UUID - see https://stackoverflow.com/a/67442754/4222206
+    - name: Finish AppImage for Windows
+      run: |
+        jpackage --verbose --app-image target/appimage/BlackBoard --app-version "${{ needs.build.outputs.GITVERSION_ASSEMBLYSEMVER }}" --name "BlackBoard" --dest target --win-shortcut --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/bb.ico --win-shortcut --win-menu --win-menu-group BlackBoard --win-dir-chooser --win-upgrade-uuid 0a18c6bc-0418-47dc-9526-3a4803066af6
+        #--resource-dir src/jpackage/resources
+
+    - name: Check status 2
+      run: |
+        get-childitem . -Recurse | where {!$_.PSIsContainer} | select-object FullName
+
+    - name: Rename result (target\BlackBoard-0.1.16.0.exe)
+      run: |
+        ren "target\BlackBoard-${{ needs.build.outputs.GITVERSION_ASSEMBLYSEMVER }}.exe" BlackBoard-${{ needs.build.outputs.BB_VERSION }}-Windows.exe
+
+    - name: Check status 3
+      run: |
+        get-childitem . -Recurse | where {!$_.PSIsContainer} | select-object FullName
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: BlackBoard-Windows
+        path: ./target/*.exe
+
+  package-macos:
+    needs: [build]
+    runs-on: macos-latest
+
+    steps:
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+
+    - name: Checkout project
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        path: blackboard
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: blackboard-bin
+        path: artifacts
+
+    - name: Extract project
+      run: |
+        cd artifacts
+        unzip *.zip
+
+    - name: Check status 0
+      run: |
+        echo "BB_VERSION=${{ needs.build.outputs.BB_VERSION }}"
+        set | sort
+        echo -n "Current directory: "
+        pwd
+        find . | sort
+        
+    - name: Prepare AppImage for MacOS
+      run: |
+        jpackage \
+          --type app-image \
+          --app-version "${{ needs.build.outputs.MACOS_MAJORMINORPATCH }}" \
+          --copyright Copyright \
+          --description "BlackBoard Circuit Designer ${{ needs.semver.outputs.GITVERSION_SEMVER }}" \
+          --name "BlackBoard" --dest target/appimage \
+          --temp target/blackboard-tmp --vendor "mpue" --verbose \
+          --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/icons/bb_dark.png \
+          --input ./artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }} \
+          --main-jar BlackBoard.jar \
+          --main-class org.pmedv.blackboard.app.BlackBoard \
+          --java-options sun.java2d.d3d=false
+
+        # --resource-dir blackboard/src/jpackage/resources-mac \
+        # --java-options '-splash:$APPDIR/splash.png' \
+        #  --mac-sign --mac-package-signing-prefix blackboard. \
+        #  --mac-signing-key-user-name "mpue"
+        # --app-version "${{ needs.semver.outputs.GITVERSION_MAJORMINORPATCH }}" \
+
+    #- name: Tweak AppImage
+    #  run: |
+    #    cp -v "Blackbeard_Splashscreen_640x360.png" "target/appimage/BlackBoard.app/Contents/app/splash.png"
+
+    - name: Check status 1
+      run: |
+        set
+        echo -n "Current directory: "
+        pwd
+        find . | sort
+
+    - name: Finish AppImage for MacOS
+      run: |
+        jpackage \
+          --type pkg \
+          --verbose \
+          --app-version "${{ needs.build.outputs.MACOS_MAJORMINORPATCH }}" \
+          --app-image target/appimage/BlackBoard.app \
+          --name "BlackBoard" \
+          --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/icons/bb_dark.png \
+          --dest target \
+          --vendor mpue
+
+          # --resource-dir blackboard/src/jpackage/resources-mac \
+
+    - name: Check status 2
+      run: |
+        set
+        echo -n "Current directory: "
+        pwd
+        find . | sort
+
+    - name: Create ZIP distribution
+      run: |
+        cd target/appimage
+        zip -r ../BlackBoard-${{ needs.build.outputs.BB_VERSION }}-MacOS.zip  *
+
+    - name: Check status 3
+      run: |
+        set
+        echo -n "Current directory: "
+        pwd
+        find . | sort
+
+    - name: Rename result
+      run: |
+        mv ./target/BlackBoard-${{ needs.build.outputs.MACOS_MAJORMINORPATCH }}.pkg ./target/BlackBoard-${{ needs.build.outputs.BB_VERSION }}-MacOS.pkg
+
+    - name: Check status 4
+      run: |
+        set
+        echo "needs.build.outputs.GITVERSION_SEMVER=${{ needs.build.outputs.GITVERSION_SEMVER }}"
+        echo "needs.build.outputs.BB_VERSION=${{ needs.build.outputs.BB_VERSION }}"
+        echo -n "Current directory: "
+        pwd
+        find . | sort
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: BlackBoard-MacOS
+        path: |
+          target/BlackBoard-*
+
+  release:
+    needs: [build,package-linux,package-windows,package-macos]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: artifacts
+
+    - name: Check status
+      run: |
+        set
+        echo -n "Current directory: "
+        pwd
+        find . | sort
+
+    - name: Create Prerelease
+      if: github.ref != 'refs/heads/master'
+      id: create_prerelease
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "v${{ needs.build.outputs.GITVERSION_SEMVER }}"
+        prerelease: true
+        title: "BlackBoard v${{ needs.build.outputs.BB_VERSION }}"
+        files: |
+          artifacts/BlackBoard-MacOS/BlackBoard-*-MacOS.pkg
+          artifacts/BlackBoard-Windows/BlackBoard-*-Windows.exe
+          artifacts/blackboard-bin/blackboard-bin-*.zip
+          artifacts/blackboard-linux/blackboard_*.deb
 
