@@ -321,6 +321,8 @@ jobs:
     - name: Check status 4
       run: |
         set
+        echo "needs.build.outputs.GITVERSION_SEMVER=${{ needs.build.outputs.GITVERSION_SEMVER }}"
+        echo "needs.build.outputs.BB_VERSION=${{ needs.build.outputs.BB_VERSION }}"
         echo -n "Current directory: "
         pwd
         find . | sort
@@ -332,7 +334,7 @@ jobs:
           target/BlackBoard-*
 
   release:
-    needs: [package-linux,package-windows,package-macos]
+    needs: [build,package-linux,package-windows,package-macos]
     runs-on: ubuntu-latest
 
     steps:
@@ -360,6 +362,6 @@ jobs:
         files: |
           artifacts/BlackBoard-MacOS/BlackBoard-*-MacOS.pkg
           artifacts/BlackBoard-Windows/BlackBoard-*-Windows.exe
-          artifacts/blackboard-bin/blackboard-bin-*-linux.1.95.zip
+          artifacts/blackboard-bin/blackboard-bin-*.zip
           artifacts/blackboard-linux/blackboard_*.deb
 
