@@ -108,7 +108,8 @@ jobs:
           --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/icons/bb_dark.png \
           --input ./artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }} \
           --main-jar BlackBoard.jar \
-          --main-class org.pmedv.blackboard.app.BlackBoard
+          --main-class org.pmedv.blackboard.app.BlackBoard \
+          --java-options sun.java2d.d3d=false
           # --resource-dir bbbb
 
     - name: Check status 1
@@ -181,7 +182,7 @@ jobs:
 
     - name: Prepare AppImage for Windows
       run: |
-        jpackage --type app-image --app-version "${{ needs.build.outputs.GITVERSION_ASSEMBLYSEMVER }}" --copyright Copyright --description "BlackBoard Circuit Designer ${{ needs.build.outputs.BB_VERSION }}" --name "BlackBoard" --dest target/appimage --temp target/blackbird-tmp --vendor "mpue" --verbose --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/bb.ico --input artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }} --main-jar BlackBoard.jar --main-class org.pmedv.blackboard.app.BlackBoard
+        jpackage --type app-image --app-version "${{ needs.build.outputs.GITVERSION_ASSEMBLYSEMVER }}" --copyright Copyright --description "BlackBoard Circuit Designer ${{ needs.build.outputs.BB_VERSION }}" --name "BlackBoard" --dest target/appimage --temp target/blackbird-tmp --vendor "mpue" --verbose --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/bb.ico --input artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }} --main-jar BlackBoard.jar --main-class org.pmedv.blackboard.app.BlackBoard --java-options sun.java2d.d3d=false
         # --resource-dir src/jpackage/resources
 
     - name: Check status 1
@@ -259,7 +260,8 @@ jobs:
           --icon artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }}/icons/bb_dark.png \
           --input ./artifacts/blackboard-bin-${{ needs.build.outputs.BB_VERSION }} \
           --main-jar BlackBoard.jar \
-          --main-class org.pmedv.blackboard.app.BlackBoard
+          --main-class org.pmedv.blackboard.app.BlackBoard \
+          --java-options sun.java2d.d3d=false
 
         # --resource-dir blackboard/src/jpackage/resources-mac \
         # --java-options '-splash:$APPDIR/splash.png' \
