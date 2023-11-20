@@ -351,7 +351,6 @@ jobs:
         find . | sort
 
     - name: Create Prerelease
-      if: github.ref != 'refs/heads/master'
       id: create_prerelease
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
