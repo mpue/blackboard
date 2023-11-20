@@ -18,6 +18,7 @@ jobs:
       DEBIAN_PKGVERSION: "${{steps.gitversion.outputs.Major}}.${{steps.gitversion.outputs.Minor}}-${{steps.gitversion.outputs.Patch}}"
       MACOS_MAJORMINORPATCH: "1.${{steps.gitversion.outputs.Minor}}.${{steps.gitversion.outputs.Patch}}"
       GITVERSION_ASSEMBLYSEMVER: "${{ steps.gitversion.outputs.AssemblySemVer }}"
+      GITVERSION_SEMVER: "${{ steps.gitversion.outputs.SemVer }}"
 
     steps:
     - name: Checkout project
@@ -355,7 +356,7 @@ jobs:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "v${{ needs.build.outputs.GITVERSION_SEMVER }}"
         prerelease: true
-        title: "BlackBoard v${{ needs.semver.outputs.BB_VERSION }}"
+        title: "BlackBoard v${{ needs.build.outputs.BB_VERSION }}"
         files: |
           artifacts/BlackBoard-MacOS/BlackBoard-*-MacOS.pkg
           artifacts/BlackBoard-Windows/BlackBoard-*-Windows.exe
