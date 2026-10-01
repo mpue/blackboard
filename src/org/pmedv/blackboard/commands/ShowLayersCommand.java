@@ -60,10 +60,13 @@ public class ShowLayersCommand extends AbstractOpenEditorCommand implements Edit
 
 				if (editor != null) {
 					Layer currentLayer = (Layer) layerPanel.getCurrentLayerCombo().getSelectedItem();
+					if (currentLayer == null) {
+						return;
+					}
 
-					log.info("setting current layer to : " + layerPanel.getCurrentLayerCombo().getSelectedItem());
+					log.info("setting current layer to : " + currentLayer);
 					editor.getModel().setCurrentLayer(currentLayer);
-					int opacity = (int) (editor.getModel().getCurrentLayer().getOpacity() * 100);
+					int opacity = (int) (currentLayer.getOpacity() * 100);
 					layerPanel.getOpacitySlider().setValue(opacity);
 				}
 			}
@@ -78,6 +81,9 @@ public class ShowLayersCommand extends AbstractOpenEditorCommand implements Edit
 			@Override
 			public void stateChanged(ChangeEvent e) {
 
+				if (editor == null || editor.getModel().getCurrentLayer() == null) {
+					return;
+				}
 				JSlider slider = (JSlider) e.getSource();
 				float opacity = (float) slider.getValue() / 100.0f;
 				editor.getModel().getCurrentLayer().setOpacity(opacity);
@@ -106,9 +112,10 @@ public class ShowLayersCommand extends AbstractOpenEditorCommand implements Edit
 		if (event.getEditor().getCurrentFile() != null)
 			log.info(event.getEditor().getCurrentFile().getName());
 
-		log.info(event.getEditor().getModel().getCurrentLayer());
-		layerPanel.setLayers(event.getEditor().getModel().getLayers());
-		layerPanel.getCurrentLayerCombo().setSelectedItem(event.getEditor().getModel().getCurrentLayer());
+		Layer current = editor.getModel().ensureCurrentLayer();
+		log.info(current);
+		layerPanel.setLayers(editor.getModel().getLayers());
+		layerPanel.restoreSelection(current);
 
 	}
 

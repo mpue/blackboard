@@ -31,6 +31,8 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
+import com.formdev.flatlaf.util.UIScale;
+
 /**
  * <p>
  * The <code>ColorIconFactory</code> generates icons for color display
@@ -60,11 +62,12 @@ public final class ColorIconFactory {
 	 */
 	public static final ImageIcon getIcon(final Color color, final int size) {
 		
+		int s = UIScale.scale(size);
 		if (!colorCache.containsKey(color)) {
-			final BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+			final BufferedImage image = new BufferedImage(s, s, BufferedImage.TYPE_INT_ARGB);
 			final Graphics g = image.getGraphics();
 			g.setColor(color);
-			g.fillRect(0, 0, size, size);			
+			g.fillRect(0, 0, s, s);			
 			final ImageIcon icon = new ImageIcon(image);
 			colorCache.put(color, icon);
 			return icon;

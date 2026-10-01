@@ -28,10 +28,15 @@ import java.util.ArrayList;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.pmedv.blackboard.components.Box;
+import org.pmedv.blackboard.components.Diode;
+import org.pmedv.blackboard.components.Ellipse;
 import org.pmedv.blackboard.components.Item;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.components.Line;
 import org.pmedv.blackboard.components.Part;
+import org.pmedv.blackboard.components.Resistor;
+import org.pmedv.blackboard.components.Symbol;
 import org.pmedv.blackboard.components.TextPart;
 
 /**
@@ -49,11 +54,21 @@ import org.pmedv.blackboard.components.TextPart;
 public class BoardEditorModel {
 	
 	public static final Log log = LogFactory.getLog(BoardEditorModel.class);
-	
-	public static final int TOP_LAYER = 0;
-	public static final int BOTTOM_LAYER = 1;
-	public static final int PART_LAYER = 2;
-	public static final int BOARD_LAYER = 3;
+
+	/*
+	WARNING
+	Do not use XX_LAYER_INDEX for identifying layers.
+	This will cause problems because it can be changed through the user (by changing the layer hierarchy).
+	Use it only on initialization!
+	 */
+	protected static final int TOP_LAYER_INDEX = 0;
+	public static final String TOP_LAYER_NAME = "Top";
+	protected static final int BOTTOM_LAYER = 1;
+	public static final String BOTTOM_LAYER_NAME = "Bottom";
+	public static final int PART_LAYER_INDEX = 2;
+	public static final String PART_LAYER_NAME = "Parts";
+	protected static final int BOARD_LAYER = 3;
+	public static final String BOARD_LAYER_NAME = "Board";
 	
 	public static enum BoardType {
 		HOLES,
@@ -77,10 +92,10 @@ public class BoardEditorModel {
 	}
 
 	public void addDefaultLayers() {
-		layers.add(new Layer(TOP_LAYER,"Top", Color.RED));
-		layers.add(new Layer(BOTTOM_LAYER,"Bottom", Color.BLUE));
-		layers.add(new Layer(PART_LAYER,"Parts"));
-		layers.add(new Layer(BOARD_LAYER,"Board"));
+		layers.add(new Layer(TOP_LAYER_INDEX, TOP_LAYER_NAME, Color.RED));
+		layers.add(new Layer(BOTTOM_LAYER, BOTTOM_LAYER_NAME, Color.BLUE));
+		layers.add(new Layer(PART_LAYER_INDEX, PART_LAYER_NAME));
+		layers.add(new Layer(BOARD_LAYER, BOARD_LAYER_NAME));
 	}
 	
 	/**
@@ -106,6 +121,122 @@ public class BoardEditorModel {
 			
 		
 		return null;
+	}
+
+	public Layer getLayer(String name) {
+		for (Layer l : layers) {
+			if (l.getName().equals(name))
+				return l;
+		}
+		return null;
+	}
+
+	public int getLayerIndexByName(String name) {
+		for (Layer l : layers) {
+			if (l.getName().equals(name))
+				return  l.getIndex();
+		}
+		return -1;
+	}
+
+	/**
+	 * Library footprints, resistors and diodes belong on the Parts layer.
+	 * Drawing primitives stay on the currently selected layer.
+	 */
+	public static boolean isLibraryPart(Item item) {
+		if (item instanceof Resistor || item instanceof Diode) {
+			return true;
+		}
+		return item instanceof Part
+				&& !(item instanceof TextPart)
+				&& !(item instanceof Box)
+				&& !(item instanceof Ellipse)
+				&& !(item instanceof Symbol);
+	}
+
+	/**
+	 * Returns the layer named {@link #PART_LAYER_NAME}, or the current layer if it was renamed or removed.
+	 */
+	private Layer getPartsLayer() {
+		Layer parts = getLayer(PART_LAYER_NAME);
+		return parts != null ? parts : ensureCurrentLayer();
+	}
+
+	/**
+	 * Identity check; {@link Layer#equals(Object)} compares names and would match a different board's layer.
+	 */
+	public boolean containsLayer(Layer layer) {
+		if (layer == null) {
+			return false;
+		}
+		for (Layer l : layers) {
+			if (l == layer) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Makes sure {@link #currentLayer} still belongs to this board.
+	 */
+	public Layer ensureCurrentLayer() {
+		if (containsLayer(currentLayer)) {
+			return currentLayer;
+		}
+		Layer top = getLayer(TOP_LAYER_NAME);
+		if (top != null) {
+			currentLayer = top;
+			return currentLayer;
+		}
+		if (!layers.isEmpty()) {
+			currentLayer = layers.get(0);
+			return currentLayer;
+		}
+		currentLayer = null;
+		return null;
+	}
+
+	public Layer resolveLayerForItem(Item item) {
+		if (isLibraryPart(item)) {
+			return getPartsLayer();
+		}
+		return ensureCurrentLayer();
+	}
+
+	/**
+	 * Places a new item: library parts on {@link #PART_LAYER_NAME}, everything else on the current layer.
+	 * Ignores a leftover index from part XML (often 0 or {@link #PART_LAYER_INDEX}).
+	 */
+	public void addItem(Item item) {
+		place(item, resolveLayerForItem(item));
+	}
+
+	/**
+	 * Places an item on {@code layer}. If the layer is null, uses {@link #addItem(Item)}.
+	 */
+	public void addItem(Item item, Layer layer) {
+		if (layer == null) {
+			addItem(item);
+			return;
+		}
+		place(item, layer);
+	}
+
+	/**
+	 * Places an item on the layer with this index (load/paste). If the index is gone, falls back once.
+	 */
+	public void addItem(Item item, int layerIndex) {
+		Layer layer = getLayer(layerIndex);
+		place(item, layer != null ? layer : resolveLayerForItem(item));
+	}
+
+	private void place(Item item, Layer layer) {
+		if (item == null || layer == null) {
+			return;
+		}
+		item.setLayer(layer.getIndex());
+		layer.getItems().add(item);
 	}
 
 	/**

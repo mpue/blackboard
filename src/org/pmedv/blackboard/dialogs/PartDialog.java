@@ -327,7 +327,7 @@ public class PartDialog extends AbstractNiceDialog {
 				Part selectedPart = model.getParts().get(index);				
 				String content = textArea.getText();
 				String name = selectedPart.getFilename();
-				File workDir = new File(System.getProperty("user.home"), "." + AppContext.getName());
+				File workDir = AppContext.getCatalogDir();
 				File partDir = new File(workDir + "/parts/");
 				File partFile = new File(partDir,name);
 				FileUtils.writeFile(partFile,content);

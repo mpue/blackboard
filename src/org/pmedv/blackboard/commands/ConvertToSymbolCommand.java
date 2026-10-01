@@ -217,7 +217,7 @@ public class ConvertToSymbolCommand extends AbstractEditorCommand {
 			symbol.setXLoc(min_x);
 			symbol.setYLoc(min_y);
 			
-			editor.getModel().getCurrentLayer().getItems().add(symbol);
+			editor.getModel().addItem(symbol, symbol.getLayer());
 			editor.setSelectedItem(symbol);
 			
 			UndoManager undoManager = editor.getUndoManager();				

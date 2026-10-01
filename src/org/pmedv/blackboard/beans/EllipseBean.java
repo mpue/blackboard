@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import java.awt.BasicStroke;
+
 import org.pmedv.blackboard.ShapeStyle;
 import org.pmedv.blackboard.components.Ellipse;
 
@@ -44,12 +46,13 @@ public class EllipseBean  {
 		this.width = ellipse.getWidth();
 		this.index = ellipse.getIndex();
 		this.layer = ellipse.getLayer();
-		this.thickness = ellipse.getStroke().getLineWidth();
-		this.dashArray = ellipse.getStroke().getDashArray();
-		this.dashPhase = ellipse.getStroke().getDashPhase();
-		this.endCap = ellipse.getStroke().getEndCap();
-		this.lineJoin = ellipse.getStroke().getLineJoin();
-		this.miterLimit = ellipse.getStroke().getMiterLimit();
+		BasicStroke stroke = ellipse.getStroke();
+		this.thickness = stroke.getLineWidth();
+		this.dashArray = stroke.getDashArray();
+		this.dashPhase = stroke.getDashPhase();
+		this.endCap = stroke.getEndCap();
+		this.lineJoin = stroke.getLineJoin();
+		this.miterLimit = stroke.getMiterLimit();
 
 		this.style = ellipse.getStyle();
 		this.startAngle = ellipse.getStartAngle();

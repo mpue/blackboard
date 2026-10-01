@@ -18,6 +18,7 @@ import javax.swing.JList;
 
 import org.pmedv.blackboard.tools.StrokeFactory;
 import org.pmedv.blackboard.tools.StrokeFactory.StrokeType;
+import org.pmedv.core.util.UiScale;
 
 @SuppressWarnings("serial")
 public class LineStrokeRenderer extends DefaultListCellRenderer {
@@ -31,6 +32,7 @@ public class LineStrokeRenderer extends DefaultListCellRenderer {
 	private final Map<Stroke, Float> values = new HashMap<Stroke, Float>();
 	
 	public LineStrokeRenderer() {
+		size.setSize(UiScale.px(48), UiScale.px(32));
 		
 		for (Float f = 1.0f;f <= 10.0f;f+=0.5f) {
 			Stroke s = StrokeFactory.createStroke(f, StrokeType.BASIC);			
@@ -51,12 +53,14 @@ public class LineStrokeRenderer extends DefaultListCellRenderer {
 	}
 
 	private Icon createIcon(Float thickness, StrokeType type) {
-
-		BufferedImage b = new BufferedImage(iconWidth, iconHeight, BufferedImage.TYPE_INT_ARGB);
+		int w = UiScale.px(iconWidth);
+		int h = UiScale.px(iconHeight);
+		BufferedImage b = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = (Graphics2D) b.getGraphics();
 		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2d.setRenderingHints(rh);
+		g2d.scale((double) w / iconWidth, (double) h / iconHeight);
 		g2d.setColor(Color.BLACK);
 		g2d.setStroke(StrokeFactory.createStroke(thickness, type));
 		g2d.drawLine(0, iconHeight / 2, iconWidth, iconHeight / 2);

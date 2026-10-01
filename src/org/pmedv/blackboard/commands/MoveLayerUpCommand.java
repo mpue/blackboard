@@ -28,8 +28,10 @@ import javax.swing.Action;
 
 import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.app.FileState;
+import org.pmedv.blackboard.components.BoardEditor;
 import org.pmedv.blackboard.components.Item;
 import org.pmedv.blackboard.components.Layer;
+import org.pmedv.blackboard.events.EditorChangedEvent.EventType;
 import org.pmedv.blackboard.models.LayerTableModel;
 import org.pmedv.core.commands.AbstractCommand;
 import org.pmedv.core.components.AlternatingLineTable;
@@ -71,8 +73,12 @@ public class MoveLayerUpCommand extends AbstractCommand {
 		
 		model.sortLayers();
 		model.fireTableDataChanged();
-		EditorUtils.getCurrentActiveEditor().repaint();
-		EditorUtils.getCurrentActiveEditor().setFileState(FileState.DIRTY);
+		BoardEditor editor = EditorUtils.getCurrentActiveEditor();
+		if (editor != null) {
+			editor.repaint();
+			editor.setFileState(FileState.DIRTY);
+			editor.notifyListeners(EventType.EDITOR_CHANGED);
+		}
 	}
 	
 }

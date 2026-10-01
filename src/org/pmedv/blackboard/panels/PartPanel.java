@@ -39,6 +39,7 @@ import org.pmedv.core.components.FilterPanel;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.services.ResourceService;
 import org.pmedv.core.util.UIUtils;
+import org.pmedv.core.util.UiScale;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -58,13 +59,12 @@ public class PartPanel extends JPanel {
 		initComponents();		
 		UIUtils.flattenSplitPane(mainSplitpane);
 		UIUtils.flattenSplitPane(imageDescriptionSplitPane);
-		mainSplitpane.setDividerLocation(400);
-		imageDescriptionSplitPane.setDividerLocation(300);
+		mainSplitpane.setDividerLocation(UiScale.px(400));
+		imageDescriptionSplitPane.setDividerLocation(UiScale.px(300));
 		bottomPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		imagePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		imageLabel.setText(null);
 		imagePanel.setBackground(Colors.LIGHTER_GRAY);
-		bottomPanel.setBackground(Color.WHITE);
 	}
 
 	private void initComponents() {
@@ -112,6 +112,7 @@ public class PartPanel extends JPanel {
 				}
 				panel1.add(scrollPane1, cc.xy(1, 3));
 			}
+			panel1.setMinimumSize(new java.awt.Dimension(UiScale.px(280), 0));
 			mainSplitpane.setLeftComponent(panel1);
 
 			//======== imageDescriptionSplitPane ========

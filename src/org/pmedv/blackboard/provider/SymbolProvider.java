@@ -25,6 +25,7 @@ package org.pmedv.blackboard.provider;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,6 +34,7 @@ import javax.swing.ImageIcon;
 import org.pmedv.blackboard.beans.SymbolBean;
 import org.pmedv.blackboard.beans.SymbolList;
 import org.pmedv.blackboard.components.Symbol;
+import org.pmedv.core.context.AppContext;
 import org.pmedv.core.util.ImageUtils;
 
 /**
@@ -55,7 +57,7 @@ public class SymbolProvider extends AbstractElementProvider<SymbolBean> {
 	private HashMap<String, ImageIcon> symbolMap;
 
 	public SymbolProvider() {
-		super(SymbolBean.class, "symbols");
+		super(SymbolBean.class, new File(AppContext.getCatalogDir(), "symbols"));
 		symbolMap = new HashMap<String, ImageIcon>();
 	}
 

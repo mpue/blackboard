@@ -31,6 +31,8 @@ import java.io.Serializable;
 import javax.swing.Icon;
 import javax.swing.UIManager;
 
+import com.formdev.flatlaf.util.UIScale;
+
 import net.infonode.gui.ComponentUtil;
 import net.infonode.util.ColorUtil;
 
@@ -66,11 +68,15 @@ public abstract class AbstractButtonIcon implements Icon, Serializable {
   }
 
   public int getIconWidth() {
-    return size;
+    return scaledSize();
   }
 
   public int getIconHeight() {
-    return size;
+    return scaledSize();
+  }
+
+  private int scaledSize() {
+    return UIScale.scale(size);
   }
 
   public boolean isShadowEnabled() {
@@ -97,16 +103,17 @@ public abstract class AbstractButtonIcon implements Icon, Serializable {
     if (color == null)
       color = ColorUtil.blend(ComponentUtil.getBackgroundColor(c), c.getForeground(), 0.5f);
 
+    int s = scaledSize();
     if (shadowEnabled) {
       Color background = ComponentUtil.getBackgroundColor(c);
       g.setColor(ColorUtil.blend(background == null ? Color.BLACK : background, Color.BLACK, shadowStrength));
-      paintIcon(c, g, x + 2, y + 2, x + size - 1, y + size - 1, true);
+      paintIcon(c, g, x + 2, y + 2, x + s - 1, y + s - 1, true);
       g.setColor(color);
-      paintIcon(c, g, x + 1, y + 1, x + size - 2, y + size - 2, false);
+      paintIcon(c, g, x + 1, y + 1, x + s - 2, y + s - 2, false);
     }
     else {
       g.setColor(color);
-      paintIcon(c, g, x, y, x + size - 1, y + size - 1, false);
+      paintIcon(c, g, x, y, x + s - 1, y + s - 1, false);
     }
 
     g.setColor(oldColor);

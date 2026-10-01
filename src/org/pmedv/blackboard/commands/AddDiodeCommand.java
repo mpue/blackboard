@@ -40,7 +40,6 @@ import org.pmedv.blackboard.components.Diode;
 import org.pmedv.blackboard.components.Item;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.dialogs.DiodeDialog;
-import org.pmedv.blackboard.models.BoardEditorModel;
 import org.pmedv.core.commands.AbstractEditorCommand;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.dialogs.AbstractNiceDialog;
@@ -91,23 +90,7 @@ public class AddDiodeCommand extends AbstractEditorCommand {
 		max++;
 		diode.setIndex(max);
 
-		// Check if the default part layer exists
-
-		boolean onPartLayer = false;
-
-		for (Layer layer : editor.getModel().getLayers()) {
-			if (layer.getIndex() == BoardEditorModel.PART_LAYER) {
-				diode.setLayer(BoardEditorModel.PART_LAYER);
-				onPartLayer = true;
-				break;
-			}
-		}
-
-		if (!onPartLayer) {
-			diode.setLayer(editor.getModel().getCurrentLayer().getIndex());
-		}
-
-		editor.getModel().getLayer(diode.getLayer()).getItems().add(diode);
+		editor.getModel().addItem(diode);
 		UndoManager undoManager = editor.getUndoManager();
 		if (!undoManager.addEdit(new AddDiodeEdit(diode))) {
 			log.error("could not add edit to undo manager");

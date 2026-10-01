@@ -125,7 +125,7 @@ public abstract class AbstractPerspective extends JPanel {
 	 */
 	protected void saveViewState() {
 
-		String outputDir = System.getProperty("user.home") + "/." + AppContext.getName() + "/";
+		String outputDir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 
 		ObjectOutputStream oos = null;
 		try {
@@ -158,7 +158,7 @@ public abstract class AbstractPerspective extends JPanel {
 	 */
 	protected boolean loadViewState() {
 
-		String inputDir = System.getProperty("user.home") + "/." + AppContext.getName() + "/";
+		String inputDir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 
 		boolean loaded = false;
 
@@ -195,7 +195,7 @@ public abstract class AbstractPerspective extends JPanel {
 	 */
 	public void deleteViewState() {
 
-		String inputDir = System.getProperty("user.home") + "/." + AppContext.getName() + "/";
+		String inputDir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 
 		try {
 			File viewStateCache = new File(inputDir + ID + ".ser");

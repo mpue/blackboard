@@ -109,6 +109,7 @@ public class Line extends Item implements Shape {
 		this.index = index;
 		this.oldstart = new Point(start.x, start.y);
 		this.oldEnd = new Point(end.x, end.y);
+		BoardUtil.applyDefaultLineStyle(this);
 	}
 
 	public Line(int x1, int y1, int x2, int y2, int index) {
@@ -121,7 +122,7 @@ public class Line extends Item implements Shape {
 		this.oldstart = new Point(x1, y1);
 		this.oldEnd = new Point(x2, y2);
 		this.index = index;
-
+		BoardUtil.applyDefaultLineStyle(this);
 	}
 
 	public Line(LineBean lineBean) {
@@ -136,8 +137,6 @@ public class Line extends Item implements Shape {
 				lineBean.setMiterLimit(1);
 			this.stroke = new BasicStroke(lineBean.getThickness(), lineBean.getEndCap(), lineBean.getLineJoin(), lineBean.getMiterLimit(), lineBean.getDashArray(), lineBean.getDashPhase());
 		}
-		else
-			setStroke(new BasicStroke(3.0f));
 	}
 
 	/**
@@ -556,7 +555,9 @@ public class Line extends Item implements Shape {
 	}
 
 	public void setStartType(LineEdgeType startType) {
-		this.startType = startType;
+		if (startType != null) {
+			this.startType = startType;
+		}
 	}
 
 	public LineEdgeType getEndType() {
@@ -564,7 +565,9 @@ public class Line extends Item implements Shape {
 	}
 
 	public void setEndType(LineEdgeType endType) {
-		this.endType = endType;
+		if (endType != null) {
+			this.endType = endType;
+		}
 	}
 
 	/**
@@ -578,7 +581,9 @@ public class Line extends Item implements Shape {
 	 * @param stroke the stroke to set
 	 */
 	public void setStroke(BasicStroke stroke) {
-		this.stroke = stroke;
+		if (stroke != null) {
+			this.stroke = stroke;
+		}
 	}
 
 	/*

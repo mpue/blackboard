@@ -36,7 +36,9 @@ import javax.swing.JToolBar;
 
 import net.infonode.docking.DockingWindow;
 import net.infonode.docking.RootWindow;
+import net.infonode.docking.TabWindow;
 import net.infonode.docking.View;
+import net.infonode.docking.util.DockingUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -87,6 +89,7 @@ import org.pmedv.blackboard.components.Line;
 import org.pmedv.blackboard.components.Part;
 import org.pmedv.blackboard.components.Pin;
 import org.pmedv.blackboard.components.Symbol;
+import org.pmedv.blackboard.events.EditorChangedEvent.EventType;
 import org.pmedv.blackboard.models.BoardEditorModel;
 import org.pmedv.blackboard.panels.CenterPanel;
 import org.pmedv.core.components.CmdJButton;
@@ -140,6 +143,27 @@ public class EditorUtils {
 			return editor;
 		}
 		return null;
+	}
+
+	/**
+	 * Makes {@code editor} the active board and notifies listeners so shared UI
+	 * (layers panel, toolbar) follows the selected tab.
+	 */
+	public static void activateEditor(BoardEditor editor, boolean requestFocus) {
+		if (editor == null) {
+			return;
+		}
+		TabWindow tw = DockingUtil.getTabWindowFor(editor.getView());
+		if (tw != null) {
+			ctx.getBean(ApplicationWindowAdvisor.class).setCurrentEditorArea(tw);
+		}
+		setToolbarButtonState(editor);
+		ctx.getBean(ApplicationWindow.class).getRasterCombo().setSelectedItem(Integer.valueOf(editor.getRaster()));
+		editor.updateStatusBar();
+		if (requestFocus && editor.getView() != null) {
+			editor.getView().requestFocus();
+		}
+		editor.notifyListeners(EventType.EDITOR_CHANGED);
 	}
 
 	/**
@@ -222,10 +246,9 @@ public class EditorUtils {
 	}
 
 	/**
-	 * gets all {@link View} objects for a given {@link AbstractPerspective}
-	 * 
+	 * Gets all {@link View} objects for a given {@link AbstractPerspective}
+	 *
 	 * @param a the perspective to get the views for
-	 * 
 	 * @return a list of {@link View} objects.
 	 */
 	public static ArrayList<View> getCurrentPerspectiveViews(AbstractPerspective a) {
@@ -387,8 +410,7 @@ public class EditorUtils {
 
 				}
 
-				editor.getModel().getCurrentLayer().getItems().add(sym);
-				sym.setLayer(editor.getModel().getCurrentLayer().getIndex());
+				editor.getModel().addItem(sym);
 				editor.refresh();
 				e.dropComplete(true);
 				e.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);

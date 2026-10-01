@@ -17,7 +17,6 @@ import org.apache.commons.logging.LogFactory;
 
 public class ZipUtils {
 	protected static final Log log = LogFactory.getLog(ZipUtils.class);
-	private static final byte[] buffer = new byte[0xFFFF];
 
 	/**
 	 * @param filename the filename to extract
@@ -76,26 +75,46 @@ public class ZipUtils {
 	}
 
 	private static void extractEntry(ZipFile zf, ZipEntry entry, String destDir) throws IOException {
-		File file = new File(destDir, entry.getName());
+		File file = resolveZipEntryFile(destDir, entry.getName());
 		if (entry.isDirectory()) {
 			file.mkdirs();
+			return;
 		}
-		else {
-			new File(file.getParent()).mkdirs();
-			InputStream is = null;
-			OutputStream os = null;
-			try {
-				is = zf.getInputStream(entry);
-				os = new FileOutputStream(file);
-				for (int len; (len = is.read(buffer)) != -1;) {
-					os.write(buffer, 0, len);
-				}
+		File parent = file.getParentFile();
+		if (parent != null) {
+			parent.mkdirs();
+		}
+		InputStream is = null;
+		OutputStream os = null;
+		try {
+			is = zf.getInputStream(entry);
+			os = new FileOutputStream(file);
+			byte[] buffer = new byte[8192];
+			int len;
+			while ((len = is.read(buffer)) != -1) {
+				os.write(buffer, 0, len);
 			}
-			finally {
+		}
+		finally {
+			if (os != null) {
 				os.close();
+			}
+			if (is != null) {
 				is.close();
 			}
 		}
+	}
+
+	private static File resolveZipEntryFile(String destDir, String entryName) throws IOException {
+		String normalized = entryName.replace('\\', '/');
+		File dest = new File(destDir).getCanonicalFile();
+		File file = new File(dest, normalized);
+		String destPath = dest.getCanonicalPath();
+		String filePath = file.getCanonicalPath();
+		if (!filePath.equals(destPath) && !filePath.startsWith(destPath + File.separator)) {
+			throw new IOException("Illegal zip entry path: " + entryName);
+		}
+		return file;
 	}
 
 	public static void zipDir(String destination, String source) throws Exception {
@@ -117,8 +136,9 @@ public class ZipUtils {
 				continue;
 			}
 			FileInputStream in = new FileInputStream(files[i].getAbsolutePath());
-			log.info("adding " + files[i].getAbsolutePath().substring(baseDir.length() + 1));
-			out.putNextEntry(new ZipEntry(files[i].getAbsolutePath().substring(baseDir.length() + 1)));
+			String entryName = files[i].getAbsolutePath().substring(baseDir.length() + 1).replace('\\', '/');
+			log.info("adding " + entryName);
+			out.putNextEntry(new ZipEntry(entryName));
 			int len;
 			while ((len = in.read(tmpBuf)) > 0) {
 				out.write(tmpBuf, 0, len);

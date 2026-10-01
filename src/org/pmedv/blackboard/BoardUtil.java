@@ -82,6 +82,19 @@ public class BoardUtil {
 	public static final BasicStroke stroke_3_0f = new BasicStroke(3.0f);
 	public static final BasicStroke stroke_4_0f = new BasicStroke(4.0f);
 
+	public static BasicStroke getDefaultStroke() {
+		return stroke_3_0f;
+	}
+
+	public static void applyDefaultLineStyle(Line line) {
+		if (line == null) {
+			return;
+		}
+		line.setStroke(getDefaultStroke());
+		line.setStartType(LineEdgeType.getDefault());
+		line.setEndType(LineEdgeType.getDefault());
+	}
+
 	/**
 	 * Snaps the current given location to a given grid
 	 * 

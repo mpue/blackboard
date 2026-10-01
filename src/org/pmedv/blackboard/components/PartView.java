@@ -244,7 +244,7 @@ public class PartView extends JPanel {
 				Part selectedPart = model.getParts().get(index);				
 				String content = textArea.getText();
 				String name = selectedPart.getName();
-				String partFileLocation = AppContext.getWorkingDir() + "/parts/" + name;				
+				String partFileLocation = new File(AppContext.getCatalogDir(), "parts/" + name).getAbsolutePath();				
 				FileUtils.writeFile(new File(partFileLocation),content);
 				try {
 					model.getParts().set(index, AppContext.getContext().getBean(PartFactory.class).createPart(name));

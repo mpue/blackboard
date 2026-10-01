@@ -61,6 +61,7 @@ public class TransformUtils {
     public static  JXLayer<JComponent> createTransformJXLayer(
 	    JComponent component, double scale, Map<RenderingHints.Key, Object> hints) {
 	DefaultTransformModel model = new DefaultTransformModel();
+	model.setScaleToPreferredSize(true);
 	model.setScale(scale);
 	return createTransformJXLayer(component, model, hints);
     }

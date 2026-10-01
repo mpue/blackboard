@@ -5,7 +5,7 @@ Name "BlackBoard"
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 1.1.0
+!define VERSION 2.1.0.8
 !define COMPANY "Matthias Pueski"
 !define URL http://blackboard.serverpool.org
 
@@ -42,7 +42,7 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile BlackBoardSetup_${VERSION}.exe
+OutFile ..\install\BlackBoardSetup_${VERSION}.exe
 InstallDir "$PROGRAMFILES\BlackBoard"
 CRCCheck on
 XPStyle on

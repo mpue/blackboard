@@ -95,7 +95,9 @@ public class DuplicateLayerCommand extends AbstractCommand {
 			for (Item item : oldlayer.getItems()) {
 				
 				try {
-					newLayer.getItems().add((Item) item.clone());
+					Item clone = (Item) item.clone();
+					clone.setLayer(newLayer.getIndex());
+					newLayer.getItems().add(clone);
 				}
 				catch (CloneNotSupportedException e1) {
 					ErrorUtils.showErrorDialog(e1);

@@ -64,6 +64,10 @@ public class AddLayerCommand extends AbstractCommand {
 
 			for (Layer l : editor.getModel().getLayers()) {
 
+				// check if layer name already exists
+				if (l.getName().equals(name))
+					return;
+
 				if (l.getIndex() > layerIndex)
 					layerIndex = l.getIndex();
 

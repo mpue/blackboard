@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import com.formdev.flatlaf.extras.*;
+import org.pmedv.core.util.UiScale;
 
 public class ResourceServiceImpl implements ResourceService {
 
@@ -94,7 +95,7 @@ public class ResourceServiceImpl implements ResourceService {
 				if (icon == null)
 					return new ImageIcon();
 				else
-					return icon;
+					return UiScale.icon(icon);
 
 			}
 			catch (IOException e) {
@@ -112,8 +113,15 @@ public class ResourceServiceImpl implements ResourceService {
 
 			InputStream is = getClass().getClassLoader().getResourceAsStream(res);
 
-			if (is != null)
-				icon = new FlatSVGIcon(is);
+			if (is != null) {
+				FlatSVGIcon svg = new FlatSVGIcon(is);
+				if (svg.getIconWidth() > 32 || svg.getIconHeight() > 32) {
+					icon = svg.derive(16, 16);
+				}
+				else {
+					icon = svg;
+				}
+			}
 
 			if (icon == null)
 				return new ImageIcon();
@@ -140,7 +148,7 @@ public class ResourceServiceImpl implements ResourceService {
 			InputStream is = getClass().getClassLoader().getResourceAsStream(res);
 			icon = new ImageIcon(ImageIO.read(is));
 
-			return icon;
+			return UiScale.icon(icon);
 
 		}
 		catch (IOException e) {

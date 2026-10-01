@@ -1,7 +1,6 @@
 package org.pmedv.core.preferences.dialogs;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -264,7 +263,6 @@ public class PreferencesDialog extends AbstractNiceDialog {
 	public JPanel createParamPanel(String className, HashMap defaults) {
 
 		JPanel panel = new JPanel(new GridBagLayout());
-		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
 		GridBagConstraints constraints = new GridBagConstraints();
@@ -330,7 +328,6 @@ public class PreferencesDialog extends AbstractNiceDialog {
 				else if (defaults.get(key) instanceof Boolean) {
 					JCheckBox checkBox = new JCheckBox();
 					checkBox.setName(key);
-					checkBox.setBackground(Color.LIGHT_GRAY);
 					Boolean value = (Boolean) defaults.get(key);
 					checkBox.setSelected(value);
 					constraints.gridx = 1;
@@ -346,11 +343,9 @@ public class PreferencesDialog extends AbstractNiceDialog {
 				}
 				else if (defaults.get(key) instanceof FileObject) {
 					FileBrowserTextfield textField = new FileBrowserTextfield();
-					textField.setBackground(Color.LIGHT_GRAY);
 					textField.setName(key);
 					FileObject value = (FileObject) defaults.get(key);
 					textField.getPathField().setText(value.getAbsolutePath());
-					textField.getPathField().setBackground(Color.LIGHT_GRAY);
 					constraints.gridx = 1;
 					panel.add(textField, constraints);
 				}

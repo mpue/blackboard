@@ -24,10 +24,15 @@ package org.pmedv.core.app;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.MediaTracker;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileReader;
@@ -47,6 +52,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pmedv.blackboard.Colors;
 import org.pmedv.blackboard.dialogs.PartDialog;
+import org.pmedv.core.util.UiScale;
 import org.pmedv.core.util.WindowUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -126,16 +132,20 @@ public class SplashScreen implements ApplicationContextAware, BeanPostProcessor,
 			log.error("Interrupted while waiting for splash image to load.");
 		}
 
-		int width = image.getWidth(null);
-        int height = image.getHeight(null);
-        
-        BufferedImage bimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        
-        Graphics2D g2d = (Graphics2D)bimg.createGraphics();
-        
-        g2d.drawImage(image, 0, 0, null);        
-        g2d.setColor(Color.WHITE);
-        g2d.setFont(new Font("Arial", Font.BOLD, 10));
+		int srcW = image.getWidth(null);
+		int srcH = image.getHeight(null);
+		float scale = splashScale();
+		int width = Math.round(srcW * scale);
+		int height = Math.round(srcH * scale);
+
+		BufferedImage bimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2d = (Graphics2D) bimg.createGraphics();
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g2d.scale(scale, scale);
+		g2d.drawImage(image, 0, 0, null);
+		g2d.setColor(Color.WHITE);
+		g2d.setFont(new Font("Arial", Font.BOLD, 10));
 		InputStream is = getClass().getClassLoader().getResourceAsStream("application.properties");
 		Properties properties = new Properties();
 		try {
@@ -160,11 +170,17 @@ public class SplashScreen implements ApplicationContextAware, BeanPostProcessor,
  
 		String buildNumber = properties.getProperty("build.number");
 		
-        g2d.drawString("Version "+version+"."+buildNumber,400,305);
-		
+		g2d.drawString("Version "+version+"."+buildNumber, 400, 305);
+		g2d.dispose();
+
 		JLabel panelImage = new JLabel(new ImageIcon(bimg));
 
 		window.getContentPane().add(panelImage);
+		Font barFont = progressBar.getFont();
+		if (barFont != null) {
+			progressBar.setFont(barFont.deriveFont(barFont.getSize2D() * scale));
+		}
+		progressBar.setPreferredSize(new Dimension(width, Math.round(16 * scale)));
 		window.getContentPane().add(progressBar, BorderLayout.SOUTH);
 		window.pack();
 		
@@ -185,6 +201,36 @@ public class SplashScreen implements ApplicationContextAware, BeanPostProcessor,
 	public void dispose() {
 		window.dispose();
 		window = null;
+	}
+
+	/**
+	 * Splash art is 512px, drawn for a 1920px-wide screen. GNOME/Wayland reports
+	 * scale 1.0 to Java, so we size against the monitor pixel width instead.
+	 */
+	private static float splashScale() {
+		try {
+			String os = System.getProperty("os.name", "").toLowerCase();
+			if (os.indexOf("linux") < 0) {
+				return UiScale.factor();
+			}
+			int width = 0;
+			GraphicsDevice[] devices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+			for (int i = 0; i < devices.length; i++) {
+				Rectangle b = devices[i].getDefaultConfiguration().getBounds();
+				if (b.width > width) {
+					width = b.width;
+				}
+			}
+			// Virtual desktop (e.g. 4K+1080p → 5760) is not a monitor.
+			if (width > 3840) {
+				width = 3840;
+			}
+			float s = width / 1920f;
+			return s < 1f ? 1f : s;
+		}
+		catch (Exception e) {
+			return UiScale.factor();
+		}
 	}
 
 	private Image loadImage(String path) {
@@ -212,20 +258,15 @@ public class SplashScreen implements ApplicationContextAware, BeanPostProcessor,
 	 */
 	public Object postProcessBeforeInitialization(final Object bean, final String name) throws BeansException {
 
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				progressBar.setValue(progress++);
-				if (showProgressLabel) {
-					if (bean instanceof PartDialog)
-						progressBar.setString("Initializing part library.");
-					else
-						progressBar.setString("Loading module " + name);
-				}
-			}
-
-		});
+		SwingUtilities.invokeLater(() -> {
+            progressBar.setValue(progress++);
+            if (showProgressLabel) {
+                if (bean instanceof PartDialog)
+                    progressBar.setString("Initializing part library.");
+                else
+                    progressBar.setString("Loading module " + name);
+            }
+        });
 
 		return bean;
 	}
@@ -241,7 +282,7 @@ public class SplashScreen implements ApplicationContextAware, BeanPostProcessor,
 	/**
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
-	public void afterPropertiesSet() throws Exception {
+	public void afterPropertiesSet() {
 		
 		if (context.containsBean("lookAndFeelConfigurer")) {
 			context.getBean("lookAndFeelConfigurer");
@@ -259,10 +300,6 @@ public class SplashScreen implements ApplicationContextAware, BeanPostProcessor,
 		progressBar.setMaximum(context.getBeanDefinitionCount() - NUM_OF_NON_SINGLETON_BEANS);
 		
 		splash();
-	}
-
-	public boolean getShowProgressLabel() {
-		return showProgressLabel;
 	}
 
 	public void setShowProgressLabel(boolean showProgressLabel) {

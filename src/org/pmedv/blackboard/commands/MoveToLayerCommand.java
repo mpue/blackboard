@@ -107,11 +107,15 @@ public class MoveToLayerCommand extends AbstractEditorCommand {
 		
 	}
 
-	private void moveItem(BoardEditorModel model,Item item, Layer target) {							
-		Layer source = model.getLayer(item.getLayer());		
-		log.debug("moving item from layer "+source.getName()+" to "+target.getName());						
+	private void moveItem(BoardEditorModel model,Item item, Layer target) {
+		if (item == null || target == null) {
+			return;
+		}
+		for (Layer layer : model.getLayers()) {
+			layer.getItems().remove(item);
+		}
+		log.debug("moving item to layer "+target.getName());
 		target.getItems().add(item);
-		source.getItems().remove(item);
 		
 		Boolean useLayerColor = (Boolean)Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.useLayerColor");
 		

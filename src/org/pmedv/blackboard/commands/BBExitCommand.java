@@ -111,7 +111,7 @@ public class BBExitCommand extends ExitCommand {
 		}
 		
 		try {
-			FileUtils.deleteDirectory(new File(AppContext.getWorkingDir(), "temp"));
+			FileUtils.deleteDirectory(new File(AppContext.getUserDataDir(), "temp"));
 		} 
 		catch (IOException e1) {
 			log.info("Could not delete temp directory");

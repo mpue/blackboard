@@ -29,16 +29,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.*;
-import javax.swing.text.AttributeSet.ColorAttribute;
 
-import org.jdesktop.jxlayer.JXLayer;
 import org.jdesktop.swingx.JXStatusBar;
 import org.jdesktop.swingx.JXStatusBar.Constraint;
-import org.pbjar.jxlayer.plaf.ext.TransformUI;
-import org.pbjar.jxlayer.plaf.ext.transform.DefaultTransformModel;
 import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.commands.SetColorCommand;
 import org.pmedv.blackboard.components.BoardEditor;
@@ -87,7 +82,6 @@ public class ApplicationWindow extends AbstractApplicationWindow implements Edit
 		JPanel toolbarPanel = new JPanel(new BorderLayout());
 		this.add(toolBar, java.awt.BorderLayout.NORTH);
 		statusBar = new JPanel();
-		statusBar.setBackground(Color.DARK_GRAY);
 		ImageIcon offlineIcon = resources.getIcon("icon.status.offline");
 		statusLabel = new JLabel();
 		statusBar.add(statusLabel);
@@ -301,10 +295,7 @@ public class ApplicationWindow extends AbstractApplicationWindow implements Edit
 		BoardEditor editor = event.getEditor();
 		
 		if (editor != null) {
-			JXLayer<?> layer = editor.getZoomLayer();
-			TransformUI ui = (TransformUI)(Object)layer.getUI();
-			DefaultTransformModel model = (DefaultTransformModel)ui.getModel();
-			zoomCombo.setSelectedItem(new Float(model.getScale()));		
+			zoomCombo.setSelectedItem(new Float(editor.getBoardZoom()));		
 			zoomCombo.addActionListener(zoomActionListener);						
 		}
 		
@@ -321,10 +312,7 @@ public class ApplicationWindow extends AbstractApplicationWindow implements Edit
 				BoardEditor editor = EditorUtils.getCurrentActiveEditor();
 
 				if (editor != null) {
-					JXLayer<?> layer = editor.getZoomLayer();
-					TransformUI ui = (TransformUI)(Object) layer.getUI();
-					DefaultTransformModel model = (DefaultTransformModel) ui.getModel();
-					model.setScale(((Float) zoomCombo.getSelectedItem()).floatValue());
+					editor.setBoardZoom(((Float) zoomCombo.getSelectedItem()).floatValue());
 				}
 
 			}

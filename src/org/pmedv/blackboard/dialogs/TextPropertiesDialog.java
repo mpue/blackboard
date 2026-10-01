@@ -68,8 +68,8 @@ public class TextPropertiesDialog extends AbstractNiceDialog {
 	    }
 	    
 		if (getUserObject() != null && getUserObject() instanceof TextPart) {
-			this.part = (TextPart)getUserObject();			
-			propertiesPanel.getFontComboBox().setSelectedItem(part.getFont().getFontName());
+			this.part = (TextPart)getUserObject();
+			propertiesPanel.getFontComboBox().setSelectedItem(part.getFont().getFamily());
 			propertiesPanel.getFontSizeSpinner().setValue(part.getFont().getSize());
 			propertiesPanel.getTextPane().setText(part.getText());
 			propertiesPanel.getTypeComboBox().setSelectedItem(part.getType());

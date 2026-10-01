@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import org.pmedv.blackboard.BoardUtil;
 import org.pmedv.blackboard.ShapeStyle;
 import org.pmedv.blackboard.beans.BoxBean;
 
@@ -23,6 +24,7 @@ public class Box extends Part implements Shape {
 		super();
 		style = ShapeStyle.OUTLINED;
 		this.resizable = true;
+		this.stroke = BoardUtil.getDefaultStroke();
 	}
 
 	public Box(BoxBean boxBean) {
@@ -48,7 +50,7 @@ public class Box extends Part implements Shape {
 						boxBean.getDashPhase());
 		}
 		else {
-			setStroke(new BasicStroke(3.0f));
+			setStroke(BoardUtil.getDefaultStroke());
 		}
 		this.style = boxBean.getStyle();
 		this.resizable = true;
@@ -67,7 +69,7 @@ public class Box extends Part implements Shape {
 			g2d.fillRect(getxLoc(), getyLoc(), width, height);	
 		}
 		else if (style.equals(ShapeStyle.OUTLINED)) {
-			g2d.setStroke(stroke);
+			g2d.setStroke(getStroke());
 			g2d.drawRect(getxLoc(), getyLoc(), width, height);
 		}
 		
@@ -114,7 +116,9 @@ public class Box extends Part implements Shape {
 	}
 
 	public void setStroke(BasicStroke stroke) {
-		this.stroke = stroke;
+		if (stroke != null) {
+			this.stroke = stroke;
+		}
 	}
 
 	public ShapeStyle getStyle() {

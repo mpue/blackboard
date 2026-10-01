@@ -25,14 +25,12 @@ package org.pmedv.blackboard.commands;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.Action;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
+import org.pmedv.blackboard.BoardUtil;
 import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.app.EditorMode;
 import org.pmedv.blackboard.components.BoardEditor;
@@ -130,7 +128,7 @@ public class SetDrawModeCommand extends AbstractEditorCommand {
 				shapesPanel.getStartLineCombo().setSelectedItem(shapesPanel.getLastSelectedLineStartStyle());
 			}
 			else {
-				shapesPanel.getStartLineCombo().setSelectedItem(LineEdgeType.ROUND_DOT);	
+				shapesPanel.getStartLineCombo().setSelectedItem(LineEdgeType.getDefault());
 			}			
 		}
 		if (shapesPanel.getEndLineCombo().getSelectedItem() == null) {
@@ -138,7 +136,7 @@ public class SetDrawModeCommand extends AbstractEditorCommand {
 				shapesPanel.getEndLineCombo().setSelectedItem(shapesPanel.getLastSelectedLineEndStyle());
 			}
 			else {
-				shapesPanel.getEndLineCombo().setSelectedItem(LineEdgeType.ROUND_DOT);	
+				shapesPanel.getEndLineCombo().setSelectedItem(LineEdgeType.getDefault());
 			}			
 		}
 		if (shapesPanel.getThicknessCombo().getSelectedItem() == null) {
@@ -147,7 +145,7 @@ public class SetDrawModeCommand extends AbstractEditorCommand {
 				shapesPanel.getThicknessCombo().setSelectedItem(shapesPanel.getLastSelectedStroke());
 			}
 			else {
-				shapesPanel.getThicknessCombo().setSelectedIndex(1);	
+				shapesPanel.getThicknessCombo().setSelectedItem(BoardUtil.getDefaultStroke());
 			}
 			
 		}

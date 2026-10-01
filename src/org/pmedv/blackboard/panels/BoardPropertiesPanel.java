@@ -22,6 +22,10 @@
  */
 package org.pmedv.blackboard.panels;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -42,12 +46,31 @@ import com.jgoodies.forms.layout.FormLayout;
 public class BoardPropertiesPanel extends JPanel {
 	
 	private static final ResourceService resources = AppContext.getContext().getBean(ResourceService.class);
+
+	/** Pixels per breadboard hole (0.1 inch raster). */
+	private static final int PIXELS_PER_HOLE = 16;
+	/** Millimeters per breadboard hole (0.1 inch). */
+	private static final float MM_PER_HOLE = 2.54f;
+
+	private static final String UNIT_PIXEL = "pixel";
+	private static final String UNIT_MM = "mm";
+	private static final String UNIT_HOLES = "holes";
+
+	private String previousUnit = UNIT_MM;
 	
 	@SuppressWarnings("unchecked")
 	public BoardPropertiesPanel() {
 		initComponents();
-		unitComboBox.addItem("pixel");
-		unitComboBox.addItem("mm");
+		unitComboBox.addItem(UNIT_MM);
+		unitComboBox.addItem(UNIT_HOLES);
+		unitComboBox.addItem(UNIT_PIXEL);
+		unitComboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				convertDimensionsToSelectedUnit();
+			}
+		});
+		setBorder(BorderFactory.createEmptyBorder(8, 12, 16, 12));
 	}
 
 	private void initComponents() {
@@ -143,6 +166,72 @@ public class BoardPropertiesPanel extends JPanel {
 		return unitComboBox;
 	}
 
+	/**
+	 * Displays width and height in the currently selected unit, converting from pixels.
+	 */
+	public void setDimensionsInPixels(int widthPx, int heightPx) {
+		String unit = getSelectedUnit();
+		boardWidthSpinner.setValue(fromPixels(widthPx, unit));
+		boardHeightSpinner.setValue(fromPixels(heightPx, unit));
+	}
 
+	/**
+	 * Board width in pixels, converted from the currently selected unit.
+	 */
+	public int getWidthInPixels() {
+		return toPixels(getSpinnerValue(boardWidthSpinner), getSelectedUnit());
+	}
+
+	/**
+	 * Board height in pixels, converted from the currently selected unit.
+	 */
+	public int getHeightInPixels() {
+		return toPixels(getSpinnerValue(boardHeightSpinner), getSelectedUnit());
+	}
+
+	private void convertDimensionsToSelectedUnit() {
+		String newUnit = getSelectedUnit();
+		if (newUnit == null || newUnit.equals(previousUnit)) {
+			return;
+		}
+		int widthPx = toPixels(getSpinnerValue(boardWidthSpinner), previousUnit);
+		int heightPx = toPixels(getSpinnerValue(boardHeightSpinner), previousUnit);
+		boardWidthSpinner.setValue(fromPixels(widthPx, newUnit));
+		boardHeightSpinner.setValue(fromPixels(heightPx, newUnit));
+		previousUnit = newUnit;
+	}
+
+	private String getSelectedUnit() {
+		Object selected = unitComboBox.getSelectedItem();
+		return selected != null ? selected.toString() : UNIT_MM;
+	}
+
+	private int getSpinnerValue(JSpinner spinner) {
+		Object value = spinner.getValue();
+		if (value instanceof Number) {
+			return Math.round(((Number) value).floatValue());
+		}
+		return 0;
+	}
+
+	private int toPixels(int value, String unit) {
+		if (UNIT_MM.equalsIgnoreCase(unit)) {
+			return Math.round((value / MM_PER_HOLE) * PIXELS_PER_HOLE);
+		}
+		if (UNIT_HOLES.equalsIgnoreCase(unit)) {
+			return value * PIXELS_PER_HOLE;
+		}
+		return value;
+	}
+
+	private int fromPixels(int pixels, String unit) {
+		if (UNIT_MM.equalsIgnoreCase(unit)) {
+			return Math.round((pixels / (float) PIXELS_PER_HOLE) * MM_PER_HOLE);
+		}
+		if (UNIT_HOLES.equalsIgnoreCase(unit)) {
+			return Math.round(pixels / (float) PIXELS_PER_HOLE);
+		}
+		return pixels;
+	}
 
 }

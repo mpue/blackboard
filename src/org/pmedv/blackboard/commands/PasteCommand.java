@@ -40,7 +40,6 @@ import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.app.FileState;
 import org.pmedv.blackboard.components.BoardEditor;
 import org.pmedv.blackboard.components.Item;
-import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.components.Line;
 import org.pmedv.blackboard.components.Part;
 import org.pmedv.blackboard.components.Resistor;
@@ -103,7 +102,7 @@ public class PasteCommand extends AbstractCommand {
 					i.setOldHeight(i.getHeight());
 				}
 
-				editor.getModel().getLayer(i.getLayer()).getItems().add(i);
+				editor.getModel().addItem(i, i.getLayer());
 				
 				
 				if (i instanceof Resistor) {					

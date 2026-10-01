@@ -128,9 +128,9 @@ public final class PartFactory {
 	 */
 	private ArrayList<String> getAvailablePartFiles() {
 		ArrayList<String> partFiles = new ArrayList<String>();
-		File workDir = new File(System.getProperty("user.home"), "." + AppContext.getName());
+		File workDir = AppContext.getCatalogDir();
 		log.info("Working directory " + workDir.getAbsolutePath());
-		File partDir = new File(workDir + "/parts/");
+		File partDir = new File(workDir, "parts");
 		File[] files = partDir.listFiles();
 		if (files != null)
 			for (int i = 0; i < files.length; i++) {
@@ -154,10 +154,9 @@ public final class PartFactory {
 		if (name == null)
 			return null;
 
-		File workDir = new File(System.getProperty("user.home") + "/." + AppContext.getName());
+		File workDir = AppContext.getCatalogDir();
 
-		FileInputStream fis = new FileInputStream(System.getProperty("user.home") + "/." + AppContext.getName()
-				+ "/parts/" + name);
+		FileInputStream fis = new FileInputStream(new File(workDir, "parts/" + name));
 
 		Part p = null;
 		
@@ -168,8 +167,7 @@ public final class PartFactory {
 			throw new IllegalArgumentException("Unable to create part from file "+name);
 		}
 
-		String xmlContent = FileUtils.readFile(new File(System.getProperty("user.home"), "." + AppContext.getName()
-				+ "/parts/" + name));
+		String xmlContent = FileUtils.readFile(new File(workDir, "parts/" + name));
 		p.setXmlContent(xmlContent);
 
 		fis.close();
@@ -191,7 +189,7 @@ public final class PartFactory {
 		p.setFilename(name);
 		p.setOldXLoc(p.getXLoc());
 		p.setOldYLoc(p.getYLoc());
-		p.setLayer(BoardEditorModel.PART_LAYER);
+		p.setLayer(BoardEditorModel.PART_LAYER_INDEX);
 
 		// image has failed loading, we display the noresource image and give it
 		// a default size

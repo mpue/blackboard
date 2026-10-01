@@ -81,7 +81,7 @@ public class PostApplicationStartupConfigurer {
 		ApplicationPerspectiveProvider perspectiveProvider = ctx.getBean(ApplicationPerspectiveProvider.class);
 
 		if (perspectiveProvider.getPerspectives().size() > 1) {
-			String inputDir = System.getProperty("user.home") + "/." + AppContext.getName() + "/";
+			String inputDir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 			String inputFileName = "appWindowConfig.xml";			
 			
 			File output = new File(inputDir+inputFileName);

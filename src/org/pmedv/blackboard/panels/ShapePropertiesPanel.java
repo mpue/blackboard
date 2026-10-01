@@ -35,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
+import org.pmedv.blackboard.BoardUtil;
 import org.pmedv.blackboard.ShapeStyle;
 import org.pmedv.blackboard.components.LineEdgeType;
 import org.pmedv.blackboard.renderer.LineEdgeTypeRenderer;
@@ -218,6 +219,12 @@ public class ShapePropertiesPanel extends JPanel {
 	}
 	public JComboBox getStyleCombo() {
 		return styleCombo;
+	}
+
+	public void applyDefaultLineStyle() {
+		startLineCombo.setSelectedItem(LineEdgeType.getDefault());
+		endLineCombo.setSelectedItem(LineEdgeType.getDefault());
+		thicknessCombo.setSelectedItem(BoardUtil.getDefaultStroke());
 	}
 
 	/**

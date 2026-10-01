@@ -1,9 +1,5 @@
 #!/bin/bash
-# if a user starts e.g. sh test/me/Linux_Start.sh get the relative dir part "test/me"
-RELATIVEDIR=`echo $0|sed s/Linux_Start.sh//g`
-if [ $RELATIVEDIR ];
-then
-  cd $RELATIVEDIR
-fi
 
-java -Dsun.java2d.opengl=true -jar BlackBoard.jar
+cd "$(dirname "$0")"
+
+exec java --enable-native-access=ALL-UNNAMED -jar BlackBoard.jar "$@"

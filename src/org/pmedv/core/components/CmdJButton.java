@@ -32,6 +32,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.border.Border;
 
+import org.pmedv.core.util.UiScale;
+
 /**
  * This class represents a basic JButton with an associated command
  * 
@@ -52,10 +54,11 @@ public class CmdJButton extends JButton implements MouseListener {
 	public CmdJButton(Action action) {
 		this.setContentAreaFilled(false);
 		this.setBorderPainted(false);
-		this.setSize(16, 16);
+		this.setSize(UiScale.px(16), UiScale.px(16));
 		this.setAction(action);
 		this.addMouseListener(this);
-		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.white),BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+		int pad = UiScale.px(5);
+		this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.white),BorderFactory.createEmptyBorder(pad, pad, pad, pad)));
 	}
 
 	public void mouseClicked(MouseEvent e) {

@@ -105,18 +105,7 @@ public class PaneUI {
 
   private static ComponentCache componentCache = new ComponentCache();
 
-  private final PaneHandler paneHandler = new PaneHandler(new PaneHandlerListener() {
-    public void updating() {
-      setEnabled(false);
-      listener.updating();
-    }
-
-    public void updated() {
-      doInit();
-      setEnabled(true);
-      listener.updated();
-    }
-  });
+  private final PaneHandler paneHandler;
 
   private Tab hoveredTab;
 
@@ -134,6 +123,18 @@ public class PaneUI {
 
   public PaneUI(final PaneUIListener listener) {
     this.listener = listener;
+    this.paneHandler = new PaneHandler(new PaneHandlerListener() {
+      public void updating() {
+        setEnabled(false);
+        listener.updating();
+      }
+
+      public void updated() {
+        doInit();
+        setEnabled(true);
+        listener.updated();
+      }
+    });
   }
 
   public void init() {

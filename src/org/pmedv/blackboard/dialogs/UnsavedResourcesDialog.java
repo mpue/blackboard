@@ -39,6 +39,7 @@ import org.pmedv.blackboard.models.UnsavedResourcesTableModel;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.dialogs.AbstractNiceDialog;
 import org.pmedv.core.gui.ApplicationWindow;
+import org.pmedv.core.util.UiScale;
 
 public class UnsavedResourcesDialog extends AbstractNiceDialog {
 
@@ -73,13 +74,13 @@ public class UnsavedResourcesDialog extends AbstractNiceDialog {
 		panel.add(scrollPane, BorderLayout.CENTER);
 		panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		
-		resourcesTable.getColumnModel().getColumn(0).setPreferredWidth(33);
-		resourcesTable.getColumnModel().getColumn(1).setPreferredWidth(537);
+		resourcesTable.getColumnModel().getColumn(0).setPreferredWidth(UiScale.px(33));
+		resourcesTable.getColumnModel().getColumn(1).setPreferredWidth(UiScale.px(537));
 		resourcesTable.setRowSelectionAllowed(false);
 		resourcesTable.setColumnSelectionAllowed(false);
 		resourcesTable.setCellSelectionEnabled(false);
 		resourcesTable.setFocusable(false);
-		resourcesTable.setRowHeight(30);
+		resourcesTable.setRowHeight(UiScale.px(30));
 		resourcesTable.setShowGrid(false);
 		resourcesTable.setIntercellSpacing(new Dimension(0, 0));
 		

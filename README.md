@@ -27,42 +27,51 @@ Currently BlackBoard provides the following features:
 
 ![Part Library](web/images/bb_parts.jpg)
 
-
-This is an eclipse project, simply import it into the workspace.
-
-In order to build blackboard, you'll need ANT to be installed. Alternatively
-you can build it from within eclipse. With ANT you simply change to the BlackBoard directory
-and type "ant".
- 
-**Important:**
-
-All data is now stored and retrieved from users home directory. Users which use nigthly builds 
-or the sources must copy the directories symbols, models, parts, datasheets and simulators 
-to the folder USER_HOME/.BlackBoard 
-
 ## Prerequisites
 
-To get Blackboard running an installed Java Runtime 8 is mandatory. This will change in the near future.
+A current Java runtime is required (the start scripts use `--enable-native-access=ALL-UNNAMED`). To build from source you also need [Apache Ant](https://ant.apache.org/).
 
-## Installing
+User data (parts, symbols, models, preferences) lives in `~/.BlackBoard` (`%USERPROFILE%\.BlackBoard` on Windows).
 
-    $ git clone git@github.com:mpue/blackboard.git 
-    $ cd blackboard
-    $ ant 
-    $ cp -R models ~/.BlackBoard
-    $ cp -R symbols ~/.BlackBoard
-    $ cp -R parts ~/.BlackBoard
-    $ cp -R datasheets ~/.BlackBoard
-    $ cp -R simulators ~/.BlackBoard
+## Installation
 
-## Running
+**Windows:** For Windows download the provided installer under releases (`BlackBoardSetup_…exe`). For a portable installation use the release zip file (`blackboard-bin-…zip`).
 
-    $ java -Dsun.java2d.opengl=true -jar dist/lib/BlackBoard.jar
-    
+**Linux:** Download a release zip or build one with ant. And start with `./Linux_Start.sh`.
+
+On the first start from the JAR, BlackBoard copies missing data folders (`parts`, `symbols`, `models`, `datasheets`, `simulators`) from the install directory into `~/.BlackBoard`. You do not copy those folders by hand like in earlier versions.
+
+You can also run:
+
+```shell
+java --enable-native-access=ALL-UNNAMED -jar BlackBoard.jar
+```
+
+**hint for Linux Users**: The first JAR start writes a GNOME/KDE menu entry to `~/.local/share/applications/org.pmedv.blackboard.desktop` and registers the app-icon. `.bb` files are registered as `application/x-blackboard`.
+
+
+## Installation from source (development)
+
+```shell
+git clone git@github.com:PBahner/blackboard.git
+cd blackboard
+ant
+```
+
+Running from the IDE or classes on disk is **not** treated as an install. BlackBoard does **not** copy bundled data and does **not** install a desktop menu or file association. For a first development setup, copy the libraries into the user data directory yourself:
+
+```shell
+mkdir -p ~/.BlackBoard
+cp -R models symbols parts datasheets simulators ~/.BlackBoard
+```
+
+Start the main class `org.pmedv.blackboard.app.BlackBoard` from the IDE (with `--enable-native-access=ALL-UNNAMED` if the JVM requires it), or use the JAR from `dist/lib` as in the normal install.
+
+
 ## Important Notes
 
 In order to run the simulation, you must run blackboard as Administrator.
-    
+
 ## Documentation 
 
 Find the german manual here:

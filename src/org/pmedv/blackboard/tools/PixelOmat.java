@@ -354,9 +354,12 @@ public class PixelOmat extends JFrame {
 			
 		// store the PixelOmat image to the parts/images directory
 		
-		File workDir = new File(".");
-		File partDir = new File(workDir + "/parts/");
-		File imageDir = new File(workDir + "/parts/images/");
+		File workDir = AppContext.getCatalogDir();
+		File partDir = new File(workDir, "parts");
+		File imageDir = new File(partDir, "images");
+		if (!imageDir.exists()) {
+			imageDir.mkdirs();
+		}
 		File outputImage = new File(imageDir+"/"+partName+".png");
 		File outputPart = new File(partDir+"/"+partName+".xml");
 		
@@ -408,7 +411,7 @@ public class PixelOmat extends JFrame {
 		newPart.setXLoc(32);
 		newPart.setYLoc(32);
 		
-		editor.getModel().getCurrentLayer().getItems().add(newPart);
+		editor.getModel().addItem(newPart);
 		editor.setSelectedItem(newPart);
 		editor.refresh();
 		

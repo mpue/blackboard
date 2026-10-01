@@ -66,7 +66,7 @@ public class SpiceUtil {
 	
 	public static void importModels(ArrayList<Model> models) throws JAXBException, PropertyException, FileNotFoundException {
 		for (Model model : models) {			
-			marshaller.marshal(model, new FileOutputStream(new File(System.getProperty("user.home")+"/."+AppContext.getName()+"/models/", model.getName() + ".xml")));			
+			marshaller.marshal(model, new FileOutputStream(new File(AppContext.getCatalogDir(), "models/" + model.getName() + ".xml")));			
 		}
 	}
 

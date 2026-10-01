@@ -24,8 +24,6 @@ package org.pmedv.core.provider;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -50,13 +48,7 @@ public class ApplicationWindowConfigurationProviderImpl implements ApplicationWi
 	public ApplicationWindowConfigurationProviderImpl() {
 
 		try {
-			
-			InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties");
-			
-			Properties p = new Properties();
-			p.load(is);
-			
-			String inputDir = System.getProperty("user.home") + "/."+p.getProperty("app.name")+"/";
+			String inputDir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 			String inputFile = "appWindowConfig.xml";	
 			
 			JAXBContext c = JAXBContext.newInstance(ApplicationWindowConfiguration.class);
@@ -88,7 +80,7 @@ public class ApplicationWindowConfigurationProviderImpl implements ApplicationWi
 		Marshaller m;
 		
 		try {			
-			String outputDir = System.getProperty("user.home") + "/."+AppContext.getName()+"/";
+			String outputDir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 			String outputFileName = "appWindowConfig.xml";			
 			m = JAXBContext.newInstance(ApplicationWindowConfiguration.class).createMarshaller();			
 			File output = new File(outputDir+outputFileName);

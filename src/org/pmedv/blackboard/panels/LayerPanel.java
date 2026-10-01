@@ -44,6 +44,8 @@ import org.pmedv.core.components.AlternatingLineTable;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.services.ResourceService;
 
+import com.formdev.flatlaf.util.UIScale;
+
 public class LayerPanel extends JPanel {
 	
 	private static final ResourceService resources = AppContext.getContext().getBean(ResourceService.class);
@@ -92,9 +94,9 @@ public class LayerPanel extends JPanel {
 		
 		JPanel buttonPanel = new JPanel(new FlowLayout());
 		addLayerButton.setIcon(resources.getIcon("icon.addlayer"));
-		addLayerButton.setPreferredSize(new Dimension(100,25));
+		addLayerButton.setPreferredSize(new Dimension(UIScale.scale(100), UIScale.scale(25)));
 		removeLayerButton.setIcon(resources.getIcon("icon.removelayer"));
-		removeLayerButton.setPreferredSize(new Dimension(100,25));
+		removeLayerButton.setPreferredSize(new Dimension(UIScale.scale(100), UIScale.scale(25)));
 		buttonPanel.add(addLayerButton);
 		buttonPanel.add(removeLayerButton);
 		

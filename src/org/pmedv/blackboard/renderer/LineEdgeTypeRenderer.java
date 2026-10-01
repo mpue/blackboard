@@ -40,6 +40,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 
 import org.pmedv.blackboard.components.LineEdgeType;
+import org.pmedv.core.util.UiScale;
 
 /**
  * The <code>LineEdgeTypeRenderer</code> renders the different available edges
@@ -67,6 +68,7 @@ public final class LineEdgeTypeRenderer extends DefaultListCellRenderer {
 	private final Map<Object, Icon> icons = new HashMap<Object, Icon>();
 
 	public LineEdgeTypeRenderer(Direction direction) {
+		size.setSize(UiScale.px(32), UiScale.px(32));
 		icons.put(LineEdgeType.ROUND_DOT, createIcon(LineEdgeType.ROUND_DOT,direction));
 		icons.put(LineEdgeType.SIMPLE_ARROW, createIcon(LineEdgeType.SIMPLE_ARROW,direction));
 		icons.put(LineEdgeType.STRAIGHT, createIcon(LineEdgeType.STRAIGHT,direction));
@@ -74,11 +76,14 @@ public final class LineEdgeTypeRenderer extends DefaultListCellRenderer {
 
 	private Icon createIcon(LineEdgeType type, Direction direction) {
 
-		BufferedImage b = new BufferedImage(32, 16, BufferedImage.TYPE_INT_ARGB);
+		int w = UiScale.px(iconWidth);
+		int h = UiScale.px(iconHeight);
+		BufferedImage b = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = (Graphics2D) b.getGraphics();
 		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2d.setRenderingHints(rh);
+		g2d.scale((double) w / iconWidth, (double) h / iconHeight);
 
 		g2d.setColor(Color.BLACK);
 		g2d.setStroke(defaultStroke);

@@ -22,6 +22,7 @@
  */
 package org.pmedv.blackboard.dialogs;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -56,15 +57,10 @@ public class BoardPropertiesDialog extends AbstractNiceDialog {
 	
 	private static final long serialVersionUID = -2659334064189002289L;
 	
-	// Dimensions of this dialog
 	private static final int DIALOG_WIDTH = 400;
-	private static final int DIALOG_HEIGHT = 320;
 	
 	private BoardPropertiesPanel propertiesPanel;
 	private BoardEditorModel model;
-	
-	private static final int UNIT = 16;
-	private static final float INCH = 2.54f;
 
 	public BoardPropertiesDialog(String title, String subTitle, ImageIcon icon, BoardEditorModel model) {
 		super(title, subTitle, icon, true, false, true, true, AppContext.getContext().getBean(ApplicationWindow.class), model);
@@ -76,23 +72,22 @@ public class BoardPropertiesDialog extends AbstractNiceDialog {
 		
 		propertiesPanel = new BoardPropertiesPanel();
 		propertiesPanel.getFileField().getFileChooser().setFileFilter(new PNGFilter());
-		setSize(new Dimension(DIALOG_WIDTH, DIALOG_HEIGHT));
-		setResizable(false);		
-		getContentPanel().add(propertiesPanel);
+		setResizable(false);
+		setSize(new Dimension(DIALOG_WIDTH, 1));
+		getContentPanel().add(propertiesPanel, BorderLayout.CENTER);
 		propertiesPanel.getTypeCombo().setRenderer(new BoardTypeComboBoxRenderer());
 		propertiesPanel.getFileField().setEnabled(false);
 		
 		if (getUserObject() != null && getUserObject() instanceof BoardEditorModel) {
 			this.model = (BoardEditorModel) getUserObject();
-			propertiesPanel.getBoardWidthSpinner().setValue(model.getWidth());
-			propertiesPanel.getBoardHeightSpinner().setValue(model.getHeight());
+			propertiesPanel.setDimensionsInPixels(model.getWidth(), model.getHeight());
 			propertiesPanel.getTypeCombo().setSelectedItem(model.getType());
 			if (model.getType().equals(BoardType.CUSTOM)) {
 				propertiesPanel.getFileField().setEnabled(true);
 				propertiesPanel.getFileField().getPathField().setText(model.getBackgroundImageLocation());
 			}
 		}
-		
+
 		initListeners();
 	}
 
@@ -100,15 +95,8 @@ public class BoardPropertiesDialog extends AbstractNiceDialog {
 		getOkButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Integer width = (Integer) propertiesPanel.getBoardWidthSpinner().getValue();
-				Integer height = (Integer) propertiesPanel.getBoardHeightSpinner().getValue();
-				
-				String unit = (String)propertiesPanel.getUnitComboBox().getSelectedItem();
-				
-				if (unit.equalsIgnoreCase("mm")) {
-					width  = (int) ((width/INCH)*UNIT);
-					height = (int) ((height/INCH)*UNIT);
-				}
+				int width = propertiesPanel.getWidthInPixels();
+				int height = propertiesPanel.getHeightInPixels();
 				
 				if (model != null) {
 					model.setWidth(width);
@@ -149,26 +137,6 @@ public class BoardPropertiesDialog extends AbstractNiceDialog {
 			public void actionPerformed(ActionEvent e) {
 				propertiesPanel.getFileField().setEnabled(
 						propertiesPanel.getTypeCombo().getSelectedItem().equals(BoardType.CUSTOM));
-			}
-		});
-		propertiesPanel.getUnitComboBox().addActionListener(new ActionListener() {
-
-			// TODO : Do something about it!
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				String unit = (String)propertiesPanel.getUnitComboBox().getSelectedItem();
-				
-				if (unit.equalsIgnoreCase("mm")) {
-
-					
-				}
-				else {
-					
-
-				}
-				
 			}
 		});
 	}

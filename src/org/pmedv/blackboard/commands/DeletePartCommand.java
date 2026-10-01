@@ -69,11 +69,11 @@ public class DeletePartCommand extends AbstractCommand {
 			PartDialog dialog = AppContext.getContext().getBean(PartDialog.class);			
 			Part part = dialog.getCurrentPart();
 			
-			File partFile = new File(AppContext.getWorkingDir() + "/parts/" + part.getFilename());
+			File partFile = new File(AppContext.getCatalogDir(), "parts/" + part.getFilename());
 			log.debug("Deleting "+partFile.getAbsolutePath());
 			partFile.delete();
 			
-			File imageFile = new File(AppContext.getWorkingDir() + "/parts/images/" + part.getImageName());
+			File imageFile = new File(AppContext.getCatalogDir(), "parts/images/" + part.getImageName());
 			log.debug("Deleting "+imageFile.getAbsolutePath());
 			imageFile.delete();
 			

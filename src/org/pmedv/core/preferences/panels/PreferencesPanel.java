@@ -14,6 +14,8 @@ import javax.swing.JTree;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
+import org.pmedv.core.util.UiScale;
+
 /**
  * @author Matthias Pueski
  */
@@ -38,7 +40,7 @@ public class PreferencesPanel extends JPanel {
 
 		//======== splitPane ========
 		{
-			splitPane.setDividerLocation(100);
+			splitPane.setDividerLocation(UiScale.px(100));
 
 			//======== scrollPane1 ========
 			{

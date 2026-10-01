@@ -40,7 +40,6 @@ import org.pmedv.blackboard.components.Item;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.components.Resistor;
 import org.pmedv.blackboard.dialogs.ResistorDialog;
-import org.pmedv.blackboard.models.BoardEditorModel;
 import org.pmedv.core.commands.AbstractEditorCommand;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.dialogs.AbstractNiceDialog;
@@ -93,23 +92,7 @@ public class AddResistorCommand extends AbstractEditorCommand {
 		max++;
 		resistor.setIndex(max);
 		
-		// Check if the default part layer exists
-		
-		boolean onPartLayer = false;
-		
-		for (Layer layer : editor.getModel().getLayers()) {
-			if (layer.getIndex() == BoardEditorModel.PART_LAYER) {
-				resistor.setLayer(BoardEditorModel.PART_LAYER);
-				onPartLayer = true;
-				break;
-			}
-		}
-		
-		if (!onPartLayer) {
-			resistor.setLayer(editor.getModel().getCurrentLayer().getIndex());	
-		}
-		
-		editor.getModel().getLayer(resistor.getLayer()).getItems().add(resistor);
+		editor.getModel().addItem(resistor);
 		
 		final UndoManager undoManager = editor.getUndoManager();
 		if (!undoManager.addEdit(new AddResistorEdit(resistor))) {

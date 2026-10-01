@@ -62,6 +62,7 @@ import org.pmedv.core.context.AppContext;
 import org.pmedv.core.gui.ApplicationWindow;
 import org.pmedv.core.services.ResourceService;
 import org.pmedv.core.util.ErrorUtils;
+import org.pmedv.core.util.UiScale;
 
 /**
  * The <code>SymbolListTable</code> is the main panel for symbol
@@ -127,7 +128,7 @@ public class SymbolListPanel extends JPanel {
 		symbolBeans.addAll(provider.getElements());		
 		model = new SymbolTableModel(symbolBeans);		
 		symbolTable.setModel(model);		
-		symbolTable.setRowHeight(128);
+		symbolTable.setRowHeight(UiScale.px(128));
 		symbolTable.setDragEnabled(true);
 		symbolTable.setTransferHandler(new SymbolTableTransferHandler());
 		// symbolTable.setPreferredSize(new Dimension(200,300));

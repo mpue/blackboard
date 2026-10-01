@@ -42,6 +42,7 @@ import org.pmedv.core.beans.ApplicationToolbarItem;
 import org.pmedv.core.commands.AbstractCommand;
 import org.pmedv.core.components.CmdJButton;
 import org.pmedv.core.context.AppContext;
+import org.pmedv.core.util.UiScale;
 import org.springframework.context.ApplicationContext;
 
 
@@ -120,7 +121,7 @@ public class ApplicationToolbarProviderImpl implements ApplicationToolbarProvide
 							button.putClientProperty("hideActionText", Boolean.TRUE);
 							button.setContentAreaFilled(false);
 							button.setBorderPainted(false);
-							button.setSize(16, 16);
+							button.setSize(UiScale.px(16), UiScale.px(16));
 							button.setAction(command);
 							button.setId("common");							
 							button.setFocusable(false);
@@ -192,7 +193,7 @@ public class ApplicationToolbarProviderImpl implements ApplicationToolbarProvide
 								button.putClientProperty("hideActionText", Boolean.TRUE);
 								button.setContentAreaFilled(false);
 								button.setBorderPainted(false);
-								button.setSize(16, 16);
+								button.setSize(UiScale.px(16), UiScale.px(16));
 								button.setAction(command);
 								button.setId(perspective.getId());
 								button.setFocusable(false);

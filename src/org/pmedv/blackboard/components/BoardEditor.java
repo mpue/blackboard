@@ -125,6 +125,7 @@ import org.pmedv.core.context.AppContext;
 import org.pmedv.core.gui.ApplicationWindow;
 import org.pmedv.core.preferences.Preferences;
 import org.pmedv.core.services.ResourceService;
+import org.pmedv.core.util.UiScale;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -258,7 +259,8 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 	// docking view
 	private View view;
 	private ArrayList<EditorChangedListener> listeners;
-	private final float[] zoomLevels = { 0.1f, 0.25f, 0.5f, 0.75f, 1.0f, 1.25f, 1.5f, 2.0f, 4.0f, 6.0f, 8.0f };
+	private static final float[] ZOOM_LEVELS = { 0.1f, 0.25f, 0.5f, 0.75f, 1.0f, 1.25f, 1.5f, 2.0f, 4.0f, 6.0f, 8.0f };
+	private final float[] zoomLevels = ZOOM_LEVELS;
 	private int currentZoomIndex = 4;
 	private final ShapePropertiesPanel shapesPanel = ctx.getBean(ShapePropertiesPanel.class);
 	private final Line currentDrawingLine = new Line(0, 0, 0, 0, 0);
@@ -293,7 +295,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 		setOpaque(false);
 		listeners = new ArrayList<EditorChangedListener>();
 		this.model = model;
-		model.setCurrentLayer(model.getLayer(BoardEditorModel.TOP_LAYER));
+		model.ensureCurrentLayer();
 		
 		if (model.getType() != null && !model.getType().equals(BoardType.SCHEMATICS)) {
 			if (model.getType().equals(BoardType.CUSTOM)) {
@@ -435,8 +437,8 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
                         	lastZoomIndex = currentZoomIndex;
                         }
                         
-                        view.x = (int) (oldView.x + (deltaX * zoomLevels[currentZoomIndex]));
-                        view.y = (int) (oldView.y + (deltaY * zoomLevels[currentZoomIndex]));
+                        view.x = (int) (oldView.x + (deltaX * visualScale(zoomLevels[currentZoomIndex])));
+                        view.y = (int) (oldView.y + (deltaY * visualScale(zoomLevels[currentZoomIndex])));
 
                         scrollRectToVisible(view);
                         
@@ -479,11 +481,8 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 					}					
 				}
 				
-				JXLayer<?> layer = getZoomLayer();
-				TransformUI ui = (TransformUI)(Object)layer.getUI();
-				DefaultTransformModel model = (DefaultTransformModel) ui.getModel();				
-				model.setScale(zoomLevels[currentZoomIndex]);
-				ctx.getBean(ApplicationWindow.class).getZoomCombo().setSelectedItem(zoomLevels[currentZoomIndex]);
+				setBoardZoom(zoomLevels[currentZoomIndex]);
+				ctx.getBean(ApplicationWindow.class).getZoomCombo().setSelectedItem(new Float(zoomLevels[currentZoomIndex]));
 			}
 		});
 		addMouseMotionListener(AppContext.getContext().getBean(AddTextCommand.class));
@@ -1865,7 +1864,7 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 				if (line.getStroke() != null)
 					g2d.setStroke(line.getStroke());
 				else
-					g2d.setStroke(BoardUtil.stroke_3_0f);
+					g2d.setStroke(BoardUtil.getDefaultStroke());
 				g2d.setColor(item.getColor());
 			}
 			
@@ -2190,6 +2189,38 @@ public class BoardEditor extends JPanel implements MouseMotionListener{
 
 	public void setRaster(int raster) {
 		this.raster = raster;
+	}
+
+	public static float visualScale(float boardZoom) {
+		return boardZoom * UiScale.factor();
+	}
+
+	public float getBoardZoom() {
+		return zoomLevels[currentZoomIndex];
+	}
+
+	public void setBoardZoom(float boardZoom) {
+		currentZoomIndex = indexOfZoom(boardZoom);
+		if (zoomLayer == null) {
+			return;
+		}
+		TransformUI ui = (TransformUI) (Object) zoomLayer.getUI();
+		DefaultTransformModel model = (DefaultTransformModel) ui.getModel();
+		model.setScaleToPreferredSize(true);
+		model.setScale(visualScale(zoomLevels[currentZoomIndex]));
+	}
+
+	private static int indexOfZoom(float boardZoom) {
+		int best = 4;
+		float bestDiff = Float.MAX_VALUE;
+		for (int i = 0; i < ZOOM_LEVELS.length; i++) {
+			float d = Math.abs(ZOOM_LEVELS[i] - boardZoom);
+			if (d < bestDiff) {
+				bestDiff = d;
+				best = i;
+			}
+		}
+		return best;
 	}
 
 	public JXLayer<?> getZoomLayer() {

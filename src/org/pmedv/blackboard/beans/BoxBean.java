@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import java.awt.BasicStroke;
+
 import org.pmedv.blackboard.ShapeStyle;
 import org.pmedv.blackboard.components.Box;
 
@@ -38,12 +40,13 @@ public class BoxBean  {
 		this.width = box.getWidth();
 		this.index = box.getIndex();
 		this.layer = box.getLayer();
-		this.thickness = box.getStroke().getLineWidth();
-		this.dashArray = box.getStroke().getDashArray();
-		this.dashPhase = box.getStroke().getDashPhase();
-		this.endCap = box.getStroke().getEndCap();
-		this.lineJoin = box.getStroke().getLineJoin();
-		this.miterLimit = box.getStroke().getMiterLimit();
+		BasicStroke stroke = box.getStroke();
+		this.thickness = stroke.getLineWidth();
+		this.dashArray = stroke.getDashArray();
+		this.dashPhase = stroke.getDashPhase();
+		this.endCap = stroke.getEndCap();
+		this.lineJoin = stroke.getLineJoin();
+		this.miterLimit = stroke.getMiterLimit();
 		this.style = box.getStyle();
 	}
 	

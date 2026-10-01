@@ -26,17 +26,16 @@ import java.io.InputStream;
 import java.util.Locale;
 import java.util.Properties;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
-import com.jgoodies.looks.plastic.theme.SkyBluer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.pmedv.blackboard.LinuxFileAssociation;
 import org.pmedv.core.app.AbstractApplication;
+import org.pmedv.core.context.AppContext;
+import org.pmedv.blackboard.AppIcon;
+import org.pmedv.core.util.UiScale;
 import com.formdev.flatlaf.util.SystemInfo;
-import org.pmedv.core.preferences.Preferences;
 
 import javax.swing.*;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 
 /**
@@ -51,10 +50,20 @@ public class BlackBoard extends AbstractApplication {
 		super(fileLocation);
 	}
 
+	@Override
+	protected String[] getBundledDataDirectories() {
+		return new String[] { "parts", "symbols", "models", "datasheets", "simulators" };
+	}
+
 	private static final Log log = LogFactory.getLog(BlackBoard.class);
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
+
+		System.setProperty("awt.app.id", AppIcon.APP_ID);
+		UiScale.applyFromDesktop();
+		AppIcon.applyEarly();
+		LinuxFileAssociation.install();
 
 		// macOS
 		if( SystemInfo.isMacOS ) {
@@ -83,13 +92,23 @@ public class BlackBoard extends AbstractApplication {
 			}						
 		}
 		
-		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties");
-		
 		Properties p = new Properties();
-		p.load(is);
-		
+		try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties")) {
+			p.load(is);
+		}
+		AppContext.setName(p.getProperty("app.name"));
 		if (!p.getProperty("language").equalsIgnoreCase("default")){
 			Locale.setDefault(new Locale(p.getProperty("language")));
+		}
+
+		// SwingX LinuxLookAndFeelAddons calls UIManager.put during class init.
+		// InfoNode listens to those changes; on GNOME that happens while PaneUI
+		// is still constructing and crashes with a null listener. Initialize
+		// SwingX addons before Spring loads InfoNode.
+		try {
+			Class.forName("org.jdesktop.swingx.plaf.LookAndFeelAddons");
+		}
+		catch (ClassNotFoundException ignored) {
 		}
 		
 		log.info("Initalizing application");		

@@ -28,6 +28,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -81,7 +82,7 @@ public class ResistorFactory {
 	public Resistor getResistor(int value, float tolerance) {
 		Resistor resistor = new Resistor(32, 32, 96, 32, 0, value, tolerance);
 		resistor.setBody(getImageForValue(value,5.0f));	
-		resistor.setLayer(BoardEditorModel.PART_LAYER);
+		resistor.setLayer(BoardEditorModel.PART_LAYER_INDEX);
 		return resistor;
 	}
 
@@ -92,7 +93,7 @@ public class ResistorFactory {
 	private BufferedImage getBaseImage() {
 
 		try {
-			BufferedImage image = ImageIO.read(new FileInputStream(AppContext.getWorkingDir()+"/parts/images/r_ohne_reflex.png"));
+			BufferedImage image = ImageIO.read(new FileInputStream(new File(AppContext.getCatalogDir(), "parts/images/r_ohne_reflex.png")));
 			return image;
 		}
 		catch (IOException e) {
@@ -107,9 +108,9 @@ public class ResistorFactory {
 		
 		try {
 			if (toleranceRing)
-				image = ImageIO.read(new FileInputStream(AppContext.getWorkingDir()+"/parts/images/r_nur_reflex_und_schatten.png"));
+				image = ImageIO.read(new FileInputStream(new File(AppContext.getCatalogDir(), "parts/images/r_nur_reflex_und_schatten.png")));
 			else
-				image = ImageIO.read(new FileInputStream(AppContext.getWorkingDir()+"/parts/images/r_nur_reflex_und_schatten_ot.png"));
+				image = ImageIO.read(new FileInputStream(new File(AppContext.getCatalogDir(), "parts/images/r_nur_reflex_und_schatten_ot.png")));
 			return image;
 		}
 		catch (IOException e) {

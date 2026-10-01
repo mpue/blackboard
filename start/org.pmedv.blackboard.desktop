@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=BlackBoard
+Comment=Breadboard and schematic designer
+Comment[de]=Platinen- und Schaltplan-Editor
+Exec=Linux_Start.sh %f
+Terminal=false
+StartupWMClass=org.pmedv.blackboard
+StartupNotify=true
+MimeType=application/x-blackboard;
+Categories=Development;Education;Engineering;
+Keywords=electronics;breadboard;schematic;PCB;

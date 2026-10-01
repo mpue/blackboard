@@ -46,9 +46,7 @@ import javax.swing.filechooser.FileFilter;
 import net.infonode.docking.DockingWindow;
 import net.infonode.docking.DockingWindowAdapter;
 import net.infonode.docking.OperationAbortedException;
-import net.infonode.docking.TabWindow;
 import net.infonode.docking.View;
-import net.infonode.docking.util.DockingUtil;
 import net.infonode.gui.mouse.MouseButtonListener;
 
 import org.apache.commons.logging.Log;
@@ -116,7 +114,7 @@ public class OpenBoardCommand extends AbstractOpenEditorCommand {
 		final ApplicationWindow win = ctx.getBean(ApplicationWindow.class);
 		
 		// No file selected before, popup a dialog and query the user which file to open.
-		if (file == null) {					
+		if (file == null || !file.exists()) {
 			String path = System.getProperty("user.home");					
 			if (AppContext.getLastSelectedFolder() != null) {
 				path = AppContext.getLastSelectedFolder();
@@ -215,7 +213,7 @@ public class OpenBoardCommand extends AbstractOpenEditorCommand {
 		
 		final BoardEditor editor = new BoardEditor(model);
 		CenterPanel panel = new CenterPanel();
-		JXLayer<?> zoomLayer = TransformUtils.createTransformJXLayer(editor, 1,new QualityHints());				
+		JXLayer<?> zoomLayer = TransformUtils.createTransformJXLayer(editor, BoardEditor.visualScale(1f), new QualityHints());				
 		panel.getCenterPanel().add(zoomLayer);				
 		editor.setZoomLayer(zoomLayer);
 		panel.setBoardEditor(editor);
@@ -273,6 +271,13 @@ public class OpenBoardCommand extends AbstractOpenEditorCommand {
 			public void windowClosed(DockingWindow window) {
 				editor.notifyListeners(EventType.EDITOR_CLOSED);
 			}
+
+			@Override
+			public void viewFocusChanged(View previouslyFocusedView, View focusedView) {
+				if (focusedView == editorView) {
+					EditorUtils.activateEditor(editor, false);
+				}
+			}
 			
 		});
 		editor.updateStatusBar();
@@ -282,14 +287,7 @@ public class OpenBoardCommand extends AbstractOpenEditorCommand {
 
 	private void handleMouseEvent(MouseEvent e, BoardEditor editor) {
 		if (e.getID() == MouseEvent.MOUSE_PRESSED) {
-			log.info(e);		
-			TabWindow tw = DockingUtil.getTabWindowFor(editor.getView());
-			advisor.setCurrentEditorArea(tw);
-			EditorUtils.setToolbarButtonState(editor);
-			ctx.getBean(ApplicationWindow.class).getRasterCombo().setSelectedItem(new Integer(editor.getRaster()));
-			editor.updateStatusBar();
-			editor.getView().requestFocus();	
-			editor.notifyListeners(EventType.EDITOR_CHANGED);
+			EditorUtils.activateEditor(editor, true);
 		}
 	}
 	

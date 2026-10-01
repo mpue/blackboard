@@ -122,37 +122,34 @@ public abstract class AbstractApplication {
 		
 		currentDir = new File(System.getProperty("user.home")).getAbsolutePath();
 
-		/**
-		 * Initialize spring application context.
-		 */
-		
-		File workDir = new File(".");
+		if (AppContext.getName() == null) {
+			throw new IllegalStateException("Application name must be set before startup.");
+		}
+
+		File workDir = detectInstallDir();
 		log.info("Working directory "+workDir.getAbsolutePath());
 		AppContext.setWorkingDir(workDir);
-		
+
+		File dataDir = AppContext.getUserDataDir();
+		if (!dataDir.exists()) {
+			log.info("Creating directory "+dataDir.getAbsolutePath());
+			FileUtils.makeDirectory(dataDir.getAbsolutePath());
+		}
+		File tempDir = new File(dataDir, "temp");
+		if (!tempDir.exists()) {
+			log.info("Creating directory "+tempDir.getAbsolutePath());
+			FileUtils.makeDirectory(tempDir.getAbsolutePath());
+		}
+		if (AppContext.isRunningFromJar()) {
+			String[] bundledDirs = getBundledDataDirectories();
+			if (bundledDirs != null) {
+                for (String bundledDir : bundledDirs) {
+                    copyBundledDataIfMissing(bundledDir);
+                }
+			}
+		}
+
 		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		
-		/**
-		 * Now check the default directory structure and create missing 
-		 * directories if necessary
-		 */
-		
-		String datadir = currentDir+"/."+AppContext.getName();
-		
-		File f = new File(datadir);
-		
-		if (!f.exists()) {
-			log.info("Creating directory "+datadir);
-			FileUtils.makeDirectory(datadir);
-		}
-		
-		String tempDir = currentDir+"/."+AppContext.getName()+"/temp";
-		
-		f = new File(tempDir);
-		if (!f.exists()) {
-			log.info("Creating directory "+tempDir);
-			FileUtils.makeDirectory(tempDir);
-		}
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			
@@ -180,7 +177,56 @@ public abstract class AbstractApplication {
 		
 	}
 
-	
+	/**
+	 * Directory that contains shipped data next to the JAR
+	 * (NSIS {@code $INSTDIR}); from the IDE it is the current directory.
+	 */
+	public static File detectInstallDir() {
+		try {
+			java.net.URL location = AbstractApplication.class.getProtectionDomain().getCodeSource().getLocation();
+			File file = new File(location.toURI());
+			if (file.isFile()) {
+				AppContext.setRunningFromJar(true);
+				return file.getParentFile();
+			}
+		}
+		catch (Exception e) {
+			log.warn("Could not determine install directory, using current directory.", e);
+		}
+		AppContext.setRunningFromJar(false);
+		return new File(".");
+	}
+
+	/**
+	 * Names of data folders shipped next to the JAR that should be copied
+	 * into the user data directory on first run. Empty by default.
+	 */
+	protected String[] getBundledDataDirectories() {
+		return new String[0];
+	}
+
+	/**
+	 * Copies a bundled folder from the install dir into the user data dir
+	 * when the destination does not exist yet.
+	 */
+	private void copyBundledDataIfMissing(String folderName) {
+		File dest = new File(AppContext.getUserDataDir(), folderName);
+		if (dest.exists()) {
+			return;
+		}
+		File src = new File(AppContext.getWorkingDir(), folderName);
+		if (!src.isDirectory()) {
+			return;
+		}
+		try {
+			org.apache.commons.io.FileUtils.copyDirectory(src, dest);
+			log.info("Copied " + folderName + " to " + dest.getAbsolutePath());
+		}
+		catch (java.io.IOException e) {
+			log.error("Could not copy bundled " + folderName + " to " + dest.getAbsolutePath(), e);
+		}
+	}
+
     /**
      * Displays the splashscreen during application startup. The splashscreen contains
      * a progressbar indicating the initializing progress of each bean. Thus the according

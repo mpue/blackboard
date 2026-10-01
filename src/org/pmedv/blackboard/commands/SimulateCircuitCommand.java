@@ -156,7 +156,7 @@ public class SimulateCircuitCommand extends AbstractEditorCommand {
 	
 	private void doSpiceSim(StringBuffer data, SpiceSimulator simulator) throws Exception {
 
-		String path = System.getProperty("user.home")+"/."+AppContext.getName()+"/temp";		
+		String path = new File(AppContext.getUserDataDir(), "temp").getAbsolutePath();		
 		File f = new File(path,"temp_"+System.currentTimeMillis()+".cir");
 		
 		FileUtils.writeStringToFile(f, data.toString());

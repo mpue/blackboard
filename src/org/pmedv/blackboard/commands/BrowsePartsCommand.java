@@ -38,7 +38,6 @@ import org.pmedv.blackboard.components.Layer;
 import org.pmedv.blackboard.components.Part;
 import org.pmedv.blackboard.dialogs.PartDialog;
 import org.pmedv.blackboard.events.EditorChangedEvent;
-import org.pmedv.blackboard.models.BoardEditorModel.BoardType;
 import org.pmedv.core.commands.AbstractEditorCommand;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.dialogs.AbstractNiceDialog;
@@ -112,23 +111,7 @@ public class BrowsePartsCommand extends AbstractEditorCommand {
 			part.setOldHeight(part.getOldHeight());			
 			
 			part.setIndex(max);
-			
-			// Check if the default part layer exists
-			
-//			boolean onPartLayer = false;
-//			
-//			for (Layer layer : editor.getModel().getLayers()) {
-//				if (layer.getIndex() == BoardEditorModel.PART_LAYER) {
-//					part.setLayer(BoardEditorModel.PART_LAYER);
-//					onPartLayer = true;
-//					break;
-//				}
-//			}
-//			
-//			if (!onPartLayer) {
-//				part.setLayer(editor.getModel().getCurrentLayer().getIndex());	
-//			}
-			
+
 			xLoc += 64;
 			yLoc += 64;
 			
@@ -142,9 +125,11 @@ public class BrowsePartsCommand extends AbstractEditorCommand {
 			}			
 			else part.setName("");
 
-			AddItemCommand cmd = new AddItemCommand();
+			editor.getModel().addItem(part);
+
+			/*AddItemCommand cmd = new AddItemCommand();
 			cmd.setItem(part);			
-			cmd.execute(null);
+			cmd.execute(null);*/
 			
 			if (dlg.getSelectedParts().size() == 1) {
 				editor.getSelectedItems().clear();

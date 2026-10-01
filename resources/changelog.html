@@ -366,3 +366,42 @@
 	<li>Change : ...UI-Redesign; Java, Spring update...</li>
 	<li>Fixed bug : </li>
 </ul>
+<b>Version 2.0.0.6</b>
+<hr>
+<ul>
+	<li>Fixed problems with file-writing</li>
+	<li>Added missing classpath libs</li>
+	<li>Fixed placing new parts on default parts-layer instead of selected layer</li>
+	<li>Fixed &quot;export image&quot;-dialog (the dialog was actually too small to display all its elements)</li>
+	<li>Fixed selection of font-names</li>
+	<li>Improved / fixed problems with file handling (in some cases the application created corrupted files because two processes were using the same file in parallel)</li>
+</ul>
+<b>Version 2.0.0.7</b>
+<hr>
+<ul>
+	<li>This release includes some bugfixes and some improvements with switching themes</li>
+	<li>Fixed error during opening boards when xml files were loaded in wrong order</li>
+	<li>Fixed some problems with switching themes</li>
+	<li>Added support to either choose a custom theme which is then stored permanently in the preferences or to automatically detect the theme (light or dark) based on the system settings</li>
+	<li>Added support for gnome theme detection</li>
+	<li>Fixed striped table background colors</li>
+	<li>NOTE: in order to use all available themes you may need to delete your {HOME}/.BlackBoard/preferences.xml</li>
+</ul>
+<b>Version 2.1.0.8</b>
+<hr>
+<ul>
+	<li>Added file-icon, file-association, app-icon for linux (tested on gnome)</li>
+	<li>Improved UI and board scaling based on system preferences</li>
+	<li>Do not save deleted unused parts in packed board file</li>
+	<li>Fixed line style handling for components (line, box, ellipse) and defined new default values</li>
+	<li>Layer handling improvements, fix layer assignment after reordering and board switching</li>
+	<li>Refactored user data and catalog directory handling</li>
+	<li>Fixed part imports from board archives and prevent file collisions</li>
+	<li>Added parts: &quot;Straight Header 7x1V&quot; and &quot;Straight Header 7x2V&quot;</li>
+	<li>Added parts: &quot;socket 2x1&quot;, &quot;socket 3x1&quot;, &quot;socket 5x1&quot;, &quot;socket 6x1&quot;, &quot;socket 7x1&quot;</li>
+	<li>Automatically set dialog heights based on contents, do not allow resizing dialogs</li>
+	<li>Fixed gnome startup crash (SwingX UIManager)</li>
+	<li>Set default image export path to the current board file path</li>
+	<li>Fixed xml board reading and zip extraction</li>
+	<li>Automatically recalculate board size when switching between units (px, mm, holes)</li>
+</ul>

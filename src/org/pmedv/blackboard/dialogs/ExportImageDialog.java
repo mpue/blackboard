@@ -79,7 +79,7 @@ public class ExportImageDialog extends AbstractNiceDialog {
 
 		editor = EditorUtils.getCurrentActiveEditor();
 
-		setSize(new Dimension(640, 550));
+		setSize(new Dimension(640, 600));
 		getContentPanel().add(exportPanel);
 
 		getOkButton().addActionListener(new ActionListener() {
@@ -139,6 +139,7 @@ public class ExportImageDialog extends AbstractNiceDialog {
 
 		exportPanel.getFileTextField().getFileChooser().setDialogTitle(resources.getResourceByKey("ExportImageDialog.saveMsg"));
 		exportPanel.getFileTextField().getFileChooser().setFileFilter(new ImageFilter());
+		initDefaultExportPath();
 		
 		setLocationRelativeTo(getRootPane());
 
@@ -147,6 +148,45 @@ public class ExportImageDialog extends AbstractNiceDialog {
 		exportPanel.getPreviewPanel().add(label, BorderLayout.CENTER);
 
 		updatePreview();
+	}
+
+	private void initDefaultExportPath() {
+		File suggested = null;
+		if (editor != null && editor.getCurrentFile() != null) {
+			File currentFile = editor.getCurrentFile();
+			File directory = currentFile.getParentFile();
+			if (directory != null && directory.isDirectory()) {
+				suggested = new File(directory, stripExtension(currentFile.getName()) + ".png");
+			}
+		}
+		if (suggested == null) {
+			String lastFolder = AppContext.getLastSelectedFolder();
+			if (lastFolder != null) {
+				File last = new File(lastFolder);
+				if (last.isFile()) {
+					suggested = last;
+				}
+				else if (last.isDirectory()) {
+					exportPanel.getFileTextField().getFileChooser().setCurrentDirectory(last);
+					return;
+				}
+			}
+		}
+		if (suggested != null) {
+			exportPanel.getFileTextField().getPathField().setText(suggested.getAbsolutePath());
+			if (suggested.getParentFile() != null) {
+				exportPanel.getFileTextField().getFileChooser().setCurrentDirectory(suggested.getParentFile());
+			}
+			exportPanel.getFileTextField().getFileChooser().setSelectedFile(suggested);
+		}
+	}
+
+	private String stripExtension(String filename) {
+		int dot = filename.lastIndexOf('.');
+		if (dot > 0) {
+			return filename.substring(0, dot);
+		}
+		return filename;
 	}
 
 	private void updatePreview() {

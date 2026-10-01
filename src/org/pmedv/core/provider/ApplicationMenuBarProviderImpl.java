@@ -56,6 +56,7 @@ import org.pmedv.core.components.CmdJCheckBoxMenuItem;
 import org.pmedv.core.components.JMenuWithId;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.services.ResourceService;
+import org.pmedv.core.util.UiScale;
 import org.springframework.context.ApplicationContext;
 
 
@@ -144,7 +145,7 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 										is = getClass().getClassLoader().getResourceAsStream("icons/noresource_16x16.png");
 									}
 									
-									icon = new ImageIcon(ImageIO.read(is));
+									icon = UiScale.icon(new ImageIcon(ImageIO.read(is)));
 
 								}
 								if (currentItem.getMnemonic() != null) {
@@ -222,7 +223,7 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 					
 					try {
 						
-						String inputDir = System.getProperty("user.home") + "/."+AppContext.getName()+"/";
+						String inputDir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 						String inputFileName = "recentFiles.xml";			
 						File inputFile = new File(inputDir+inputFileName);
 						
@@ -239,6 +240,9 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 						
 						for (String recentFile : fileList.getRecentFiles()) {							
 							File file = new File(recentFile);
+							if (!file.exists()) {
+								continue;
+							}
 							AbstractCommand openBoardAction = new OpenBoardCommand(file.getName(), file);							
 							JMenuItem item = new JMenuItem(openBoardAction);
 							openRecentMenu.add(item);
@@ -287,14 +291,14 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 					InputStream is = getClass().getClassLoader().getResourceAsStream(perspective.getPerspectiveIcon());												 
 					
 					if (is != null) {
-						icon = new ImageIcon(ImageIO.read(is));	
+						icon = UiScale.icon(new ImageIcon(ImageIO.read(is)));	
 					}
 					else {
 						
 						is = getClass().getClassLoader().getResourceAsStream("icons/noresource_16x16.png");
 
 						if (is != null)
-							icon = new ImageIcon(ImageIO.read(is));
+							icon = UiScale.icon(new ImageIcon(ImageIO.read(is)));
 						
 					}
 					
@@ -366,7 +370,7 @@ public class ApplicationMenuBarProviderImpl implements ApplicationMenuBarProvide
 									if (currentItem.getImageIcon() != null) {
 										
 										InputStream is = getClass().getClassLoader().getResourceAsStream(currentItem.getImageIcon());												 
-										pIcon = new ImageIcon(ImageIO.read(is));
+										pIcon = UiScale.icon(new ImageIcon(ImageIO.read(is)));
 
 									}
 									if (currentItem.getMnemonic() != null) {

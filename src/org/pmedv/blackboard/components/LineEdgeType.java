@@ -4,6 +4,10 @@ public enum LineEdgeType {
 
 	ROUND_DOT,
 	SIMPLE_ARROW,
-	STRAIGHT,
+	STRAIGHT;
+
+	public static LineEdgeType getDefault() {
+		return ROUND_DOT;
+	}
 	
 }

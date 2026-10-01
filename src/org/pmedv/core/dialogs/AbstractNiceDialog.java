@@ -24,8 +24,13 @@ package org.pmedv.core.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -48,6 +53,7 @@ import org.pmedv.core.gui.ApplicationWindow;
 import org.pmedv.core.services.ResourceService;
 import org.springframework.context.ApplicationContext;
 
+import com.formdev.flatlaf.util.UIScale;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -96,6 +102,7 @@ public abstract class AbstractNiceDialog extends JDialog {
 	private Icon cancelIcon;
 	
 	private Object userObject;
+	private boolean sizeScaled;
 
 	public AbstractNiceDialog(String title,String subTitle,ImageIcon icon, boolean modal) {
 		
@@ -159,7 +166,7 @@ public abstract class AbstractNiceDialog extends JDialog {
 	
 	private JPanel createHeader(String title, String subTitle, ImageIcon icon) {
 
-		int headerHeight = 50;
+		int headerHeight = UIScale.scale(50);
 
 		FormLayout formLayout = new FormLayout(
 				"8dlu, 10dlu, fill:pref:grow, 7dlu, pref, 7dlu",
@@ -178,8 +185,8 @@ public abstract class AbstractNiceDialog extends JDialog {
 		titleLabel.setForeground(Color.black);
 		subTitleLabel.setForeground(Color.black);
 
-		titleLabel.setFont(new Font("Arial", Font.BOLD, 15));
-		subTitleLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		titleLabel.setFont(new Font("Arial", Font.BOLD, UIScale.scale(15)));
+		subTitleLabel.setFont(new Font("Arial", Font.PLAIN, UIScale.scale(12)));
 
 		CellConstraints cc = new CellConstraints();
 		header.add(titleLabel, cc.xywh(2, 2, 2, 1));
@@ -202,6 +209,7 @@ public abstract class AbstractNiceDialog extends JDialog {
 	private JPanel createButtonBar(boolean showNewButton, boolean showOkButton, boolean showCancelButton) {
 		
 		buttonPanel = new JPanel(new FlowLayout());
+		buttonPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
 		if (showNewButton) {
 			newButton = new JButton(resources.getResourceByKey("button.new"));
@@ -223,7 +231,59 @@ public abstract class AbstractNiceDialog extends JDialog {
 	}
 	
 	private void centerAndAdjustSize() {
-		setLocationRelativeTo(getRootPane());		
+		sizeToFitContents();
+		Window owner = getOwner();
+		setLocationRelativeTo(owner != null ? owner : win);
+	}
+
+	/**
+	 * Grows the dialog so header, content, buttons and window decorations fit.
+	 */
+	protected void sizeToFitContents() {
+		if (!isDisplayable()) {
+			addNotify();
+		}
+		validate();
+
+		Dimension requested = getSize();
+		Dimension preferred = getPreferredSize();
+		Insets insets = getInsets();
+
+		int reqW = requested.width;
+		int reqH = requested.height;
+		if (!sizeScaled) {
+			reqW = UIScale.scale(reqW);
+			reqH = UIScale.scale(reqH);
+			sizeScaled = true;
+		}
+
+		int width = reqW > 1 ? Math.max(reqW, preferred.width) : preferred.width;
+		int height = Math.max(reqH, preferred.height);
+		if (insets.top == 0) {
+			height += UIScale.scale(40);
+		}
+
+		Rectangle screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		if (screen != null) {
+			if (width > 1) {
+				width = Math.min(width, screen.width);
+			}
+			height = Math.min(Math.max(height, 1), screen.height);
+		}
+
+		if (width > 0 && height > 0) {
+			setSize(width, height);
+		}
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
+		if (visible) {
+			sizeToFitContents();
+			Window owner = getOwner();
+			setLocationRelativeTo(owner != null ? owner : win);
+		}
+		super.setVisible(visible);
 	}
 
 	/* (non-Javadoc)

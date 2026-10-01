@@ -188,7 +188,7 @@ public class ConvertToPartCommand extends AbstractEditorCommand {
 				if (line.getStroke() != null)
 					g2d.setStroke(line.getStroke());
 				else
-					g2d.setStroke(BoardUtil.stroke_3_0f);
+					g2d.setStroke(BoardUtil.getDefaultStroke());
 				g2d.setColor(item.getColor());
 			}
 			
@@ -212,9 +212,12 @@ public class ConvertToPartCommand extends AbstractEditorCommand {
 			
 		// now store the rendered image to the parts/images directory
 		
-		File workDir = new File(".");
-		File partDir = new File(workDir + "/parts/");
-		File imageDir = new File(workDir + "/parts/images/");
+		File workDir = AppContext.getCatalogDir();
+		File partDir = new File(workDir, "parts");
+		File imageDir = new File(partDir, "images");
+		if (!imageDir.exists()) {
+			imageDir.mkdirs();
+		}
 		File outputImage = new File(imageDir+"/"+partName+".png");
 		File outputPart = new File(partDir+"/"+partName+".xml");
 		
@@ -290,7 +293,7 @@ public class ConvertToPartCommand extends AbstractEditorCommand {
 			newPart.setXLoc(min_x);
 			newPart.setYLoc(min_y);
 			
-			editor.getModel().getCurrentLayer().getItems().add(newPart);
+			editor.getModel().addItem(newPart);
 			editor.setSelectedItem(newPart);
 			editor.refresh();
 		}

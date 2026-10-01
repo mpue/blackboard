@@ -41,6 +41,7 @@ public class AppContext {
     private static String lastSelectedFolder = System.getProperty("user.home");
     private static String name;
     private static File workingDir;
+    private static boolean runningFromJar;
     
 	private static final ClipBoard<Item> clipboard = new ClipBoard<Item>();
     
@@ -103,6 +104,33 @@ public class AppContext {
 	 */
 	public static File getWorkingDir() {
 		return workingDir;
+	}
+
+	/**
+	 * User-writable application data ({@code ~/.BlackBoard}): preferences,
+	 * window state, recent files, temp.
+	 */
+	public static File getUserDataDir() {
+		return new File(System.getProperty("user.home"), "." + name);
+	}
+
+	/**
+	 * Catalogs (parts, symbols, models, datasheets, simulators). From source
+	 * this is the project directory; from the JAR it is {@link #getUserDataDir()}.
+	 */
+	public static File getCatalogDir() {
+		if (runningFromJar) {
+			return getUserDataDir();
+		}
+		return workingDir;
+	}
+
+	public static boolean isRunningFromJar() {
+		return runningFromJar;
+	}
+
+	public static void setRunningFromJar(boolean runningFromJar) {
+		AppContext.runningFromJar = runningFromJar;
 	}
 
 	/**

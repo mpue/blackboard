@@ -69,11 +69,20 @@ public class BreakSymbolCommand extends AbstractEditorCommand {
 			if (editor.getSelectedItem() instanceof Symbol) {
 
 				Symbol symbol = (Symbol) editor.getSelectedItem();
-				editor.getModel().getCurrentLayer().getItems().addAll(symbol.getItems());				
+				Layer target = editor.getModel().getLayer(symbol.getLayer());
+				if (target == null) {
+					target = editor.getModel().ensureCurrentLayer();
+				}
+				if (target == null) {
+					return;
+				}
+				for (Item item : symbol.getItems()) {
+					item.setLayer(target.getIndex());
+					target.getItems().add(item);
+				}
 				symbol.getItems().clear();
-				Layer layer = editor.getModel().getLayer(symbol.getLayer()); 				
-				layer.getItems().remove(symbol);
-				editor.setSelectedItem(null);				
+				target.getItems().remove(symbol);
+				editor.setSelectedItem(null);
 				
 			}
 

@@ -85,15 +85,20 @@ public class AddItemCommand extends AbstractCommand {
 		BoardEditorModel model = editor.getModel();
 		UndoManager undoManager = editor.getUndoManager();				
 		
+		Layer target = model.resolveLayerForItem(item);
+		if (target == null) {
+			return;
+		}
+		item.setLayer(target.getIndex());	
+		
 		final ShapePropertiesPanel shapesPanel = ctx.getBean(ShapePropertiesPanel.class);
-		item.setLayer(model.getCurrentLayer().getIndex());	
 		
 		Boolean useLayerColor = (Boolean)Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.useLayerColor");
 		
-		if (useLayerColor) {
-			item.setColor(model.getCurrentLayer().getColor());					
+		if (useLayerColor && !BoardEditorModel.isLibraryPart(item)) {
+			item.setColor(target.getColor());					
 		}
-		else {
+		else if (!BoardEditorModel.isLibraryPart(item)) {
 			item.setColor(ctx.getBean(Palette.class).getCurrentColor());	
 		}
 		
@@ -107,7 +112,7 @@ public class AddItemCommand extends AbstractCommand {
 			// Line has to be larger than the current raster
 			if (line.getLength() >= editor.getRaster()) {
 				// we do not allow double connections
-				if (model.getCurrentLayer().getItems().contains(line)) {
+				if (target.getItems().contains(line)) {
 					ErrorUtils.showErrorDialog(new IllegalStateException(resources.getResourceByKey("msg.connection.alreadyexists")));
 					return;
 				}
@@ -127,9 +132,9 @@ public class AddItemCommand extends AbstractCommand {
 			s.setStyle((ShapeStyle) shapesPanel.getStyleCombo().getSelectedItem());
 		}
 
-		log.debug("Adding item to layer "+model.getCurrentLayer());
+		log.debug("Adding item to layer "+target);
 		
-		model.getCurrentLayer().getItems().add(item);	
+		model.addItem(item, target);	
 		removePending(model);
 
 		if (!split) {

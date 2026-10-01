@@ -79,7 +79,10 @@ public class ExportImageCommand extends AbstractEditorCommand {
 		
 		String name = dlg.getSelectedPath();
 		
-		AppContext.setLastSelectedFolder(dlg.getSelectedPath());
+		File exportFile = new File(name);
+		if (exportFile.getParentFile() != null) {
+			AppContext.setLastSelectedFolder(exportFile.getParentFile().getAbsolutePath());
+		}
 		
 		if (!(name.endsWith(".png") || name.endsWith(".PNG")))
 			name += ".png";	

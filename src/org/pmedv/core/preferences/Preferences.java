@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.pmedv.blackboard.LookAndFeelUtil;
 import org.pmedv.core.beans.FileObject;
 import org.pmedv.core.context.AppContext;
 
@@ -30,7 +31,7 @@ import org.pmedv.core.context.AppContext;
  */
 public class Preferences {
 
-	public static HashMap<String, Object> values = new HashMap<String, Object>();
+	public static HashMap<String, Object> values = new HashMap<>();
 
 	private static final Log log = LogFactory.getLog(Preferences.class);
 
@@ -42,25 +43,25 @@ public class Preferences {
 	 * Sets the preferences to the default value if no entry exists.
 	 */
 	private static void setDefaultPreferences() {
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.maxRecentFiles", new Integer(5));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showNames", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showValues", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.invertMouse", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.layerPanelPlacement", new String("left"));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.layerPanelPlacement.optionValues", new String("left,right"));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.lookAndFeel", new String("SkyBlue"));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.lookAndFeel.optionValues", new String("Nimbus,SkyBlue,System,FlatDarcula"));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.useLayerColor", new Boolean(true));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.realisticWires", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.autoHideLayers", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.dotGrid", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showPinNames", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showPinNumbers", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showOrigins", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showTooltips", new Boolean(true));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.dawContinuousLines", new Boolean(true));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.drawPins", new Boolean(false));
-		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showMidpoints", new Boolean(false));
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.maxRecentFiles", 5);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showNames", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showValues", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.invertMouse", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.layerPanelPlacement", "left");
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.layerPanelPlacement.optionValues", "left,right");
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.lookAndFeel", LookAndFeelUtil.getLookAndFeelDefault());
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.lookAndFeel.optionValues", LookAndFeelUtil.getLookAndFeelOptions());
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.useLayerColor", true);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.realisticWires", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.autoHideLayers", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.dotGrid", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showPinNames", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showPinNumbers", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showOrigins", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showTooltips", true);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.dawContinuousLines", true);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.drawPins", false);
+		setDefaultPreference("org.pmedv.blackboard.BoardDesignerPerspective.showMidpoints", false);
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class Preferences {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void load() {
-		String prefsFileLocation = System.getProperty("user.home") + "/." + AppContext.getName() + "/preferences.xml";
+		String prefsFileLocation = new File(AppContext.getUserDataDir(), "preferences.xml").getAbsolutePath();
 		File prefsFile = new File(prefsFileLocation);
 
 		// No preferences file found: Write defaults and store preferences.
@@ -111,7 +112,7 @@ public class Preferences {
 	 */
 	public static void store() {
 
-		String prefsFile = System.getProperty("user.home") + "/." + AppContext.getName() + "/preferences.xml";
+		String prefsFile = new File(AppContext.getUserDataDir(), "preferences.xml").getAbsolutePath();
 
 		XMLEncoder enc;
 

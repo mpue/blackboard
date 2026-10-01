@@ -103,7 +103,10 @@ import org.pmedv.core.perspectives.AbstractPerspective;
 import org.pmedv.core.preferences.Preferences;
 import org.pmedv.core.provider.ApplicationWindowConfigurationProvider;
 import org.pmedv.core.services.ResourceService;
+import org.pmedv.core.util.UiScale;
 import org.springframework.context.ApplicationContext;
+
+import com.formdev.flatlaf.util.UIScale;
 
 public class BoardDesignerPerspective extends AbstractPerspective implements IMemento {
 
@@ -161,6 +164,11 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 				rootWindow.getWindowProperties().getTabProperties().getNormalButtonProperties().getCloseButtonProperties().setVisible(false);
 
 				editorArea = new TabWindow();
+				int iconTextGap = UiScale.px(8);
+				rootWindow.getRootWindowProperties().getTabWindowProperties().getTabProperties()
+						.getTitledTabProperties().getNormalProperties().setIconTextGap(iconTextGap);
+				editorArea.getWindowProperties().getTabProperties().getTitledTabProperties()
+						.getNormalProperties().setIconTextGap(iconTextGap);
 				editorArea.getWindowProperties().getTabProperties().getNormalButtonProperties().getCloseButtonProperties().setVisible(false);
 				editorArea.getWindowProperties().getTabProperties().getHighlightedButtonProperties().getCloseButtonProperties().setVisible(false);
 				editorArea.getWindowProperties().getTabProperties().getNormalButtonProperties().getMinimizeButtonProperties().setVisible(true);
@@ -203,9 +211,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		 taskpanecontainer.add(shapePane);
 		 **/
 
-		ctx.getBean(ShapePropertiesPanel.class).getStartLineCombo().setSelectedItem(LineEdgeType.STRAIGHT);
-		ctx.getBean(ShapePropertiesPanel.class).getEndLineCombo().setSelectedItem(LineEdgeType.STRAIGHT);
-		ctx.getBean(ShapePropertiesPanel.class).getThicknessCombo().setSelectedItem(new BasicStroke(2.0f));
+		ctx.getBean(ShapePropertiesPanel.class).applyDefaultLineStyle();
 
 		/**
 		 JXTaskPane layerPane = new JXTaskPane();
@@ -235,7 +241,8 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		}
 
 		horizontalSplitPane.setOneTouchExpandable(true);
-		horizontalSplitPane.setDividerSize(10);
+		horizontalSplitPane.setDividerSize(UIScale.scale(10));
+		toolTabPane.setMinimumSize(new Dimension(UIScale.scale(260), 0));
 
 		toolTabPane.addTab(resources.getResourceByKey("tooltab.forms"),resources.getIcon("icon.paint"), scrollPane);
 
@@ -345,7 +352,24 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		ctx.getBean(ShapePropertiesPanel.class).getStartAngleSpinner().setEnabled(false);
 
 		initListeners();
+		SwingUtilities.invokeLater(this::applyToolSplitLocation);
 
+	}
+
+	private void applyToolSplitLocation() {
+		int minTools = Math.max(UIScale.scale(260), toolTabPane.getPreferredSize().width);
+		int saved = configProvider.getConfig().getDividerLocation();
+		String position = (String) Preferences.values.get("org.pmedv.blackboard.BoardDesignerPerspective.layerPanelPlacement");
+		if ("left".equalsIgnoreCase(position)) {
+			horizontalSplitPane.setDividerLocation(Math.max(saved, minTools));
+			return;
+		}
+		int total = horizontalSplitPane.getWidth();
+		if (total <= 0) {
+			return;
+		}
+		int loc = saved > 0 ? saved : total - minTools;
+		horizontalSplitPane.setDividerLocation(Math.max(50, Math.min(loc, total - minTools)));
 	}
 
 	private void initListeners() {
@@ -517,29 +541,41 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 	@Override
 	public void loadState() {
 
-		String dir = System.getProperty("user.home") + "/." + AppContext.getName() + "/";
+		String dir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 
 		try {
 			final Unmarshaller u = (Unmarshaller) JAXBContext.newInstance(FileList.class).createUnmarshaller();
 			final FileList files = (FileList) u.unmarshal(new FileInputStream(new File(dir + ID + ".xml")));
 
+			int validFiles = 0;
+			for (final String path : files.getFiles()) {
+				File file = new File(path);
+				if (file.exists()) {
+					validFiles++;
+				}
+			}
+
 			int count = 0;
 
 			for (final String path : files.getFiles()) {
 				log.info("Opening editor for :" + path);
-				OpenBoardCommand cmd = new OpenBoardCommand(path, new File(path));
+				File file = new File(path);
+				if (file.exists()) {
+					OpenBoardCommand cmd = new OpenBoardCommand(path, file);
 
-				// the last command needs a trigger for perspective restore
-				if (count == files.getFiles().size() - 1) {
-					cmd.addPostConfigurator(new LoadViewStateEvent());
-					cmd.addPostConfigurator(new ViewStateDoneEvent());
+					// the last command needs a trigger for perspective restore
+					if (count == validFiles - 1) {
+						cmd.addPostConfigurator(new LoadViewStateEvent());
+						cmd.addPostConfigurator(new ViewStateDoneEvent());
+					}
+
+					cmd.execute(null);
+					count++;
 				}
 
-				cmd.execute(null);
-				count++;
 			}
 
-			horizontalSplitPane.setDividerLocation(configProvider.getConfig().getDividerLocation());
+			applyToolSplitLocation();
 
 		}
 		catch (Exception e) {
@@ -551,7 +587,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 	@Override
 	public void saveState() {
 
-		String dir = System.getProperty("user.home") + "/." + AppContext.getName() + "/";
+		String dir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 
 		FileList files = new FileList();
 
@@ -569,6 +605,7 @@ public class BoardDesignerPerspective extends AbstractPerspective implements IMe
 		try {
 
 			Marshaller m = (Marshaller) JAXBContext.newInstance(FileList.class).createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			m.marshal(files, new FileOutputStream(new File(dir + ID + ".xml")));
 			if (viewMap.getViewCount() > 0)
 				saveViewState();

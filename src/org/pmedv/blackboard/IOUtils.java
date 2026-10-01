@@ -25,10 +25,12 @@ package org.pmedv.blackboard;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.xml.bind.JAXBContext;
@@ -95,6 +97,7 @@ public class IOUtils {
 		
 		try {
 			partMarshaller = (Marshaller) JAXBContext.newInstance(Part.class).createMarshaller();
+			partMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		}
 		catch (JAXBException e) {
 			throw new RuntimeException("Unable to create unmarshaller for "+Part.class);
@@ -104,68 +107,218 @@ public class IOUtils {
 	public static File unpackBoard(File file) throws Exception {
 		File tempDir = new File(System.getProperty("java.io.tmpdir") + "/blackboard/", file.getName());
 		log.info("Temp directory is at : " + tempDir.getAbsolutePath());
-		if (!tempDir.exists()) {
-			tempDir.mkdir();
+		if (tempDir.exists()) {
+			FileUtils.deleteDirectory(tempDir);
+		}
+		if (!tempDir.mkdirs()) {
+			throw new IOException("Could not create temp directory " + tempDir.getAbsolutePath());
 		}
 		ZipUtils.extractZipArchive(file.getAbsolutePath(), tempDir.getAbsolutePath());
 		File tempPartDir = new File(tempDir, "parts");
 		File tempImagesDir = new File(tempPartDir, "images");
 		
-		File workDir = new File(System.getProperty("user.home"),"."+AppContext.getName());
+		File workDir = AppContext.getCatalogDir();
 		log.info("Working directory " + workDir.getAbsolutePath());		
 		File partDir = new File(workDir, "parts");
 		File imageDir = new File(partDir, "images");
 		
+		File boardXml = findBoardXml(tempDir, file);
 		if (tempPartDir.exists()) {
-			for (int i = 0; i < tempPartDir.listFiles().length; i++) {
-				File outputPart = new File(partDir, tempPartDir.listFiles()[i].getName());
-				if (outputPart.getName().endsWith(".xml")) {
-					try {
-						if (!outputPart.exists()) {
-							FileUtils.copyFile(tempPartDir.listFiles()[i], outputPart);
-							Part p = (Part) partUnmarshaller.unmarshal(new FileInputStream(tempPartDir.listFiles()[i]));
-							FileUtils.copyFile(new File(tempImagesDir, p.getImageName()), new File(imageDir, p.getImageName()));
-							AppContext.getContext().getBean(PartFactory.class).addPart(outputPart.getName());
-						}
-// TODO : This is a real big mess here, if we do it like that, each time a board is opened, the parts which are contained in 
-// 		  the file will be created and we get lots of duplicates. Notice to myself : Do not program while sitting in a train!
-//						else {
-//							// houston we got a problem, there's already a file with the same name, it might be the same
-//							// part or not. No matter what, we cannot be sure and we need to give the file a new name						
-//							// to be absolutely sure, we need a unique name, we just add the time add the beginning of the filename							
-//							String timestamp = String.valueOf(System.currentTimeMillis());													
-//							// copy the file with a new name
-//							String partName = timestamp + tempPartDir.listFiles()[i].getName();
-//							File newOutput = new File(partDir,partName);
-//							FileUtils.copyFile(tempPartDir.listFiles()[i], newOutput);
-//							// get the part
-//							Part p = (Part) partUnmarshaller.unmarshal(new FileInputStream(newOutput));
-//							// if a part with a new name exists the image probably is also the same, wo we need a new name for it too
-//							String newImageName = timestamp + p.getImageName();
-//							FileUtils.copyFile(new File(tempImagesDir, p.getImageName()), new File(imageDir, newImageName));
-//							p.setImageName(newImageName);
-//							// persist the changes 
-//							partMarshaller.marshal(p, newOutput);
-//							// and finally add the part to the PartFactory
-//							AppContext.getContext().getBean(PartFactory.class).addPart(partName);
-//						}
-						
-					}
-					catch (Exception e) {
-						throw(e);
-					}
+			if (!imageDir.exists() && !imageDir.mkdirs()) {
+				throw new IOException("Could not create image directory " + imageDir.getAbsolutePath());
+			}
+			Set<String> usedPartFiles = collectUsedPartFilenames(boardXml);
+			Map<String, String> partFilenameRemap = importPackedParts(tempPartDir, tempImagesDir, partDir, imageDir, usedPartFiles);
+			if (boardXml != null && !partFilenameRemap.isEmpty()) {
+				replacePartFilenamesInUnpackedBoardXml(boardXml, partFilenameRemap);
+			}
+		}
+		return boardXml;
+	}
+
+	private static File findBoardXml(File tempDir, File packedFile) {
+		File expectedBoardXml = new File(tempDir, packedFile.getName() + ".xml");
+		if (expectedBoardXml.isFile()) {
+			return expectedBoardXml;
+		}
+		File[] files = tempDir.listFiles();
+		if (files != null) {
+			for (File f : files) {
+				String filename = f.getName();
+				boolean isDirectChild = f.isFile() && !filename.contains("/") && !filename.contains("\\");
+				if (isDirectChild && filename.toLowerCase().endsWith(".xml")) {
+					return f;
 				}
 			}
 		}
-		
-		File[] files = tempDir.listFiles();
-		for (int i = 0; i < files.length; i++) {
-			if (files[i].getName().endsWith("xml")) {
-				return files[i];
+		return null;
+	}
+
+	/**
+	 * Copies packed parts into the local library. Existing files with the same
+	 * content are left alone; colliding names with different content get a unique
+	 * filename. Returns a map of original XML names to the names actually used.
+	 */
+	private static Map<String, String> importPackedParts(File tempPartDir, File tempImagesDir, File partDir, File imageDir, Set<String> usedPartFiles) throws Exception {
+		Map<String, String> filenameRemap = new HashMap<String, String>();
+		File[] packedFiles = tempPartDir.listFiles();
+		if (packedFiles == null) {
+			return filenameRemap;
+		}
+		PartFactory partFactory = AppContext.getContext().getBean(PartFactory.class);
+		for (File packedFile : packedFiles) {
+			if (!packedFile.isFile() || !packedFile.getName().toLowerCase().endsWith(".xml")) {
+				continue;
+			}
+			String originalName = packedFile.getName();
+			if (usedPartFiles != null && !usedPartFiles.contains(originalName)) {
+				log.info("Skipping packed part not used on board: " + originalName);
+				continue;
+			}
+			File localFile = new File(partDir, originalName);
+			if (localFile.exists() && FileUtils.contentEquals(localFile, packedFile)) {
+				continue;
+			}
+			String destXmlName = originalName;
+			if (localFile.exists()) {
+				File destXml = findNumberedCopyOrUnusedName(partDir, originalName, packedFile);
+				destXmlName = destXml.getName();
+				if (destXml.exists()) {
+					if (partFactory.getPart(destXmlName) == null) {
+						partFactory.addPart(destXmlName);
+					}
+					filenameRemap.put(originalName, destXmlName);
+					continue;
+				}
+				log.info("Part filename collision for " + originalName + ", importing as " + destXmlName);
+			}
+			Part packedPart = unmarshalPart(packedFile);
+			copyPackedPartIntoLibrary(packedFile, packedPart, destXmlName, tempImagesDir, partDir, imageDir, partFactory);
+			if (!destXmlName.equals(originalName)) {
+				filenameRemap.put(originalName, destXmlName);
 			}
 		}
-		
-		return null;
+		return filenameRemap;
+	}
+
+	/**
+	 * Filenames of library parts still placed on the board. {@code null} means
+	 * the board XML could not be read and packed parts should not be filtered.
+	 */
+	private static Set<String> collectUsedPartFilenames(File boardXml) {
+		if (boardXml == null || !boardXml.isFile()) {
+			return null;
+		}
+		try {
+			Unmarshaller u = JAXBContext.newInstance(BoardBean.class).createUnmarshaller();
+			BoardBean board = (BoardBean) u.unmarshal(boardXml);
+			Set<String> names = new HashSet<String>();
+			if (board != null && board.getParts() != null) {
+				for (PartBean partBean : board.getParts()) {
+					if (partBean.getFilename() != null && partBean.getFilename().length() > 0) {
+						names.add(partBean.getFilename());
+					}
+				}
+			}
+			return names;
+		}
+		catch (Exception e) {
+			log.warn("Could not read packed board parts list, importing all packed parts.");
+			return null;
+		}
+	}
+
+	/**
+	 * Copies a packed part XML and its image into the local parts library.
+	 * {@code destXmlName} is already resolved; this only unique-names the image
+	 * if that filename is taken by a different file.
+	 */
+	private static void copyPackedPartIntoLibrary(File packedXml, Part packedPart, String destXmlName,
+			File tempImagesDir, File partDir, File imageDir, PartFactory partFactory) throws Exception {
+		boolean imageNameChanged = false;
+		String imageName = packedPart.getImageName();
+		if (imageName != null) {
+			File packedImage = new File(tempImagesDir, imageName);
+			if (packedImage.isFile()) {
+				File destImage = new File(imageDir, imageName);
+				if (destImage.exists() && !FileUtils.contentEquals(destImage, packedImage)) {
+					destImage = findNumberedCopyOrUnusedName(imageDir, imageName, packedImage);
+					packedPart.setImageName(destImage.getName());
+					imageNameChanged = true;
+				}
+				if (!destImage.exists()) {
+					FileUtils.copyFile(packedImage, destImage);
+				}
+			}
+		}
+		File destXml = new File(partDir, destXmlName);
+		if (imageNameChanged) {
+			partMarshaller.marshal(packedPart, destXml);
+		}
+		else {
+			FileUtils.copyFile(packedXml, destXml);
+		}
+		partFactory.addPart(destXmlName);
+	}
+
+	/**
+	 * For a colliding name like {@code foo.xml}, checks {@code foo_1.xml},
+	 * {@code foo_2.xml}, ... in order. Returns an existing numbered copy whose
+	 * bytes match {@code content}, or the first numbered name that is still unused.
+	 */
+	private static File findNumberedCopyOrUnusedName(File dir, String filename, File content) throws IOException {
+		int dot = filename.lastIndexOf('.');
+		String base = dot > 0 ? filename.substring(0, dot) : filename;
+		String ext = dot > 0 ? filename.substring(dot) : "";
+		int n = 1;
+		while (true) {
+			File candidate = new File(dir, base + "_" + n + ext);
+			if (!candidate.exists()) {
+				return candidate;
+			}
+			if (content != null && FileUtils.contentEquals(candidate, content)) {
+				return candidate;
+			}
+			n++;
+		}
+	}
+
+	private static Part unmarshalPart(File file) throws Exception {
+		FileInputStream fis = new FileInputStream(file);
+		try {
+			return (Part) partUnmarshaller.unmarshal(fis);
+		}
+		finally {
+			fis.close();
+		}
+	}
+
+	/**
+	 * Packed boards still name parts as they were stored in the zip
+	 * (e.g. {@code foo.xml}). After a filename collision the library copy is
+	 * {@code foo_1.xml}; this rewrites those references in the unpacked board
+	 * XML so {@code openBoard} loads the imported files.
+	 */
+	private static void replacePartFilenamesInUnpackedBoardXml(File boardXml, Map<String, String> packedNameToLibraryName) throws Exception {
+		Unmarshaller u = JAXBContext.newInstance(BoardBean.class).createUnmarshaller();
+		BoardBean board = (BoardBean) u.unmarshal(boardXml);
+		if (board == null || board.getParts() == null) {
+			return;
+		}
+		boolean changed = false;
+		for (PartBean partBean : board.getParts()) {
+			String libraryName = packedNameToLibraryName.get(partBean.getFilename());
+			if (libraryName != null) {
+				partBean.setFilename(libraryName);
+				changed = true;
+			}
+		}
+		if (!changed) {
+			return;
+		}
+		Marshaller m = JAXBContext.newInstance(BoardBean.class).createMarshaller();
+		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		m.marshal(board, boardXml);
 	}
 
 	/**
@@ -211,6 +364,7 @@ public class IOUtils {
 			}
 			if (board.getLayers().size() == 0)
 				model.addDefaultLayers();
+			model.ensureCurrentLayer();
 			if (board.getType() != null && board.getType().equals(BoardType.CUSTOM)) {
 				String name = file.getName().substring(0, file.getName().lastIndexOf("."));
 				tempDir = new File(System.getProperty("java.io.tmpdir")+"/blackboard/", name);
@@ -226,7 +380,7 @@ public class IOUtils {
 			}
 			for (LineBean lineBean : board.getLines()) {
 				Line line = new Line(lineBean);
-				model.getLayer(line.getLayer()).getItems().add(line);
+				model.addItem(line, line.getLayer());
 			}
 			for (TextPartBean textBean : board.getTextParts()) {
 				Font f = new Font(textBean.getFont(), Font.PLAIN, textBean.getFontsize());
@@ -245,13 +399,13 @@ public class IOUtils {
 				for (int i = 0; i < ninetyDegreeSteps; i++)
 					p.rotateCW();
 				p.setRotation(textBean.getRotation());
-				model.getLayer(p.getLayer()).getItems().add(p);
+				model.addItem(p, p.getLayer());
 			}
 			for (PartBean partBean : board.getParts()) {
-				Part part = (Part) AppContext.getContext().getBean(PartFactory.class).getPart(partBean.getFilename()).clone();
-				// part does not exist -> proceed
-				if (part == null)
+				Part template = AppContext.getContext().getBean(PartFactory.class).getPart(partBean.getFilename());
+				if (template == null)
 					continue;
+				Part part = (Part) template.clone();
 				part.setXLoc(partBean.getXLoc());
 				part.setYLoc(partBean.getYLoc());
 				part.setOldXLoc(part.getXLoc());
@@ -275,29 +429,29 @@ public class IOUtils {
 				}				
 				
 				part.setRotation(partBean.getRotation());
-				model.getLayer(part.getLayer()).getItems().add(part);
+				model.addItem(part, part.getLayer());
 			}
 			for (ResistorBean resistorBean : board.getResistors()) {
 				Resistor resistor = new Resistor(resistorBean);
-				model.getLayer(resistor.getLayer()).getItems().add(resistor);
+				model.addItem(resistor, resistor.getLayer());
 				resistor.setIndex(resistorBean.getIndex());
 			}
 			for (DiodeBean diodeBean : board.getDiodes()) {
 				Diode diode = new Diode(diodeBean);
-				model.getLayer(diode.getLayer()).getItems().add(diode);
+				model.addItem(diode, diode.getLayer());
 				diode.setIndex(diodeBean.getIndex());
 			}
 			for (BoxBean bb : board.getBoxes()) {
 				Box box = new Box(bb);
-				model.getLayer(box.getLayer()).getItems().add(box);
+				model.addItem(box, box.getLayer());
 			}
 			for (EllipseBean eb : board.getEllipses()) {
 				Ellipse ellipse = new Ellipse(eb);
-				model.getLayer(ellipse.getLayer()).getItems().add(ellipse);
+				model.addItem(ellipse, ellipse.getLayer());
 			}
 			for (SymbolBean sb : board.getSymbols()) {				
 				Symbol symbol = new Symbol(sb);
-				model.getLayer(sb.getLayer()).getItems().add(symbol);								
+				model.addItem(symbol, sb.getLayer());								
 			}
 		}
 		catch (Exception i) {
@@ -325,10 +479,10 @@ public class IOUtils {
 	 * 
 	 * @param filename the name to append to the list
 	 */
-	public static void updateRecentFiles(String filename) {
+	public static synchronized void updateRecentFiles(String filename) {
 		RecentFileList fileList = null;
 		try {
-			String inputDir = System.getProperty("user.home") + "/." + AppContext.getName() + "/";
+			String inputDir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 			String inputFileName = "recentFiles.xml";
 			File inputFile = new File(inputDir + inputFileName);
 			if (inputFile.exists()) {
@@ -349,7 +503,7 @@ public class IOUtils {
 			fileList.getRecentFiles().add(filename);
 		Marshaller m;
 		try {
-			String outputDir = System.getProperty("user.home") + "/." + AppContext.getName() + "/";
+			String outputDir = AppContext.getUserDataDir().getAbsolutePath() + "/";
 			String outputFileName = "recentFiles.xml";
 			m = JAXBContext.newInstance(RecentFileList.class).createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -446,27 +600,26 @@ public class IOUtils {
 	 */
 	public static boolean savePackedBoard(File file, BoardEditorModel model) throws IOException {
 
-		File tempDir = new File(System.getProperty("java.io.tmpdir"),"blackboard");
-		
-		if (!tempDir.exists()) {
-			if (!tempDir.mkdir()) {
-				throw new IOException("Could not create temp directory, try to create it manually ("+tempDir.getAbsolutePath()+")");
-			}
+		File blackboardTemp = new File(System.getProperty("java.io.tmpdir"), "blackboard");
+		if (!blackboardTemp.exists() && !blackboardTemp.mkdir()) {
+			throw new IOException("Could not create temp directory, try to create it manually ("+blackboardTemp.getAbsolutePath()+")");
 		}
 
-		tempDir = new File(System.getProperty("java.io.tmpdir")+"/blackboard/",file.getName());
-		if (!tempDir.exists()) {
-			if (!tempDir.mkdir()) {
-				throw new IOException("Could not create temp directory, try to create it manually ("+tempDir.getAbsolutePath()+")");
-			}
+		File tempDir = new File(blackboardTemp, file.getName());
+		if (tempDir.exists()) {
+			FileUtils.deleteDirectory(tempDir);
+		}
+		if (!tempDir.mkdirs()) {
+			throw new IOException("Could not create temp directory, try to create it manually ("+tempDir.getAbsolutePath()+")");
 		}
 		File tempPartDir = new File(tempDir, "parts");
-		if (!tempPartDir.exists()) {
-			tempPartDir.mkdir();
+		if (!tempPartDir.mkdir()) {
+			throw new IOException("Could not create temp parts directory ("+tempPartDir.getAbsolutePath()+")");
 		}
 		File tempImagesDir = new File(tempPartDir, "images");
-		if (!tempImagesDir.exists())
-			tempImagesDir.mkdir();
+		if (!tempImagesDir.mkdir()) {
+			throw new IOException("Could not create temp images directory ("+tempImagesDir.getAbsolutePath()+")");
+		}
 		File tempXMLFile = new File(tempDir, file.getName() + ".xml");
 		BoardBean board = new BoardBean();
 		board.setWidth(model.getWidth());
@@ -491,9 +644,9 @@ public class IOUtils {
 				else if (item instanceof Part && !(item instanceof TextPart) && !(item instanceof Box)
 						&& !(item instanceof Ellipse) && !(item instanceof Symbol)) {
 					Part part = (Part) item;
-					FileUtils.copyFile(new File(System.getProperty("user.home") + "/." + AppContext.getName() + "/parts/" + part.getFilename()), new File(
+					FileUtils.copyFile(new File(AppContext.getCatalogDir(), "parts/" + part.getFilename()), new File(
 							tempPartDir, part.getFilename()), true);
-					FileUtils.copyFile(new File(System.getProperty("user.home") + "/." + AppContext.getName() + "/parts/images/" + part.getImageName()), new File(
+					FileUtils.copyFile(new File(AppContext.getCatalogDir(), "parts/images/" + part.getImageName()), new File(
 							tempImagesDir, part.getImageName()), true);
 					PartBean pb = new PartBean(part);
 					board.getParts().add(pb);

@@ -118,8 +118,7 @@ public class AddTextCommand extends AbstractEditorCommand implements MouseMotion
 		max++;		
 		p.setIndex(max);
 		
-		final Layer currentLayer = (Layer)ctx.getBean(ShowLayersCommand.class).getLayerPanel().getCurrentLayerCombo().getSelectedItem();		
-		editor.getModel().getLayer(currentLayer.getIndex()).getItems().add(p);
+		editor.getModel().addItem(p);
 		
 		final UndoManager undoManager = editor.getUndoManager();
 		

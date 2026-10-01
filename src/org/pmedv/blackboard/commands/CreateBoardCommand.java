@@ -38,9 +38,7 @@ import javax.swing.SwingUtilities;
 import net.infonode.docking.DockingWindow;
 import net.infonode.docking.DockingWindowAdapter;
 import net.infonode.docking.OperationAbortedException;
-import net.infonode.docking.TabWindow;
 import net.infonode.docking.View;
-import net.infonode.docking.util.DockingUtil;
 import net.infonode.gui.mouse.MouseButtonListener;
 
 import org.apache.commons.logging.Log;
@@ -134,7 +132,7 @@ public class CreateBoardCommand extends AbstractOpenEditorCommand {
 				// the center panel centers the editor inside the view no matter which dimensions it has
 				CenterPanel panel = new CenterPanel();
 				// go for the zoom
-				JXLayer<?> zoomLayer = TransformUtils.createTransformJXLayer(editor, 1,new QualityHints());				
+				JXLayer<?> zoomLayer = TransformUtils.createTransformJXLayer(editor, BoardEditor.visualScale(1f), new QualityHints());				
 				panel.getCenterPanel().add(zoomLayer);				
 				editor.setZoomLayer(zoomLayer);
 				panel.setBoardEditor(editor);
@@ -228,6 +226,13 @@ public class CreateBoardCommand extends AbstractOpenEditorCommand {
 					@Override
 					public void windowClosed(DockingWindow window) {
 						editor.notifyListeners(EventType.EDITOR_CLOSED);
+					}
+
+					@Override
+					public void viewFocusChanged(View previouslyFocusedView, View focusedView) {
+						if (focusedView == editorView) {
+							EditorUtils.activateEditor(editor, false);
+						}
 					}					
 				});
 				editor.updateStatusBar();
@@ -240,14 +245,7 @@ public class CreateBoardCommand extends AbstractOpenEditorCommand {
 
 	private void handleMouseEvent(MouseEvent e, BoardEditor editor) {
 		if (e.getID() == MouseEvent.MOUSE_PRESSED) {
-			log.info(e);		
-			TabWindow tw = DockingUtil.getTabWindowFor(editor.getView());
-			advisor.setCurrentEditorArea(tw);
-			EditorUtils.setToolbarButtonState(editor);
-			ctx.getBean(ApplicationWindow.class).getRasterCombo().setSelectedItem(new Integer(editor.getRaster()));
-			editor.updateStatusBar();
-			editor.getView().requestFocus();	
-			editor.notifyListeners(EventType.EDITOR_CHANGED);
+			EditorUtils.activateEditor(editor, true);
 		}
 	}
 	

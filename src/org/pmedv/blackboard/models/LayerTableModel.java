@@ -30,6 +30,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pmedv.blackboard.EditorUtils;
 import org.pmedv.blackboard.app.FileState;
+import org.pmedv.blackboard.components.Item;
 import org.pmedv.blackboard.components.Layer;
 import org.pmedv.core.context.AppContext;
 import org.pmedv.core.model.AbstractBaseTableModel;
@@ -244,9 +245,16 @@ public class LayerTableModel extends AbstractBaseTableModel implements Reorderab
 		// change order
 		Layer l = layers.remove(fromIndex);		
 		layers.add(toIndex, l);
-		// and finally reassingn indices
+		// Reassign indices AND keep items pointing at their owning layer.
+		// Drawing uses list membership; save/paste/undo/move-to-layer use Item.layer.
 		for (int i = 0; i < layers.size();i++) {
-			layers.get(i).setIndex(i);
+			Layer layer = layers.get(i);
+			layer.setIndex(i);
+			if (layer.getItems() != null) {
+				for (Item item : layer.getItems()) {
+					item.setLayer(i);
+				}
+			}
 		}		
 		// update table
 		fireTableDataChanged();

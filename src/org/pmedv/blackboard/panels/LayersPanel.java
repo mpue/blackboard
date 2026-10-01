@@ -43,6 +43,7 @@ import javax.swing.JSlider;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.pmedv.blackboard.EditorUtils;
@@ -154,9 +155,10 @@ public class LayersPanel extends JPanel {
 		ListSelectionModel lsm = layerTable.getSelectionModel();
 		// set the selected interval of rows. Using the "rowNumber"
 		// variable for the beginning and end selects only that one row.
-		lsm.setSelectionInterval( rowNumber, rowNumber );		
-		
-		selectLayer(rowNumber);
+		if (rowNumber >= 0) {
+			lsm.setSelectionInterval( rowNumber, rowNumber );		
+			selectLayer(rowNumber);
+		}
 		
 		if (e.isPopupTrigger() && model.getLayer().size() >= 1) {			
 			popupMenu.show(e.getComponent(), e.getX(), e.getY());			
@@ -271,36 +273,76 @@ public class LayersPanel extends JPanel {
 		
 		model.setLayers(layers);		
 	}
+
+	/**
+	 * Restores combo, table selection and opacity for a board without writing
+	 * that selection onto a different board's model.
+	 */
+	public void restoreSelection(Layer layer) {
+		applyLayerSelection(layer, false);
+	}
 	
 	private void selectLayer(int row) {
+		if (model.getLayer() == null || row < 0 || row >= model.getLayer().size()) {
+			return;
+		}
+		int modelRow = layerTable.convertRowIndexToModel(row);
+		if (modelRow < 0 || modelRow >= model.getLayer().size()) {
+			return;
+		}
+		applyLayerSelection(model.getLayer().get(modelRow), true);
+	}
 
-		/**
-		 * Remove all listeners (in fact one) in order to prevent 
-		 * multiple comboBoxChanged events 
-		 */
-		
+	private void applyLayerSelection(Layer layer, boolean applyToEditor) {
+		if (layer == null || model.getLayer() == null) {
+			return;
+		}
+
 		ActionListener[] listeners = currentLayerCombo.getListeners(ActionListener.class);		
 		for (int i = 0; i < listeners.length; i++) {
 			currentLayerCombo.removeActionListener(listeners[i]);
 		}
-
-		/**
-		 * Select the according layer
-		 */
-		
-		Layer layer = model.getLayer().get(row);		
 		currentLayerCombo.setSelectedItem(layer);
-		
-		/**
-		 * And finally add the listeners back to the box
-		 */
-		
 		for (int i = 0; i < listeners.length; i++) {
 			currentLayerCombo.addActionListener(listeners[i]);
 		}
-		
-		BoardEditor editor = EditorUtils.getCurrentActiveEditor();
-		editor.getModel().setCurrentLayer(layer);
+
+		int modelIndex = -1;
+		for (int i = 0; i < model.getLayer().size(); i++) {
+			if (model.getLayer().get(i) == layer) {
+				modelIndex = i;
+				break;
+			}
+		}
+		if (modelIndex < 0) {
+			modelIndex = model.getLayer().indexOf(layer);
+		}
+		if (modelIndex >= 0) {
+			int viewIndex = layerTable.convertRowIndexToView(modelIndex);
+			if (viewIndex >= 0) {
+				layerTable.getSelectionModel().setSelectionInterval(viewIndex, viewIndex);
+			}
+		}
+
+		setOpacitySliderQuietly((int) (layer.getOpacity() * 100));
+
+		if (applyToEditor) {
+			BoardEditor editor = EditorUtils.getCurrentActiveEditor();
+			if (editor != null) {
+				editor.getModel().setCurrentLayer(layer);
+			}
+		}
+	}
+
+	private void setOpacitySliderQuietly(int value) {
+		ChangeListener[] listeners = opacitySlider.getListeners(ChangeListener.class);
+		for (int i = 0; i < listeners.length; i++) {
+			opacitySlider.removeChangeListener(listeners[i]);
+		}
+		opacitySlider.setValue(value);
+		for (int i = 0; i < listeners.length; i++) {
+			opacitySlider.addChangeListener(listeners[i]);
+		}
 	}
 	
 	public AlternatingLineTable getLayerTable() {

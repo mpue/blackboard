@@ -67,7 +67,7 @@ public class DataSheetProvider {
 	private final File sheetFile;
 
 	public DataSheetProvider() {
-		File workDir = new File(System.getProperty("user.home") + "/." + AppContext.getName());
+		File workDir = AppContext.getCatalogDir();
 		log.info("Working directory " + workDir.getAbsolutePath());
 		sheetsDir = new File(workDir, "datasheets");
 		sheetFile = new File(sheetsDir, "sheets.xml");
@@ -89,6 +89,10 @@ public class DataSheetProvider {
 	}
 
 	private void createDefaultSheetList(File sheetFile) throws JAXBException, IOException {
+
+		if (!sheetsDir.exists() && !sheetsDir.mkdirs()) {
+			throw new IOException("Could not create directory " + sheetsDir.getAbsolutePath());
+		}
 
 		datasheetList = new DatasheetList();
 

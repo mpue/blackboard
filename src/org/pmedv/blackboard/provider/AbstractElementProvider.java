@@ -36,7 +36,6 @@ import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.pmedv.core.context.AppContext;
 
 /**
  * <p>
@@ -54,13 +53,12 @@ public class AbstractElementProvider<T extends BaseElement> {
 	private static final Log log = LogFactory.getLog(AbstractElementProvider.class);
 
 	private final ArrayList<T> elements;	
-	private File elementsXmlDir;
-	private String elementsDirName;
+	private final File elementsXmlDir;
 	
 	private final Unmarshaller unmarshaller;
 	private final Marshaller marshaller;
 	
-	public AbstractElementProvider(Class<?> clazz, String elementsBaseDir) {
+	public AbstractElementProvider(Class<?> clazz, File elementsDir) {
 
 		elements = new ArrayList<T>();
 		
@@ -80,11 +78,8 @@ public class AbstractElementProvider<T extends BaseElement> {
 			throw new RuntimeException("Unable to create unmarshaller for "+clazz);
 		}
 		
-		this.elementsDirName = elementsBaseDir;
-		final File workDir = new File(".");
-		log.info("Working directory " + workDir.getAbsolutePath());
-		
-		elementsXmlDir = new File(System.getProperty("user.home"), "."+AppContext.getName()+"/"+ elementsDirName+"/");
+		this.elementsXmlDir = elementsDir;
+		log.info("Elements directory " + elementsXmlDir.getAbsolutePath());
 		
 		if (!elementsXmlDir.exists()) {
 			throw new RuntimeException(elementsXmlDir.getAbsolutePath()+" does not exist.");
@@ -155,8 +150,7 @@ public class AbstractElementProvider<T extends BaseElement> {
 	
 	public void storeElementList() {
 
-		File workDir = new File(".");
-		log.info("Working directory " + workDir.getAbsolutePath());
+		log.info("Elements directory " + elementsXmlDir.getAbsolutePath());
 
 
 		for (T t : elements) {			

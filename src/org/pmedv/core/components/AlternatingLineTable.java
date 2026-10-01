@@ -3,6 +3,7 @@ package org.pmedv.core.components;
 import java.awt.Color;
 import java.awt.Component;
 
+import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
@@ -31,7 +32,7 @@ public class AlternatingLineTable extends JXTable {
 		Component c = super.prepareRenderer(renderer, row, column);
 
 		if (row % 2 == 0 && !isCellSelected(row, column)) {
-			c.setBackground(Color.DARK_GRAY);
+			c.setBackground(UIManager.getColor("Table.stripedRowBackgroundColor"));
 		}
 		else {
 			if (isCellSelected(row, column)) {

@@ -81,7 +81,7 @@ public class ConvertToSymbolEdit extends AbstractUndoableEdit {
 		
 		editor.getSelectedItems().clear();
 				
-		editor.getModel().getCurrentLayer().getItems().add(symbol);
+		editor.getModel().addItem(symbol, symbol.getLayer());
 
 		
 		editor.updateStatusBar();	

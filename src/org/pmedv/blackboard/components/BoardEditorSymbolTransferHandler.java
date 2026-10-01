@@ -85,7 +85,8 @@ public class BoardEditorSymbolTransferHandler extends TransferHandler implements
 			try {
 				symbol = (SymbolBean) t.getTransferData(flavors[0]);			
 				BoardEditor editor = (BoardEditor)comp;
-				editor.getModel().getCurrentLayer().getItems().add(new Symbol(symbol));
+				Symbol dropped = new Symbol(symbol);
+				editor.getModel().addItem(dropped);
 				editor.refresh();				
 				return true;
 			} 
